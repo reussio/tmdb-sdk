@@ -3,9 +3,13 @@ package dev.reuss.tmdb.domain.movie;
 import dev.reuss.tmdb.common.external.ExternalIds;
 import dev.reuss.tmdb.common.image.MovieImages;
 import dev.reuss.tmdb.domain.movie.model.*;
+import dev.reuss.tmdb.domain.movie.query.MovieNowPlayingQuery;
+import dev.reuss.tmdb.domain.movie.query.MoviePopularQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieRecommendationsQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieReviewsQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieSimilarQuery;
+import dev.reuss.tmdb.domain.movie.query.MovieTopRatedQuery;
+import dev.reuss.tmdb.domain.movie.query.MovieUpcomingQuery;
 import dev.reuss.tmdb.query.AppendToResponse;
 import dev.reuss.tmdb.query.ChangesQuery;
 import dev.reuss.tmdb.query.ImageQuery;
@@ -134,6 +138,98 @@ public interface MovieService {
      * @return latest movie details
      */
     MovieDetails latest();
+
+    /**
+     * Loads movies that are currently in theatres.
+     *
+     * @return now playing movies
+     */
+    MovieNowPlayingResponse nowPlaying();
+
+    /**
+     * Loads movies that are currently in theatres using a specific language.
+     *
+     * @param language response language
+     * @return localized now playing movies
+     */
+    MovieNowPlayingResponse nowPlaying(Language language);
+
+    /**
+     * Loads movies that are currently in theatres using query parameters.
+     *
+     * @param query now playing query
+     * @return now playing movies
+     */
+    MovieNowPlayingResponse nowPlaying(MovieNowPlayingQuery query);
+
+    /**
+     * Loads movies ordered by popularity.
+     *
+     * @return popular movies
+     */
+    MoviePopularResponse popular();
+
+    /**
+     * Loads movies ordered by popularity using a specific language.
+     *
+     * @param language response language
+     * @return localized popular movies
+     */
+    MoviePopularResponse popular(Language language);
+
+    /**
+     * Loads movies ordered by popularity using query parameters.
+     *
+     * @param query popular movies query
+     * @return popular movies
+     */
+    MoviePopularResponse popular(MoviePopularQuery query);
+
+    /**
+     * Loads movies ordered by rating.
+     *
+     * @return top rated movies
+     */
+    MovieTopRatedResponse topRated();
+
+    /**
+     * Loads movies ordered by rating using a specific language.
+     *
+     * @param language response language
+     * @return localized top rated movies
+     */
+    MovieTopRatedResponse topRated(Language language);
+
+    /**
+     * Loads movies ordered by rating using query parameters.
+     *
+     * @param query top rated movies query
+     * @return top rated movies
+     */
+    MovieTopRatedResponse topRated(MovieTopRatedQuery query);
+
+    /**
+     * Loads movies that are being released soon.
+     *
+     * @return upcoming movies
+     */
+    MovieUpcomingResponse upcoming();
+
+    /**
+     * Loads movies that are being released soon using a specific language.
+     *
+     * @param language response language
+     * @return localized upcoming movies
+     */
+    MovieUpcomingResponse upcoming(Language language);
+
+    /**
+     * Loads movies that are being released soon using query parameters.
+     *
+     * @param query upcoming movies query
+     * @return upcoming movies
+     */
+    MovieUpcomingResponse upcoming(MovieUpcomingQuery query);
 
     /**
      * Loads movie recommendations.

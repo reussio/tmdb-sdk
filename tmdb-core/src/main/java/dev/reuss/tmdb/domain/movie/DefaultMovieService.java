@@ -6,9 +6,13 @@ import dev.reuss.tmdb.core.http.QueryParams;
 import dev.reuss.tmdb.core.http.TmdbHttpClient;
 import dev.reuss.tmdb.core.http.TmdbRequest;
 import dev.reuss.tmdb.domain.movie.model.*;
+import dev.reuss.tmdb.domain.movie.query.MovieNowPlayingQuery;
+import dev.reuss.tmdb.domain.movie.query.MoviePopularQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieRecommendationsQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieReviewsQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieSimilarQuery;
+import dev.reuss.tmdb.domain.movie.query.MovieTopRatedQuery;
+import dev.reuss.tmdb.domain.movie.query.MovieUpcomingQuery;
 import dev.reuss.tmdb.query.AppendToResponse;
 import dev.reuss.tmdb.query.ChangesQuery;
 import dev.reuss.tmdb.query.ImageQuery;
@@ -189,6 +193,142 @@ public final class DefaultMovieService implements MovieService {
         return httpClient.get(
                 TmdbRequest.get(MoviePaths.latest()),
                 MovieDetails.class
+        );
+    }
+
+    @Override
+    public MovieNowPlayingResponse nowPlaying() {
+        return httpClient.get(
+                TmdbRequest.get(MoviePaths.nowPlaying()),
+                MovieNowPlayingResponse.class
+        );
+    }
+
+    @Override
+    public MovieNowPlayingResponse nowPlaying(Language language) {
+        Objects.requireNonNull(language, "Language must not be null");
+
+        return httpClient.get(
+                TmdbRequest.get(
+                        MoviePaths.nowPlaying(),
+                        QueryParams.create().add("language", language)
+                ),
+                MovieNowPlayingResponse.class
+        );
+    }
+
+    @Override
+    public MovieNowPlayingResponse nowPlaying(MovieNowPlayingQuery query) {
+        Objects.requireNonNull(query, "Movie now playing query must not be null");
+
+        return httpClient.get(
+                TmdbRequest.get(
+                        MoviePaths.nowPlaying(),
+                        query.toQueryParams()
+                ),
+                MovieNowPlayingResponse.class
+        );
+    }
+
+    @Override
+    public MoviePopularResponse popular() {
+        return httpClient.get(
+                TmdbRequest.get(MoviePaths.popular()),
+                MoviePopularResponse.class
+        );
+    }
+
+    @Override
+    public MoviePopularResponse popular(Language language) {
+        Objects.requireNonNull(language, "Language must not be null");
+
+        return httpClient.get(
+                TmdbRequest.get(
+                        MoviePaths.popular(),
+                        QueryParams.create().add("language", language)
+                ),
+                MoviePopularResponse.class
+        );
+    }
+
+    @Override
+    public MoviePopularResponse popular(MoviePopularQuery query) {
+        Objects.requireNonNull(query, "Movie popular query must not be null");
+
+        return httpClient.get(
+                TmdbRequest.get(
+                        MoviePaths.popular(),
+                        query.toQueryParams()
+                ),
+                MoviePopularResponse.class
+        );
+    }
+
+    @Override
+    public MovieTopRatedResponse topRated() {
+        return httpClient.get(
+                TmdbRequest.get(MoviePaths.topRated()),
+                MovieTopRatedResponse.class
+        );
+    }
+
+    @Override
+    public MovieTopRatedResponse topRated(Language language) {
+        Objects.requireNonNull(language, "Language must not be null");
+
+        return httpClient.get(
+                TmdbRequest.get(
+                        MoviePaths.topRated(),
+                        QueryParams.create().add("language", language)
+                ),
+                MovieTopRatedResponse.class
+        );
+    }
+
+    @Override
+    public MovieTopRatedResponse topRated(MovieTopRatedQuery query) {
+        Objects.requireNonNull(query, "Movie top rated query must not be null");
+
+        return httpClient.get(
+                TmdbRequest.get(
+                        MoviePaths.topRated(),
+                        query.toQueryParams()
+                ),
+                MovieTopRatedResponse.class
+        );
+    }
+
+    @Override
+    public MovieUpcomingResponse upcoming() {
+        return httpClient.get(
+                TmdbRequest.get(MoviePaths.upcoming()),
+                MovieUpcomingResponse.class
+        );
+    }
+
+    @Override
+    public MovieUpcomingResponse upcoming(Language language) {
+        Objects.requireNonNull(language, "Language must not be null");
+
+        return httpClient.get(
+                TmdbRequest.get(
+                        MoviePaths.upcoming(),
+                        QueryParams.create().add("language", language)
+                ),
+                MovieUpcomingResponse.class
+        );
+    }
+
+    @Override
+    public MovieUpcomingResponse upcoming(MovieUpcomingQuery query) {
+        Objects.requireNonNull(query, "Movie upcoming query must not be null");
+
+        return httpClient.get(
+                TmdbRequest.get(
+                        MoviePaths.upcoming(),
+                        query.toQueryParams()
+                ),
+                MovieUpcomingResponse.class
         );
     }
 
