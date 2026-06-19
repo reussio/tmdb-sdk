@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.reuss.tmdb.core.config.TmdbClientConfig;
 import dev.reuss.tmdb.core.exception.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,6 +32,8 @@ import java.util.stream.Collectors;
  * {@link TmdbServerException}.</p>
  */
 public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
+
+    private static final Logger log = LoggerFactory.getLogger(JavaNetTmdbHttpClient.class);
 
     private final TmdbClientConfig config;
     private final HttpClient httpClient;
@@ -71,7 +75,14 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
         Objects.requireNonNull(request, "TMDB request must not be null");
         Objects.requireNonNull(responseType, "Response type must not be null");
 
+        log.debug(
+                "Sending TMDB request: method=GET, path={}, responseType={}",
+                request.path(),
+                responseType.getSimpleName()
+        );
+
         URI uri = buildUri(request);
+        log.trace("Resolved TMDB request URI: {}", uri);
 
         HttpRequest httpRequest = HttpRequest.newBuilder(uri)
                 .timeout(config.requestTimeout())
@@ -80,14 +91,17 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
                 .GET()
                 .build();
 
+        long startedAt = System.nanoTime();
+
         try {
             HttpResponse<String> response = httpClient.send(
                     httpRequest,
                     HttpResponse.BodyHandlers.ofString()
             );
 
-            return handleResponse(response, responseType);
+            long durationMillis = elapsedMillis(startedAt);
 
+            return handleResponse(response, responseType, request.path(), durationMillis);
         } catch (IOException e) {
             throw new TmdbClientException("Failed to execute TMDB request", e);
         } catch (InterruptedException e) {
@@ -121,13 +135,23 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
         return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 
-    private <T> T handleResponse(HttpResponse<String> response, Class<T> responseType) {
+    private <T> T handleResponse(HttpResponse<String> response, Class<T> responseType, String path, long durationMillis) {
         int httpStatus = response.statusCode();
         String body = response.body();
 
+        log.debug(
+                "Received TMDB response: status={}, path={}, responseType={}, duration={}ms",
+                httpStatus,
+                path,
+                responseType.getSimpleName(),
+                durationMillis
+        );
+
         if (httpStatus >= 200 && httpStatus < 300) {
-            return mapBody(body, responseType, httpStatus);
+            return mapBody(body, responseType);
         }
+
+        logNonSuccessfulResponse(httpStatus, path, durationMillis);
 
         throw mapErrorResponse(httpStatus, body);
     }
@@ -154,7 +178,7 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
         }
     }
 
-    private <T> T mapBody(String body, Class<T> responseType, int statusCode) {
+    private <T> T mapBody(String body, Class<T> responseType) {
         try {
             return objectMapper.readValue(body, responseType);
         } catch (Exception exception) {
@@ -163,5 +187,30 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
                     exception
             );
         }
+    }
+
+    private void logNonSuccessfulResponse(int httpStatus, String path, long durationMillis) {
+        if (httpStatus == 429) {
+            log.warn(
+                    "TMDB rate limit response received: status={}, path={}, duration={}ms",
+                    httpStatus,
+                    path,
+                    durationMillis
+            );
+            return;
+        }
+
+        if (httpStatus >= 500) {
+            log.warn(
+                    "TMDB server error response received: status={}, path={}, duration={}ms",
+                    httpStatus,
+                    path,
+                    durationMillis
+            );
+        }
+    }
+
+    private long elapsedMillis(long startedAt) {
+        return (System.nanoTime() - startedAt) / 1_000_000;
     }
 }
