@@ -16,22 +16,73 @@ import dev.reuss.tmdb.value.language.Language;
  */
 public interface TvSeriesService {
 
+    /**
+     * Loads TV shows airing today.
+     *
+     * @return TV series airing today
+     */
     TvSeriesListResponse airingToday();
 
+    /**
+     * Loads TV shows airing today using a specific language.
+     *
+     * @param language response language
+     * @return localized TV series airing today
+     */
     TvSeriesListResponse airingToday(Language language);
 
+    /**
+     * Loads TV shows airing today using query parameters.
+     *
+     * @param query date list query
+     * @return TV series airing today
+     */
     TvSeriesListResponse airingToday(TvSeriesDateListQuery query);
 
+    /**
+     * Loads TV shows that air in the next 7 days.
+     *
+     * @return TV series on the air
+     */
     TvSeriesListResponse onTheAir();
 
+    /**
+     * Loads TV shows that air in the next 7 days using a specific language.
+     *
+     * @param language response language
+     * @return localized TV series on the air
+     */
     TvSeriesListResponse onTheAir(Language language);
 
+    /**
+     * Loads TV shows that air in the next 7 days using query parameters.
+     *
+     * @param query date list query
+     * @return TV series on the air
+     */
     TvSeriesListResponse onTheAir(TvSeriesDateListQuery query);
 
+    /**
+     * Loads TV shows ordered by popularity.
+     *
+     * @return popular TV series
+     */
     TvSeriesListResponse popular();
 
+    /**
+     * Loads TV shows ordered by popularity using a specific language.
+     *
+     * @param language response language
+     * @return localized popular TV series
+     */
     TvSeriesListResponse popular(Language language);
 
+    /**
+     * Loads TV shows ordered by popularity using query parameters.
+     *
+     * @param query list query
+     * @return popular TV series
+     */
     TvSeriesListResponse popular(TvSeriesListQuery query);
 
     /**
