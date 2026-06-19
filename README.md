@@ -162,6 +162,8 @@ class MovieLookupService {
 
 The SDK maps transport, mapping and TMDB API errors to SDK-specific exceptions.
 
+All SDK exceptions extend `TmdbException`.
+
 Common exception types include:
 
 * `TmdbClientException`
