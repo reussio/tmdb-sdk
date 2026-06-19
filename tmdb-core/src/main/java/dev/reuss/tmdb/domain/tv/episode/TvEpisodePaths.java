@@ -14,10 +14,6 @@ final class TvEpisodePaths {
         return episode(tvShowId, seasonNumber, episodeNumber);
     }
 
-    static String changes(TvShowId tvShowId, int seasonNumber, int episodeNumber) {
-        return episode(tvShowId, seasonNumber, episodeNumber) + "/changes";
-    }
-
     static String changes(TvEpisodeId episodeId) {
         return TV + "/episode/" + episodeId.asString() + "/changes";
     }
