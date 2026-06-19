@@ -2,6 +2,7 @@ package dev.reuss.tmdb.spring.boot;
 
 import dev.reuss.tmdb.TmdbClient;
 import dev.reuss.tmdb.domain.certifications.CertificationService;
+import dev.reuss.tmdb.domain.collection.CollectionService;
 import dev.reuss.tmdb.domain.companies.CompanyService;
 import dev.reuss.tmdb.domain.configuration.ConfigurationService;
 import dev.reuss.tmdb.domain.credits.CreditService;
@@ -159,6 +160,12 @@ public class TmdbServiceAutoConfiguration {
     @ConditionalOnMissingBean
     public MovieService movieService(TmdbClient tmdbClient) {
         return tmdbClient.movies();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public CollectionService collectionService(TmdbClient tmdbClient) {
+        return tmdbClient.collections();
     }
 
     @Bean

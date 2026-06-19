@@ -2,6 +2,7 @@ package dev.reuss.tmdb.spring.boot;
 
 import dev.reuss.tmdb.TmdbClient;
 import dev.reuss.tmdb.domain.certifications.CertificationService;
+import dev.reuss.tmdb.domain.collection.CollectionService;
 import dev.reuss.tmdb.domain.companies.CompanyService;
 import dev.reuss.tmdb.domain.configuration.ConfigurationService;
 import dev.reuss.tmdb.domain.credits.CreditService;
@@ -62,6 +63,7 @@ public class TmdbServiceAutoConfigurationTest {
                     assertThat(context).hasSingleBean(TvEpisodeService.class);
                     assertThat(context).hasSingleBean(TvEpisodeGroupService.class);
                     assertThat(context).hasSingleBean(MovieService.class);
+                    assertThat(context).hasSingleBean(CollectionService.class);
                 });
     }
 
