@@ -5,7 +5,7 @@ package dev.reuss.tmdb.value.id;
  *
  * @param value episode number
  */
-public record TvEpisodeNumber(int value) implements NumericTmdbResourceId {
+public record TvEpisodeNumber(int value) {
 
     public TvEpisodeNumber {
         if (value <= 0) {
@@ -15,6 +15,10 @@ public record TvEpisodeNumber(int value) implements NumericTmdbResourceId {
 
     public static TvEpisodeNumber of(int value) {
         return new TvEpisodeNumber(value);
+    }
+
+    public String asString() {
+        return String.valueOf(value);
     }
 
     @Override

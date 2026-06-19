@@ -5,7 +5,7 @@ package dev.reuss.tmdb.value.id;
  *
  * @param value season number
  */
-public record TvSeasonNumber(int value) implements NumericTmdbResourceId {
+public record TvSeasonNumber(int value) {
 
     public TvSeasonNumber {
         if (value < 0) {
@@ -15,6 +15,10 @@ public record TvSeasonNumber(int value) implements NumericTmdbResourceId {
 
     public static TvSeasonNumber of(int value) {
         return new TvSeasonNumber(value);
+    }
+
+    public String asString() {
+        return String.valueOf(value);
     }
 
     @Override
