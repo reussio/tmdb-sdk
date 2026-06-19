@@ -18,10 +18,6 @@ final class TvSeasonPaths {
         return season(tvShowId, seasonNumber) + "/aggregate_credits";
     }
 
-    static String changes(TvShowId tvShowId, int seasonNumber) {
-        return season(tvShowId, seasonNumber) + "/changes";
-    }
-
     static String changes(TvSeasonId seasonId) {
         return TV + "/season/" + seasonId.asString() + "/changes";
     }
