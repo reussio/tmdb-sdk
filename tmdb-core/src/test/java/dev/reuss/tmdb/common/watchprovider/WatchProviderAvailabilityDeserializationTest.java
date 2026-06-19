@@ -73,11 +73,11 @@ class WatchProviderAvailabilityDeserializationTest {
 
     private static void assertAvailability(WatchProviderAvailability availability) {
         assertEquals("https://www.themoviedb.org/movie/550-fight-club/watch?locale=DE", availability.link());
-        assertProvider(availability.flatrate().getFirst());
-        assertProvider(availability.rent().getFirst());
-        assertProvider(availability.buy().getFirst());
-        assertProvider(availability.ads().getFirst());
-        assertProvider(availability.free().getFirst());
+        assertProvider(availability.flatrate().get(0));
+        assertProvider(availability.rent().get(0));
+        assertProvider(availability.buy().get(0));
+        assertProvider(availability.ads().get(0));
+        assertProvider(availability.free().get(0));
     }
 
     private static void assertProvider(WatchProvider provider) {

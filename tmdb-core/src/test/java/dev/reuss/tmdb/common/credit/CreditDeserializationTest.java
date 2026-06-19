@@ -37,7 +37,7 @@ class CreditDeserializationTest {
                 }
                 """, MovieCredits.class);
 
-        CastCredit cast = credits.cast().getFirst();
+        CastCredit cast = credits.cast().get(0);
 
         assertEquals(4, cast.castId());
     }
@@ -65,7 +65,7 @@ class CreditDeserializationTest {
                 }
                 """, TvSeriesCredits.class);
 
-        CastCredit cast = credits.cast().getFirst();
+        CastCredit cast = credits.cast().get(0);
 
         assertNull(cast.castId());
     }
@@ -93,7 +93,7 @@ class CreditDeserializationTest {
                 }
                 """, TvEpisodeCredits.class);
 
-        GuestStarCredit guestStar = credits.guestStars().getFirst();
+        GuestStarCredit guestStar = credits.guestStars().get(0);
 
         assertEquals("Barristan Selmy", guestStar.character());
     }

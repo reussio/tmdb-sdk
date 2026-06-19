@@ -20,7 +20,7 @@ class ChangeDeserializationTest {
     void mapsMovieChanges() throws Exception {
         MovieChanges changes = objectMapper.readValue(changeJson("title"), MovieChanges.class);
 
-        assertChange(changes.changes().getFirst(), "title");
+        assertChange(changes.changes().get(0), "title");
         assertTrue(new MovieChanges(null).changes().isEmpty());
     }
 
@@ -28,7 +28,7 @@ class ChangeDeserializationTest {
     void mapsTvSeriesChanges() throws Exception {
         TvSeriesChanges changes = objectMapper.readValue(changeJson("name"), TvSeriesChanges.class);
 
-        assertChange(changes.changes().getFirst(), "name");
+        assertChange(changes.changes().get(0), "name");
         assertTrue(new TvSeriesChanges(null).changes().isEmpty());
     }
 
@@ -36,7 +36,7 @@ class ChangeDeserializationTest {
     void mapsTvSeasonChanges() throws Exception {
         TvSeasonChanges changes = objectMapper.readValue(changeJson("overview"), TvSeasonChanges.class);
 
-        assertChange(changes.changes().getFirst(), "overview");
+        assertChange(changes.changes().get(0), "overview");
         assertTrue(new TvSeasonChanges(null).changes().isEmpty());
     }
 
@@ -44,7 +44,7 @@ class ChangeDeserializationTest {
     void mapsTvEpisodeChanges() throws Exception {
         TvEpisodeChanges changes = objectMapper.readValue(changeJson("runtime"), TvEpisodeChanges.class);
 
-        assertChange(changes.changes().getFirst(), "runtime");
+        assertChange(changes.changes().get(0), "runtime");
         assertTrue(new TvEpisodeChanges(null).changes().isEmpty());
     }
 
@@ -70,8 +70,8 @@ class ChangeDeserializationTest {
                 }
                 """, PersonChanges.class);
 
-        Change change = changes.changes().getFirst();
-        ChangeItem item = change.items().getFirst();
+        Change change = changes.changes().get(0);
+        ChangeItem item = change.items().get(0);
 
         assertEquals("biography", change.key());
         assertEquals("change-2", item.id());
@@ -101,8 +101,8 @@ class ChangeDeserializationTest {
                 }
                 """, MovieChanges.class);
 
-        assertTrue(missingItems.changes().getFirst().items().isEmpty());
-        assertTrue(nullItems.changes().getFirst().items().isEmpty());
+        assertTrue(missingItems.changes().get(0).items().isEmpty());
+        assertTrue(nullItems.changes().get(0).items().isEmpty());
     }
 
     private static String changeJson(String key) {
@@ -134,7 +134,7 @@ class ChangeDeserializationTest {
 
     @SuppressWarnings("unchecked")
     private static void assertChange(Change change, String key) {
-        ChangeItem item = change.items().getFirst();
+        ChangeItem item = change.items().get(0);
 
         assertEquals(key, change.key());
         assertEquals(1, change.items().size());

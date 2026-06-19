@@ -27,7 +27,7 @@ class AlternativeTitleDeserializationTest {
                 """, MovieAlternativeTitles.class);
 
         assertEquals(550, titles.id());
-        assertEquals("Fight Club", titles.titles().getFirst().title());
+        assertEquals("Fight Club", titles.titles().get(0).title());
     }
 
     @Test
@@ -46,6 +46,6 @@ class AlternativeTitleDeserializationTest {
                 """, TvSeriesAlternativeTitles.class);
 
         assertEquals(1399, titles.id());
-        assertEquals("Game of Thrones", titles.results().getFirst().title());
+        assertEquals("Game of Thrones", titles.results().get(0).title());
     }
 }

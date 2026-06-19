@@ -36,7 +36,7 @@ class TranslationDeserializationTest {
                 }
                 """, MovieTranslations.class);
 
-        Translation<MovieTranslationData> translation = translations.translations().getFirst();
+        Translation<MovieTranslationData> translation = translations.translations().get(0);
 
         assertEquals("US", translation.iso31661());
         assertEquals("en", translation.iso6391());
@@ -65,7 +65,7 @@ class TranslationDeserializationTest {
                 }
                 """, TvSeriesTranslations.class);
 
-        Translation<TvSeriesTranslationData> translation = translations.translations().getFirst();
+        Translation<TvSeriesTranslationData> translation = translations.translations().get(0);
 
         assertEquals("DE", translation.iso31661());
         assertEquals("de", translation.iso6391());
