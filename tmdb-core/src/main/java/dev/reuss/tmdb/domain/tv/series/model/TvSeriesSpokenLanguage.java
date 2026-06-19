@@ -1,0 +1,20 @@
+package dev.reuss.tmdb.domain.tv.series.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import dev.reuss.tmdb.common.TmdbModel;
+
+/**
+ * Spoken language used in TV series details.
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
+public record TvSeriesSpokenLanguage(
+        @JsonProperty("english_name")
+        String englishName,
+
+        @JsonProperty("iso_639_1")
+        String iso6391,
+
+        String name
+) implements TmdbModel {
+}
