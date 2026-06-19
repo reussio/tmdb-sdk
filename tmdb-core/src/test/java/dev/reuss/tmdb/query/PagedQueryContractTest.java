@@ -2,9 +2,13 @@ package dev.reuss.tmdb.query;
 
 import dev.reuss.tmdb.domain.discover.query.MovieDiscoverQuery;
 import dev.reuss.tmdb.domain.discover.query.TvDiscoverQuery;
+import dev.reuss.tmdb.domain.movie.query.MovieNowPlayingQuery;
+import dev.reuss.tmdb.domain.movie.query.MoviePopularQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieRecommendationsQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieReviewsQuery;
 import dev.reuss.tmdb.domain.movie.query.MovieSimilarQuery;
+import dev.reuss.tmdb.domain.movie.query.MovieTopRatedQuery;
+import dev.reuss.tmdb.domain.movie.query.MovieUpcomingQuery;
 import dev.reuss.tmdb.domain.people.query.PopularPeopleQuery;
 import dev.reuss.tmdb.domain.search.query.*;
 import dev.reuss.tmdb.domain.tv.series.query.TvSeriesDateListQuery;
@@ -43,6 +47,10 @@ class PagedQueryContractTest {
                 new PagedQueryCase("ChangesQuery", ChangesQuery::create),
                 new PagedQueryCase("MovieDiscoverQuery", MovieDiscoverQuery::create),
                 new PagedQueryCase("TvDiscoverQuery", TvDiscoverQuery::create),
+                new PagedQueryCase("MovieNowPlayingQuery", MovieNowPlayingQuery::create),
+                new PagedQueryCase("MoviePopularQuery", MoviePopularQuery::create),
+                new PagedQueryCase("MovieTopRatedQuery", MovieTopRatedQuery::create),
+                new PagedQueryCase("MovieUpcomingQuery", MovieUpcomingQuery::create),
                 new PagedQueryCase("MovieRecommendationsQuery", MovieRecommendationsQuery::create),
                 new PagedQueryCase("MovieReviewsQuery", MovieReviewsQuery::create),
                 new PagedQueryCase("MovieSimilarQuery", MovieSimilarQuery::create),
