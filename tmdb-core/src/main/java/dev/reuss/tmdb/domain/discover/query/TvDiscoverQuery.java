@@ -11,6 +11,10 @@ import java.time.LocalDate;
 
 /**
  * Query parameters for TMDB TV discovery.
+ *
+ * <p>All fields are optional. Page and year filters are validated before
+ * serialization; other filters are passed through using TMDB's discover TV
+ * query parameter names.</p>
  */
 public final class TvDiscoverQuery implements PagedQuery<TvDiscoverQuery> {
 

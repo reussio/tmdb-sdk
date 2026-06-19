@@ -1,5 +1,8 @@
 package dev.reuss.tmdb.value.image.size;
 
+/**
+ * Supported TMDB still image sizes.
+ */
 public enum StillSize implements ImageSize {
     W92("w92"),
     W185("w185"),

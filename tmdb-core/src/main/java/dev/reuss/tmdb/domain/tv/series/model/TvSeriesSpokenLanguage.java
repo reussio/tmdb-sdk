@@ -6,6 +6,10 @@ import dev.reuss.tmdb.common.TmdbModel;
 
 /**
  * Spoken language used in TV series details.
+ *
+ * @param englishName English language name
+ * @param iso6391 ISO 639-1 language code
+ * @param name localized language name
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TvSeriesSpokenLanguage(

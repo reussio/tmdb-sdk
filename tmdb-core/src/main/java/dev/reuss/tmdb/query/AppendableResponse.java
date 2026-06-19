@@ -3,7 +3,11 @@ package dev.reuss.tmdb.query;
 import java.io.Serializable;
 
 /**
- * Common contract for append_to_response values.
+ * Common contract for TMDB {@code append_to_response} values.
+ *
+ * <p>Implementations are intended for endpoint groups that support appended
+ * responses and expose both the raw TMDB query value and the expected response
+ * model type.</p>
  */
 public interface AppendableResponse extends Serializable {
 

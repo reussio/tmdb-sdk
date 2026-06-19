@@ -5,6 +5,9 @@ import dev.reuss.tmdb.common.image.TvSeasonImages;
 import dev.reuss.tmdb.domain.tv.season.model.*;
 import dev.reuss.tmdb.query.AppendableResponse;
 
+/**
+ * TV season responses that can be requested through TMDB's {@code append_to_response} parameter.
+ */
 public enum TvSeasonAppend implements AppendableResponse {
 
     AGGREGATE_CREDITS("aggregate_credits", TvSeasonAggregateCredits.class),

@@ -13,17 +13,48 @@ import dev.reuss.tmdb.value.id.MovieId;
 import dev.reuss.tmdb.value.language.Language;
 import dev.reuss.tmdb.value.region.Region;
 
+/**
+ * Service for TMDB movie endpoints.
+ */
 public interface MovieService {
 
+    /**
+     * Loads the details for a movie.
+     *
+     * @param movieId TMDB movie id
+     * @return movie details
+     */
     MovieDetails details(MovieId movieId);
 
+    /**
+     * Loads the details for a movie using a specific language.
+     *
+     * @param movieId TMDB movie id
+     * @param language response language
+     * @return localized movie details
+     */
     MovieDetails details(MovieId movieId, Language language);
 
+    /**
+     * Loads the details for a movie with appended responses.
+     *
+     * @param movieId TMDB movie id
+     * @param appendToResponse appended responses
+     * @return movie details with appended responses
+     */
     MovieDetails details(
             MovieId movieId,
             AppendToResponse<MovieAppend> appendToResponse
     );
 
+    /**
+     * Loads the details for a movie using a specific language and appended responses.
+     *
+     * @param movieId TMDB movie id
+     * @param language response language
+     * @param appendToResponse appended responses
+     * @return localized movie details with appended responses
+     */
     MovieDetails details(
             MovieId movieId,
             Language language,
@@ -250,8 +281,21 @@ public interface MovieService {
      */
     MovieWatchProviders watchProviders(MovieId movieId);
 
+    /**
+     * Loads images for a movie.
+     *
+     * @param movieId TMDB movie id
+     * @return movie images
+     */
     MovieImages images(MovieId movieId);
 
+    /**
+     * Loads images for a movie using query parameters.
+     *
+     * @param movieId TMDB movie id
+     * @param query image query
+     * @return movie images
+     */
     MovieImages images(MovieId movieId, ImageQuery query);
 
 }

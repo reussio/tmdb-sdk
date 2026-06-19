@@ -12,6 +12,9 @@ import dev.reuss.tmdb.value.id.TvSeasonNumber;
 import dev.reuss.tmdb.value.id.TvShowId;
 import dev.reuss.tmdb.value.language.Language;
 
+/**
+ * Service for TMDB TV season endpoints.
+ */
 public interface TvSeasonService {
 
     /**
@@ -200,8 +203,23 @@ public interface TvSeasonService {
             Language language
     );
 
+    /**
+     * Loads images for a TV season.
+     *
+     * @param tvShowId TMDB TV series id
+     * @param seasonNumber season number
+     * @return TV season images
+     */
     TvSeasonImages images(TvShowId tvShowId, int seasonNumber);
 
+    /**
+     * Loads images for a TV season using query parameters.
+     *
+     * @param tvShowId TMDB TV series id
+     * @param seasonNumber season number
+     * @param query image query
+     * @return TV season images
+     */
     TvSeasonImages images(TvShowId tvShowId, int seasonNumber, ImageQuery query);
 
 }

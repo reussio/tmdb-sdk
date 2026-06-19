@@ -10,6 +10,22 @@ import java.util.List;
 
 /**
  * Movie result returned by TMDB find.
+ *
+ * @param adult whether the movie is marked as adult
+ * @param backdropPath backdrop image path
+ * @param id TMDB movie id
+ * @param title movie title
+ * @param originalLanguage original language
+ * @param originalTitle original title
+ * @param overview movie overview
+ * @param posterPath poster image path
+ * @param mediaType media type discriminator
+ * @param genreIds genre ids
+ * @param popularity popularity
+ * @param releaseDate release date
+ * @param video whether the movie has video flag
+ * @param voteAverage vote average
+ * @param voteCount vote count
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record FindMovieResult(

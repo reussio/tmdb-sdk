@@ -12,14 +12,34 @@ import dev.reuss.tmdb.value.id.TvSeasonNumber;
 import dev.reuss.tmdb.value.id.TvShowId;
 import dev.reuss.tmdb.value.language.Language;
 
+/**
+ * Service for TMDB TV episode endpoints.
+ */
 public interface TvEpisodeService {
 
+    /**
+     * Loads the details for a TV episode.
+     *
+     * @param seriesId TMDB TV series id
+     * @param seasonNumber season number
+     * @param episodeNumber episode number
+     * @return TV episode details
+     */
     TvEpisodeDetails details(
             TvShowId seriesId,
             TvSeasonNumber seasonNumber,
             TvEpisodeNumber episodeNumber
     );
 
+    /**
+     * Loads the details for a TV episode using a specific language.
+     *
+     * @param seriesId TMDB TV series id
+     * @param seasonNumber season number
+     * @param episodeNumber episode number
+     * @param language response language
+     * @return localized TV episode details
+     */
     TvEpisodeDetails details(
             TvShowId seriesId,
             TvSeasonNumber seasonNumber,
@@ -27,6 +47,15 @@ public interface TvEpisodeService {
             Language language
     );
 
+    /**
+     * Loads the details for a TV episode with appended responses.
+     *
+     * @param seriesId TMDB TV series id
+     * @param seasonNumber season number
+     * @param episodeNumber episode number
+     * @param appendToResponse appended responses
+     * @return TV episode details with appended responses
+     */
     TvEpisodeDetails details(
             TvShowId seriesId,
             TvSeasonNumber seasonNumber,
@@ -34,6 +63,16 @@ public interface TvEpisodeService {
             AppendToResponse<TvEpisodeAppend> appendToResponse
     );
 
+    /**
+     * Loads the details for a TV episode using a specific language and appended responses.
+     *
+     * @param seriesId TMDB TV series id
+     * @param seasonNumber season number
+     * @param episodeNumber episode number
+     * @param language response language
+     * @param appendToResponse appended responses
+     * @return localized TV episode details with appended responses
+     */
     TvEpisodeDetails details(
             TvShowId seriesId,
             TvSeasonNumber seasonNumber,
@@ -154,8 +193,25 @@ public interface TvEpisodeService {
             TvEpisodeVideosQuery query
     );
 
+    /**
+     * Loads images for a TV episode.
+     *
+     * @param tvShowId TMDB TV series id
+     * @param seasonNumber season number
+     * @param episodeNumber episode number
+     * @return TV episode images
+     */
     TvEpisodeImages images(TvShowId tvShowId, int seasonNumber, int episodeNumber);
 
+    /**
+     * Loads images for a TV episode using query parameters.
+     *
+     * @param tvShowId TMDB TV series id
+     * @param seasonNumber season number
+     * @param episodeNumber episode number
+     * @param query image query
+     * @return TV episode images
+     */
     TvEpisodeImages images(TvShowId tvShowId, int seasonNumber, int episodeNumber, ImageQuery query);
 
 }

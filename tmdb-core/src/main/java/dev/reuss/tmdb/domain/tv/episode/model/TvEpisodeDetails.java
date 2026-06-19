@@ -27,6 +27,12 @@ import java.util.List;
  * @param stillPath      still image path
  * @param voteAverage    vote average
  * @param voteCount      vote count
+ * @param changes        appended changes
+ * @param credits        appended credits
+ * @param externalIds    appended external ids
+ * @param images         appended images
+ * @param translations   appended translations
+ * @param videos         appended videos
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TvEpisodeDetails(

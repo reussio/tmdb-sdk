@@ -26,6 +26,13 @@ import java.util.List;
  * @param placeOfBirth       place of birth
  * @param popularity         person popularity
  * @param profilePath        profile image path
+ * @param changes            appended changes
+ * @param combinedCredits    appended combined credits
+ * @param externalIds        appended external ids
+ * @param images             appended images
+ * @param movieCredits       appended movie credits
+ * @param tvCredits          appended TV credits
+ * @param translations       appended translations
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record PersonDetails(

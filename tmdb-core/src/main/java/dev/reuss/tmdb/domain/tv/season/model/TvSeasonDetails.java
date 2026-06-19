@@ -21,6 +21,14 @@ import java.util.List;
  * @param posterPath   poster image path
  * @param seasonNumber season number
  * @param voteAverage  vote average
+ * @param aggregateCredits appended aggregate credits
+ * @param changes      appended changes
+ * @param credits      appended credits
+ * @param externalIds  appended external ids
+ * @param images       appended images
+ * @param translations appended translations
+ * @param videos       appended videos
+ * @param watchProviders appended watch providers
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TvSeasonDetails(

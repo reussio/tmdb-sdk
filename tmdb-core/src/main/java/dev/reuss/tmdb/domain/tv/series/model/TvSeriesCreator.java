@@ -6,6 +6,12 @@ import dev.reuss.tmdb.common.TmdbModel;
 
 /**
  * Creator of a TMDB TV series.
+ *
+ * @param id TMDB person id
+ * @param creditId credit id
+ * @param name creator name
+ * @param gender gender value returned by TMDB
+ * @param profilePath profile image path
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TvSeriesCreator(

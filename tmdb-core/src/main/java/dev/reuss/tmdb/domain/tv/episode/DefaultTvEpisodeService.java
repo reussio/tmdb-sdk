@@ -17,6 +17,9 @@ import dev.reuss.tmdb.value.language.Language;
 
 import java.util.Objects;
 
+/**
+ * Default {@link TvEpisodeService} implementation backed by TMDB HTTP requests.
+ */
 public final class DefaultTvEpisodeService implements TvEpisodeService {
 
     private final TmdbHttpClient httpClient;

@@ -7,6 +7,9 @@ import dev.reuss.tmdb.query.QueryValidation;
 
 /**
  * Query parameters for searching TMDB companies.
+ *
+ * <p>The search text is required and must not be blank. The optional page value
+ * is validated by {@link QueryValidation#validatePage(Integer)}.</p>
  */
 public final class SearchCompanyQuery implements SearchQuery, PagedQuery<SearchCompanyQuery> {
 

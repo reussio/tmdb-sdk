@@ -1,5 +1,8 @@
 package dev.reuss.tmdb.value.image.size;
 
+/**
+ * Supported TMDB profile image sizes.
+ */
 public enum ProfileSize implements ImageSize {
     W45("w45"),
     W185("w185"),

@@ -3,6 +3,9 @@ package dev.reuss.tmdb.core.exception;
 import java.util.Arrays;
 import java.util.Optional;
 
+/**
+ * Known TMDB API status codes and their default HTTP status and message.
+ */
 public enum TmdbError {
 
     SUCCESS(1, 200, "Success."),
@@ -63,18 +66,39 @@ public enum TmdbError {
         this.message = message;
     }
 
+    /**
+     * Returns the TMDB status code.
+     *
+     * @return TMDB status code
+     */
     public int code() {
         return code;
     }
 
+    /**
+     * Returns the default HTTP status for the TMDB status code.
+     *
+     * @return HTTP status code
+     */
     public int httpStatus() {
         return httpStatus;
     }
 
+    /**
+     * Returns TMDB's default status message.
+     *
+     * @return status message
+     */
     public String message() {
         return message;
     }
 
+    /**
+     * Finds a known TMDB error by status code.
+     *
+     * @param code TMDB status code
+     * @return matching error, if known
+     */
     public static Optional<TmdbError> fromCode(int code) {
         return Arrays.stream(values())
                 .filter(error -> error.code == code)

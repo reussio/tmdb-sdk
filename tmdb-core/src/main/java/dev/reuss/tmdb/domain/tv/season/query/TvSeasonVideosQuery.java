@@ -10,6 +10,10 @@ import java.util.stream.Collectors;
 
 /**
  * Query parameters for TV season videos.
+ *
+ * <p>Both language and included video languages are optional. Included video
+ * languages are serialized as a comma-separated {@code include_video_language}
+ * value.</p>
  */
 public final class TvSeasonVideosQuery implements TmdbQuery {
 

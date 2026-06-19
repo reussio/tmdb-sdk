@@ -8,6 +8,9 @@ import dev.reuss.tmdb.domain.tv.episode.model.TvEpisodeTranslations;
 import dev.reuss.tmdb.domain.tv.episode.model.TvEpisodeVideos;
 import dev.reuss.tmdb.query.AppendableResponse;
 
+/**
+ * TV episode responses that can be requested through TMDB's {@code append_to_response} parameter.
+ */
 public enum TvEpisodeAppend implements AppendableResponse {
 
     CHANGES("changes", TvEpisodeChanges.class),

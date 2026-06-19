@@ -6,6 +6,9 @@ import dev.reuss.tmdb.common.TmdbModel;
 
 /**
  * Production country used in TV series details.
+ *
+ * @param iso31661 ISO 3166-1 country code
+ * @param name country name
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TvSeriesProductionCountry(

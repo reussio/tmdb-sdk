@@ -12,6 +12,54 @@ import java.util.List;
 
 /**
  * Details of a TMDB TV series.
+ *
+ * @param adult whether the series is marked as adult
+ * @param backdropPath backdrop image path
+ * @param createdBy series creators
+ * @param episodeRunTime episode runtimes in minutes
+ * @param firstAirDate first air date
+ * @param genres series genres
+ * @param homepage series homepage
+ * @param id TMDB TV series id
+ * @param inProduction whether the series is in production
+ * @param languages languages used by the series
+ * @param lastAirDate last air date
+ * @param lastEpisodeToAir last aired episode
+ * @param name series name
+ * @param nextEpisodeToAir next scheduled episode
+ * @param networks networks
+ * @param numberOfEpisodes episode count
+ * @param numberOfSeasons season count
+ * @param originCountry origin countries
+ * @param originalLanguage original language
+ * @param originalName original name
+ * @param overview series overview
+ * @param popularity popularity
+ * @param posterPath poster image path
+ * @param productionCompanies production companies
+ * @param productionCountries production countries
+ * @param seasons seasons
+ * @param spokenLanguages spoken languages
+ * @param status series status
+ * @param tagline series tagline
+ * @param type series type
+ * @param voteAverage vote average
+ * @param voteCount vote count
+ * @param aggregateCredits appended aggregate credits
+ * @param alternativeTitles appended alternative titles
+ * @param changes appended changes
+ * @param contentRatings appended content ratings
+ * @param credits appended credits
+ * @param episodeGroups appended episode groups
+ * @param externalIds appended external ids
+ * @param keywords appended keywords
+ * @param recommendations appended recommendations
+ * @param reviews appended reviews
+ * @param screenedTheatrically appended theatrical screenings
+ * @param similar appended similar TV series
+ * @param translations appended translations
+ * @param videos appended videos
+ * @param watchProviders appended watch providers
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TvSeriesDetails(

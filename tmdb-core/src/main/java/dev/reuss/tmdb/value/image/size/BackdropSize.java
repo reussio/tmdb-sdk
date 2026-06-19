@@ -1,5 +1,8 @@
 package dev.reuss.tmdb.value.image.size;
 
+/**
+ * Supported TMDB backdrop image sizes.
+ */
 public enum BackdropSize implements ImageSize {
     W300("w300"),
     W780("w780"),

@@ -7,6 +7,9 @@ import dev.reuss.tmdb.value.language.Language;
 
 /**
  * Query parameters for popular people.
+ *
+ * <p>Both language and page are optional. Page values are validated by
+ * {@link QueryValidation#validatePage(Integer)}.</p>
  */
 public final class PopularPeopleQuery implements PagedQuery<PopularPeopleQuery> {
 

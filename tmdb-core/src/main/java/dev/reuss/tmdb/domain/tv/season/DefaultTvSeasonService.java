@@ -17,6 +17,9 @@ import dev.reuss.tmdb.value.language.Language;
 
 import java.util.Objects;
 
+/**
+ * Default {@link TvSeasonService} implementation backed by TMDB HTTP requests.
+ */
 public final class DefaultTvSeasonService implements TvSeasonService {
 
     private final TmdbHttpClient httpClient;

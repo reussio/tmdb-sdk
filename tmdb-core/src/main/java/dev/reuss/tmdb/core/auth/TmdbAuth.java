@@ -11,6 +11,8 @@ import java.io.Serializable;
  *
  * <p>The access token is intentionally masked in {@link #toString()} to
  * avoid accidentally exposing credentials in logs or debug output.</p>
+ *
+ * @param accessToken TMDB bearer access token
  */
 public record TmdbAuth(String accessToken) implements Serializable {
 

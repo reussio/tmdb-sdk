@@ -7,6 +7,9 @@ import dev.reuss.tmdb.value.language.Language;
 
 /**
  * Query parameters for date-based TMDB TV series list endpoints.
+ *
+ * <p>Language, page and timezone are optional. Page values are validated by
+ * {@link QueryValidation#validatePage(Integer)}.</p>
  */
 public final class TvSeriesDateListQuery implements PagedQuery<TvSeriesDateListQuery> {
 

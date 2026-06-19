@@ -9,6 +9,10 @@ import dev.reuss.tmdb.value.region.Region;
 
 /**
  * Query parameters for searching TMDB movies.
+ *
+ * <p>The search text is required and must not be blank. Optional filters are
+ * adult content inclusion, language, page, region, year and primary release
+ * year. Page and year filters are validated before serialization.</p>
  */
 public final class SearchMovieQuery implements SearchQuery, PagedQuery<SearchMovieQuery> {
 

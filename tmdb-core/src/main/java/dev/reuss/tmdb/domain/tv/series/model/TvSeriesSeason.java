@@ -6,6 +6,15 @@ import dev.reuss.tmdb.common.TmdbModel;
 
 /**
  * Lightweight TV season representation used in TV series details.
+ *
+ * @param airDate season air date
+ * @param episodeCount episode count
+ * @param id TMDB season id
+ * @param name season name
+ * @param overview season overview
+ * @param posterPath poster image path
+ * @param seasonNumber season number
+ * @param voteAverage vote average
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TvSeriesSeason(

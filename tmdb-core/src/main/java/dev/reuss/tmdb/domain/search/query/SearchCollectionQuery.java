@@ -9,6 +9,10 @@ import dev.reuss.tmdb.value.region.Region;
 
 /**
  * Query parameters for searching TMDB collections.
+ *
+ * <p>The search text is required and must not be blank. Optional filters are
+ * adult content inclusion, language, page and region. Page values are validated
+ * by {@link QueryValidation#validatePage(Integer)}.</p>
  */
 public final class SearchCollectionQuery implements SearchQuery, PagedQuery<SearchCollectionQuery> {
 

@@ -4,6 +4,22 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dev.reuss.tmdb.common.TmdbModel;
 
+/**
+ * External identifiers associated with a TMDB resource.
+ *
+ * @param id TMDB resource id
+ * @param imdbId IMDb id
+ * @param wikidataId Wikidata id
+ * @param facebookId Facebook id
+ * @param instagramId Instagram id
+ * @param twitterId Twitter id
+ * @param tvdbId TVDB id
+ * @param tvrageId TVRage id
+ * @param freebaseMid Freebase machine id
+ * @param freebaseId Freebase id
+ * @param tiktokId TikTok id
+ * @param youtubeId YouTube id
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record ExternalIds(
         int id,
@@ -42,6 +58,11 @@ public record ExternalIds(
         String youtubeId
 ) implements TmdbModel {
 
+    /**
+     * Returns whether any social media identifier is present.
+     *
+     * @return {@code true} if at least one social media id is present
+     */
     public boolean hasSocialIds() {
         return facebookId != null
                 || instagramId != null
@@ -50,6 +71,11 @@ public record ExternalIds(
                 || youtubeId != null;
     }
 
+    /**
+     * Returns whether any external database identifier is present.
+     *
+     * @return {@code true} if at least one external database id is present
+     */
     public boolean hasDatabaseIds() {
         return imdbId != null
                 || wikidataId != null

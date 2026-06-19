@@ -40,6 +40,19 @@ import java.util.List;
  * @param video               whether the movie has video flag
  * @param voteAverage         vote average
  * @param voteCount           vote count
+ * @param alternativeTitles   appended alternative titles
+ * @param changes             appended changes
+ * @param credits             appended credits
+ * @param externalIds         appended external ids
+ * @param images              appended images
+ * @param keywords            appended keywords
+ * @param recommendations     appended recommendations
+ * @param releaseDates        appended release dates
+ * @param reviews             appended reviews
+ * @param similar             appended similar movies
+ * @param translations        appended translations
+ * @param videos              appended videos
+ * @param watchProviders      appended watch providers
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record MovieDetails(

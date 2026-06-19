@@ -8,6 +8,10 @@ import dev.reuss.tmdb.value.language.Language;
 
 /**
  * Query parameters for searching TMDB TV shows.
+ *
+ * <p>The search text is required and must not be blank. Optional filters are
+ * first air date year, adult content inclusion, language, page and year. Page
+ * and year filters are validated before serialization.</p>
  */
 public final class SearchTvQuery implements SearchQuery, PagedQuery<SearchTvQuery> {
 

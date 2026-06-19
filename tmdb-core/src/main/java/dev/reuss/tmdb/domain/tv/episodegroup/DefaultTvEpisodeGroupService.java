@@ -7,6 +7,9 @@ import dev.reuss.tmdb.value.id.TvEpisodeGroupId;
 
 import java.util.Objects;
 
+/**
+ * Default {@link TvEpisodeGroupService} implementation backed by TMDB HTTP requests.
+ */
 public final class DefaultTvEpisodeGroupService implements TvEpisodeGroupService {
 
     private final TmdbHttpClient httpClient;

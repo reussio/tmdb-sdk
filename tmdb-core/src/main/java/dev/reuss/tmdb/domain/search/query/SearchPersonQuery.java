@@ -8,6 +8,10 @@ import dev.reuss.tmdb.value.language.Language;
 
 /**
  * Query parameters for searching TMDB people.
+ *
+ * <p>The search text is required and must not be blank. Optional filters are
+ * adult content inclusion, language and page. Page values are validated by
+ * {@link QueryValidation#validatePage(Integer)}.</p>
  */
 public final class SearchPersonQuery implements SearchQuery, PagedQuery<SearchPersonQuery> {
 

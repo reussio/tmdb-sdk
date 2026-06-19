@@ -43,53 +43,143 @@ import dev.reuss.tmdb.domain.watchproviders.WatchProviderService;
 public interface TmdbClient {
 
     /**
-     * Returns the configuration service.
+     * Returns the service for TMDB API configuration metadata.
      *
-     * @return the configuration service
+     * @return configuration service
      */
     ConfigurationService configuration();
 
     /**
-     * Returns the image url builder.
+     * Returns the builder for TMDB image URLs.
      *
-     * @return the image url builder
+     * @return image URL builder
      */
     ImageUrlBuilder imageUrls();
 
+    /**
+     * Returns the service for movie and TV certification lists.
+     *
+     * @return certification service
+     */
     CertificationService certifications();
 
+    /**
+     * Returns the service for TMDB companies.
+     *
+     * @return company service
+     */
     CompanyService companies();
 
+    /**
+     * Returns the service for credit details.
+     *
+     * @return credit service
+     */
     CreditService credits();
 
+    /**
+     * Returns the service for discovering movies and TV shows.
+     *
+     * @return discover service
+     */
     DiscoverService discover();
 
+    /**
+     * Returns the service for resolving external ids to TMDB resources.
+     *
+     * @return find service
+     */
     FindService find();
 
+    /**
+     * Returns the service for movie and TV genres.
+     *
+     * @return genre service
+     */
     GenreService genres();
 
+    /**
+     * Returns the service for TMDB keywords.
+     *
+     * @return keyword service
+     */
     KeywordService keywords();
 
+    /**
+     * Returns the service for TV networks.
+     *
+     * @return network service
+     */
     NetworkService networks();
 
+    /**
+     * Returns the service for review details.
+     *
+     * @return review service
+     */
     ReviewService reviews();
 
+    /**
+     * Returns the service for trending movies, TV shows, people and mixed results.
+     *
+     * @return trending service
+     */
     TrendingService trending();
 
+    /**
+     * Returns the service for watch provider metadata.
+     *
+     * @return watch provider service
+     */
     WatchProviderService watchProviders();
 
+    /**
+     * Returns the service for TMDB search endpoints.
+     *
+     * @return search service
+     */
     SearchService search();
 
+    /**
+     * Returns the service for people endpoints.
+     *
+     * @return people service
+     */
     PersonService people();
 
+    /**
+     * Returns the service for TV series endpoints.
+     *
+     * @return TV series service
+     */
     TvSeriesService tvSeries();
 
+    /**
+     * Returns the service for TV season endpoints.
+     *
+     * @return TV season service
+     */
     TvSeasonService tvSeason();
 
+    /**
+     * Returns the service for TV episode endpoints.
+     *
+     * @return TV episode service
+     */
     TvEpisodeService tvEpisode();
 
+    /**
+     * Returns the service for TV episode group endpoints.
+     *
+     * @return TV episode group service
+     */
     TvEpisodeGroupService tvEpisodeGroup();
 
+    /**
+     * Returns the service for movie endpoints.
+     *
+     * @return movie service
+     */
     MovieService movies();
 
     /**

@@ -1,5 +1,8 @@
 package dev.reuss.tmdb.value.image.size;
 
+/**
+ * Supported TMDB logo image sizes.
+ */
 public enum LogoSize implements ImageSize {
     W45("w45"),
     W92("w92"),

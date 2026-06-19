@@ -5,6 +5,9 @@ import dev.reuss.tmdb.common.image.MovieImages;
 import dev.reuss.tmdb.domain.movie.model.*;
 import dev.reuss.tmdb.query.AppendableResponse;
 
+/**
+ * Movie responses that can be requested through TMDB's {@code append_to_response} parameter.
+ */
 public enum MovieAppend implements AppendableResponse {
 
     ALTERNATIVE_TITLES("alternative_titles", MovieAlternativeTitles.class),

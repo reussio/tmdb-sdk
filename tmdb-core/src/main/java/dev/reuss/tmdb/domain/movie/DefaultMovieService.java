@@ -19,6 +19,9 @@ import dev.reuss.tmdb.value.region.Region;
 
 import java.util.Objects;
 
+/**
+ * Default {@link MovieService} implementation backed by TMDB HTTP requests.
+ */
 public final class DefaultMovieService implements MovieService {
 
     private final TmdbHttpClient httpClient;

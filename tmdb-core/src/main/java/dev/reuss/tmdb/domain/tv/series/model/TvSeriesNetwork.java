@@ -6,6 +6,11 @@ import dev.reuss.tmdb.common.TmdbModel;
 
 /**
  * TV network used in TV series details.
+ *
+ * @param id TMDB network id
+ * @param logoPath logo image path
+ * @param name network name
+ * @param originCountry origin country code
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TvSeriesNetwork(
