@@ -1,6 +1,7 @@
 package dev.reuss.tmdb;
 
 import dev.reuss.tmdb.domain.certifications.CertificationService;
+import dev.reuss.tmdb.domain.collection.CollectionService;
 import dev.reuss.tmdb.domain.companies.CompanyService;
 import dev.reuss.tmdb.domain.configuration.ConfigurationService;
 import dev.reuss.tmdb.domain.credits.CreditService;
@@ -181,6 +182,8 @@ public interface TmdbClient {
      * @return movie service
      */
     MovieService movies();
+
+    CollectionService collections();
 
     /**
      * Creates a new TMDB client builder.

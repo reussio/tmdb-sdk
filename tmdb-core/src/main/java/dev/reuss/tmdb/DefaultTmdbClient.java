@@ -5,6 +5,8 @@ import dev.reuss.tmdb.core.http.JavaNetTmdbHttpClient;
 import dev.reuss.tmdb.core.http.TmdbHttpClient;
 import dev.reuss.tmdb.domain.certifications.CertificationService;
 import dev.reuss.tmdb.domain.certifications.DefaultCertificationService;
+import dev.reuss.tmdb.domain.collection.CollectionService;
+import dev.reuss.tmdb.domain.collection.DefaultCollectionService;
 import dev.reuss.tmdb.domain.companies.CompanyService;
 import dev.reuss.tmdb.domain.companies.DefaultCompanyService;
 import dev.reuss.tmdb.domain.configuration.ConfigurationService;
@@ -68,6 +70,7 @@ final class DefaultTmdbClient implements TmdbClient {
     private final TvEpisodeService tvEpisode;
     private final TvEpisodeGroupService tvEpisodeGroup;
     private final MovieService movies;
+    private final CollectionService collections;
 
     DefaultTmdbClient(TmdbClientConfig config) {
         Objects.requireNonNull(config, "TMDB client config must not be null");
@@ -94,6 +97,7 @@ final class DefaultTmdbClient implements TmdbClient {
         this.tvEpisode = new DefaultTvEpisodeService(httpClient);
         this.tvEpisodeGroup = new DefaultTvEpisodeGroupService(httpClient);
         this.movies = new DefaultMovieService(httpClient);
+        this.collections = new DefaultCollectionService(httpClient);
     }
 
     @Override
@@ -194,5 +198,10 @@ final class DefaultTmdbClient implements TmdbClient {
     @Override
     public MovieService movies() {
         return movies;
+    }
+
+    @Override
+    public CollectionService collections() {
+        return collections;
     }
 }
