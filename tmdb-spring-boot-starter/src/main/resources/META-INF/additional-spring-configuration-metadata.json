@@ -1,0 +1,38 @@
+{
+  "properties": [
+    {
+      "name": "tmdb.access-token",
+      "type": "java.lang.String",
+      "description": "TMDB API read access token used for bearer authentication."
+    },
+    {
+      "name": "tmdb.base-url",
+      "type": "java.lang.String",
+      "description": "Base URL of the TMDB API.",
+      "defaultValue": "https://api.themoviedb.org/3"
+    },
+    {
+      "name": "tmdb.default-language",
+      "type": "java.lang.String",
+      "description": "Default TMDB language tag, for example en-US or de-DE.",
+      "defaultValue": "en-US"
+    },
+    {
+      "name": "tmdb.default-region",
+      "type": "java.lang.String",
+      "description": "Default TMDB region code, for example US or DE."
+    },
+    {
+      "name": "tmdb.connect-timeout",
+      "type": "java.time.Duration",
+      "description": "Connection timeout for TMDB HTTP requests.",
+      "defaultValue": "5s"
+    },
+    {
+      "name": "tmdb.request-timeout",
+      "type": "java.time.Duration",
+      "description": "Request timeout for TMDB HTTP requests.",
+      "defaultValue": "10s"
+    }
+  ]
+}

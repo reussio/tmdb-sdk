@@ -12,6 +12,8 @@
     </parent>
 
     <artifactId>tmdb-core</artifactId>
+    <name>TMDB Java SDK Core</name>
+    <description>Core Java client library for The Movie Database API.</description>
 
     <dependencies>
         <dependency>

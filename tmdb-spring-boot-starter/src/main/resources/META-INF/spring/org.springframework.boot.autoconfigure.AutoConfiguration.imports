@@ -1,0 +1,2 @@
+dev.reuss.tmdb.spring.boot.TmdbClientAutoConfiguration
+dev.reuss.tmdb.spring.boot.TmdbServiceAutoConfiguration
