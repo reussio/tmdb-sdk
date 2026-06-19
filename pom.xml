@@ -10,11 +10,35 @@
 
     <name>TMDB Java SDK</name>
     <description>A modern Java client library for The Movie Database API.</description>
+    <url>https://reussio.github.io/tmdb-sdk/</url>
 
     <modules>
         <module>tmdb-core</module>
         <module>tmdb-spring-boot-starter</module>
     </modules>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>reussio</id>
+            <name>Tobias Reuß</name>
+            <url>https://github.com/reussio</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/reussio/tmdb-sdk.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/reussio/tmdb-sdk.git</developerConnection>
+        <url>https://github.com/reussio/tmdb-sdk</url>
+        <tag>HEAD</tag>
+    </scm>
 
     <properties>
         <maven.compiler.release>21</maven.compiler.release>
