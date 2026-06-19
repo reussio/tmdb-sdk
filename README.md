@@ -1,8 +1,16 @@
 # TMDB Java SDK
 
+[![Maven Central Core](https://img.shields.io/maven-central/v/dev.reuss.tmdb/tmdb-core.svg?label=tmdb-core)](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-core)
+[![Maven Central Spring Boot Starter](https://img.shields.io/maven-central/v/dev.reuss.tmdb/tmdb-spring-boot-starter.svg?label=spring-boot-starter)](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-spring-boot-starter)
+[![Javadocs](https://img.shields.io/badge/Javadocs-online-blue.svg)](https://reussio.github.io/tmdb-sdk/)
+[![Publish](https://github.com/reussio/tmdb-sdk/actions/workflows/publish.yml/badge.svg)](https://github.com/reussio/tmdb-sdk/actions/workflows/publish.yml)
+[![Java 17](https://img.shields.io/badge/Java-17%2B-orange.svg)](https://openjdk.org/projects/jdk/17/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 A modern Java client library for [The Movie Database API](https://developer.themoviedb.org/).
 
-The SDK provides a typed Java API for TMDB resources such as movies, TV series, people, search, discovery, genres, watch providers and configuration metadata.
+The SDK provides a typed Java API for TMDB resources such as movies, TV series, people, search, discovery, genres, watch
+providers and configuration metadata.
 
 ## Features
 
@@ -17,10 +25,10 @@ The SDK provides a typed Java API for TMDB resources such as movies, TV series, 
 
 ## Modules
 
-| Module                     | Description                                  |
-| -------------------------- | -------------------------------------------- |
-| `tmdb-core`                | Core Java SDK without framework dependencies |
-| `tmdb-spring-boot-starter` | Spring Boot auto-configuration for the SDK   |
+| Module                                                                                                      | Description                                  |
+|-------------------------------------------------------------------------------------------------------------|----------------------------------------------|
+| [`tmdb-core`](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-core)                               | Core Java SDK without framework dependencies |
+| [`tmdb-spring-boot-starter`](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-spring-boot-starter) | Spring Boot auto-configuration for the SDK   |
 
 ## Requirements
 
@@ -90,7 +98,7 @@ TmdbClient tmdb = TmdbClient.builder()
 Default values:
 
 | Option           | Default                        |
-| ---------------- | ------------------------------ |
+|------------------|--------------------------------|
 | Base URL         | `https://api.themoviedb.org/3` |
 | Default language | `en-US`                        |
 | Connect timeout  | `5s`                           |
@@ -150,7 +158,7 @@ class MovieLookupService {
 ### Spring Boot Properties
 
 | Property                | Default                        | Description                                          |
-| ----------------------- | ------------------------------ | ---------------------------------------------------- |
+|-------------------------|--------------------------------|------------------------------------------------------|
 | `tmdb.access-token`     | required                       | TMDB API read access token                           |
 | `tmdb.base-url`         | `https://api.themoviedb.org/3` | TMDB API base URL                                    |
 | `tmdb.default-language` | `en-US`                        | Default language tag, for example `en-US` or `de-DE` |
