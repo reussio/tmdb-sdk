@@ -2,6 +2,7 @@
 
 [![Maven Central Core](https://img.shields.io/maven-central/v/dev.reuss.tmdb/tmdb-core.svg?label=tmdb-core)](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-core)
 [![Maven Central Spring Boot Starter](https://img.shields.io/maven-central/v/dev.reuss.tmdb/tmdb-spring-boot-starter.svg?label=spring-boot-starter)](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-spring-boot-starter)
+[![Maven Central Quarkus Extension](https://img.shields.io/maven-central/v/dev.reuss.tmdb/quarkus-tmdb.svg?label=quarkus-tmdb)](https://central.sonatype.com/artifact/dev.reuss.tmdb/quarkus-tmdb)
 [![Javadocs](https://img.shields.io/badge/Javadocs-online-blue.svg)](https://reussio.github.io/tmdb-sdk/)
 [![Publish](https://github.com/reussio/tmdb-sdk/actions/workflows/publish.yml/badge.svg)](https://github.com/reussio/tmdb-sdk/actions/workflows/publish.yml)
 [![Java 17](https://img.shields.io/badge/Java-17%2B-orange.svg)](https://openjdk.org/projects/jdk/17/)
@@ -21,7 +22,8 @@ providers and configuration metadata.
 * Typed IDs, language codes and regions
 * Query objects for complex request parameters
 * SDK-specific exception hierarchy
-* Optional Spring Boot starter with auto-configuration
+* Optional Spring Boot starter with autoconfiguration
+* Optional Quarkus extension with CDI, health checks, metrics, Dev UI and native-image support
 
 ## Modules
 
@@ -29,6 +31,7 @@ providers and configuration metadata.
 |-------------------------------------------------------------------------------------------------------------|----------------------------------------------|
 | [`tmdb-core`](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-core)                               | Core Java SDK without framework dependencies |
 | [`tmdb-spring-boot-starter`](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-spring-boot-starter) | Spring Boot auto-configuration for the SDK   |
+| [`quarkus-tmdb`](https://central.sonatype.com/artifact/dev.reuss.tmdb/quarkus-tmdb)                         | Quarkus extension for the SDK                |
 
 ## Requirements
 
@@ -53,6 +56,16 @@ providers and configuration metadata.
 <dependency>
     <groupId>dev.reuss.tmdb</groupId>
     <artifactId>tmdb-spring-boot-starter</artifactId>
+    <version>0.2.0</version>
+</dependency>
+```
+
+### Quarkus
+
+```xml
+<dependency>
+    <groupId>dev.reuss.tmdb</groupId>
+    <artifactId>quarkus-tmdb</artifactId>
     <version>0.2.0</version>
 </dependency>
 ```
@@ -165,6 +178,34 @@ class MovieLookupService {
 | `tmdb.default-region`   | none                           | Default region code, for example `US` or `DE`        |
 | `tmdb.connect-timeout`  | `5s`                           | HTTP connection timeout                              |
 | `tmdb.request-timeout`  | `10s`                          | HTTP request timeout                                 |
+
+## Quarkus Extension
+
+The Quarkus extension exposes `TmdbClient` and all SDK domain services as CDI beans.
+
+```properties
+tmdb.access-token=${TMDB_ACCESS_TOKEN}
+tmdb.default-language=de-DE
+tmdb.default-region=DE
+tmdb.connect-timeout=5s
+tmdb.request-timeout=10s
+```
+
+```java
+import dev.reuss.tmdb.domain.movie.MovieService;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+
+@ApplicationScoped
+class MovieLookupService {
+
+    @Inject
+    MovieService movieService;
+}
+```
+
+If `quarkus-smallrye-health` or a Quarkus metrics extension such as Micrometer is present, the extension registers
+health checks and TMDB client metrics automatically. In dev mode, the TMDB card is available in the Quarkus Dev UI.
 
 ## Error Handling
 

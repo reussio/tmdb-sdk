@@ -2,6 +2,7 @@ package dev.reuss.tmdb;
 
 import dev.reuss.tmdb.core.auth.TmdbAuth;
 import dev.reuss.tmdb.core.config.TmdbClientConfig;
+import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder;
 import dev.reuss.tmdb.value.language.Language;
 import dev.reuss.tmdb.value.language.Languages;
 import dev.reuss.tmdb.value.region.Region;
@@ -32,11 +33,12 @@ import java.util.Objects;
 public final class TmdbClientBuilder {
 
     private TmdbAuth auth;
-    private String baseUrl = "https://api.themoviedb.org/3";
+    private String baseUrl = TmdbClientConfig.DEFAULT_BASE_URL;
     private Language defaultLanguage = Languages.EN_US;
     private Region defaultRegion;
-    private Duration connectTimeout = Duration.ofSeconds(5);
-    private Duration requestTimeout = Duration.ofSeconds(10);
+    private Duration connectTimeout = TmdbClientConfig.DEFAULT_CONNECT_TIMEOUT_DURATION;
+    private Duration requestTimeout = TmdbClientConfig.DEFAULT_REQUEST_TIMEOUT_DURATION;
+    private TmdbMetricsRecorder metricsRecorder = TmdbMetricsRecorder.NOOP;
 
     /**
      * Sets the TMDB bearer access token.
@@ -130,6 +132,20 @@ public final class TmdbClientBuilder {
     }
 
     /**
+     * Sets the metrics recorder used to observe TMDB HTTP requests.
+     *
+     * <p>The default recorder is a no-op implementation.</p>
+     *
+     * @param metricsRecorder the metrics recorder
+     * @return this builder
+     * @throws NullPointerException if {@code metricsRecorder} is {@code null}
+     */
+    public TmdbClientBuilder metricsRecorder(TmdbMetricsRecorder metricsRecorder) {
+        this.metricsRecorder = Objects.requireNonNull(metricsRecorder, "metricsRecorder must not be null");
+        return this;
+    }
+
+    /**
      * Builds a new {@link TmdbClient}.
      *
      * @return a new TMDB client instance
@@ -143,7 +159,8 @@ public final class TmdbClientBuilder {
                 defaultLanguage,
                 defaultRegion,
                 connectTimeout,
-                requestTimeout
+                requestTimeout,
+                metricsRecorder
         );
 
         return new DefaultTmdbClient(config);

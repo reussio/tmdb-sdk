@@ -15,6 +15,7 @@
     <modules>
         <module>tmdb-core</module>
         <module>tmdb-spring-boot-starter</module>
+        <module>quarkus-tmdb</module>
     </modules>
 
     <licenses>

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dev.reuss.tmdb.core.config.TmdbClientConfig;
 import dev.reuss.tmdb.core.exception.*;
+import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -38,6 +40,7 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
     private final TmdbClientConfig config;
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
+    private final TmdbMetricsRecorder metricsRecorder;
 
     /**
      * Creates a new HTTP client using the given TMDB client configuration.
@@ -53,6 +56,7 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
         this.objectMapper = new ObjectMapper()
                 .findAndRegisterModules()
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        this.metricsRecorder = config.metricsRecorder();
     }
 
     /**
@@ -91,7 +95,10 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
                 .GET()
                 .build();
 
+        String method = httpRequest.method();
+        String path = request.path();
         long startedAt = System.nanoTime();
+        metricsRecorder.recordRequestStarted(method, path);
 
         try {
             HttpResponse<String> response = httpClient.send(
@@ -101,10 +108,36 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
 
             long durationMillis = elapsedMillis(startedAt);
 
-            return handleResponse(response, responseType, request.path(), durationMillis);
+            metricsRecorder.recordRequestFinished(
+                    method,
+                    path,
+                    response.statusCode(),
+                    Duration.ofMillis(durationMillis),
+                    responseBytes(response.body())
+            );
+
+            return handleResponse(response, responseType, method, path, durationMillis);
         } catch (IOException e) {
+            Duration duration = Duration.ofNanos(System.nanoTime() - startedAt);
+
+            metricsRecorder.recordRequestFailed(
+                    method,
+                    path,
+                    e,
+                    duration
+            );
+
             throw new TmdbClientException("Failed to execute TMDB request", e);
         } catch (InterruptedException e) {
+            Duration duration = Duration.ofNanos(System.nanoTime() - startedAt);
+
+            metricsRecorder.recordRequestFailed(
+                    method,
+                    path,
+                    e,
+                    duration
+            );
+
             Thread.currentThread().interrupt();
             throw new TmdbClientException("TMDB request was interrupted", e);
         }
@@ -135,7 +168,13 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
         return URLEncoder.encode(value, StandardCharsets.UTF_8);
     }
 
-    private <T> T handleResponse(HttpResponse<String> response, Class<T> responseType, String path, long durationMillis) {
+    private <T> T handleResponse(
+            HttpResponse<String> response,
+            Class<T> responseType,
+            String method,
+            String path,
+            long durationMillis
+    ) {
         int httpStatus = response.statusCode();
         String body = response.body();
 
@@ -148,7 +187,7 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
         );
 
         if (httpStatus >= 200 && httpStatus < 300) {
-            return mapBody(body, responseType);
+            return mapBody(body, responseType, method, path);
         }
 
         logNonSuccessfulResponse(httpStatus, path, durationMillis);
@@ -178,10 +217,11 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
         }
     }
 
-    private <T> T mapBody(String body, Class<T> responseType) {
+    private <T> T mapBody(String body, Class<T> responseType, String method, String path) {
         try {
             return objectMapper.readValue(body, responseType);
         } catch (Exception exception) {
+            metricsRecorder.recordMappingFailed(method, path, responseType, exception);
             throw new TmdbMappingException(
                     "Failed to map TMDB response to " + responseType.getSimpleName(),
                     exception
@@ -212,5 +252,9 @@ public final class JavaNetTmdbHttpClient implements TmdbHttpClient {
 
     private long elapsedMillis(long startedAt) {
         return (System.nanoTime() - startedAt) / 1_000_000;
+    }
+
+    private static long responseBytes(String body) {
+        return body == null ? 0 : body.getBytes(StandardCharsets.UTF_8).length;
     }
 }
