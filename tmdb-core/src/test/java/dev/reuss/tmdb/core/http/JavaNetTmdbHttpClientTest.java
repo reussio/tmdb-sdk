@@ -4,6 +4,7 @@ import com.sun.net.httpserver.HttpServer;
 import dev.reuss.tmdb.core.auth.TmdbAuth;
 import dev.reuss.tmdb.core.config.TmdbClientConfig;
 import dev.reuss.tmdb.core.exception.*;
+import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder;
 import dev.reuss.tmdb.value.language.Language;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -119,7 +120,8 @@ class JavaNetTmdbHttpClientTest {
                 Language.of("en-US"),
                 null,
                 Duration.ofSeconds(1),
-                Duration.ofSeconds(1)
+                Duration.ofSeconds(1),
+                TmdbMetricsRecorder.NOOP
         );
     }
 

@@ -1,0 +1,15 @@
+---
+artifact: ${project.groupId}:${project.artifactId}:${project.version}
+name: "TMDB"
+description: "Access The Movie Database API from Quarkus applications with ready-to-use CDI services and observability support."
+metadata:
+  short-name: "TMDB"
+  keywords:
+    - "tmdb"
+    - "themoviedb"
+    - "movies"
+    - "tv"
+  categories:
+    - "miscellaneous"
+  config:
+    - "tmdb."

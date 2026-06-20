@@ -1,6 +1,7 @@
 package dev.reuss.tmdb.core.config;
 
 import dev.reuss.tmdb.core.auth.TmdbAuth;
+import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder;
 import dev.reuss.tmdb.value.language.Languages;
 import dev.reuss.tmdb.value.region.Regions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,8 @@ class TmdbClientConfigTest {
                 Languages.DE_DE,
                 Regions.DE,
                 Duration.ofSeconds(5),
-                Duration.ofSeconds(10)
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP
         );
 
         assertEquals("https://api.themoviedb.org/3", config.baseUrl());
@@ -37,7 +39,8 @@ class TmdbClientConfigTest {
                 Languages.EN_US,
                 null,
                 Duration.ofSeconds(5),
-                Duration.ofSeconds(10)
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP
         );
 
         assertNull(config.defaultRegion());
@@ -51,7 +54,8 @@ class TmdbClientConfigTest {
                 Languages.EN_US,
                 Regions.US,
                 Duration.ofSeconds(5),
-                Duration.ofSeconds(10)
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP
         ));
     }
 
@@ -63,7 +67,8 @@ class TmdbClientConfigTest {
                 Languages.EN_US,
                 Regions.US,
                 Duration.ofSeconds(5),
-                Duration.ofSeconds(10)
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP
         ));
 
         assertThrows(IllegalArgumentException.class, () -> new TmdbClientConfig(
@@ -72,7 +77,8 @@ class TmdbClientConfigTest {
                 Languages.EN_US,
                 Regions.US,
                 Duration.ofSeconds(5),
-                Duration.ofSeconds(10)
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP
         ));
     }
 
@@ -84,7 +90,8 @@ class TmdbClientConfigTest {
                 Languages.EN_US,
                 Regions.US,
                 Duration.ofSeconds(5),
-                Duration.ofSeconds(10)
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP
         );
 
         assertEquals("https://api.themoviedb.org/3", config.baseUrl());
@@ -98,7 +105,8 @@ class TmdbClientConfigTest {
                 null,
                 Regions.US,
                 Duration.ofSeconds(5),
-                Duration.ofSeconds(10)
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP
         ));
     }
 
@@ -110,7 +118,8 @@ class TmdbClientConfigTest {
                 Languages.EN_US,
                 Regions.US,
                 null,
-                Duration.ofSeconds(10)
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP
         ));
 
         assertThrows(NullPointerException.class, () -> new TmdbClientConfig(
@@ -119,7 +128,8 @@ class TmdbClientConfigTest {
                 Languages.EN_US,
                 Regions.US,
                 Duration.ofSeconds(5),
-                null
+                null,
+                TmdbMetricsRecorder.NOOP
         ));
     }
 }

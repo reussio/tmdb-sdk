@@ -1,10 +1,10 @@
 package dev.reuss.tmdb.core.config;
 
 import dev.reuss.tmdb.core.auth.TmdbAuth;
+import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder;
 import dev.reuss.tmdb.value.language.Language;
 import dev.reuss.tmdb.value.region.Region;
 
-import java.io.Serializable;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -24,6 +24,7 @@ import java.util.Objects;
  * @param defaultRegion   the optional default region used for regional requests
  * @param connectTimeout  the HTTP connection timeout
  * @param requestTimeout  the overall HTTP request timeout
+ * @param metricsRecorder the metrics recorder used to observe TMDB HTTP requests
  */
 public record TmdbClientConfig(
         TmdbAuth auth,
@@ -31,8 +32,16 @@ public record TmdbClientConfig(
         Language defaultLanguage,
         Region defaultRegion,
         Duration connectTimeout,
-        Duration requestTimeout
-) implements Serializable {
+        Duration requestTimeout,
+        TmdbMetricsRecorder metricsRecorder
+) {
+    public static final String DEFAULT_BASE_URL = "https://api.themoviedb.org/3";
+    public static final String DEFAULT_LANGUAGE = "en-US";
+    public static final String DEFAULT_CONNECT_TIMEOUT = "5s";
+    public static final String DEFAULT_REQUEST_TIMEOUT = "10s";
+    public static final Duration DEFAULT_CONNECT_TIMEOUT_DURATION = Duration.ofSeconds(5);
+    public static final Duration DEFAULT_REQUEST_TIMEOUT_DURATION = Duration.ofSeconds(10);
+
     /**
      * Creates a new TMDB client configuration.
      *
@@ -53,6 +62,7 @@ public record TmdbClientConfig(
         Objects.requireNonNull(defaultLanguage, "Default language must not be null");
         Objects.requireNonNull(connectTimeout, "Connect timeout must not be null");
         Objects.requireNonNull(requestTimeout, "Request timeout must not be null");
+        Objects.requireNonNull(metricsRecorder, "Metrics recorder must not be null");
 
         if (connectTimeout.isZero() || connectTimeout.isNegative()) {
             throw new IllegalArgumentException("Connect timeout must be greater than zero");
