@@ -46,7 +46,7 @@ providers and configuration metadata.
 <dependency>
     <groupId>dev.reuss.tmdb</groupId>
     <artifactId>tmdb-core</artifactId>
-    <version>0.2.0</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -56,7 +56,7 @@ providers and configuration metadata.
 <dependency>
     <groupId>dev.reuss.tmdb</groupId>
     <artifactId>tmdb-spring-boot-starter</artifactId>
-    <version>0.2.0</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -66,7 +66,7 @@ providers and configuration metadata.
 <dependency>
     <groupId>dev.reuss.tmdb</groupId>
     <artifactId>quarkus-tmdb</artifactId>
-    <version>0.2.0</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
