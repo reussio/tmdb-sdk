@@ -24,8 +24,10 @@ class TmdbAutoConfigurationImportsTest {
             String content = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
 
             assertThat(content)
+                    .contains(TmdbMetricsAutoConfiguration.class.getName())
                     .contains(TmdbClientAutoConfiguration.class.getName())
-                    .contains(TmdbServiceAutoConfiguration.class.getName());
+                    .contains(TmdbServiceAutoConfiguration.class.getName())
+                    .contains(TmdbHealthAutoConfiguration.class.getName());
         }
     }
 }

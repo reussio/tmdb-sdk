@@ -168,6 +168,26 @@ class MovieLookupService {
 }
 ```
 
+### Actuator Health
+
+If Spring Boot Actuator is on the classpath, the starter registers a `tmdb` health indicator automatically. The check
+reports whether the `TmdbClient` bean is configured; it does not call the external TMDB API.
+
+```properties
+management.health.tmdb.enabled=true
+```
+
+### Actuator Metrics
+
+If Micrometer is available, the starter records TMDB client request metrics automatically. With Spring Boot Actuator,
+metrics are available through the regular actuator endpoints.
+
+```properties
+management.endpoints.web.exposure.include=health,metrics,prometheus
+```
+
+For Prometheus output, add `micrometer-registry-prometheus` to your application and open `/actuator/prometheus`.
+
 ### Spring Boot Properties
 
 | Property                | Default                        | Description                                          |

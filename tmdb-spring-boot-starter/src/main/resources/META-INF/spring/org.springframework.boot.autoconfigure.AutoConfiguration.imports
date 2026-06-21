@@ -1,2 +1,4 @@
+dev.reuss.tmdb.spring.boot.TmdbMetricsAutoConfiguration
 dev.reuss.tmdb.spring.boot.TmdbClientAutoConfiguration
 dev.reuss.tmdb.spring.boot.TmdbServiceAutoConfiguration
+dev.reuss.tmdb.spring.boot.TmdbHealthAutoConfiguration

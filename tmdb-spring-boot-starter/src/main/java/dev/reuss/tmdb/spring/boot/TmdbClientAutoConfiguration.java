@@ -2,6 +2,8 @@ package dev.reuss.tmdb.spring.boot;
 
 import dev.reuss.tmdb.TmdbClient;
 import dev.reuss.tmdb.TmdbClientBuilder;
+import dev.reuss.tmdb.core.config.TmdbClientConfig;
+import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder;
 import dev.reuss.tmdb.value.language.Language;
 import dev.reuss.tmdb.value.language.Languages;
 import dev.reuss.tmdb.value.region.Region;
@@ -11,6 +13,7 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.context.annotation.Bean;
 
 import java.time.Duration;
@@ -24,11 +27,17 @@ public class TmdbClientAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public TmdbClient tmdbClient(TmdbProperties properties) {
-        String baseUrl = valueOrDefault(properties.baseUrl(), "https://api.themoviedb.org/3");
+    public TmdbClient tmdbClient(TmdbProperties properties, ObjectProvider<TmdbMetricsRecorder> metricsRecorder) {
+        String baseUrl = valueOrDefault(properties.baseUrl(), TmdbClientConfig.DEFAULT_BASE_URL);
         Language defaultLanguage = languageOrDefault(properties.defaultLanguage());
-        Duration connectTimeout = durationOrDefault(properties.connectTimeout(), Duration.ofSeconds(5));
-        Duration requestTimeout = durationOrDefault(properties.requestTimeout(), Duration.ofSeconds(10));
+        Duration connectTimeout = durationOrDefault(
+                properties.connectTimeout(),
+                TmdbClientConfig.DEFAULT_CONNECT_TIMEOUT_DURATION
+        );
+        Duration requestTimeout = durationOrDefault(
+                properties.requestTimeout(),
+                TmdbClientConfig.DEFAULT_REQUEST_TIMEOUT_DURATION
+        );
         Region defaultRegion = regionOrNull(properties.defaultRegion());
 
         TmdbClientBuilder builder = TmdbClient.builder()
@@ -41,6 +50,8 @@ public class TmdbClientAutoConfiguration {
         if (defaultRegion != null) {
             builder.defaultRegion(defaultRegion);
         }
+
+        metricsRecorder.ifAvailable(builder::metricsRecorder);
 
         TmdbClient tmdbClient = builder.build();
 
