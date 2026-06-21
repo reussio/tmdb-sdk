@@ -22,12 +22,14 @@ import dev.reuss.tmdb.domain.tv.episodegroup.TvEpisodeGroupService;
 import dev.reuss.tmdb.domain.tv.season.TvSeasonService;
 import dev.reuss.tmdb.domain.tv.series.TvSeriesService;
 import dev.reuss.tmdb.domain.watchproviders.WatchProviderService;
+import dev.reuss.tmdb.value.language.Language;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.AutoConfigurations;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
 
 public class TmdbServiceAutoConfigurationTest {
 
@@ -87,7 +89,7 @@ public class TmdbServiceAutoConfigurationTest {
 
     @Test
     void doesNotOverrideCustomConfigurationServiceBean() {
-        ConfigurationService customService = mock(ConfigurationService.class);
+        ConfigurationService customService = new TestConfigurationService();
 
         contextRunner
                 .withBean(ConfigurationService.class, () -> customService)
@@ -96,5 +98,43 @@ public class TmdbServiceAutoConfigurationTest {
                     assertThat(context).hasSingleBean(ConfigurationService.class);
                     assertThat(context.getBean(ConfigurationService.class)).isSameAs(customService);
                 });
+    }
+
+    private static final class TestConfigurationService implements ConfigurationService {
+
+        @Override
+        public dev.reuss.tmdb.domain.configuration.model.ApiConfiguration apiConfiguration() {
+            return null;
+        }
+
+        @Override
+        public List<dev.reuss.tmdb.domain.configuration.model.Country> countries() {
+            return List.of();
+        }
+
+        @Override
+        public List<dev.reuss.tmdb.domain.configuration.model.Country> countries(Language language) {
+            return List.of();
+        }
+
+        @Override
+        public List<dev.reuss.tmdb.domain.configuration.model.JobDepartment> jobs() {
+            return List.of();
+        }
+
+        @Override
+        public List<dev.reuss.tmdb.domain.configuration.model.ConfigurationLanguage> languages() {
+            return List.of();
+        }
+
+        @Override
+        public List<String> primaryTranslations() {
+            return List.of();
+        }
+
+        @Override
+        public List<dev.reuss.tmdb.domain.configuration.model.Timezone> timezones() {
+            return List.of();
+        }
     }
 }

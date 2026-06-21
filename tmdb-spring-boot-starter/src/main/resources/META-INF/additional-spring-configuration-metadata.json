@@ -33,6 +33,12 @@
       "type": "java.time.Duration",
       "description": "Request timeout for TMDB HTTP requests.",
       "defaultValue": "10s"
+    },
+    {
+      "name": "management.health.tmdb.enabled",
+      "type": "java.lang.Boolean",
+      "description": "Whether to enable the TMDB Spring Boot Actuator health indicator.",
+      "defaultValue": true
     }
   ]
 }
