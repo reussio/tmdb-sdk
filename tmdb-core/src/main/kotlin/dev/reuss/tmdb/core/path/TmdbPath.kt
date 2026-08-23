@@ -5,7 +5,7 @@ import dev.reuss.tmdb.value.id.TmdbResourceId
 internal fun tmdbPath(vararg segments: Any): String =
     segments.joinToString(
         separator = "/",
-        prefix = "/"
+        prefix = "/",
     ) { segment ->
         when (segment) {
             is TmdbResourceId -> segment.asString()

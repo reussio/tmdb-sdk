@@ -11,5 +11,5 @@ import dev.reuss.tmdb.common.TmdbModel
 @JvmRecord
 data class Change(
     val key: String?,
-    val items: List<ChangeItem> = emptyList()
+    val items: List<ChangeItem> = emptyList(),
 ) : TmdbModel

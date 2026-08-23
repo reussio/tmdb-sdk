@@ -19,22 +19,16 @@ import dev.reuss.tmdb.domain.tv.episodegroup.model.TvEpisodeGroupType
 data class TvSeriesEpisodeGroup(
     @all:JsonProperty("description")
     val description: String?,
-
     @all:JsonProperty("episode_count")
     val episodeCount: Int,
-
     @all:JsonProperty("group_count")
     val groupCount: Int,
-
     @all:JsonProperty("id")
     val id: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("network")
     val network: TvSeriesNetwork?,
-
     @all:JsonProperty("type")
-    val type: TvEpisodeGroupType
+    val type: TvEpisodeGroupType,
 ) : TmdbModel

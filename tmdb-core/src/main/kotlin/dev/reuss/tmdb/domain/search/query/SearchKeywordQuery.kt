@@ -11,27 +11,28 @@ import dev.reuss.tmdb.query.QueryValidation
  * is validated by [QueryValidation.validatePage].
  */
 class SearchKeywordQuery private constructor(
-    override val query: String
-) : SearchQuery, PagedQuery<SearchKeywordQuery> {
-
+    override val query: String,
+) : SearchQuery,
+    PagedQuery<SearchKeywordQuery> {
     private var page: Int? = null
 
-    override fun page(page: Int?) = apply {
-        QueryValidation.validatePage(page)
-        this.page = page
-    }
+    override fun page(page: Int?) =
+        apply {
+            QueryValidation.validatePage(page)
+            this.page = page
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("query", query)
             .add("page", page)
 
     companion object {
-
         @JvmStatic
         fun of(query: String): SearchKeywordQuery =
             SearchKeywordQuery(
-                QueryValidation.requireNotBlank(query, "Search query")
+                QueryValidation.requireNotBlank(query, "Search query"),
             )
     }
 }

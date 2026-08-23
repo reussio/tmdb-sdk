@@ -1,7 +1,7 @@
 package dev.reuss.tmdb.value.language
 
 import dev.reuss.tmdb.common.TmdbModel
-import java.util.*
+import java.util.Locale
 
 /**
  * Represents an ISO 639-1 language code.
@@ -19,13 +19,13 @@ import java.util.*
  * @see Languages
  */
 class LanguageCode private constructor(
-    val value: String
+    val value: String,
 ) : TmdbModel {
-
     override fun toString(): String = value
 
     override fun equals(other: Any?): Boolean =
-        this === other || other is LanguageCode && value == other.value
+        this === other ||
+            (other is LanguageCode && value == other.value)
 
     override fun hashCode(): Int = value.hashCode()
 

@@ -13,9 +13,8 @@ class TmdbClientConfig(
     val defaultRegion: Region?,
     val connectTimeout: Duration,
     val requestTimeout: Duration,
-    val metricsRecorder: TmdbMetricsRecorder
+    val metricsRecorder: TmdbMetricsRecorder,
 ) {
-
     val baseUrl: String = baseUrl.trim()
 
     init {

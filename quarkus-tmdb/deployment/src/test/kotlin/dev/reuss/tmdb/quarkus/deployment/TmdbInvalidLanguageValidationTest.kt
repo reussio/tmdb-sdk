@@ -10,49 +10,45 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
 class TmdbInvalidLanguageValidationTest {
-
     @Test
     fun shouldFailWhenDefaultLanguageIsInvalid() {
     }
 
     companion object {
-
         @JvmField
         @RegisterExtension
-        val app = QuarkusExtensionTest()
-            .withApplicationRoot { jar ->
-                jar
-                    .addClasses(
-                        TmdbProducer::class.java,
-                        TmdbConfig::class.java
-                    )
-                    .addAsManifestResource(
-                        EmptyAsset.INSTANCE,
-                        "beans.xml"
-                    )
-                    .addAsResource(
-                        StringAsset(
-                            """
-                            tmdb.access-token=test-token
-                            tmdb.default-language=invalid
-                            """.trimIndent()
+        val app =
+            QuarkusExtensionTest()
+                .withApplicationRoot { jar ->
+                    jar
+                        .addClasses(
+                            TmdbProducer::class.java,
+                            TmdbConfig::class.java,
+                        ).addAsManifestResource(
+                            EmptyAsset.INSTANCE,
+                            "beans.xml",
+                        ).addAsResource(
+                            StringAsset(
+                                """
+                                tmdb.access-token=test-token
+                                tmdb.default-language=invalid
+                                """.trimIndent(),
+                            ),
+                            "application.properties",
+                        )
+                }.assertException { throwable ->
+                    assertTrue(
+                        containsMessage(
+                            throwable,
+                            "Language must match format",
                         ),
-                        "application.properties"
+                        "Expected invalid language message but got: $throwable",
                     )
-            }
-            .assertException { throwable ->
-                assertTrue(
-                    containsMessage(
-                        throwable,
-                        "Language must match format"
-                    ),
-                    "Expected invalid language message but got: $throwable"
-                )
-            }
+                }
 
         private fun containsMessage(
             throwable: Throwable,
-            expected: String
+            expected: String,
         ): Boolean {
             var current: Throwable? = throwable
 

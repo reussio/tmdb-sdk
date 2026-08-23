@@ -12,18 +12,17 @@ import java.util.concurrent.atomic.AtomicInteger
  * Micrometer-backed metrics recorder for the TMDB SDK.
  */
 class SpringTmdbMetricsRecorder(
-    private val meterRegistry: MeterRegistry
+    private val meterRegistry: MeterRegistry,
 ) : TmdbMetricsRecorder {
-
     private val activeRequests: AtomicInteger =
         meterRegistry.gauge(
             ACTIVE_REQUESTS_METRIC,
-            AtomicInteger()
+            AtomicInteger(),
         )
 
     override fun recordRequestStarted(
         method: String,
-        path: String
+        path: String,
     ) {
         activeRequests.incrementAndGet()
     }
@@ -33,7 +32,7 @@ class SpringTmdbMetricsRecorder(
         path: String,
         statusCode: Int,
         duration: Duration,
-        responseBytes: Long
+        responseBytes: Long,
     ) {
         activeRequests.decrementAndGet()
 
@@ -42,7 +41,8 @@ class SpringTmdbMetricsRecorder(
         val statusFamily = statusFamily(statusCode)
         val outcome = outcome(statusCode)
 
-        Timer.builder(REQUESTS_METRIC)
+        Timer
+            .builder(REQUESTS_METRIC)
             .description("TMDB client request duration")
             .tag("method", method)
             .tag("path", normalizedPath)
@@ -54,7 +54,8 @@ class SpringTmdbMetricsRecorder(
             .register(meterRegistry)
             .record(duration)
 
-        Counter.builder(REQUEST_TOTAL_METRIC)
+        Counter
+            .builder(REQUEST_TOTAL_METRIC)
             .description("TMDB client request count")
             .tag("method", method)
             .tag("path", normalizedPath)
@@ -64,7 +65,8 @@ class SpringTmdbMetricsRecorder(
             .register(meterRegistry)
             .increment()
 
-        DistributionSummary.builder(RESPONSE_BYTES_METRIC)
+        DistributionSummary
+            .builder(RESPONSE_BYTES_METRIC)
             .description("TMDB client response payload size")
             .baseUnit("bytes")
             .tag("method", method)
@@ -76,7 +78,8 @@ class SpringTmdbMetricsRecorder(
             .record(responseBytes.toDouble())
 
         if (statusCode >= 400) {
-            Counter.builder(ERRORS_METRIC)
+            Counter
+                .builder(ERRORS_METRIC)
                 .description("TMDB client errors")
                 .tag("method", method)
                 .tag("path", normalizedPath)
@@ -88,7 +91,8 @@ class SpringTmdbMetricsRecorder(
         }
 
         if (statusCode == 429) {
-            Counter.builder(RATE_LIMIT_HITS_METRIC)
+            Counter
+                .builder(RATE_LIMIT_HITS_METRIC)
                 .description("TMDB client rate limit hits")
                 .tag("method", method)
                 .tag("path", normalizedPath)
@@ -101,14 +105,15 @@ class SpringTmdbMetricsRecorder(
         method: String,
         path: String,
         exception: Throwable,
-        duration: Duration
+        duration: Duration,
     ) {
         activeRequests.decrementAndGet()
 
         val normalizedPath = normalizePath(path)
         val exceptionName = exception.javaClass.simpleName
 
-        Counter.builder(ERRORS_METRIC)
+        Counter
+            .builder(ERRORS_METRIC)
             .description("TMDB client errors")
             .tag("method", method)
             .tag("path", normalizedPath)
@@ -117,7 +122,8 @@ class SpringTmdbMetricsRecorder(
             .register(meterRegistry)
             .increment()
 
-        Timer.builder(REQUESTS_METRIC)
+        Timer
+            .builder(REQUESTS_METRIC)
             .description("TMDB client request duration")
             .tag("method", method)
             .tag("path", normalizedPath)
@@ -129,7 +135,8 @@ class SpringTmdbMetricsRecorder(
             .register(meterRegistry)
             .record(duration)
 
-        Counter.builder(REQUEST_TOTAL_METRIC)
+        Counter
+            .builder(REQUEST_TOTAL_METRIC)
             .description("TMDB client request count")
             .tag("method", method)
             .tag("path", normalizedPath)
@@ -144,9 +151,10 @@ class SpringTmdbMetricsRecorder(
         method: String,
         path: String,
         responseType: Class<*>,
-        exception: Throwable
+        exception: Throwable,
     ) {
-        Counter.builder(MAPPING_ERRORS_METRIC)
+        Counter
+            .builder(MAPPING_ERRORS_METRIC)
             .description("TMDB client JSON mapping errors")
             .tag("method", method)
             .tag("path", normalizePath(path))
@@ -168,11 +176,9 @@ class SpringTmdbMetricsRecorder(
         private val ID_PATH_SEGMENT = Regex("/\\d+(?=/|$)")
 
         @JvmStatic
-        fun normalizePath(path: String): String =
-            path.replace(ID_PATH_SEGMENT, "/{id}")
+        fun normalizePath(path: String): String = path.replace(ID_PATH_SEGMENT, "/{id}")
 
-        private fun statusFamily(statusCode: Int): String =
-            "${statusCode / 100}xx"
+        private fun statusFamily(statusCode: Int): String = "${statusCode / 100}xx"
 
         private fun outcome(statusCode: Int): String =
             when {

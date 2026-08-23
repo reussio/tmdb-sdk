@@ -11,28 +11,25 @@ import io.quarkus.deployment.annotations.BuildStep
  * Registers TMDB health check support when Quarkus Health is present.
  */
 class TmdbHealthProcessor {
-
     @BuildStep
     fun healthCheck(
         capabilities: Capabilities,
-        additionalBeans: BuildProducer<AdditionalBeanBuildItem>
+        additionalBeans: BuildProducer<AdditionalBeanBuildItem>,
     ) {
         if (shouldRegisterHealthCheck(capabilities)) {
             additionalBeans.produce(
-                AdditionalBeanBuildItem.builder()
+                AdditionalBeanBuildItem
+                    .builder()
                     .addBeanClass(TmdbHealthCheck::class.java)
                     .setUnremovable()
-                    .build()
+                    .build(),
             )
         }
     }
 
     companion object {
-
         @JvmStatic
-        fun shouldRegisterHealthCheck(
-            capabilities: Capabilities
-        ): Boolean =
+        fun shouldRegisterHealthCheck(capabilities: Capabilities): Boolean =
             capabilities.isPresent(Capability.SMALLRYE_HEALTH)
     }
 }

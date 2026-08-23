@@ -8,9 +8,8 @@ package dev.reuss.tmdb.value.id
  * with other TMDB resource ids such as movie or person ids.
  */
 class TvShowId private constructor(
-    value: Int
+    value: Int,
 ) : NumericTmdbResourceId(value, "TV series id") {
-
     companion object {
         @JvmStatic
         fun of(value: Int): TvShowId = TvShowId(value)

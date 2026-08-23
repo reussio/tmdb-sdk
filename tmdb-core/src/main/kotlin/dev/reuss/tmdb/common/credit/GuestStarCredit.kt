@@ -22,34 +22,24 @@ import dev.reuss.tmdb.common.TmdbModel
 data class GuestStarCredit(
     @all:JsonProperty("character")
     val character: String?,
-
     @all:JsonProperty("credit_id")
     val creditId: String?,
-
     @all:JsonProperty("order")
     val order: Int?,
-
     @all:JsonProperty("adult")
     val adult: Boolean,
-
     @all:JsonProperty("gender")
     val gender: Int,
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("known_for_department")
     val knownForDepartment: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("original_name")
     val originalName: String?,
-
     @all:JsonProperty("popularity")
     val popularity: Double,
-
     @all:JsonProperty("profile_path")
-    val profilePath: String?
+    val profilePath: String?,
 ) : TmdbModel

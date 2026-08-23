@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class SearchQueryContractTest {
-
     @ParameterizedTest(name = "{0}")
     @MethodSource("searchQueries")
     fun rejectsBlankQueryText(queryCase: SearchQueryCase) {
@@ -34,17 +33,14 @@ class SearchQueryContractTest {
 
     data class SearchQueryCase(
         val name: String,
-        val factory: (String) -> SearchQuery
+        val factory: (String) -> SearchQuery,
     ) {
-        fun create(query: String): SearchQuery =
-            factory(query)
+        fun create(query: String): SearchQuery = factory(query)
 
-        override fun toString(): String =
-            name
+        override fun toString(): String = name
     }
 
     companion object {
-
         @JvmStatic
         fun searchQueries(): List<SearchQueryCase> =
             listOf(
@@ -54,7 +50,7 @@ class SearchQueryContractTest {
                 SearchQueryCase("SearchMovieQuery", SearchMovieQuery::of),
                 SearchQueryCase("SearchMultiQuery", SearchMultiQuery::of),
                 SearchQueryCase("SearchPersonQuery", SearchPersonQuery::of),
-                SearchQueryCase("SearchTvQuery", SearchTvQuery::of)
+                SearchQueryCase("SearchTvQuery", SearchTvQuery::of),
             )
     }
 }

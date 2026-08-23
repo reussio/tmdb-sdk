@@ -15,7 +15,6 @@ import java.time.LocalDate
  * query parameter names.
  */
 class TvDiscoverQuery private constructor() : PagedQuery<TvDiscoverQuery> {
-
     private var airDateGte: LocalDate? = null
     private var airDateLte: LocalDate? = null
 
@@ -63,142 +62,176 @@ class TvDiscoverQuery private constructor() : PagedQuery<TvDiscoverQuery> {
 
     private var withType: String? = null
 
-    fun airDateGte(value: LocalDate?) = apply {
-        airDateGte = value
-    }
+    fun airDateGte(value: LocalDate?) =
+        apply {
+            airDateGte = value
+        }
 
-    fun airDateLte(value: LocalDate?) = apply {
-        airDateLte = value
-    }
+    fun airDateLte(value: LocalDate?) =
+        apply {
+            airDateLte = value
+        }
 
-    fun firstAirDateYear(value: Int) = apply {
-        QueryValidation.validateYear(value, "First air date year")
-        firstAirDateYear = value
-    }
+    fun firstAirDateYear(value: Int) =
+        apply {
+            QueryValidation.validateYear(value, "First air date year")
+            firstAirDateYear = value
+        }
 
-    fun firstAirDateGte(value: LocalDate?) = apply {
-        firstAirDateGte = value
-    }
+    fun firstAirDateGte(value: LocalDate?) =
+        apply {
+            firstAirDateGte = value
+        }
 
-    fun firstAirDateLte(value: LocalDate?) = apply {
-        firstAirDateLte = value
-    }
+    fun firstAirDateLte(value: LocalDate?) =
+        apply {
+            firstAirDateLte = value
+        }
 
-    fun includeAdult(value: Boolean) = apply {
-        includeAdult = value
-    }
+    fun includeAdult(value: Boolean) =
+        apply {
+            includeAdult = value
+        }
 
-    fun includeNullFirstAirDates(value: Boolean) = apply {
-        includeNullFirstAirDates = value
-    }
+    fun includeNullFirstAirDates(value: Boolean) =
+        apply {
+            includeNullFirstAirDates = value
+        }
 
-    fun language(value: Language?) = apply {
-        language = value
-    }
+    fun language(value: Language?) =
+        apply {
+            language = value
+        }
 
-    override fun page(page: Int?) = apply {
-        QueryValidation.validatePage(page)
-        this.page = page
-    }
+    override fun page(page: Int?) =
+        apply {
+            QueryValidation.validatePage(page)
+            this.page = page
+        }
 
-    fun screenedTheatrically(value: Boolean) = apply {
-        screenedTheatrically = value
-    }
+    fun screenedTheatrically(value: Boolean) =
+        apply {
+            screenedTheatrically = value
+        }
 
-    fun sortBy(value: TvDiscoverSortBy?) = apply {
-        sortBy = value
-    }
+    fun sortBy(value: TvDiscoverSortBy?) =
+        apply {
+            sortBy = value
+        }
 
-    fun timezone(value: String?) = apply {
-        timezone = value
-    }
+    fun timezone(value: String?) =
+        apply {
+            timezone = value
+        }
 
-    fun voteAverageGte(value: Double) = apply {
-        voteAverageGte = value
-    }
+    fun voteAverageGte(value: Double) =
+        apply {
+            voteAverageGte = value
+        }
 
-    fun voteAverageLte(value: Double) = apply {
-        voteAverageLte = value
-    }
+    fun voteAverageLte(value: Double) =
+        apply {
+            voteAverageLte = value
+        }
 
-    fun voteCountGte(value: Double) = apply {
-        voteCountGte = value
-    }
+    fun voteCountGte(value: Double) =
+        apply {
+            voteCountGte = value
+        }
 
-    fun voteCountLte(value: Double) = apply {
-        voteCountLte = value
-    }
+    fun voteCountLte(value: Double) =
+        apply {
+            voteCountLte = value
+        }
 
-    fun watchRegion(value: Region?) = apply {
-        watchRegion = value
-    }
+    fun watchRegion(value: Region?) =
+        apply {
+            watchRegion = value
+        }
 
-    fun withCompanies(value: String?) = apply {
-        withCompanies = value
-    }
+    fun withCompanies(value: String?) =
+        apply {
+            withCompanies = value
+        }
 
-    fun withGenres(value: String?) = apply {
-        withGenres = value
-    }
+    fun withGenres(value: String?) =
+        apply {
+            withGenres = value
+        }
 
-    fun withKeywords(value: String?) = apply {
-        withKeywords = value
-    }
+    fun withKeywords(value: String?) =
+        apply {
+            withKeywords = value
+        }
 
-    fun withNetworks(value: Int) = apply {
-        withNetworks = value
-    }
+    fun withNetworks(value: Int) =
+        apply {
+            withNetworks = value
+        }
 
-    fun withOriginCountry(value: String?) = apply {
-        withOriginCountry = value
-    }
+    fun withOriginCountry(value: String?) =
+        apply {
+            withOriginCountry = value
+        }
 
-    fun withOriginalLanguage(value: String?) = apply {
-        withOriginalLanguage = value
-    }
+    fun withOriginalLanguage(value: String?) =
+        apply {
+            withOriginalLanguage = value
+        }
 
-    fun withRuntimeGte(value: Int) = apply {
-        withRuntimeGte = value
-    }
+    fun withRuntimeGte(value: Int) =
+        apply {
+            withRuntimeGte = value
+        }
 
-    fun withRuntimeLte(value: Int) = apply {
-        withRuntimeLte = value
-    }
+    fun withRuntimeLte(value: Int) =
+        apply {
+            withRuntimeLte = value
+        }
 
-    fun withStatus(value: String?) = apply {
-        withStatus = value
-    }
+    fun withStatus(value: String?) =
+        apply {
+            withStatus = value
+        }
 
-    fun withWatchMonetizationTypes(value: String?) = apply {
-        withWatchMonetizationTypes = value
-    }
+    fun withWatchMonetizationTypes(value: String?) =
+        apply {
+            withWatchMonetizationTypes = value
+        }
 
-    fun withWatchProviders(value: String?) = apply {
-        withWatchProviders = value
-    }
+    fun withWatchProviders(value: String?) =
+        apply {
+            withWatchProviders = value
+        }
 
-    fun withoutCompanies(value: String?) = apply {
-        withoutCompanies = value
-    }
+    fun withoutCompanies(value: String?) =
+        apply {
+            withoutCompanies = value
+        }
 
-    fun withoutGenres(value: String?) = apply {
-        withoutGenres = value
-    }
+    fun withoutGenres(value: String?) =
+        apply {
+            withoutGenres = value
+        }
 
-    fun withoutKeywords(value: String?) = apply {
-        withoutKeywords = value
-    }
+    fun withoutKeywords(value: String?) =
+        apply {
+            withoutKeywords = value
+        }
 
-    fun withoutWatchProviders(value: String?) = apply {
-        withoutWatchProviders = value
-    }
+    fun withoutWatchProviders(value: String?) =
+        apply {
+            withoutWatchProviders = value
+        }
 
-    fun withType(value: String?) = apply {
-        withType = value
-    }
+    fun withType(value: String?) =
+        apply {
+            withType = value
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("air_date.gte", airDateGte)
             .add("air_date.lte", airDateLte)
             .add("first_air_date_year", firstAirDateYear)
@@ -234,9 +267,7 @@ class TvDiscoverQuery private constructor() : PagedQuery<TvDiscoverQuery> {
             .add("with_type", withType)
 
     companion object {
-
         @JvmStatic
-        fun create(): TvDiscoverQuery =
-            TvDiscoverQuery()
+        fun create(): TvDiscoverQuery = TvDiscoverQuery()
     }
 }

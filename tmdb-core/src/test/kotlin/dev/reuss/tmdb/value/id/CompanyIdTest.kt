@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class CompanyIdTest {
-
     @Test
     fun createsCompanyId() {
         val id = CompanyId.of(420)
@@ -17,18 +16,20 @@ class CompanyIdTest {
 
     @Test
     fun rejectsZero() {
-        val exception = assertThrows<IllegalArgumentException> {
-            CompanyId.of(0)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                CompanyId.of(0)
+            }
 
         assertEquals("Company id must be greater than 0", exception.message)
     }
 
     @Test
     fun rejectsNegativeValue() {
-        val exception = assertThrows<IllegalArgumentException> {
-            CompanyId.of(-1)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                CompanyId.of(-1)
+            }
 
         assertEquals("Company id must be greater than 0", exception.message)
     }

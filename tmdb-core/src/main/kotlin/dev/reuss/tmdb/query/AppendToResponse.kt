@@ -20,11 +20,9 @@ import java.io.Serializable
  * @property values appendable responses to request
  */
 class AppendToResponse<T : AppendableResponse> private constructor(
-    val values: List<T>
+    val values: List<T>,
 ) : Serializable {
-
-    override fun toString(): String =
-        values.joinToString(",") { it.value }
+    override fun toString(): String = values.joinToString(",") { it.value }
 
     companion object {
         private const val MAX_VALUES = 20
@@ -33,9 +31,7 @@ class AppendToResponse<T : AppendableResponse> private constructor(
          * Creates an append-to-response value from one or more appendable responses.
          */
         @JvmStatic
-        fun <T : AppendableResponse> of(
-            vararg values: T
-        ): AppendToResponse<T> {
+        fun <T : AppendableResponse> of(vararg values: T): AppendToResponse<T> {
             require(values.isNotEmpty()) {
                 "Append to response values must not be empty"
             }
@@ -51,7 +47,7 @@ class AppendToResponse<T : AppendableResponse> private constructor(
             }
 
             return AppendToResponse(
-                java.util.List.copyOf(uniqueValues.values)
+                java.util.List.copyOf(uniqueValues.values),
             )
         }
     }

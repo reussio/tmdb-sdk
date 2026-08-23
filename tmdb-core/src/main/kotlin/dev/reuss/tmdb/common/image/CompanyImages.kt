@@ -11,5 +11,6 @@ import dev.reuss.tmdb.common.TmdbModel
 @JvmRecord
 data class CompanyImages(
     val id: Int,
-    override val logos: List<LogoImage> = emptyList()
-) : LogoImagesResponse, TmdbModel
+    override val logos: List<LogoImage> = emptyList(),
+) : LogoImagesResponse,
+    TmdbModel

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LanguageTest {
-
     @Test
     fun createsLanguageWithoutRegion() {
         val language = Language.of("de")

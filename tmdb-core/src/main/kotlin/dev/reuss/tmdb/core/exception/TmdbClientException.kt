@@ -8,5 +8,5 @@ package dev.reuss.tmdb.core.exception
  */
 class TmdbClientException(
     message: String,
-    cause: Throwable
+    cause: Throwable,
 ) : TmdbException(message, cause)

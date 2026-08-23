@@ -5,9 +5,8 @@ package dev.reuss.tmdb.value.id
  */
 abstract class NumericTmdbResourceId(
     val value: Int,
-    resourceName: String
+    resourceName: String,
 ) : TmdbResourceId {
-
     init {
         require(value > 0) {
             "$resourceName must be greater than 0"
@@ -19,11 +18,7 @@ abstract class NumericTmdbResourceId(
     final override fun toString(): String = asString()
 
     final override fun equals(other: Any?): Boolean =
-        this === other ||
-                other != null &&
-                this::class == other::class &&
-                other is NumericTmdbResourceId &&
-                value == other.value
+        this === other || (other is NumericTmdbResourceId && this::class == other::class && value == other.value)
 
     final override fun hashCode(): Int = value
 }

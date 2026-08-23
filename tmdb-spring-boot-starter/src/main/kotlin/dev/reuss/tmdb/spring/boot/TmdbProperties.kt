@@ -20,5 +20,5 @@ data class TmdbProperties(
     val defaultLanguage: String?,
     val defaultRegion: String?,
     val connectTimeout: Duration?,
-    val requestTimeout: Duration?
+    val requestTimeout: Duration?,
 )

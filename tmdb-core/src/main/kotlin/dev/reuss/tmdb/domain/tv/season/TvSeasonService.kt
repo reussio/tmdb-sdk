@@ -2,7 +2,13 @@ package dev.reuss.tmdb.domain.tv.season
 
 import dev.reuss.tmdb.common.external.ExternalIds
 import dev.reuss.tmdb.common.image.TvSeasonImages
-import dev.reuss.tmdb.domain.tv.season.model.*
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonAggregateCredits
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonChanges
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonCredits
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonDetails
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonTranslations
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonVideos
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonWatchProviders
 import dev.reuss.tmdb.domain.tv.season.query.TvSeasonVideosQuery
 import dev.reuss.tmdb.query.AppendToResponse
 import dev.reuss.tmdb.query.ChangesQuery
@@ -16,106 +22,105 @@ import dev.reuss.tmdb.value.language.Language
  * Service for TMDB TV season endpoints.
  */
 interface TvSeasonService {
-
-    fun details(
-        seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber
-    ): TvSeasonDetails
-
     fun details(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
-        language: Language
-    ): TvSeasonDetails
-
-    fun details(
-        seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber,
-        appendToResponse: AppendToResponse<TvSeasonAppend>
     ): TvSeasonDetails
 
     fun details(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
         language: Language,
-        appendToResponse: AppendToResponse<TvSeasonAppend>
+    ): TvSeasonDetails
+
+    fun details(
+        seriesId: TvShowId,
+        seasonNumber: TvSeasonNumber,
+        appendToResponse: AppendToResponse<TvSeasonAppend>,
+    ): TvSeasonDetails
+
+    fun details(
+        seriesId: TvShowId,
+        seasonNumber: TvSeasonNumber,
+        language: Language,
+        appendToResponse: AppendToResponse<TvSeasonAppend>,
     ): TvSeasonDetails
 
     fun aggregateCredits(
         seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber
+        seasonNumber: TvSeasonNumber,
     ): TvSeasonAggregateCredits
 
     fun aggregateCredits(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
-        language: Language
+        language: Language,
     ): TvSeasonAggregateCredits
 
     fun changes(seasonId: TvSeasonId): TvSeasonChanges
 
     fun changes(
         seasonId: TvSeasonId,
-        query: ChangesQuery
+        query: ChangesQuery,
     ): TvSeasonChanges
 
     fun credits(
         seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber
+        seasonNumber: TvSeasonNumber,
     ): TvSeasonCredits
 
     fun credits(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
-        language: Language
+        language: Language,
     ): TvSeasonCredits
 
     fun externalIds(
         seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber
+        seasonNumber: TvSeasonNumber,
     ): ExternalIds
 
     fun translations(
         seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber
+        seasonNumber: TvSeasonNumber,
     ): TvSeasonTranslations
 
     fun videos(
         seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber
+        seasonNumber: TvSeasonNumber,
     ): TvSeasonVideos
 
     fun videos(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
-        language: Language
+        language: Language,
     ): TvSeasonVideos
 
     fun videos(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
-        query: TvSeasonVideosQuery
+        query: TvSeasonVideosQuery,
     ): TvSeasonVideos
 
     fun watchProviders(
         seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber
+        seasonNumber: TvSeasonNumber,
     ): TvSeasonWatchProviders
 
     fun watchProviders(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
-        language: Language
+        language: Language,
     ): TvSeasonWatchProviders
 
     fun images(
         seriesId: TvShowId,
-        seasonNumber: TvSeasonNumber
+        seasonNumber: TvSeasonNumber,
     ): TvSeasonImages
 
     fun images(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
-        query: ImageQuery
+        query: ImageQuery,
     ): TvSeasonImages
 }

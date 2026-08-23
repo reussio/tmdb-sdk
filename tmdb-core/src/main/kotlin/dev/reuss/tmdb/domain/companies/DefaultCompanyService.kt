@@ -11,24 +11,23 @@ import dev.reuss.tmdb.value.id.CompanyId
  * Default [CompanyService] implementation backed by the TMDB HTTP client.
  */
 internal class DefaultCompanyService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : CompanyService {
-
     override fun details(companyId: CompanyId): Company =
         httpClient.get(
             TmdbRequest.get(CompanyPaths.details(companyId)),
-            Company::class.java
+            Company::class.java,
         )
 
     override fun alternativeNames(companyId: CompanyId): CompanyAlternativeNames =
         httpClient.get(
             TmdbRequest.get(CompanyPaths.alternativeNames(companyId)),
-            CompanyAlternativeNames::class.java
+            CompanyAlternativeNames::class.java,
         )
 
     override fun images(companyId: CompanyId): CompanyImages =
         httpClient.get(
             TmdbRequest.get(CompanyPaths.images(companyId)),
-            CompanyImages::class.java
+            CompanyImages::class.java,
         )
 }

@@ -14,25 +14,24 @@ import org.springframework.boot.test.context.runner.ApplicationContextRunner
 import java.time.Duration
 
 class TmdbMetricsAutoConfigurationTest {
-
-    private val contextRunner = ApplicationContextRunner()
-        .withConfiguration(
-            AutoConfigurations.of(TmdbMetricsAutoConfiguration::class.java)
-        )
+    private val contextRunner =
+        ApplicationContextRunner()
+            .withConfiguration(
+                AutoConfigurations.of(TmdbMetricsAutoConfiguration::class.java),
+            )
 
     @Test
     fun createsMetricsRecorderWhenMeterRegistryIsAvailable() {
         contextRunner
             .withBean(
                 MeterRegistry::class.java,
-                { SimpleMeterRegistry() }
-            )
-            .run { context ->
+                { SimpleMeterRegistry() },
+            ).run { context ->
                 assertThat(context)
                     .hasSingleBean(TmdbMetricsRecorder::class.java)
 
                 assertThat(
-                    context.getBean(TmdbMetricsRecorder::class.java)
+                    context.getBean(TmdbMetricsRecorder::class.java),
                 ).isInstanceOf(SpringTmdbMetricsRecorder::class.java)
             }
     }
@@ -52,18 +51,16 @@ class TmdbMetricsAutoConfigurationTest {
         contextRunner
             .withBean(
                 MeterRegistry::class.java,
-                { SimpleMeterRegistry() }
-            )
-            .withBean(
+                { SimpleMeterRegistry() },
+            ).withBean(
                 TmdbMetricsRecorder::class.java,
-                { customRecorder }
-            )
-            .run { context ->
+                { customRecorder },
+            ).run { context ->
                 assertThat(context)
                     .hasSingleBean(TmdbMetricsRecorder::class.java)
 
                 assertThat(
-                    context.getBean(TmdbMetricsRecorder::class.java)
+                    context.getBean(TmdbMetricsRecorder::class.java),
                 ).isSameAs(customRecorder)
             }
     }
@@ -77,10 +74,9 @@ class TmdbMetricsAutoConfigurationTest {
                     SimpleMetricsExportAutoConfiguration::class.java,
                     CompositeMeterRegistryAutoConfiguration::class.java,
                     TmdbMetricsAutoConfiguration::class.java,
-                    TmdbClientAutoConfiguration::class.java
-                )
-            )
-            .withPropertyValues("tmdb.access-token=test-token")
+                    TmdbClientAutoConfiguration::class.java,
+                ),
+            ).withPropertyValues("tmdb.access-token=test-token")
             .run { context ->
                 assertThat(context)
                     .hasSingleBean(MeterRegistry::class.java)
@@ -104,14 +100,14 @@ class TmdbMetricsAutoConfigurationTest {
             "/movie/550",
             200,
             Duration.ofMillis(25),
-            512
+            512,
         )
 
         assertThat(
             meterRegistry
                 .get(SpringTmdbMetricsRecorder.ACTIVE_REQUESTS_METRIC)
                 .gauge()
-                .value()
+                .value(),
         ).isZero()
 
         assertThat(
@@ -122,7 +118,7 @@ class TmdbMetricsAutoConfigurationTest {
                 .tag("status", "200")
                 .tag("outcome", "SUCCESS")
                 .timer()
-                .count()
+                .count(),
         ).isEqualTo(1)
 
         assertThat(
@@ -131,7 +127,7 @@ class TmdbMetricsAutoConfigurationTest {
                 .tag("method", "GET")
                 .tag("path", "/movie/{id}")
                 .summary()
-                .totalAmount()
+                .totalAmount(),
         ).isEqualTo(512.0)
     }
 
@@ -146,7 +142,7 @@ class TmdbMetricsAutoConfigurationTest {
             "/movie/550",
             429,
             Duration.ofMillis(25),
-            128
+            128,
         )
 
         recorder.recordRequestStarted("GET", "/movie/550")
@@ -154,14 +150,14 @@ class TmdbMetricsAutoConfigurationTest {
             "GET",
             "/movie/550",
             IllegalStateException("boom"),
-            Duration.ofMillis(5)
+            Duration.ofMillis(5),
         )
 
         recorder.recordMappingFailed(
             "GET",
             "/movie/550",
             String::class.java,
-            IllegalArgumentException("invalid")
+            IllegalArgumentException("invalid"),
         )
 
         assertThat(
@@ -170,7 +166,7 @@ class TmdbMetricsAutoConfigurationTest {
                 .tag("type", "api")
                 .tag("status", "429")
                 .counter()
-                .count()
+                .count(),
         ).isEqualTo(1.0)
 
         assertThat(
@@ -179,7 +175,7 @@ class TmdbMetricsAutoConfigurationTest {
                 .tag("method", "GET")
                 .tag("path", "/movie/{id}")
                 .counter()
-                .count()
+                .count(),
         ).isEqualTo(1.0)
 
         assertThat(
@@ -188,7 +184,7 @@ class TmdbMetricsAutoConfigurationTest {
                 .tag("type", "exception")
                 .tag("exception", "IllegalStateException")
                 .counter()
-                .count()
+                .count(),
         ).isEqualTo(1.0)
 
         assertThat(
@@ -197,7 +193,7 @@ class TmdbMetricsAutoConfigurationTest {
                 .tag("response_type", "String")
                 .tag("exception", "IllegalArgumentException")
                 .counter()
-                .count()
+                .count(),
         ).isEqualTo(1.0)
     }
 }

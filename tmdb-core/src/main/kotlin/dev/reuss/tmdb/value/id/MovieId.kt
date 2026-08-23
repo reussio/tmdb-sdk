@@ -6,9 +6,8 @@ package dev.reuss.tmdb.value.id
  * @property value TMDB movie id
  */
 class MovieId private constructor(
-    value: Int
+    value: Int,
 ) : NumericTmdbResourceId(value, "Movie id") {
-
     companion object {
         @JvmStatic
         fun of(value: Int): MovieId = MovieId(value)

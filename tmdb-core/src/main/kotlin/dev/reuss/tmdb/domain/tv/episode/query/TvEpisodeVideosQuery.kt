@@ -12,24 +12,27 @@ import dev.reuss.tmdb.value.language.Language
  * value.
  */
 class TvEpisodeVideosQuery private constructor() : TmdbQuery {
-
     private var language: Language? = null
     private var includeVideoLanguage: List<Language>? = null
 
-    fun language(value: Language?) = apply {
-        language = value
-    }
+    fun language(value: Language?) =
+        apply {
+            language = value
+        }
 
-    fun includeVideoLanguage(value: List<Language>?) = apply {
-        includeVideoLanguage = value?.toList()
-    }
+    fun includeVideoLanguage(value: List<Language>?) =
+        apply {
+            includeVideoLanguage = value?.toList()
+        }
 
-    fun includeVideoLanguage(vararg value: Language) = apply {
-        includeVideoLanguage = value.toList()
-    }
+    fun includeVideoLanguage(vararg value: Language) =
+        apply {
+            includeVideoLanguage = value.toList()
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("language", language?.value)
             .add("include_video_language", includeVideoLanguageValue())
 
@@ -39,9 +42,7 @@ class TvEpisodeVideosQuery private constructor() : TmdbQuery {
             ?.joinToString(",") { it.value }
 
     companion object {
-
         @JvmStatic
-        fun create(): TvEpisodeVideosQuery =
-            TvEpisodeVideosQuery()
+        fun create(): TvEpisodeVideosQuery = TvEpisodeVideosQuery()
     }
 }

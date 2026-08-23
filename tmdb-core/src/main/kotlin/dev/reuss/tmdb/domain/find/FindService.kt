@@ -9,7 +9,6 @@ import dev.reuss.tmdb.value.language.Language
  * Service for finding TMDB objects by external identifiers.
  */
 interface FindService {
-
     /**
      * Finds TMDB objects by external id.
      *
@@ -19,7 +18,7 @@ interface FindService {
      */
     fun byExternalId(
         externalId: ExternalId,
-        externalSource: ExternalSource
+        externalSource: ExternalSource,
     ): FindResults
 
     /**
@@ -33,6 +32,6 @@ interface FindService {
     fun byExternalId(
         externalId: ExternalId,
         externalSource: ExternalSource,
-        language: Language
+        language: Language,
     ): FindResults
 }

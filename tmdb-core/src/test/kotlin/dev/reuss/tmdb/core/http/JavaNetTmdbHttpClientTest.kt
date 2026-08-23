@@ -3,7 +3,13 @@ package dev.reuss.tmdb.core.http
 import com.sun.net.httpserver.HttpServer
 import dev.reuss.tmdb.core.auth.TmdbAuth
 import dev.reuss.tmdb.core.config.TmdbClientConfig
-import dev.reuss.tmdb.core.exception.*
+import dev.reuss.tmdb.core.exception.TmdbApiException
+import dev.reuss.tmdb.core.exception.TmdbClientException
+import dev.reuss.tmdb.core.exception.TmdbMappingException
+import dev.reuss.tmdb.core.exception.TmdbNotFoundException
+import dev.reuss.tmdb.core.exception.TmdbRateLimitException
+import dev.reuss.tmdb.core.exception.TmdbServerException
+import dev.reuss.tmdb.core.exception.TmdbUnauthorizedException
 import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder
 import dev.reuss.tmdb.value.language.Language
 import org.junit.jupiter.api.AfterEach
@@ -15,7 +21,6 @@ import java.net.InetSocketAddress
 import java.time.Duration
 
 class JavaNetTmdbHttpClientTest {
-
     private var server: HttpServer? = null
     private var lastRequestUri: String? = null
     private var lastAuthorizationHeader: String? = null
@@ -48,21 +53,22 @@ class JavaNetTmdbHttpClientTest {
         assertThrows<TmdbMappingException> {
             client.get(
                 TmdbRequest.get("/movie/550"),
-                SuccessResponse::class.java
+                SuccessResponse::class.java,
             )
         }
     }
 
     @Test
     fun wrapsIoFailuresInClientException() {
-        val client = JavaNetTmdbHttpClient(
-            config("http://127.0.0.1:9")
-        )
+        val client =
+            JavaNetTmdbHttpClient(
+                config("http://127.0.0.1:9"),
+            )
 
         assertThrows<TmdbClientException> {
             client.get(
                 TmdbRequest.get("/movie/550"),
-                SuccessResponse::class.java
+                SuccessResponse::class.java,
             )
         }
     }
@@ -73,14 +79,16 @@ class JavaNetTmdbHttpClientTest {
 
         val client = JavaNetTmdbHttpClient(config(serverBaseUrl()))
 
-        val response = client.get(
-            TmdbRequest.get(
-                "/movie/550",
-                QueryParams.create()
-                    .add("query", "Fight Club")
-            ),
-            SuccessResponse::class.java
-        )
+        val response =
+            client.get(
+                TmdbRequest.get(
+                    "/movie/550",
+                    QueryParams
+                        .create()
+                        .add("query", "Fight Club"),
+                ),
+                SuccessResponse::class.java,
+            )
 
         assertEquals(550, response.id)
         assertEquals("/movie/550?query=Fight+Club", lastRequestUri)
@@ -89,7 +97,7 @@ class JavaNetTmdbHttpClientTest {
 
     private fun assertHttpStatusMapsTo(
         status: Int,
-        exceptionType: Class<out TmdbApiException>
+        exceptionType: Class<out TmdbApiException>,
     ) {
         startServer(
             status,
@@ -99,17 +107,18 @@ class JavaNetTmdbHttpClientTest {
               "status_code": $status,
               "status_message": "mapped error"
             }
-            """.trimIndent()
+            """.trimIndent(),
         )
 
         val client = JavaNetTmdbHttpClient(config(serverBaseUrl()))
 
-        val exception = assertThrows<TmdbApiException> {
-            client.get(
-                TmdbRequest.get("/failing"),
-                SuccessResponse::class.java
-            )
-        }
+        val exception =
+            assertThrows<TmdbApiException> {
+                client.get(
+                    TmdbRequest.get("/failing"),
+                    SuccessResponse::class.java,
+                )
+            }
 
         assertInstanceOf(exceptionType, exception)
         assertEquals(status, exception.httpStatus)
@@ -119,14 +128,15 @@ class JavaNetTmdbHttpClientTest {
 
     private fun startServer(
         status: Int,
-        body: String
+        body: String,
     ) {
         stopServer()
 
-        val newServer = HttpServer.create(
-            InetSocketAddress("127.0.0.1", 0),
-            0
-        )
+        val newServer =
+            HttpServer.create(
+                InetSocketAddress("127.0.0.1", 0),
+                0,
+            )
 
         newServer.createContext("/") { exchange ->
             lastRequestUri = exchange.requestURI.toString()
@@ -137,7 +147,7 @@ class JavaNetTmdbHttpClientTest {
 
             exchange.responseHeaders.add(
                 "Content-Type",
-                "application/json"
+                "application/json",
             )
             exchange.sendResponseHeaders(status, bytes.size.toLong())
 
@@ -164,10 +174,10 @@ class JavaNetTmdbHttpClientTest {
             null,
             Duration.ofSeconds(1),
             Duration.ofSeconds(1),
-            TmdbMetricsRecorder.NOOP
+            TmdbMetricsRecorder.NOOP,
         )
 
     private data class SuccessResponse(
-        val id: Int
+        val id: Int,
     )
 }

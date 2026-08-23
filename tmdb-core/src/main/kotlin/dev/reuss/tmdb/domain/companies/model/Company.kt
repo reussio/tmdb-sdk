@@ -19,25 +19,18 @@ import dev.reuss.tmdb.common.TmdbModel
 data class Company(
     @all:JsonProperty("description")
     val description: String?,
-
     @all:JsonProperty("headquarters")
     val headquarters: String?,
-
     @all:JsonProperty("homepage")
     val homepage: String?,
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("logo_path")
     val logoPath: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("origin_country")
     val originCountry: String?,
-
     @all:JsonProperty("parent_company")
-    val parentCompany: Company?
+    val parentCompany: Company?,
 ) : TmdbModel

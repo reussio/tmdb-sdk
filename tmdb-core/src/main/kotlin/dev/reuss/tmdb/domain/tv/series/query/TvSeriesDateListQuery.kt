@@ -12,19 +12,20 @@ import dev.reuss.tmdb.value.language.Language
  * [QueryValidation.validatePage].
  */
 class TvSeriesDateListQuery private constructor() : PagedQuery<TvSeriesDateListQuery> {
-
     private var language: Language? = null
     private var page: Int? = null
     private var timezone: String? = null
 
-    fun language(value: Language?) = apply {
-        language = value
-    }
+    fun language(value: Language?) =
+        apply {
+            language = value
+        }
 
-    override fun page(page: Int?) = apply {
-        QueryValidation.validatePage(page)
-        this.page = page
-    }
+    override fun page(page: Int?) =
+        apply {
+            QueryValidation.validatePage(page)
+            this.page = page
+        }
 
     /**
      * Sets the timezone used by date-based TV list endpoints.
@@ -32,20 +33,20 @@ class TvSeriesDateListQuery private constructor() : PagedQuery<TvSeriesDateListQ
      * @param value timezone, for example `Europe/Berlin`
      * @return this query
      */
-    fun timezone(value: String?) = apply {
-        timezone = value
-    }
+    fun timezone(value: String?) =
+        apply {
+            timezone = value
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("language", language?.value)
             .add("page", page)
             .add("timezone", timezone)
 
     companion object {
-
         @JvmStatic
-        fun create(): TvSeriesDateListQuery =
-            TvSeriesDateListQuery()
+        fun create(): TvSeriesDateListQuery = TvSeriesDateListQuery()
     }
 }

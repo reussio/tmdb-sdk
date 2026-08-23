@@ -16,16 +16,12 @@ import dev.reuss.tmdb.common.TmdbModel
 data class FindResults(
     @all:JsonProperty("movie_results")
     val movieResults: List<FindMovieResult> = emptyList(),
-
     @all:JsonProperty("person_results")
     val personResults: List<Any> = emptyList(),
-
     @all:JsonProperty("tv_results")
     val tvResults: List<Any> = emptyList(),
-
     @all:JsonProperty("tv_episode_results")
     val tvEpisodeResults: List<Any> = emptyList(),
-
     @all:JsonProperty("tv_season_results")
-    val tvSeasonResults: List<Any> = emptyList()
+    val tvSeasonResults: List<Any> = emptyList(),
 ) : TmdbModel

@@ -18,19 +18,14 @@ import dev.reuss.tmdb.domain.watchproviders.model.WatchProvider
 data class WatchProviderAvailability(
     @all:JsonProperty("link")
     val link: String?,
-
     @all:JsonProperty("flatrate")
     val flatrate: List<WatchProvider> = emptyList(),
-
     @all:JsonProperty("rent")
     val rent: List<WatchProvider> = emptyList(),
-
     @all:JsonProperty("buy")
     val buy: List<WatchProvider> = emptyList(),
-
     @all:JsonProperty("ads")
     val ads: List<WatchProvider> = emptyList(),
-
     @all:JsonProperty("free")
-    val free: List<WatchProvider> = emptyList()
+    val free: List<WatchProvider> = emptyList(),
 ) : TmdbModel

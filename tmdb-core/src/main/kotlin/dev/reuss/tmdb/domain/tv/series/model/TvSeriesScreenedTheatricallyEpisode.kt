@@ -14,10 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesScreenedTheatricallyEpisode(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("episode_number")
     val episodeNumber: Int,
-
     @all:JsonProperty("season_number")
-    val seasonNumber: Int
+    val seasonNumber: Int,
 ) : TmdbModel

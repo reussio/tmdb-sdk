@@ -12,7 +12,6 @@ import dev.reuss.tmdb.value.language.Language
  * Service for loading TMDB collection data.
  */
 interface CollectionService {
-
     /**
      * Loads collection details.
      */
@@ -23,7 +22,7 @@ interface CollectionService {
      */
     fun details(
         collectionId: CollectionId,
-        language: Language
+        language: Language,
     ): CollectionDetails
 
     /**
@@ -31,7 +30,7 @@ interface CollectionService {
      */
     fun details(
         collectionId: CollectionId,
-        query: CollectionDetailsQuery
+        query: CollectionDetailsQuery,
     ): CollectionDetails
 
     /**
@@ -44,7 +43,7 @@ interface CollectionService {
      */
     fun images(
         collectionId: CollectionId,
-        query: ImageQuery
+        query: ImageQuery,
     ): CollectionImages
 
     /**

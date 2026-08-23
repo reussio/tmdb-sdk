@@ -10,7 +10,6 @@ import java.io.Serializable
  * model type.
  */
 interface AppendableResponse : Serializable {
-
     /**
      * TMDB `append_to_response` query value.
      */

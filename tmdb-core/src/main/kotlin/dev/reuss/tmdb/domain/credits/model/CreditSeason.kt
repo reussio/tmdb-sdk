@@ -19,25 +19,18 @@ import dev.reuss.tmdb.common.TmdbModel
 data class CreditSeason(
     @all:JsonProperty("air_date")
     val airDate: String?,
-
     @all:JsonProperty("episode_count")
     val episodeCount: Int,
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("overview")
     val overview: String?,
-
     @all:JsonProperty("poster_path")
     val posterPath: String?,
-
     @all:JsonProperty("season_number")
     val seasonNumber: Int,
-
     @all:JsonProperty("show_id")
-    val showId: Int
+    val showId: Int,
 ) : TmdbModel

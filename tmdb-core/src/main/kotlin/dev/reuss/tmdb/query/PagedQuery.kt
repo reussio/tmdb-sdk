@@ -6,7 +6,6 @@ package dev.reuss.tmdb.query
  * @property T concrete query type
  */
 interface PagedQuery<T : PagedQuery<T>> : TmdbQuery {
-
     /**
      * Sets the requested result page.
      *

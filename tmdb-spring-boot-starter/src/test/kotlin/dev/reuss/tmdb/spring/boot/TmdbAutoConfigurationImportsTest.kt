@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
 class TmdbAutoConfigurationImportsTest {
-
     @Test
     fun autoConfigurationImportsFileContainsTmdbAutoConfigurations() {
         val classLoader = Thread.currentThread().contextClassLoader
@@ -14,9 +13,10 @@ class TmdbAutoConfigurationImportsTest {
                 .`as`("AutoConfiguration imports file")
                 .isNotNull()
 
-            val content = inputStream
-                ?.readAllBytes()
-                ?.toString(Charsets.UTF_8)
+            val content =
+                inputStream
+                    ?.readAllBytes()
+                    ?.toString(Charsets.UTF_8)
 
             assertThat(content)
                 .contains(TmdbMetricsAutoConfiguration::class.java.name)

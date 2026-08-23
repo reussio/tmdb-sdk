@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.networks.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -14,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class NetworkAlternativeName(
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("type")
-    val type: String?
+    val type: String?,
 ) : TmdbModel

@@ -23,37 +23,26 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesEpisode(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("overview")
     val overview: String?,
-
     @all:JsonProperty("vote_average")
     val voteAverage: Double,
-
     @all:JsonProperty("vote_count")
     val voteCount: Int,
-
     @all:JsonProperty("air_date")
     val airDate: String?,
-
     @all:JsonProperty("episode_number")
     val episodeNumber: Int,
-
     @all:JsonProperty("production_code")
     val productionCode: String?,
-
     @all:JsonProperty("runtime")
     val runtime: Int?,
-
     @all:JsonProperty("season_number")
     val seasonNumber: Int,
-
     @all:JsonProperty("show_id")
     val showId: Int,
-
     @all:JsonProperty("still_path")
-    val stillPath: String?
+    val stillPath: String?,
 ) : TmdbModel

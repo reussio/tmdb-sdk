@@ -19,13 +19,11 @@ import dev.reuss.tmdb.common.credit.GuestStarCredit
 data class TvEpisodeCredits(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("crew")
     override val crew: List<CrewCredit> = emptyList(),
-
     @all:JsonProperty("cast")
     override val cast: List<CastCredit> = emptyList(),
-
     @all:JsonProperty("guest_stars")
-    val guestStars: List<GuestStarCredit> = emptyList()
-) : CreditsResponse<CastCredit, CrewCredit>, TmdbModel
+    val guestStars: List<GuestStarCredit> = emptyList(),
+) : CreditsResponse<CastCredit, CrewCredit>,
+    TmdbModel

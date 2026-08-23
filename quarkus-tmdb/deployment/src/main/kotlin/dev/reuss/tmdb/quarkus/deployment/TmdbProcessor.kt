@@ -19,31 +19,29 @@ import org.jboss.jandex.Type
  * Core Quarkus build processor for the TMDB extension.
  */
 class TmdbProcessor {
-
     @BuildStep
-    fun feature(): FeatureBuildItem =
-        FeatureBuildItem(FEATURE)
+    fun feature(): FeatureBuildItem = FeatureBuildItem(FEATURE)
 
     @BuildStep
     fun configMapping(): ConfigMappingBuildItem =
         ConfigMappingBuildItem(
             TmdbConfig::class.java,
-            "tmdb"
+            "tmdb",
         )
 
     @BuildStep
     fun producerBeans(): AdditionalBeanBuildItem =
-        AdditionalBeanBuildItem.builder()
+        AdditionalBeanBuildItem
+            .builder()
             .addBeanClass(TmdbProducer::class.java)
             .setUnremovable()
             .build()
 
     @BuildStep
     @Record(ExecutionTime.RUNTIME_INIT)
-    fun tmdbClient(
-        recorder: TmdbRecorder
-    ): SyntheticBeanBuildItem =
-        SyntheticBeanBuildItem.configure(TmdbClient::class.java)
+    fun tmdbClient(recorder: TmdbRecorder): SyntheticBeanBuildItem =
+        SyntheticBeanBuildItem
+            .configure(TmdbClient::class.java)
             .scope(Singleton::class.java)
             .defaultBean()
             .unremovable()

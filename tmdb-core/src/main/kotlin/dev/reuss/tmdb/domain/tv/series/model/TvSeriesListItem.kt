@@ -24,40 +24,28 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesListItem(
     @all:JsonProperty("backdrop_path")
     val backdropPath: String?,
-
     @all:JsonProperty("first_air_date")
     val firstAirDate: String?,
-
     @all:JsonProperty("genre_ids")
     val genreIds: List<Int> = emptyList(),
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("origin_country")
     val originCountry: List<String> = emptyList(),
-
     @all:JsonProperty("original_language")
     val originalLanguage: String?,
-
     @all:JsonProperty("original_name")
     val originalName: String?,
-
     @all:JsonProperty("overview")
     val overview: String?,
-
     @all:JsonProperty("popularity")
     val popularity: Double,
-
     @all:JsonProperty("poster_path")
     val posterPath: String?,
-
     @all:JsonProperty("vote_average")
     val voteAverage: Double,
-
     @all:JsonProperty("vote_count")
-    val voteCount: Int
+    val voteCount: Int,
 ) : TmdbModel

@@ -11,30 +11,27 @@ import dev.reuss.tmdb.domain.discover.query.TvDiscoverQuery
  * Default [DiscoverService] implementation backed by the TMDB HTTP client.
  */
 internal class DefaultDiscoverService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : DiscoverService {
-
-    override fun movies(): DiscoverMovieResponse =
-        movies(MovieDiscoverQuery.create())
+    override fun movies(): DiscoverMovieResponse = movies(MovieDiscoverQuery.create())
 
     override fun movies(query: MovieDiscoverQuery): DiscoverMovieResponse =
         httpClient.get(
             TmdbRequest.get(
                 DiscoverPaths.movies(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            DiscoverMovieResponse::class.java
+            DiscoverMovieResponse::class.java,
         )
 
-    override fun tv(): DiscoverTvShowResponse =
-        tv(TvDiscoverQuery.create())
+    override fun tv(): DiscoverTvShowResponse = tv(TvDiscoverQuery.create())
 
     override fun tv(query: TvDiscoverQuery): DiscoverTvShowResponse =
         httpClient.get(
             TmdbRequest.get(
                 DiscoverPaths.tvSeries(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            DiscoverTvShowResponse::class.java
+            DiscoverTvShowResponse::class.java,
         )
 }

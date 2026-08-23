@@ -13,29 +13,29 @@ import java.util.TreeSet
  * Registers TMDB SDK model classes for native-image reflection.
  */
 class TmdbNativeImageProcessor {
-
     @BuildStep
     fun indexTmdbCore(): IndexDependencyBuildItem =
         IndexDependencyBuildItem(
             "dev.reuss.tmdb",
-            "tmdb-core"
+            "tmdb-core",
         )
 
     @BuildStep
     fun registerTmdbModelsForReflection(
         combinedIndex: CombinedIndexBuildItem,
-        reflectiveClasses: BuildProducer<ReflectiveClassBuildItem>
+        reflectiveClasses: BuildProducer<ReflectiveClassBuildItem>,
     ) {
         val classNames = reflectionClassNames(combinedIndex.index)
 
         if (classNames.isNotEmpty()) {
             reflectiveClasses.produce(
-                ReflectiveClassBuildItem.builder(classNames)
+                ReflectiveClassBuildItem
+                    .builder(classNames)
                     .constructors(true)
                     .methods(true)
                     .fields(true)
                     .reason("TMDB SDK Jackson model deserialization")
-                    .build()
+                    .build(),
             )
         }
     }
@@ -51,7 +51,8 @@ class TmdbNativeImageProcessor {
         fun reflectionClassNames(index: IndexView): Set<String> {
             val classNames = TreeSet<String>()
 
-            index.getAllKnownImplementations(TMDB_MODEL)
+            index
+                .getAllKnownImplementations(TMDB_MODEL)
                 .asSequence()
                 .filterNot { it.isInterface }
                 .filterNot { it.isAbstract }

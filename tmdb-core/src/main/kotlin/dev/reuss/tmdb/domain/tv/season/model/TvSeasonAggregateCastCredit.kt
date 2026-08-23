@@ -22,34 +22,24 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeasonAggregateCastCredit(
     @all:JsonProperty("adult")
     val adult: Boolean,
-
     @all:JsonProperty("gender")
     val gender: Int,
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("known_for_department")
     val knownForDepartment: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("original_name")
     val originalName: String?,
-
     @all:JsonProperty("popularity")
     val popularity: Double,
-
     @all:JsonProperty("profile_path")
     val profilePath: String?,
-
     @all:JsonProperty("roles")
     val roles: List<TvSeasonAggregateCastRole> = emptyList(),
-
     @all:JsonProperty("total_episode_count")
     val totalEpisodeCount: Int,
-
     @all:JsonProperty("order")
-    val order: Int
+    val order: Int,
 ) : TmdbModel

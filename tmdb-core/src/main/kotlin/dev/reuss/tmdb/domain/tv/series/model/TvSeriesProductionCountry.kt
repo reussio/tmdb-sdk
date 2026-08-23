@@ -13,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesProductionCountry(
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("name")
-    val name: String?
+    val name: String?,
 ) : TmdbModel

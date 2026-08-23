@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.tv.series.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -16,13 +15,10 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesTranslationData(
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("overview")
     val overview: String?,
-
     @all:JsonProperty("homepage")
     val homepage: String?,
-
     @all:JsonProperty("tagline")
-    val tagline: String?
+    val tagline: String?,
 ) : TmdbModel

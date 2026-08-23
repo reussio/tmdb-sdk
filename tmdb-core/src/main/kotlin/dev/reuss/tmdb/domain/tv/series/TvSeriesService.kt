@@ -2,7 +2,22 @@ package dev.reuss.tmdb.domain.tv.series
 
 import dev.reuss.tmdb.common.external.ExternalIds
 import dev.reuss.tmdb.common.image.TvShowImages
-import dev.reuss.tmdb.domain.tv.series.model.*
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesAggregateCredits
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesAlternativeTitles
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesChanges
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesContentRatings
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesCredits
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesDetails
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesEpisodeGroups
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesKeywords
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesListResponse
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesRecommendations
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesReviews
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesScreenedTheatrically
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesSimilar
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesTranslations
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesVideos
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesWatchProviders
 import dev.reuss.tmdb.domain.tv.series.query.TvSeriesDateListQuery
 import dev.reuss.tmdb.domain.tv.series.query.TvSeriesListQuery
 import dev.reuss.tmdb.domain.tv.series.query.TvSeriesVideosQuery
@@ -16,7 +31,6 @@ import dev.reuss.tmdb.value.language.Language
  * Service for TMDB TV series list endpoints.
  */
 interface TvSeriesService {
-
     fun airingToday(): TvSeriesListResponse
 
     fun airingToday(language: Language): TvSeriesListResponse
@@ -45,25 +59,25 @@ interface TvSeriesService {
 
     fun details(
         seriesId: TvShowId,
-        language: Language
+        language: Language,
     ): TvSeriesDetails
 
     fun details(
         seriesId: TvShowId,
-        appendToResponse: AppendToResponse<TvSeriesAppend>
+        appendToResponse: AppendToResponse<TvSeriesAppend>,
     ): TvSeriesDetails
 
     fun details(
         seriesId: TvShowId,
         language: Language,
-        appendToResponse: AppendToResponse<TvSeriesAppend>
+        appendToResponse: AppendToResponse<TvSeriesAppend>,
     ): TvSeriesDetails
 
     fun aggregateCredits(seriesId: TvShowId): TvSeriesAggregateCredits
 
     fun aggregateCredits(
         seriesId: TvShowId,
-        language: Language
+        language: Language,
     ): TvSeriesAggregateCredits
 
     fun alternativeTitles(seriesId: TvShowId): TvSeriesAlternativeTitles
@@ -72,7 +86,7 @@ interface TvSeriesService {
 
     fun changes(
         seriesId: TvShowId,
-        query: ChangesQuery
+        query: ChangesQuery,
     ): TvSeriesChanges
 
     fun contentRatings(seriesId: TvShowId): TvSeriesContentRatings
@@ -81,7 +95,7 @@ interface TvSeriesService {
 
     fun credits(
         seriesId: TvShowId,
-        language: Language
+        language: Language,
     ): TvSeriesCredits
 
     fun episodeGroups(seriesId: TvShowId): TvSeriesEpisodeGroups
@@ -96,40 +110,38 @@ interface TvSeriesService {
 
     fun recommendations(
         seriesId: TvShowId,
-        language: Language
+        language: Language,
     ): TvSeriesRecommendations
 
     fun recommendations(
         seriesId: TvShowId,
-        query: TvSeriesListQuery
+        query: TvSeriesListQuery,
     ): TvSeriesRecommendations
 
     fun reviews(seriesId: TvShowId): TvSeriesReviews
 
     fun reviews(
         seriesId: TvShowId,
-        language: Language
+        language: Language,
     ): TvSeriesReviews
 
     fun reviews(
         seriesId: TvShowId,
-        query: TvSeriesListQuery
+        query: TvSeriesListQuery,
     ): TvSeriesReviews
 
-    fun screenedTheatrically(
-        seriesId: TvShowId
-    ): TvSeriesScreenedTheatrically
+    fun screenedTheatrically(seriesId: TvShowId): TvSeriesScreenedTheatrically
 
     fun similar(seriesId: TvShowId): TvSeriesSimilar
 
     fun similar(
         seriesId: TvShowId,
-        language: Language
+        language: Language,
     ): TvSeriesSimilar
 
     fun similar(
         seriesId: TvShowId,
-        query: TvSeriesListQuery
+        query: TvSeriesListQuery,
     ): TvSeriesSimilar
 
     fun translations(seriesId: TvShowId): TvSeriesTranslations
@@ -138,12 +150,12 @@ interface TvSeriesService {
 
     fun videos(
         seriesId: TvShowId,
-        language: Language
+        language: Language,
     ): TvSeriesVideos
 
     fun videos(
         seriesId: TvShowId,
-        query: TvSeriesVideosQuery
+        query: TvSeriesVideosQuery,
     ): TvSeriesVideos
 
     fun watchProviders(seriesId: TvShowId): TvSeriesWatchProviders
@@ -152,6 +164,6 @@ interface TvSeriesService {
 
     fun images(
         seriesId: TvShowId,
-        query: ImageQuery
+        query: ImageQuery,
     ): TvShowImages
 }

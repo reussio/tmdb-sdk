@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.configuration.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -14,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class JobDepartment(
     @all:JsonProperty("department")
     val department: String?,
-
     @all:JsonProperty("jobs")
-    val jobs: List<String> = emptyList()
+    val jobs: List<String> = emptyList(),
 ) : TmdbModel

@@ -14,10 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeasonAggregateCastRole(
     @all:JsonProperty("credit_id")
     val creditId: String?,
-
     @all:JsonProperty("character")
     val character: String?,
-
     @all:JsonProperty("episode_count")
-    val episodeCount: Int
+    val episodeCount: Int,
 ) : TmdbModel

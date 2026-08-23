@@ -10,45 +10,41 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
 class TmdbBlankAccessTokenValidationTest {
-
     @Test
     fun shouldFailWhenAccessTokenIsBlank() {
     }
 
     companion object {
-
         @JvmField
         @RegisterExtension
-        val app = QuarkusExtensionTest()
-            .withApplicationRoot { jar ->
-                jar
-                    .addClasses(
-                        TmdbProducer::class.java,
-                        TmdbConfig::class.java
+        val app =
+            QuarkusExtensionTest()
+                .withApplicationRoot { jar ->
+                    jar
+                        .addClasses(
+                            TmdbProducer::class.java,
+                            TmdbConfig::class.java,
+                        ).addAsManifestResource(
+                            EmptyAsset.INSTANCE,
+                            "beans.xml",
+                        ).addAsResource(
+                            StringAsset(
+                                """
+                                tmdb.access-token=
+                                """.trimIndent(),
+                            ),
+                            "application.properties",
+                        )
+                }.assertException { throwable ->
+                    assertTrue(
+                        containsMessage(throwable, "tmdb.access-token"),
+                        "Expected blank access token message but got: $throwable",
                     )
-                    .addAsManifestResource(
-                        EmptyAsset.INSTANCE,
-                        "beans.xml"
-                    )
-                    .addAsResource(
-                        StringAsset(
-                            """
-                            tmdb.access-token=
-                            """.trimIndent()
-                        ),
-                        "application.properties"
-                    )
-            }
-            .assertException { throwable ->
-                assertTrue(
-                    containsMessage(throwable, "tmdb.access-token"),
-                    "Expected blank access token message but got: $throwable"
-                )
-            }
+                }
 
         private fun containsMessage(
             throwable: Throwable,
-            expected: String
+            expected: String,
         ): Boolean {
             var current: Throwable? = throwable
 

@@ -12,10 +12,10 @@ class TmdbRateLimitException(
     message: String,
     httpStatus: Int,
     tmdbStatusCode: Int,
-    responseBody: String
+    responseBody: String,
 ) : TmdbApiException(
-    message,
-    httpStatus,
-    tmdbStatusCode,
-    responseBody
-)
+        message,
+        httpStatus,
+        tmdbStatusCode,
+        responseBody,
+    )

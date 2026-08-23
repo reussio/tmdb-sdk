@@ -6,9 +6,8 @@ package dev.reuss.tmdb.value.id
  * @property value season number
  */
 data class TvSeasonNumber private constructor(
-    val value: Int
+    val value: Int,
 ) {
-
     init {
         require(value >= 0) {
             "TV season number must not be negative"

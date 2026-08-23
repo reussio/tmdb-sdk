@@ -1,6 +1,10 @@
 package dev.reuss.tmdb.domain.configuration
 
-import dev.reuss.tmdb.domain.configuration.model.*
+import dev.reuss.tmdb.domain.configuration.model.ApiConfiguration
+import dev.reuss.tmdb.domain.configuration.model.ConfigurationLanguage
+import dev.reuss.tmdb.domain.configuration.model.Country
+import dev.reuss.tmdb.domain.configuration.model.JobDepartment
+import dev.reuss.tmdb.domain.configuration.model.Timezone
 import dev.reuss.tmdb.value.language.Language
 
 /**
@@ -12,7 +16,6 @@ import dev.reuss.tmdb.value.language.Language
  * @see <a href="https://developer.themoviedb.org/reference/configuration-details">TMDB Configuration</a>
  */
 interface ConfigurationService {
-
     /**
      * Loads the TMDB API configuration.
      *

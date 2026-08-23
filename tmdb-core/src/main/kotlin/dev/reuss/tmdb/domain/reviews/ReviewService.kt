@@ -7,7 +7,6 @@ import dev.reuss.tmdb.value.id.ReviewId
  * Service for loading TMDB review metadata.
  */
 interface ReviewService {
-
     /**
      * Loads review details by review id.
      *

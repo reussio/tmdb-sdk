@@ -15,7 +15,6 @@ import java.time.LocalDate
  * query parameter names.
  */
 class MovieDiscoverQuery private constructor() : PagedQuery<MovieDiscoverQuery> {
-
     private var certification: String? = null
     private var certificationGte: String? = null
     private var certificationLte: String? = null
@@ -68,163 +67,202 @@ class MovieDiscoverQuery private constructor() : PagedQuery<MovieDiscoverQuery> 
 
     private var year: Int? = null
 
-    fun certification(value: String?) = apply {
-        certification = value
-    }
+    fun certification(value: String?) =
+        apply {
+            certification = value
+        }
 
-    fun certificationGte(value: String?) = apply {
-        certificationGte = value
-    }
+    fun certificationGte(value: String?) =
+        apply {
+            certificationGte = value
+        }
 
-    fun certificationLte(value: String?) = apply {
-        certificationLte = value
-    }
+    fun certificationLte(value: String?) =
+        apply {
+            certificationLte = value
+        }
 
-    fun certificationCountry(value: String?) = apply {
-        certificationCountry = value
-    }
+    fun certificationCountry(value: String?) =
+        apply {
+            certificationCountry = value
+        }
 
-    fun includeAdult(value: Boolean) = apply {
-        includeAdult = value
-    }
+    fun includeAdult(value: Boolean) =
+        apply {
+            includeAdult = value
+        }
 
-    fun includeVideo(value: Boolean) = apply {
-        includeVideo = value
-    }
+    fun includeVideo(value: Boolean) =
+        apply {
+            includeVideo = value
+        }
 
-    fun language(value: Language?) = apply {
-        language = value
-    }
+    fun language(value: Language?) =
+        apply {
+            language = value
+        }
 
-    override fun page(page: Int?) = apply {
-        QueryValidation.validatePage(page)
-        this.page = page
-    }
+    override fun page(page: Int?) =
+        apply {
+            QueryValidation.validatePage(page)
+            this.page = page
+        }
 
-    fun primaryReleaseYear(value: Int) = apply {
-        QueryValidation.validateYear(value, "Primary release year")
-        primaryReleaseYear = value
-    }
+    fun primaryReleaseYear(value: Int) =
+        apply {
+            QueryValidation.validateYear(value, "Primary release year")
+            primaryReleaseYear = value
+        }
 
-    fun primaryReleaseDateGte(value: LocalDate?) = apply {
-        primaryReleaseDateGte = value
-    }
+    fun primaryReleaseDateGte(value: LocalDate?) =
+        apply {
+            primaryReleaseDateGte = value
+        }
 
-    fun primaryReleaseDateLte(value: LocalDate?) = apply {
-        primaryReleaseDateLte = value
-    }
+    fun primaryReleaseDateLte(value: LocalDate?) =
+        apply {
+            primaryReleaseDateLte = value
+        }
 
-    fun region(value: Region?) = apply {
-        region = value
-    }
+    fun region(value: Region?) =
+        apply {
+            region = value
+        }
 
-    fun releaseDateGte(value: LocalDate?) = apply {
-        releaseDateGte = value
-    }
+    fun releaseDateGte(value: LocalDate?) =
+        apply {
+            releaseDateGte = value
+        }
 
-    fun releaseDateLte(value: LocalDate?) = apply {
-        releaseDateLte = value
-    }
+    fun releaseDateLte(value: LocalDate?) =
+        apply {
+            releaseDateLte = value
+        }
 
-    fun sortBy(value: MovieDiscoverSortBy?) = apply {
-        sortBy = value
-    }
+    fun sortBy(value: MovieDiscoverSortBy?) =
+        apply {
+            sortBy = value
+        }
 
-    fun voteAverageGte(value: Double) = apply {
-        voteAverageGte = value
-    }
+    fun voteAverageGte(value: Double) =
+        apply {
+            voteAverageGte = value
+        }
 
-    fun voteAverageLte(value: Double) = apply {
-        voteAverageLte = value
-    }
+    fun voteAverageLte(value: Double) =
+        apply {
+            voteAverageLte = value
+        }
 
-    fun voteCountGte(value: Double) = apply {
-        voteCountGte = value
-    }
+    fun voteCountGte(value: Double) =
+        apply {
+            voteCountGte = value
+        }
 
-    fun voteCountLte(value: Double) = apply {
-        voteCountLte = value
-    }
+    fun voteCountLte(value: Double) =
+        apply {
+            voteCountLte = value
+        }
 
-    fun watchRegion(value: Region?) = apply {
-        watchRegion = value
-    }
+    fun watchRegion(value: Region?) =
+        apply {
+            watchRegion = value
+        }
 
-    fun withCast(value: String?) = apply {
-        withCast = value
-    }
+    fun withCast(value: String?) =
+        apply {
+            withCast = value
+        }
 
-    fun withCompanies(value: String?) = apply {
-        withCompanies = value
-    }
+    fun withCompanies(value: String?) =
+        apply {
+            withCompanies = value
+        }
 
-    fun withCrew(value: String?) = apply {
-        withCrew = value
-    }
+    fun withCrew(value: String?) =
+        apply {
+            withCrew = value
+        }
 
-    fun withGenres(value: String?) = apply {
-        withGenres = value
-    }
+    fun withGenres(value: String?) =
+        apply {
+            withGenres = value
+        }
 
-    fun withKeywords(value: String?) = apply {
-        withKeywords = value
-    }
+    fun withKeywords(value: String?) =
+        apply {
+            withKeywords = value
+        }
 
-    fun withOriginCountry(value: String?) = apply {
-        withOriginCountry = value
-    }
+    fun withOriginCountry(value: String?) =
+        apply {
+            withOriginCountry = value
+        }
 
-    fun withOriginalLanguage(value: String?) = apply {
-        withOriginalLanguage = value
-    }
+    fun withOriginalLanguage(value: String?) =
+        apply {
+            withOriginalLanguage = value
+        }
 
-    fun withPeople(value: String?) = apply {
-        withPeople = value
-    }
+    fun withPeople(value: String?) =
+        apply {
+            withPeople = value
+        }
 
-    fun withReleaseType(value: String?) = apply {
-        withReleaseType = value
-    }
+    fun withReleaseType(value: String?) =
+        apply {
+            withReleaseType = value
+        }
 
-    fun withRuntimeGte(value: Int) = apply {
-        withRuntimeGte = value
-    }
+    fun withRuntimeGte(value: Int) =
+        apply {
+            withRuntimeGte = value
+        }
 
-    fun withRuntimeLte(value: Int) = apply {
-        withRuntimeLte = value
-    }
+    fun withRuntimeLte(value: Int) =
+        apply {
+            withRuntimeLte = value
+        }
 
-    fun withWatchMonetizationTypes(value: String?) = apply {
-        withWatchMonetizationTypes = value
-    }
+    fun withWatchMonetizationTypes(value: String?) =
+        apply {
+            withWatchMonetizationTypes = value
+        }
 
-    fun withWatchProviders(value: String?) = apply {
-        withWatchProviders = value
-    }
+    fun withWatchProviders(value: String?) =
+        apply {
+            withWatchProviders = value
+        }
 
-    fun withoutCompanies(value: String?) = apply {
-        withoutCompanies = value
-    }
+    fun withoutCompanies(value: String?) =
+        apply {
+            withoutCompanies = value
+        }
 
-    fun withoutGenres(value: String?) = apply {
-        withoutGenres = value
-    }
+    fun withoutGenres(value: String?) =
+        apply {
+            withoutGenres = value
+        }
 
-    fun withoutKeywords(value: String?) = apply {
-        withoutKeywords = value
-    }
+    fun withoutKeywords(value: String?) =
+        apply {
+            withoutKeywords = value
+        }
 
-    fun withoutWatchProviders(value: String?) = apply {
-        withoutWatchProviders = value
-    }
+    fun withoutWatchProviders(value: String?) =
+        apply {
+            withoutWatchProviders = value
+        }
 
-    fun year(value: Int) = apply {
-        QueryValidation.validateYear(value, "Year")
-        year = value
-    }
+    fun year(value: Int) =
+        apply {
+            QueryValidation.validateYear(value, "Year")
+            year = value
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("certification", certification)
             .add("certification.gte", certificationGte)
             .add("certification.lte", certificationLte)
@@ -265,9 +303,7 @@ class MovieDiscoverQuery private constructor() : PagedQuery<MovieDiscoverQuery> 
             .add("year", year)
 
     companion object {
-
         @JvmStatic
-        fun create(): MovieDiscoverQuery =
-            MovieDiscoverQuery()
+        fun create(): MovieDiscoverQuery = MovieDiscoverQuery()
     }
 }

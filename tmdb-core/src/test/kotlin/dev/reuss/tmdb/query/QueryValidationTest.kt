@@ -15,45 +15,49 @@ import org.junit.jupiter.api.assertThrows
 import java.time.LocalDate
 
 class QueryValidationTest {
-
     @Test
     fun defaultQueriesOnlySerializeSetValues() {
         assertTrue(
-            MovieRecommendationsQuery.create()
+            MovieRecommendationsQuery
+                .create()
                 .toQueryParams()
                 .toMap()
-                .isEmpty()
+                .isEmpty(),
         )
 
         assertTrue(
-            MovieDiscoverQuery.create()
+            MovieDiscoverQuery
+                .create()
                 .toQueryParams()
                 .toMap()
-                .isEmpty()
+                .isEmpty(),
         )
 
         assertEquals(
             mapOf("query" to "Fight Club"),
-            SearchMovieQuery.of(" Fight Club ")
+            SearchMovieQuery
+                .of(" Fight Club ")
                 .toQueryParams()
-                .toMap()
+                .toMap(),
         )
     }
 
     @Test
     fun optionalValuesAreSerializedWhenSet() {
-        val params = MovieRecommendationsQuery.create()
-            .language(Language.of("de-DE"))
-            .page(2)
-            .toQueryParams()
-            .toMap()
+        val params =
+            MovieRecommendationsQuery
+                .create()
+                .language(Language.of("de-DE"))
+                .page(2)
+                .toQueryParams()
+                .toMap()
 
         assertEquals(
             mapOf(
                 "language" to "de-DE",
-                "page" to "2"
+                "page" to "2",
             ),
-            params
+            params,
         )
     }
 
@@ -106,13 +110,15 @@ class QueryValidationTest {
         }
 
         assertThrows<IllegalArgumentException> {
-            ChangesQuery.create()
+            ChangesQuery
+                .create()
                 .startDate(LocalDate.of(2024, 1, 10))
                 .endDate(LocalDate.of(2024, 1, 9))
         }
 
         assertThrows<IllegalArgumentException> {
-            ChangesQuery.create()
+            ChangesQuery
+                .create()
                 .startDate(LocalDate.of(2024, 1, 1))
                 .endDate(LocalDate.of(2024, 1, 16))
         }
@@ -121,14 +127,15 @@ class QueryValidationTest {
             mapOf(
                 "start_date" to "2024-01-01",
                 "end_date" to "2024-01-14",
-                "page" to "2"
+                "page" to "2",
             ),
-            ChangesQuery.create()
+            ChangesQuery
+                .create()
                 .startDate(LocalDate.of(2024, 1, 1))
                 .endDate(LocalDate.of(2024, 1, 14))
                 .page(2)
                 .toQueryParams()
-                .toMap()
+                .toMap(),
         )
     }
 
@@ -137,40 +144,40 @@ class QueryValidationTest {
         assertEquals(
             mapOf(
                 "language" to "de-DE",
-                "include_image_language" to "de,en,null"
+                "include_image_language" to "de,en,null",
             ),
             ImageQuery(
                 Language.of("de-DE"),
-                "de,en,null"
-            ).toQueryParams().toMap()
+                "de,en,null",
+            ).toQueryParams().toMap(),
         )
 
         assertEquals(
             mapOf(
                 "language" to "de-DE",
-                "include_video_language" to "de-DE,en-US"
+                "include_video_language" to "de-DE,en-US",
             ),
-            TvSeasonVideosQuery.create()
+            TvSeasonVideosQuery
+                .create()
                 .language(Language.of("de-DE"))
                 .includeVideoLanguage(
                     Language.of("de-DE"),
-                    Language.of("en-US")
-                )
-                .toQueryParams()
-                .toMap()
+                    Language.of("en-US"),
+                ).toQueryParams()
+                .toMap(),
         )
 
         assertEquals(
             mapOf(
-                "include_video_language" to "de-DE,en-US"
+                "include_video_language" to "de-DE,en-US",
             ),
-            TvEpisodeVideosQuery.create()
+            TvEpisodeVideosQuery
+                .create()
                 .includeVideoLanguage(
                     Language.of("de-DE"),
-                    Language.of("en-US")
-                )
-                .toQueryParams()
-                .toMap()
+                    Language.of("en-US"),
+                ).toQueryParams()
+                .toMap(),
         )
     }
 }

@@ -16,16 +16,12 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesCreator(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("credit_id")
     val creditId: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("gender")
     val gender: Int,
-
     @all:JsonProperty("profile_path")
-    val profilePath: String?
+    val profilePath: String?,
 ) : TmdbModel

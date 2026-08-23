@@ -9,12 +9,11 @@ import dev.reuss.tmdb.value.id.KeywordId
  * Default [KeywordService] implementation backed by the TMDB HTTP client.
  */
 internal class DefaultKeywordService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : KeywordService {
-
     override fun details(keywordId: KeywordId): Keyword =
         httpClient.get(
             TmdbRequest.get(KeywordPaths.details(keywordId)),
-            Keyword::class.java
+            Keyword::class.java,
         )
 }

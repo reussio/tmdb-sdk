@@ -8,7 +8,6 @@ import dev.reuss.tmdb.value.language.Language
  * Service for loading TMDB credit metadata.
  */
 interface CreditService {
-
     /**
      * Loads credit details by credit id.
      *
@@ -26,6 +25,6 @@ interface CreditService {
      */
     fun details(
         creditId: CreditId,
-        language: Language
+        language: Language,
     ): CreditDetails
 }

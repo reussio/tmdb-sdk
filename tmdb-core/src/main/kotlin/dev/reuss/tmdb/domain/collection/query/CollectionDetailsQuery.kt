@@ -10,21 +10,18 @@ import dev.reuss.tmdb.value.language.Language
  * @property language response language
  */
 data class CollectionDetailsQuery(
-    val language: Language? = null
+    val language: Language? = null,
 ) : TmdbQuery {
-
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("language", language?.value)
 
     companion object {
+        @JvmStatic
+        fun empty(): CollectionDetailsQuery = CollectionDetailsQuery()
 
         @JvmStatic
-        fun empty(): CollectionDetailsQuery =
-            CollectionDetailsQuery()
-
-        @JvmStatic
-        fun of(language: Language): CollectionDetailsQuery =
-            CollectionDetailsQuery(language)
+        fun of(language: Language): CollectionDetailsQuery = CollectionDetailsQuery(language)
     }
 }

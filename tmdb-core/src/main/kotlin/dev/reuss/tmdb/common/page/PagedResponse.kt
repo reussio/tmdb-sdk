@@ -1,7 +1,7 @@
 package dev.reuss.tmdb.common.page
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import java.util.*
+import java.util.OptionalInt
 
 /**
  * Common contract for paginated TMDB responses.
@@ -10,7 +10,6 @@ import java.util.*
  */
 
 interface PagedResponse<T> {
-
     val page: Int
 
     val results: List<T>
@@ -21,33 +20,19 @@ interface PagedResponse<T> {
     @get:JsonProperty("total_results")
     val totalResults: Int
 
-    fun hasNextPage(): Boolean {
-        return page < totalPages
-    }
+    fun hasNextPage(): Boolean = page < totalPages
 
-    fun hasPreviousPage(): Boolean {
-        return page > 1
-    }
+    fun hasPreviousPage(): Boolean = page > 1
 
-    fun isFirstPage(): Boolean {
-        return page <= 1
-    }
+    fun isFirstPage(): Boolean = page <= 1
 
-    fun isLastPage(): Boolean {
-        return page >= totalPages
-    }
+    fun isLastPage(): Boolean = page >= totalPages
 
-    fun isEmpty(): Boolean {
-        return resultCount() == 0
-    }
+    fun isEmpty(): Boolean = resultCount() == 0
 
-    fun hasResults(): Boolean {
-        return !isEmpty()
-    }
+    fun hasResults(): Boolean = !isEmpty()
 
-    fun resultCount(): Int {
-        return results.size
-    }
+    fun resultCount(): Int = results.size
 
     fun nextPage(): Int {
         if (!hasNextPage()) {
@@ -65,11 +50,7 @@ interface PagedResponse<T> {
         return page - 1
     }
 
-    fun nextPageNumber(): OptionalInt {
-        return if (hasNextPage()) OptionalInt.of(page + 1) else OptionalInt.empty()
-    }
+    fun nextPageNumber(): OptionalInt = if (hasNextPage()) OptionalInt.of(page + 1) else OptionalInt.empty()
 
-    fun previousPageNumber(): OptionalInt {
-        return if (hasPreviousPage()) OptionalInt.of(page - 1) else OptionalInt.empty()
-    }
+    fun previousPageNumber(): OptionalInt = if (hasPreviousPage()) OptionalInt.of(page - 1) else OptionalInt.empty()
 }

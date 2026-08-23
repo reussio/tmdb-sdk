@@ -2,7 +2,8 @@ package dev.reuss.tmdb.value.language
 
 import dev.reuss.tmdb.common.TmdbModel
 import dev.reuss.tmdb.value.region.Region
-import java.util.*
+import java.util.Locale
+import java.util.Optional
 
 /**
  * Represents a TMDB language parameter.
@@ -29,9 +30,8 @@ import java.util.*
  */
 class Language private constructor(
     val code: LanguageCode,
-    val region: Region?
+    val region: Region?,
 ) : TmdbModel {
-
     /**
      * Returns the TMDB language parameter value.
      *
@@ -40,31 +40,31 @@ class Language private constructor(
      * as a language-region tag, for example `de-DE`.
      */
     val value: String
-        get() = if (region == null) {
-            code.value
-        } else {
-            "${code.value}-${region.value}"
-        }
+        get() =
+            if (region == null) {
+                code.value
+            } else {
+                "${code.value}-${region.value}"
+            }
 
     /**
      * Returns the optional region part of this language parameter.
      */
-    fun regionOptional(): Optional<Region> =
-        Optional.ofNullable(region)
+    fun regionOptional(): Optional<Region> = Optional.ofNullable(region)
 
     override fun toString(): String = value
 
     override fun equals(other: Any?): Boolean =
         this === other ||
+            (
                 other is Language &&
-                code == other.code &&
-                region == other.region
+                    code == other.code &&
+                    region == other.region
+            )
 
-    override fun hashCode(): Int =
-        31 * code.hashCode() + (region?.hashCode() ?: 0)
+    override fun hashCode(): Int = 31 * code.hashCode() + (region?.hashCode() ?: 0)
 
     companion object {
-
         /**
          * Creates a language parameter from a language code or language tag.
          *
@@ -86,7 +86,7 @@ class Language private constructor(
             if (normalized.matches(Regex("^[a-zA-Z]{2}$"))) {
                 return Language(
                     LanguageCode.of(normalized),
-                    null
+                    null,
                 )
             }
 
@@ -95,12 +95,12 @@ class Language private constructor(
 
                 return Language(
                     LanguageCode.of(code.lowercase(Locale.ROOT)),
-                    Region.of(region.uppercase(Locale.ROOT))
+                    Region.of(region.uppercase(Locale.ROOT)),
                 )
             }
 
             throw IllegalArgumentException(
-                "Language must match format like de, en, de-DE or en-US"
+                "Language must match format like de, en, de-DE or en-US",
             )
         }
 
@@ -108,8 +108,7 @@ class Language private constructor(
          * Creates a language parameter without a region.
          */
         @JvmStatic
-        fun of(code: LanguageCode): Language =
-            Language(code, null)
+        fun of(code: LanguageCode): Language = Language(code, null)
 
         /**
          * Creates a language parameter with a region.
@@ -117,8 +116,7 @@ class Language private constructor(
         @JvmStatic
         fun of(
             code: LanguageCode,
-            region: Region
-        ): Language =
-            Language(code, region)
+            region: Region,
+        ): Language = Language(code, region)
     }
 }

@@ -10,14 +10,14 @@ import org.springframework.boot.autoconfigure.AutoConfigurations
 import org.springframework.boot.test.context.runner.ApplicationContextRunner
 
 class TmdbHealthAutoConfigurationTest {
-
-    private val contextRunner = ApplicationContextRunner()
-        .withConfiguration(
-            AutoConfigurations.of(
-                TmdbClientAutoConfiguration::class.java,
-                TmdbHealthAutoConfiguration::class.java
+    private val contextRunner =
+        ApplicationContextRunner()
+            .withConfiguration(
+                AutoConfigurations.of(
+                    TmdbClientAutoConfiguration::class.java,
+                    TmdbHealthAutoConfiguration::class.java,
+                ),
             )
-        )
 
     @Test
     fun createsTmdbHealthIndicatorWhenActuatorAndClientAreAvailable() {
@@ -28,9 +28,10 @@ class TmdbHealthAutoConfigurationTest {
                 assertThat(context).hasBean("tmdbHealthIndicator")
                 assertThat(context).hasSingleBean(HealthIndicator::class.java)
 
-                val health = context
-                    .getBean(HealthIndicator::class.java)
-                    .health()
+                val health =
+                    context
+                        .getBean(HealthIndicator::class.java)
+                        .health()
 
                 assertThat(health.status)
                     .isEqualTo(Status.UP)
@@ -45,9 +46,8 @@ class TmdbHealthAutoConfigurationTest {
         contextRunner
             .withPropertyValues(
                 "tmdb.access-token=test-token",
-                "management.health.tmdb.enabled=false"
-            )
-            .run { context ->
+                "management.health.tmdb.enabled=false",
+            ).run { context ->
                 assertThat(context)
                     .doesNotHaveBean("tmdbHealthIndicator")
             }
@@ -57,7 +57,8 @@ class TmdbHealthAutoConfigurationTest {
     fun doesNotReplaceCustomTmdbHealthIndicator() {
         val customHealthIndicator =
             HealthIndicator {
-                Health.up()
+                Health
+                    .up()
                     .withDetail("client", "custom")
                     .build()
             }
@@ -66,17 +67,16 @@ class TmdbHealthAutoConfigurationTest {
             .withBean(
                 "tmdbHealthIndicator",
                 HealthIndicator::class.java,
-                { customHealthIndicator }
-            )
-            .withPropertyValues("tmdb.access-token=test-token")
+                { customHealthIndicator },
+            ).withPropertyValues("tmdb.access-token=test-token")
             .run { context ->
                 assertThat(context).hasBean("tmdbHealthIndicator")
 
                 assertThat(
                     context.getBean(
                         "tmdbHealthIndicator",
-                        HealthIndicator::class.java
-                    )
+                        HealthIndicator::class.java,
+                    ),
                 ).isSameAs(customHealthIndicator)
             }
     }

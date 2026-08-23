@@ -11,15 +11,15 @@ import org.junit.jupiter.api.Test
 import java.io.UncheckedIOException
 
 class TmdbReflectionRegistrationTest {
-
     @Test
     fun shouldCollectTmdbModelsForReflection() {
-        val index = index(
-            TmdbModel::class.java,
-            Country::class.java,
-            MovieDetails::class.java,
-            TmdbErrorResponse::class.java
-        )
+        val index =
+            index(
+                TmdbModel::class.java,
+                Country::class.java,
+                MovieDetails::class.java,
+                TmdbErrorResponse::class.java,
+            )
 
         val classNames =
             TmdbNativeImageProcessor.reflectionClassNames(index)

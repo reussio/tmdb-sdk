@@ -13,13 +13,12 @@ import dev.reuss.tmdb.query.AppendableResponse
  */
 enum class TvEpisodeAppend(
     override val value: String,
-    override val responseType: Class<*>
+    override val responseType: Class<*>,
 ) : AppendableResponse {
-
     CHANGES("changes", TvEpisodeChanges::class.java),
     CREDITS("credits", TvEpisodeCredits::class.java),
     EXTERNAL_IDS("external_ids", ExternalIds::class.java),
     IMAGES("images", TvEpisodeImages::class.java),
     TRANSLATIONS("translations", TvEpisodeTranslations::class.java),
-    VIDEOS("videos", TvEpisodeVideos::class.java)
+    VIDEOS("videos", TvEpisodeVideos::class.java),
 }

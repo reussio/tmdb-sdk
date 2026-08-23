@@ -8,7 +8,6 @@ import dev.reuss.tmdb.value.language.Language
  */
 
 interface GenreService {
-
     fun movies(): GenreList
 
     fun movies(language: Language): GenreList

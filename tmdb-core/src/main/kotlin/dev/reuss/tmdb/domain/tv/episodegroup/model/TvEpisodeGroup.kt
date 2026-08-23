@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.tv.episodegroup.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -17,16 +16,12 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvEpisodeGroup(
     @all:JsonProperty("id")
     val id: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("order")
     val order: Int,
-
     @all:JsonProperty("episodes")
     val episodes: List<TvEpisodeGroupEpisode> = emptyList(),
-
     @all:JsonProperty("locked")
-    val locked: Boolean
+    val locked: Boolean,
 ) : TmdbModel

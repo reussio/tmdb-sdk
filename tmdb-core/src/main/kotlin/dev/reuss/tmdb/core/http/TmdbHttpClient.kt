@@ -10,7 +10,6 @@ import dev.reuss.tmdb.core.exception.TmdbException
  * implementation is based on Java's built-in HTTP client.
  */
 interface TmdbHttpClient {
-
     /**
      * Sends a GET request and maps the response body to the given Java type.
      *
@@ -19,6 +18,6 @@ interface TmdbHttpClient {
      */
     fun <T> get(
         request: TmdbRequest,
-        responseType: Class<T>
+        responseType: Class<T>,
     ): T
 }

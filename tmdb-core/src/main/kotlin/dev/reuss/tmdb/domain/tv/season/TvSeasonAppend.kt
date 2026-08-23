@@ -2,7 +2,12 @@ package dev.reuss.tmdb.domain.tv.season
 
 import dev.reuss.tmdb.common.external.ExternalIds
 import dev.reuss.tmdb.common.image.TvSeasonImages
-import dev.reuss.tmdb.domain.tv.season.model.*
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonAggregateCredits
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonChanges
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonCredits
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonTranslations
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonVideos
+import dev.reuss.tmdb.domain.tv.season.model.TvSeasonWatchProviders
 import dev.reuss.tmdb.query.AppendableResponse
 
 /**
@@ -10,9 +15,8 @@ import dev.reuss.tmdb.query.AppendableResponse
  */
 enum class TvSeasonAppend(
     override val value: String,
-    override val responseType: Class<*>
+    override val responseType: Class<*>,
 ) : AppendableResponse {
-
     AGGREGATE_CREDITS("aggregate_credits", TvSeasonAggregateCredits::class.java),
     CHANGES("changes", TvSeasonChanges::class.java),
     CREDITS("credits", TvSeasonCredits::class.java),
@@ -20,5 +24,5 @@ enum class TvSeasonAppend(
     IMAGES("images", TvSeasonImages::class.java),
     TRANSLATIONS("translations", TvSeasonTranslations::class.java),
     VIDEOS("videos", TvSeasonVideos::class.java),
-    WATCH_PROVIDERS("watch/providers", TvSeasonWatchProviders::class.java)
+    WATCH_PROVIDERS("watch/providers", TvSeasonWatchProviders::class.java),
 }

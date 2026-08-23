@@ -7,25 +7,26 @@ import org.junit.jupiter.api.assertThrows
 import java.lang.reflect.InvocationTargetException
 
 class AppendToResponseTest {
-
     @Test
     fun serializesValuesInStableOrder() {
-        val append = AppendToResponse.of(
-            MovieAppend.CREDITS,
-            MovieAppend.WATCH_PROVIDERS,
-            MovieAppend.VIDEOS
-        )
+        val append =
+            AppendToResponse.of(
+                MovieAppend.CREDITS,
+                MovieAppend.WATCH_PROVIDERS,
+                MovieAppend.VIDEOS,
+            )
 
         assertEquals("credits,watch/providers,videos", append.toString())
     }
 
     @Test
     fun removesDuplicateValues() {
-        val append = AppendToResponse.of(
-            MovieAppend.CREDITS,
-            MovieAppend.VIDEOS,
-            MovieAppend.CREDITS
-        )
+        val append =
+            AppendToResponse.of(
+                MovieAppend.CREDITS,
+                MovieAppend.VIDEOS,
+                MovieAppend.CREDITS,
+            )
 
         assertEquals("credits,videos", append.toString())
         assertEquals(2, append.values.size)
@@ -45,8 +46,8 @@ class AppendToResponseTest {
             invokeOf(
                 arrayOf(
                     MovieAppend.CREDITS,
-                    null
-                )
+                    null,
+                ),
             )
         }
 
@@ -56,11 +57,12 @@ class AppendToResponseTest {
     }
 
     private fun invokeOf(values: Array<out AppendableResponse?>?) {
-        val method = AppendToResponse::class.java.methods
-            .single {
-                it.name == "of" &&
+        val method =
+            AppendToResponse::class.java.methods
+                .single {
+                    it.name == "of" &&
                         it.parameterCount == 1
-            }
+                }
 
         try {
             method.invoke(null, values)
@@ -71,9 +73,8 @@ class AppendToResponseTest {
 
     private enum class TestAppend(
         override val value: String,
-        override val responseType: Class<*>
+        override val responseType: Class<*>,
     ) : AppendableResponse {
-
         V01("v01", Any::class.java),
         V02("v02", Any::class.java),
         V03("v03", Any::class.java),
@@ -94,6 +95,6 @@ class AppendToResponseTest {
         V18("v18", Any::class.java),
         V19("v19", Any::class.java),
         V20("v20", Any::class.java),
-        V21("v21", Any::class.java)
+        V21("v21", Any::class.java),
     }
 }

@@ -6,18 +6,18 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class TmdbDevUiProcessorTest {
-
     @Test
     fun shouldExposeMaskedConfigurationRows() {
-        val rows = TmdbDevUiProcessor.devUiConfigurationRows(
-            "0.2.0",
-            "https://example.test/3",
-            "de-DE",
-            "DE",
-            "3s",
-            "12s",
-            true
-        )
+        val rows =
+            TmdbDevUiProcessor.devUiConfigurationRows(
+                "0.2.0",
+                "https://example.test/3",
+                "de-DE",
+                "DE",
+                "3s",
+                "12s",
+                true,
+            )
 
         assertEquals("Extension Version", rows[0]["name"])
         assertEquals("0.2.0", rows[0]["value"])
@@ -37,28 +37,30 @@ class TmdbDevUiProcessorTest {
 
     @Test
     fun shouldNotExposeMissingTokenValue() {
-        val rows = TmdbDevUiProcessor.devUiConfigurationRows(
-            "0.2.0",
-            "https://example.test/3",
-            "de-DE",
-            "DE",
-            "3s",
-            "12s",
-            false
-        )
+        val rows =
+            TmdbDevUiProcessor.devUiConfigurationRows(
+                "0.2.0",
+                "https://example.test/3",
+                "de-DE",
+                "DE",
+                "3s",
+                "12s",
+                false,
+            )
 
         assertEquals("not configured", rows[6]["value"])
     }
 
     @Test
     fun shouldExposeStatusRows() {
-        val rows = TmdbDevUiProcessor.devUiStatusRows(
-            true,
-            "https://example.test/3",
-            true,
-            false,
-            42
-        )
+        val rows =
+            TmdbDevUiProcessor.devUiStatusRows(
+                true,
+                "https://example.test/3",
+                true,
+                false,
+                42,
+            )
 
         assertEquals("Configuration", rows[0]["name"])
         assertEquals("ready", rows[0]["status"])
@@ -77,21 +79,23 @@ class TmdbDevUiProcessorTest {
 
     @Test
     fun shouldMarkConfigurationIncompleteForMissingTokenOrInvalidBaseUrl() {
-        val missingTokenRows = TmdbDevUiProcessor.devUiStatusRows(
-            false,
-            "https://example.test/3",
-            false,
-            false,
-            42
-        )
+        val missingTokenRows =
+            TmdbDevUiProcessor.devUiStatusRows(
+                false,
+                "https://example.test/3",
+                false,
+                false,
+                42,
+            )
 
-        val invalidBaseUrlRows = TmdbDevUiProcessor.devUiStatusRows(
-            true,
-            "not a uri",
-            false,
-            false,
-            42
-        )
+        val invalidBaseUrlRows =
+            TmdbDevUiProcessor.devUiStatusRows(
+                true,
+                "not a uri",
+                false,
+                false,
+                42,
+            )
 
         assertEquals("incomplete", missingTokenRows[0]["status"])
         assertEquals("incomplete", invalidBaseUrlRows[0]["status"])
@@ -106,27 +110,27 @@ class TmdbDevUiProcessorTest {
             rows.any { row ->
                 row["name"] == "TmdbClient" &&
                     row["type"] == "dev.reuss.tmdb.TmdbClient"
-            }
+            },
         )
 
         assertTrue(
             rows.any { row ->
                 row["name"] == "MovieService" &&
                     row["type"] == "dev.reuss.tmdb.domain.movie.MovieService"
-            }
+            },
         )
 
         assertTrue(
             rows.any { row ->
                 row["name"] == "TvSeriesService" &&
                     row["type"] == "dev.reuss.tmdb.domain.tv.series.TvSeriesService"
-            }
+            },
         )
 
         assertFalse(
             rows.any { row ->
                 row["name"] == "TmdbMetricsRecorder"
-            }
+            },
         )
 
         assertEquals(22, rows.size)

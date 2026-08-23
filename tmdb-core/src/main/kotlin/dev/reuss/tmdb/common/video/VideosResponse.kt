@@ -7,18 +7,11 @@ package dev.reuss.tmdb.common.video
  */
 
 interface VideosResponse<T> {
-
     val results: List<T>
 
-    fun isEmpty(): Boolean {
-        return results.isEmpty()
-    }
+    fun isEmpty(): Boolean = results.isEmpty()
 
-    fun hasVideos(): Boolean {
-        return !isEmpty()
-    }
+    fun hasVideos(): Boolean = !isEmpty()
 
-    fun videoCount(): Int {
-        return results.size
-    }
+    fun videoCount(): Int = results.size
 }

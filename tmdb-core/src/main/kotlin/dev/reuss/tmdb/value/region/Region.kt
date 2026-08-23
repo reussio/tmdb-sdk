@@ -1,7 +1,7 @@
 package dev.reuss.tmdb.value.region
 
 import dev.reuss.tmdb.common.TmdbModel
-import java.util.*
+import java.util.Locale
 
 /**
  * Represents a TMDB region parameter.
@@ -21,13 +21,13 @@ import java.util.*
  * @see Regions
  */
 class Region private constructor(
-    val value: String
+    val value: String,
 ) : TmdbModel {
-
     override fun toString(): String = value
 
     override fun equals(other: Any?): Boolean =
-        this === other || other is Region && value == other.value
+        this === other ||
+            (other is Region && value == other.value)
 
     override fun hashCode(): Int = value.hashCode()
 

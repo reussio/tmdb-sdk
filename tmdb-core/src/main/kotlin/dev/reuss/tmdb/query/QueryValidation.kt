@@ -4,14 +4,13 @@ package dev.reuss.tmdb.query
  * Validation helpers for TMDB query objects.
  */
 object QueryValidation {
-
     /**
      * Requires a non-blank string value and returns it trimmed.
      */
     @JvmStatic
     fun requireNotBlank(
         value: String?,
-        fieldName: String
+        fieldName: String,
     ): String {
         require(!value.isNullOrBlank()) {
             "$fieldName must not be blank"
@@ -36,7 +35,7 @@ object QueryValidation {
     @JvmStatic
     fun validateYear(
         year: Int?,
-        fieldName: String
+        fieldName: String,
     ) {
         require(year == null || year in 1000..9999) {
             "$fieldName must be between 1000 and 9999"
@@ -49,16 +48,17 @@ object QueryValidation {
     @JvmStatic
     fun validateYear(
         year: String?,
-        fieldName: String
+        fieldName: String,
     ) {
         if (year.isNullOrBlank()) {
             return
         }
 
-        val parsedYear = year.toIntOrNull()
-            ?: throw IllegalArgumentException(
-                "$fieldName must be a four-digit year"
-            )
+        val parsedYear =
+            year.toIntOrNull()
+                ?: throw IllegalArgumentException(
+                    "$fieldName must be a four-digit year",
+                )
 
         validateYear(parsedYear, fieldName)
     }

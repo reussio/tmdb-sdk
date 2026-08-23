@@ -11,27 +11,19 @@ package dev.reuss.tmdb.common.image
 data class CollectionImages(
     val id: Int,
     val backdrops: List<TmdbImage> = emptyList(),
-    val posters: List<TmdbImage> = emptyList()
+    val posters: List<TmdbImage> = emptyList(),
 ) {
+    fun isEmpty(): Boolean = backdrops.isEmpty() && posters.isEmpty()
 
-    fun isEmpty(): Boolean =
-        backdrops.isEmpty() && posters.isEmpty()
+    fun hasImages(): Boolean = !isEmpty()
 
-    fun hasImages(): Boolean =
-        !isEmpty()
+    fun hasBackdrops(): Boolean = backdrops.isNotEmpty()
 
-    fun hasBackdrops(): Boolean =
-        backdrops.isNotEmpty()
+    fun hasPosters(): Boolean = posters.isNotEmpty()
 
-    fun hasPosters(): Boolean =
-        posters.isNotEmpty()
+    fun backdropCount(): Int = backdrops.size
 
-    fun backdropCount(): Int =
-        backdrops.size
+    fun posterCount(): Int = posters.size
 
-    fun posterCount(): Int =
-        posters.size
-
-    fun imageCount(): Int =
-        backdrops.size + posters.size
+    fun imageCount(): Int = backdrops.size + posters.size
 }

@@ -19,25 +19,18 @@ import dev.reuss.tmdb.common.TmdbModel
 data class PopularPerson(
     @all:JsonProperty("adult")
     val adult: Boolean,
-
     @all:JsonProperty("gender")
     val gender: Int,
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("known_for")
     val knownFor: List<PopularPersonKnownFor> = emptyList(),
-
     @all:JsonProperty("known_for_department")
     val knownForDepartment: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("popularity")
     val popularity: Double,
-
     @all:JsonProperty("profile_path")
-    val profilePath: String?
+    val profilePath: String?,
 ) : TmdbModel

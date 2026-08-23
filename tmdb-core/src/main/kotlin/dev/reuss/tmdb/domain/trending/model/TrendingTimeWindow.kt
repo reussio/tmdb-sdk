@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 enum class TrendingTimeWindow(
     @all:JsonProperty("value")
-    val value: String
+    val value: String,
 ) {
     DAY("day"),
-    WEEK("week")
+    WEEK("week"),
 }

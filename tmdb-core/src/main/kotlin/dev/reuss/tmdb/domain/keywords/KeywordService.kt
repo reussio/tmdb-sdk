@@ -8,6 +8,5 @@ import dev.reuss.tmdb.value.id.KeywordId
  */
 
 interface KeywordService {
-
     fun details(keywordId: KeywordId): Keyword
 }

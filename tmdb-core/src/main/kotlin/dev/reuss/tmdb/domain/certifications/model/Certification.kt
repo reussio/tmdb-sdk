@@ -14,10 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 data class Certification(
     @all:JsonProperty("certification")
     val certification: String?,
-
     @all:JsonProperty("meaning")
     val meaning: String?,
-
     @all:JsonProperty("order")
-    val order: Int
+    val order: Int,
 ) : TmdbModel

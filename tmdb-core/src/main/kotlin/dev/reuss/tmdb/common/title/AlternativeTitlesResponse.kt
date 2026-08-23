@@ -5,18 +5,11 @@ package dev.reuss.tmdb.common.title
  */
 
 interface AlternativeTitlesResponse {
-
     val alternativeTitles: List<AlternativeTitle>
 
-    fun isEmpty(): Boolean {
-        return alternativeTitles.isEmpty()
-    }
+    fun isEmpty(): Boolean = alternativeTitles.isEmpty()
 
-    fun hasAlternativeTitles(): Boolean {
-        return !isEmpty()
-    }
+    fun hasAlternativeTitles(): Boolean = !isEmpty()
 
-    fun alternativeTitleCount(): Int {
-        return alternativeTitles.size
-    }
+    fun alternativeTitleCount(): Int = alternativeTitles.size
 }

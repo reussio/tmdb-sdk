@@ -5,18 +5,11 @@ package dev.reuss.tmdb.common.keyword
  */
 
 interface KeywordsResponse {
-
     val keywords: List<Keyword>
 
-    fun isEmpty(): Boolean {
-        return keywords.isEmpty()
-    }
+    fun isEmpty(): Boolean = keywords.isEmpty()
 
-    fun hasKeywords(): Boolean {
-        return !isEmpty()
-    }
+    fun hasKeywords(): Boolean = !isEmpty()
 
-    fun keywordCount(): Int {
-        return keywords.size
-    }
+    fun keywordCount(): Int = keywords.size
 }

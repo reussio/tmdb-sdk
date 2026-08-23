@@ -4,25 +4,27 @@ import dev.reuss.tmdb.core.auth.TmdbAuth
 import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder
 import dev.reuss.tmdb.value.language.Languages
 import dev.reuss.tmdb.value.region.Regions
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertInstanceOf
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import java.lang.reflect.InvocationTargetException
 import java.time.Duration
 
 class TmdbClientConfigTest {
-
     @Test
     fun createsConfig() {
-        val config = TmdbClientConfig(
-            TmdbAuth.bearerToken("token"),
-            "https://api.themoviedb.org/3",
-            Languages.DE_DE,
-            Regions.DE,
-            Duration.ofSeconds(5),
-            Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP
-        )
+        val config =
+            TmdbClientConfig(
+                TmdbAuth.bearerToken("token"),
+                "https://api.themoviedb.org/3",
+                Languages.DE_DE,
+                Regions.DE,
+                Duration.ofSeconds(5),
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP,
+            )
 
         assertEquals("https://api.themoviedb.org/3", config.baseUrl)
         assertEquals(Languages.DE_DE, config.defaultLanguage)
@@ -33,15 +35,16 @@ class TmdbClientConfigTest {
 
     @Test
     fun allowsNullDefaultRegion() {
-        val config = TmdbClientConfig(
-            TmdbAuth.bearerToken("token"),
-            "https://api.themoviedb.org/3",
-            Languages.EN_US,
-            null,
-            Duration.ofSeconds(5),
-            Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP
-        )
+        val config =
+            TmdbClientConfig(
+                TmdbAuth.bearerToken("token"),
+                "https://api.themoviedb.org/3",
+                Languages.EN_US,
+                null,
+                Duration.ofSeconds(5),
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP,
+            )
 
         assertNull(config.defaultRegion)
     }
@@ -55,7 +58,7 @@ class TmdbClientConfigTest {
             Regions.US,
             Duration.ofSeconds(5),
             Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP
+            TmdbMetricsRecorder.NOOP,
         )
     }
 
@@ -69,7 +72,7 @@ class TmdbClientConfigTest {
                 Regions.US,
                 Duration.ofSeconds(5),
                 Duration.ofSeconds(10),
-                TmdbMetricsRecorder.NOOP
+                TmdbMetricsRecorder.NOOP,
             )
         }
 
@@ -81,22 +84,23 @@ class TmdbClientConfigTest {
                 Regions.US,
                 Duration.ofSeconds(5),
                 Duration.ofSeconds(10),
-                TmdbMetricsRecorder.NOOP
+                TmdbMetricsRecorder.NOOP,
             )
         }
     }
 
     @Test
     fun trimsBaseUrl() {
-        val config = TmdbClientConfig(
-            TmdbAuth.bearerToken("token"),
-            "  https://api.themoviedb.org/3  ",
-            Languages.EN_US,
-            Regions.US,
-            Duration.ofSeconds(5),
-            Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP
-        )
+        val config =
+            TmdbClientConfig(
+                TmdbAuth.bearerToken("token"),
+                "  https://api.themoviedb.org/3  ",
+                Languages.EN_US,
+                Regions.US,
+                Duration.ofSeconds(5),
+                Duration.ofSeconds(10),
+                TmdbMetricsRecorder.NOOP,
+            )
 
         assertEquals("https://api.themoviedb.org/3", config.baseUrl)
     }
@@ -110,7 +114,7 @@ class TmdbClientConfigTest {
             Regions.US,
             Duration.ofSeconds(5),
             Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP
+            TmdbMetricsRecorder.NOOP,
         )
     }
 
@@ -123,7 +127,7 @@ class TmdbClientConfigTest {
             Regions.US,
             null,
             Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP
+            TmdbMetricsRecorder.NOOP,
         )
 
         assertConstructorRejectsNull(
@@ -133,21 +137,23 @@ class TmdbClientConfigTest {
             Regions.US,
             Duration.ofSeconds(5),
             null,
-            TmdbMetricsRecorder.NOOP
+            TmdbMetricsRecorder.NOOP,
         )
     }
 
     private fun assertConstructorRejectsNull(vararg arguments: Any?) {
-        val constructor = TmdbClientConfig::class.java.declaredConstructors
-            .first { it.parameterCount == 7 && !it.isSynthetic }
+        val constructor =
+            TmdbClientConfig::class.java.declaredConstructors
+                .first { it.parameterCount == 7 && !it.isSynthetic }
 
-        val exception = assertThrows<InvocationTargetException> {
-            constructor.newInstance(*arguments)
-        }
+        val exception =
+            assertThrows<InvocationTargetException> {
+                constructor.newInstance(*arguments)
+            }
 
         assertInstanceOf(
             NullPointerException::class.java,
-            exception.cause
+            exception.cause,
         )
     }
 }

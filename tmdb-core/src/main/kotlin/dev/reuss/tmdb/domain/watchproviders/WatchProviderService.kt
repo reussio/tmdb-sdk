@@ -9,7 +9,6 @@ import dev.reuss.tmdb.value.region.Region
  * Service for loading TMDB watch provider metadata.
  */
 interface WatchProviderService {
-
     /**
      * Loads all available watch provider regions.
      *
@@ -57,7 +56,7 @@ interface WatchProviderService {
      */
     fun movies(
         watchRegion: Region,
-        language: Language
+        language: Language,
     ): WatchProviders
 
     /**
@@ -92,6 +91,6 @@ interface WatchProviderService {
      */
     fun tv(
         watchRegion: Region,
-        language: Language
+        language: Language,
     ): WatchProviders
 }

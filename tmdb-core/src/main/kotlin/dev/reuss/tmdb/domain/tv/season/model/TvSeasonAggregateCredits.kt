@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.tv.season.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -15,10 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeasonAggregateCredits(
     @all:JsonProperty("cast")
     val cast: List<TvSeasonAggregateCastCredit> = emptyList(),
-
     @all:JsonProperty("crew")
     val crew: List<TvSeasonAggregateCrewCredit> = emptyList(),
-
     @all:JsonProperty("id")
-    val id: Int
+    val id: Int,
 ) : TmdbModel

@@ -14,10 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesAggregateCrewJob(
     @all:JsonProperty("credit_id")
     val creditId: String?,
-
     @all:JsonProperty("job")
     val job: String?,
-
     @all:JsonProperty("episode_count")
-    val episodeCount: Int
+    val episodeCount: Int,
 ) : TmdbModel

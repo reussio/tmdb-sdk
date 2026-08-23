@@ -2,8 +2,29 @@ package dev.reuss.tmdb.domain.movie
 
 import dev.reuss.tmdb.common.external.ExternalIds
 import dev.reuss.tmdb.common.image.MovieImages
-import dev.reuss.tmdb.domain.movie.model.*
-import dev.reuss.tmdb.domain.movie.query.*
+import dev.reuss.tmdb.domain.movie.model.MovieAlternativeTitles
+import dev.reuss.tmdb.domain.movie.model.MovieChanges
+import dev.reuss.tmdb.domain.movie.model.MovieCredits
+import dev.reuss.tmdb.domain.movie.model.MovieDetails
+import dev.reuss.tmdb.domain.movie.model.MovieKeywords
+import dev.reuss.tmdb.domain.movie.model.MovieNowPlayingResponse
+import dev.reuss.tmdb.domain.movie.model.MoviePopularResponse
+import dev.reuss.tmdb.domain.movie.model.MovieRecommendations
+import dev.reuss.tmdb.domain.movie.model.MovieReleaseDates
+import dev.reuss.tmdb.domain.movie.model.MovieReviews
+import dev.reuss.tmdb.domain.movie.model.MovieTopRatedResponse
+import dev.reuss.tmdb.domain.movie.model.MovieTranslations
+import dev.reuss.tmdb.domain.movie.model.MovieUpcomingResponse
+import dev.reuss.tmdb.domain.movie.model.MovieVideos
+import dev.reuss.tmdb.domain.movie.model.MovieWatchProviders
+import dev.reuss.tmdb.domain.movie.model.SimilarMovies
+import dev.reuss.tmdb.domain.movie.query.MovieNowPlayingQuery
+import dev.reuss.tmdb.domain.movie.query.MoviePopularQuery
+import dev.reuss.tmdb.domain.movie.query.MovieRecommendationsQuery
+import dev.reuss.tmdb.domain.movie.query.MovieReviewsQuery
+import dev.reuss.tmdb.domain.movie.query.MovieSimilarQuery
+import dev.reuss.tmdb.domain.movie.query.MovieTopRatedQuery
+import dev.reuss.tmdb.domain.movie.query.MovieUpcomingQuery
 import dev.reuss.tmdb.query.AppendToResponse
 import dev.reuss.tmdb.query.ChangesQuery
 import dev.reuss.tmdb.query.ImageQuery
@@ -15,7 +36,6 @@ import dev.reuss.tmdb.value.region.Region
  * Service for TMDB movie endpoints.
  */
 interface MovieService {
-
     /**
      * Loads the details for a movie.
      *
@@ -33,7 +53,7 @@ interface MovieService {
      */
     fun details(
         movieId: MovieId,
-        language: Language
+        language: Language,
     ): MovieDetails
 
     /**
@@ -45,7 +65,7 @@ interface MovieService {
      */
     fun details(
         movieId: MovieId,
-        appendToResponse: AppendToResponse<MovieAppend>
+        appendToResponse: AppendToResponse<MovieAppend>,
     ): MovieDetails
 
     /**
@@ -59,7 +79,7 @@ interface MovieService {
     fun details(
         movieId: MovieId,
         language: Language,
-        appendToResponse: AppendToResponse<MovieAppend>
+        appendToResponse: AppendToResponse<MovieAppend>,
     ): MovieDetails
 
     /**
@@ -79,7 +99,7 @@ interface MovieService {
      */
     fun alternativeTitles(
         movieId: MovieId,
-        country: Region
+        country: Region,
     ): MovieAlternativeTitles
 
     /**
@@ -99,7 +119,7 @@ interface MovieService {
      */
     fun changes(
         movieId: MovieId,
-        query: ChangesQuery
+        query: ChangesQuery,
     ): MovieChanges
 
     /**
@@ -119,7 +139,7 @@ interface MovieService {
      */
     fun credits(
         movieId: MovieId,
-        language: Language
+        language: Language,
     ): MovieCredits
 
     /**
@@ -254,7 +274,7 @@ interface MovieService {
      */
     fun recommendations(
         movieId: MovieId,
-        language: Language
+        language: Language,
     ): MovieRecommendations
 
     /**
@@ -266,7 +286,7 @@ interface MovieService {
      */
     fun recommendations(
         movieId: MovieId,
-        page: Int
+        page: Int,
     ): MovieRecommendations
 
     /**
@@ -278,7 +298,7 @@ interface MovieService {
      */
     fun recommendations(
         movieId: MovieId,
-        query: MovieRecommendationsQuery
+        query: MovieRecommendationsQuery,
     ): MovieRecommendations
 
     /**
@@ -306,7 +326,7 @@ interface MovieService {
      */
     fun reviews(
         movieId: MovieId,
-        language: Language
+        language: Language,
     ): MovieReviews
 
     /**
@@ -318,7 +338,7 @@ interface MovieService {
      */
     fun reviews(
         movieId: MovieId,
-        page: Int
+        page: Int,
     ): MovieReviews
 
     /**
@@ -330,7 +350,7 @@ interface MovieService {
      */
     fun reviews(
         movieId: MovieId,
-        query: MovieReviewsQuery
+        query: MovieReviewsQuery,
     ): MovieReviews
 
     /**
@@ -350,7 +370,7 @@ interface MovieService {
      */
     fun similar(
         movieId: MovieId,
-        language: Language
+        language: Language,
     ): SimilarMovies
 
     /**
@@ -362,7 +382,7 @@ interface MovieService {
      */
     fun similar(
         movieId: MovieId,
-        page: Int
+        page: Int,
     ): SimilarMovies
 
     /**
@@ -374,7 +394,7 @@ interface MovieService {
      */
     fun similar(
         movieId: MovieId,
-        query: MovieSimilarQuery
+        query: MovieSimilarQuery,
     ): SimilarMovies
 
     /**
@@ -402,7 +422,7 @@ interface MovieService {
      */
     fun videos(
         movieId: MovieId,
-        language: Language
+        language: Language,
     ): MovieVideos
 
     /**
@@ -430,6 +450,6 @@ interface MovieService {
      */
     fun images(
         movieId: MovieId,
-        query: ImageQuery
+        query: ImageQuery,
     ): MovieImages
 }

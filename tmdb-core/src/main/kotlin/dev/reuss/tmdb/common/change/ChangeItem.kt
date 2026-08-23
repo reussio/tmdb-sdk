@@ -18,22 +18,16 @@ import dev.reuss.tmdb.common.TmdbModel
 data class ChangeItem(
     @all:JsonProperty("id")
     val id: String?,
-
     @all:JsonProperty("action")
     val action: String?,
-
     @all:JsonProperty("time")
     val time: String?,
-
     @all:JsonProperty("iso_639_1")
     val iso6391: String?,
-
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("value")
     val value: Any?,
-
     @all:JsonProperty("original_value")
-    val originalValue: Any?
+    val originalValue: Any?,
 ) : TmdbModel

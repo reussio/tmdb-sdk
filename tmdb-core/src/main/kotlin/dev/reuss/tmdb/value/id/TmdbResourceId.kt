@@ -10,7 +10,6 @@ import java.io.Serializable
  * the id as a request path segment.
  */
 interface TmdbResourceId : Serializable {
-
     /**
      * Returns the raw TMDB resource id as it should appear in request paths.
      */

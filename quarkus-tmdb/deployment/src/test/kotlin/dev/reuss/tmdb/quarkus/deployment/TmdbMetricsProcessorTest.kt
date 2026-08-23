@@ -7,26 +7,27 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class TmdbMetricsProcessorTest {
-
     @Test
     fun shouldRegisterMetricsWhenMetricsCapabilityIsAvailable() {
-        val capabilities = Capabilities(
-            setOf(Capability.METRICS)
-        )
+        val capabilities =
+            Capabilities(
+                setOf(Capability.METRICS),
+            )
 
         assertTrue(
-            TmdbMetricsProcessor.shouldRegisterMetrics(capabilities)
+            TmdbMetricsProcessor.shouldRegisterMetrics(capabilities),
         )
     }
 
     @Test
     fun shouldSkipMetricsWhenMetricsCapabilityIsMissing() {
-        val capabilities = Capabilities(
-            emptySet()
-        )
+        val capabilities =
+            Capabilities(
+                emptySet(),
+            )
 
         assertFalse(
-            TmdbMetricsProcessor.shouldRegisterMetrics(capabilities)
+            TmdbMetricsProcessor.shouldRegisterMetrics(capabilities),
         )
     }
 }

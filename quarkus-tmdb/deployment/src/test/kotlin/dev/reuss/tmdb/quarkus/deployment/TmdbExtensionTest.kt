@@ -34,7 +34,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
 
 class TmdbExtensionTest {
-
     @Inject
     lateinit var client: TmdbClient
 
@@ -157,30 +156,28 @@ class TmdbExtensionTest {
     }
 
     companion object {
-
         @JvmField
         @RegisterExtension
-        val app = QuarkusExtensionTest()
-            .withApplicationRoot { jar ->
-                jar
-                    .addClasses(
-                        TmdbProducer::class.java,
-                        TmdbConfig::class.java
-                    )
-                    .addAsManifestResource(
-                        EmptyAsset.INSTANCE,
-                        "beans.xml"
-                    )
-                    .addAsResource(
-                        StringAsset(
-                            """
-                            tmdb.access-token=test-token
-                            tmdb.default-language=de-DE
-                            tmdb.default-region=DE
-                            """.trimIndent()
-                        ),
-                        "application.properties"
-                    )
-            }
+        val app =
+            QuarkusExtensionTest()
+                .withApplicationRoot { jar ->
+                    jar
+                        .addClasses(
+                            TmdbProducer::class.java,
+                            TmdbConfig::class.java,
+                        ).addAsManifestResource(
+                            EmptyAsset.INSTANCE,
+                            "beans.xml",
+                        ).addAsResource(
+                            StringAsset(
+                                """
+                                tmdb.access-token=test-token
+                                tmdb.default-language=de-DE
+                                tmdb.default-region=DE
+                                """.trimIndent(),
+                            ),
+                            "application.properties",
+                        )
+                }
     }
 }

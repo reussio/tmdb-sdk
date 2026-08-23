@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class NetworkIdTest {
-
     @Test
     fun createsNetworkId() {
         val id = NetworkId.of(49)
@@ -17,18 +16,20 @@ class NetworkIdTest {
 
     @Test
     fun rejectsZero() {
-        val exception = assertThrows<IllegalArgumentException> {
-            NetworkId.of(0)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                NetworkId.of(0)
+            }
 
         assertEquals("Network id must be greater than 0", exception.message)
     }
 
     @Test
     fun rejectsNegativeValue() {
-        val exception = assertThrows<IllegalArgumentException> {
-            NetworkId.of(-1)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                NetworkId.of(-1)
+            }
 
         assertEquals("Network id must be greater than 0", exception.message)
     }

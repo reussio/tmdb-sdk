@@ -7,11 +7,11 @@ import org.springframework.boot.autoconfigure.AutoConfigurations
 import org.springframework.boot.test.context.runner.ApplicationContextRunner
 
 class TmdbClientAutoConfigurationTest {
-
-    private val contextRunner = ApplicationContextRunner()
-        .withConfiguration(
-            AutoConfigurations.of(TmdbClientAutoConfiguration::class.java)
-        )
+    private val contextRunner =
+        ApplicationContextRunner()
+            .withConfiguration(
+                AutoConfigurations.of(TmdbClientAutoConfiguration::class.java),
+            )
 
     @Test
     fun createsTmdbClientWhenAccessTokenIsConfigured() {
@@ -25,22 +25,23 @@ class TmdbClientAutoConfigurationTest {
 
     @Test
     fun doesNotCreateTmdbClientWhenCustomBeanExists() {
-        val customClient = TmdbClient.builder()
-            .accessToken("custom-token")
-            .build()
+        val customClient =
+            TmdbClient
+                .builder()
+                .accessToken("custom-token")
+                .build()
 
         contextRunner
             .withBean(
                 TmdbClient::class.java,
-                { customClient }
-            )
-            .withPropertyValues("tmdb.access-token=test-token")
+                { customClient },
+            ).withPropertyValues("tmdb.access-token=test-token")
             .run { context ->
                 assertThat(context)
                     .hasSingleBean(TmdbClient::class.java)
 
                 assertThat(
-                    context.getBean(TmdbClient::class.java)
+                    context.getBean(TmdbClient::class.java),
                 ).isSameAs(customClient)
             }
     }
@@ -60,9 +61,8 @@ class TmdbClientAutoConfigurationTest {
                 "tmdb.default-language=de-DE",
                 "tmdb.default-region=DE",
                 "tmdb.connect-timeout=2s",
-                "tmdb.request-timeout=5s"
-            )
-            .run { context ->
+                "tmdb.request-timeout=5s",
+            ).run { context ->
                 assertThat(context)
                     .hasSingleBean(TmdbClient::class.java)
 

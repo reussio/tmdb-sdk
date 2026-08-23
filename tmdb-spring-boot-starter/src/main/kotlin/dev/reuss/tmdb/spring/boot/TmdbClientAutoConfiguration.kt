@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.spring.boot
 
 import dev.reuss.tmdb.TmdbClient
-import dev.reuss.tmdb.TmdbClientBuilder
 import dev.reuss.tmdb.core.config.TmdbClientConfig
 import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder
 import dev.reuss.tmdb.value.language.Language
@@ -19,16 +18,16 @@ import org.springframework.context.annotation.Bean
 @ConditionalOnClass(TmdbClient::class)
 @EnableConfigurationProperties(TmdbProperties::class)
 class TmdbClientAutoConfiguration {
-
     @Bean
     @ConditionalOnMissingBean
     fun tmdbClient(
         properties: TmdbProperties,
-        metricsRecorder: ObjectProvider<TmdbMetricsRecorder>
+        metricsRecorder: ObjectProvider<TmdbMetricsRecorder>,
     ): TmdbClient {
-        val baseUrl = properties.baseUrl
-            ?.takeUnless { it.isBlank() }
-            ?: TmdbClientConfig.DEFAULT_BASE_URL
+        val baseUrl =
+            properties.baseUrl
+                ?.takeUnless { it.isBlank() }
+                ?: TmdbClientConfig.DEFAULT_BASE_URL
 
         val defaultLanguage = languageOrDefault(properties.defaultLanguage)
 
@@ -40,16 +39,19 @@ class TmdbClientAutoConfiguration {
             properties.requestTimeout
                 ?: TmdbClientConfig.DEFAULT_REQUEST_TIMEOUT_DURATION
 
-        val defaultRegion = properties.defaultRegion
-            ?.takeUnless { it.isBlank() }
-            ?.let { Region.of(it) }
+        val defaultRegion =
+            properties.defaultRegion
+                ?.takeUnless { it.isBlank() }
+                ?.let { Region.of(it) }
 
-        val builder = TmdbClient.builder()
-            .accessToken(requireAccessToken(properties.accessToken))
-            .baseUrl(baseUrl)
-            .defaultLanguage(defaultLanguage)
-            .connectTimeout(connectTimeout)
-            .requestTimeout(requestTimeout)
+        val builder =
+            TmdbClient
+                .builder()
+                .accessToken(requireAccessToken(properties.accessToken))
+                .baseUrl(baseUrl)
+                .defaultLanguage(defaultLanguage)
+                .connectTimeout(connectTimeout)
+                .requestTimeout(requestTimeout)
 
         defaultRegion?.let(builder::defaultRegion)
         metricsRecorder.ifAvailable(builder::metricsRecorder)
@@ -62,7 +64,7 @@ class TmdbClientAutoConfiguration {
             defaultLanguage,
             defaultRegion ?: "none",
             connectTimeout.seconds,
-            requestTimeout.seconds
+            requestTimeout.seconds,
         )
 
         return client
@@ -79,7 +81,7 @@ class TmdbClientAutoConfiguration {
             throw IllegalArgumentException(
                 "Invalid value for property 'tmdb.default-language': '$value'. " +
                     "Expected a TMDB language tag such as 'en-US' or 'de-DE'.",
-                exception
+                exception,
             )
         }
     }

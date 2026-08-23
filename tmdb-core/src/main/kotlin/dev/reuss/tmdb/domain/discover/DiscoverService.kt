@@ -9,7 +9,6 @@ import dev.reuss.tmdb.domain.discover.query.TvDiscoverQuery
  * Service for discovering TMDB media using filters and sort options.
  */
 interface DiscoverService {
-
     fun movies(): DiscoverMovieResponse
 
     fun movies(query: MovieDiscoverQuery): DiscoverMovieResponse

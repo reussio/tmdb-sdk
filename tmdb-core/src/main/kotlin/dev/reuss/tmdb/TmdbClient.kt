@@ -45,7 +45,6 @@ import dev.reuss.tmdb.domain.watchproviders.WatchProviderService
  * @see TmdbClientBuilder
  */
 interface TmdbClient {
-
     /**
      * Returns the service for TMDB API configuration metadata.
      */
@@ -152,12 +151,10 @@ interface TmdbClient {
     fun collections(): CollectionService
 
     companion object {
-
         /**
          * Creates a new TMDB client builder.
          */
         @JvmStatic
         fun builder(): TmdbClientBuilder = TmdbClientBuilder()
     }
-
 }

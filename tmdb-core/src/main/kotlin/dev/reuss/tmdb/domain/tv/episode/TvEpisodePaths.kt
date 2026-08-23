@@ -5,28 +5,10 @@ import dev.reuss.tmdb.value.id.TvEpisodeId
 import dev.reuss.tmdb.value.id.TvShowId
 
 internal object TvEpisodePaths {
-
     fun details(
         tvShowId: TvShowId,
         seasonNumber: Int,
-        episodeNumber: Int
-    ): String =
-        tmdbPath(
-            "tv",
-            tvShowId,
-            "season",
-            seasonNumber,
-            "episode",
-            episodeNumber
-        )
-
-    fun changes(episodeId: TvEpisodeId): String =
-        tmdbPath("tv", "episode", episodeId, "changes")
-
-    fun credits(
-        tvShowId: TvShowId,
-        seasonNumber: Int,
-        episodeNumber: Int
+        episodeNumber: Int,
     ): String =
         tmdbPath(
             "tv",
@@ -35,13 +17,29 @@ internal object TvEpisodePaths {
             seasonNumber,
             "episode",
             episodeNumber,
-            "credits"
+        )
+
+    fun changes(episodeId: TvEpisodeId): String = tmdbPath("tv", "episode", episodeId, "changes")
+
+    fun credits(
+        tvShowId: TvShowId,
+        seasonNumber: Int,
+        episodeNumber: Int,
+    ): String =
+        tmdbPath(
+            "tv",
+            tvShowId,
+            "season",
+            seasonNumber,
+            "episode",
+            episodeNumber,
+            "credits",
         )
 
     fun externalIds(
         tvShowId: TvShowId,
         seasonNumber: Int,
-        episodeNumber: Int
+        episodeNumber: Int,
     ): String =
         tmdbPath(
             "tv",
@@ -50,13 +48,13 @@ internal object TvEpisodePaths {
             seasonNumber,
             "episode",
             episodeNumber,
-            "external_ids"
+            "external_ids",
         )
 
     fun images(
         tvShowId: TvShowId,
         seasonNumber: Int,
-        episodeNumber: Int
+        episodeNumber: Int,
     ): String =
         tmdbPath(
             "tv",
@@ -65,13 +63,13 @@ internal object TvEpisodePaths {
             seasonNumber,
             "episode",
             episodeNumber,
-            "images"
+            "images",
         )
 
     fun translations(
         tvShowId: TvShowId,
         seasonNumber: Int,
-        episodeNumber: Int
+        episodeNumber: Int,
     ): String =
         tmdbPath(
             "tv",
@@ -80,13 +78,13 @@ internal object TvEpisodePaths {
             seasonNumber,
             "episode",
             episodeNumber,
-            "translations"
+            "translations",
         )
 
     fun videos(
         tvShowId: TvShowId,
         seasonNumber: Int,
-        episodeNumber: Int
+        episodeNumber: Int,
     ): String =
         tmdbPath(
             "tv",
@@ -95,6 +93,6 @@ internal object TvEpisodePaths {
             seasonNumber,
             "episode",
             episodeNumber,
-            "videos"
+            "videos",
         )
 }

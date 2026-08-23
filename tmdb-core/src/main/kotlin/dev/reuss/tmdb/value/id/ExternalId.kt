@@ -7,9 +7,8 @@ package dev.reuss.tmdb.value.id
  * TVDB, Wikidata, Facebook, Instagram, TikTok, Twitter or YouTube.
  */
 class ExternalId private constructor(
-    value: String
+    value: String,
 ) : StringTmdbResourceId(value, "External id") {
-
     companion object {
         @JvmStatic
         fun of(value: String): ExternalId = ExternalId(value)

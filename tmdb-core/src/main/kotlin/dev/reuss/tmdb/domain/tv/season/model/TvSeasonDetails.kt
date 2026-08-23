@@ -30,52 +30,36 @@ import dev.reuss.tmdb.common.image.TvSeasonImages
 data class TvSeasonDetails(
     @all:JsonProperty("_id")
     val objectId: String?,
-
     @all:JsonProperty("air_date")
     val airDate: String?,
-
     @all:JsonProperty("episodes")
     val episodes: List<TvSeasonEpisode> = emptyList(),
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("overview")
     val overview: String?,
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("poster_path")
     val posterPath: String?,
-
     @all:JsonProperty("season_number")
     val seasonNumber: Int,
-
     @all:JsonProperty("vote_average")
     val voteAverage: Double,
-
     @all:JsonProperty("aggregate_credits")
     val aggregateCredits: TvSeasonAggregateCredits? = null,
-
     @all:JsonProperty("changes")
     val changes: TvSeasonChanges? = null,
-
     @all:JsonProperty("credits")
     val credits: TvSeasonCredits? = null,
-
     @all:JsonProperty("external_ids")
     val externalIds: ExternalIds? = null,
-
     @all:JsonProperty("images")
     val images: TvSeasonImages? = null,
-
     @all:JsonProperty("translations")
     val translations: TvSeasonTranslations? = null,
-
     @all:JsonProperty("videos")
     val videos: TvSeasonVideos? = null,
-
     @all:JsonProperty("watch/providers")
-    val watchProviders: TvSeasonWatchProviders? = null
+    val watchProviders: TvSeasonWatchProviders? = null,
 ) : TmdbModel

@@ -7,7 +7,5 @@ import java.util.function.Function
 
 @Recorder
 open class TmdbRecorder {
-
-    open fun createClient(): Function<SyntheticCreationalContext<TmdbClient>, TmdbClient> =
-        TmdbClientCreator()
+    open fun createClient(): Function<SyntheticCreationalContext<TmdbClient>, TmdbClient> = TmdbClientCreator()
 }

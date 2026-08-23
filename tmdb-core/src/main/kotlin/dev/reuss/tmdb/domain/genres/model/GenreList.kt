@@ -11,5 +11,5 @@ import dev.reuss.tmdb.common.genre.Genre
  */
 data class GenreList(
     @all:JsonProperty("genres")
-    val genres: List<Genre>?
+    val genres: List<Genre>?,
 ) : TmdbModel

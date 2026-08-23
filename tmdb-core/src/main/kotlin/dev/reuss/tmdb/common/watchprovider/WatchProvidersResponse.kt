@@ -1,7 +1,7 @@
 package dev.reuss.tmdb.common.watchprovider
 
 import dev.reuss.tmdb.value.region.Region
-import java.util.*
+import java.util.Optional
 
 /**
  * Common contract for TMDB responses that contain watch provider
@@ -11,24 +11,15 @@ import java.util.*
  */
 
 interface WatchProvidersResponse<T : Any> {
-
     val results: Map<String, T>
 
-    fun isEmpty(): Boolean {
-        return results.isEmpty()
-    }
+    fun isEmpty(): Boolean = results.isEmpty()
 
-    fun hasProviders(): Boolean {
-        return !isEmpty()
-    }
+    fun hasProviders(): Boolean = !isEmpty()
 
-    fun regionCount(): Int {
-        return results.size
-    }
+    fun regionCount(): Int = results.size
 
-    fun hasRegion(region: String?): Boolean {
-        return region != null && results.containsKey(region.uppercase())
-    }
+    fun hasRegion(region: String?): Boolean = region != null && results.containsKey(region.uppercase())
 
     fun region(region: String?): Optional<T> {
         if (region == null) {
@@ -38,7 +29,5 @@ interface WatchProvidersResponse<T : Any> {
         return Optional.ofNullable(results.get(region.uppercase()))
     }
 
-    fun region(region: Region?): Optional<T> {
-        return if (region == null) Optional.empty<T>() else region(region.toString())
-    }
+    fun region(region: Region?): Optional<T> = if (region == null) Optional.empty<T>() else region(region.toString())
 }

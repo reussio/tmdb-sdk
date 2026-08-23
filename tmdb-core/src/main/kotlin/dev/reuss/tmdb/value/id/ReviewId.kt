@@ -8,9 +8,8 @@ package dev.reuss.tmdb.value.id
  * @property value the raw TMDB review id
  */
 class ReviewId private constructor(
-    value: String
+    value: String,
 ) : StringTmdbResourceId(value, "Review id") {
-
     companion object {
         @JvmStatic
         fun of(value: String): ReviewId = ReviewId(value)

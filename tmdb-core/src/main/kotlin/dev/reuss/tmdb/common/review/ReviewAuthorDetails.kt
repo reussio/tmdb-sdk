@@ -15,13 +15,10 @@ import dev.reuss.tmdb.common.TmdbModel
 data class ReviewAuthorDetails(
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("username")
     val username: String?,
-
     @all:JsonProperty("avatar_path")
     val avatarPath: String?,
-
     @all:JsonProperty("rating")
-    val rating: Double?
+    val rating: Double?,
 ) : TmdbModel

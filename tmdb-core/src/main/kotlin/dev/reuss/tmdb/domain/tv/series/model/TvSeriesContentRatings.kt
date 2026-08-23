@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.tv.series.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -14,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesContentRatings(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("results")
-    val results: List<TvSeriesContentRating> = emptyList()
+    val results: List<TvSeriesContentRating> = emptyList(),
 ) : TmdbModel

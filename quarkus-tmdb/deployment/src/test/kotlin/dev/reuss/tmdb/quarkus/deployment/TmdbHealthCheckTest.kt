@@ -7,19 +7,18 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class TmdbHealthCheckTest {
-
     @Test
     fun shouldBeReadinessHealthCheck() {
         assertTrue(
             HealthCheck::class.java.isAssignableFrom(
-                TmdbHealthCheck::class.java
-            )
+                TmdbHealthCheck::class.java,
+            ),
         )
 
         assertTrue(
             TmdbHealthCheck::class.java.isAnnotationPresent(
-                Readiness::class.java
-            )
+                Readiness::class.java,
+            ),
         )
     }
 }

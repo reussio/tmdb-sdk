@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.networks.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 import dev.reuss.tmdb.common.name.AlternativeNamesResponse
 
@@ -15,7 +14,7 @@ import dev.reuss.tmdb.common.name.AlternativeNamesResponse
 data class NetworkAlternativeNames(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("results")
-    override val results: List<NetworkAlternativeName> = emptyList()
-) : AlternativeNamesResponse<NetworkAlternativeName>, TmdbModel
+    override val results: List<NetworkAlternativeName> = emptyList(),
+) : AlternativeNamesResponse<NetworkAlternativeName>,
+    TmdbModel

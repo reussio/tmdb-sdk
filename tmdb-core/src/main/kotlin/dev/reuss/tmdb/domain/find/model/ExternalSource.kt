@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
  */
 enum class ExternalSource(
     @all:JsonProperty("value")
-    val value: String
+    val value: String,
 ) {
     IMDB("imdb_id"),
     FACEBOOK("facebook_id"),
@@ -18,5 +18,5 @@ enum class ExternalSource(
     TIKTOK("tiktok_id"),
     TWITTER("twitter_id"),
     WIKIDATA("wikidata_id"),
-    YOUTUBE("youtube_id")
+    YOUTUBE("youtube_id"),
 }

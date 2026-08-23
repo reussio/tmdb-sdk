@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class MovieIdTest {
-
     @Test
     fun createsMovieId() {
         val id = MovieId.of(550)
@@ -16,18 +15,20 @@ class MovieIdTest {
 
     @Test
     fun rejectsZero() {
-        val exception = assertThrows<IllegalArgumentException> {
-            MovieId.of(0)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                MovieId.of(0)
+            }
 
         assertEquals("Movie id must be greater than 0", exception.message)
     }
 
     @Test
     fun rejectsNegativeValue() {
-        val exception = assertThrows<IllegalArgumentException> {
-            MovieId.of(-1)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                MovieId.of(-1)
+            }
 
         assertEquals("Movie id must be greater than 0", exception.message)
     }

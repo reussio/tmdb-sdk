@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.people.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -14,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class PersonTranslationData(
     @all:JsonProperty("biography")
     val biography: String?,
-
     @all:JsonProperty("name")
-    val name: String?
+    val name: String?,
 ) : TmdbModel

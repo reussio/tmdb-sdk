@@ -7,13 +7,18 @@ import dev.reuss.tmdb.domain.search.model.movie.SearchMovieResponse
 import dev.reuss.tmdb.domain.search.model.multi.SearchMultiResponse
 import dev.reuss.tmdb.domain.search.model.person.SearchPersonResponse
 import dev.reuss.tmdb.domain.search.model.tv.SearchTvShowResponse
-import dev.reuss.tmdb.domain.search.query.*
+import dev.reuss.tmdb.domain.search.query.SearchCollectionQuery
+import dev.reuss.tmdb.domain.search.query.SearchCompanyQuery
+import dev.reuss.tmdb.domain.search.query.SearchKeywordQuery
+import dev.reuss.tmdb.domain.search.query.SearchMovieQuery
+import dev.reuss.tmdb.domain.search.query.SearchMultiQuery
+import dev.reuss.tmdb.domain.search.query.SearchPersonQuery
+import dev.reuss.tmdb.domain.search.query.SearchTvQuery
 
 /**
  * Service for searching TMDB resources.
  */
 interface SearchService {
-
     /**
      * Searches for collections by their original, translated and alternative names.
      *

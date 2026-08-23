@@ -12,102 +12,108 @@ import dev.reuss.tmdb.value.region.Region
  * Default [WatchProviderService] implementation backed by the TMDB HTTP client.
  */
 internal class DefaultWatchProviderService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : WatchProviderService {
-
     override fun regions(): WatchProviderRegions =
         httpClient.get(
             TmdbRequest.get(WatchProviderPaths.availableRegions()),
-            WatchProviderRegions::class.java
+            WatchProviderRegions::class.java,
         )
 
     override fun regions(language: Language): WatchProviderRegions =
         httpClient.get(
             TmdbRequest.get(
                 WatchProviderPaths.availableRegions(),
-                QueryParams.create()
-                    .add("language", language.value)
+                QueryParams
+                    .create()
+                    .add("language", language.value),
             ),
-            WatchProviderRegions::class.java
+            WatchProviderRegions::class.java,
         )
 
     override fun movies(): WatchProviders =
         httpClient.get(
             TmdbRequest.get(WatchProviderPaths.movieProviders()),
-            WatchProviders::class.java
+            WatchProviders::class.java,
         )
 
     override fun movies(language: Language): WatchProviders =
         httpClient.get(
             TmdbRequest.get(
                 WatchProviderPaths.movieProviders(),
-                QueryParams.create()
-                    .add("language", language.value)
+                QueryParams
+                    .create()
+                    .add("language", language.value),
             ),
-            WatchProviders::class.java
+            WatchProviders::class.java,
         )
 
     override fun movies(watchRegion: Region): WatchProviders =
         httpClient.get(
             TmdbRequest.get(
                 WatchProviderPaths.movieProviders(),
-                QueryParams.create()
-                    .add("watch_region", watchRegion.value)
+                QueryParams
+                    .create()
+                    .add("watch_region", watchRegion.value),
             ),
-            WatchProviders::class.java
+            WatchProviders::class.java,
         )
 
     override fun movies(
         watchRegion: Region,
-        language: Language
+        language: Language,
     ): WatchProviders =
         httpClient.get(
             TmdbRequest.get(
                 WatchProviderPaths.movieProviders(),
-                QueryParams.create()
+                QueryParams
+                    .create()
                     .add("watch_region", watchRegion.value)
-                    .add("language", language.value)
+                    .add("language", language.value),
             ),
-            WatchProviders::class.java
+            WatchProviders::class.java,
         )
 
     override fun tv(): WatchProviders =
         httpClient.get(
             TmdbRequest.get(WatchProviderPaths.tvProviders()),
-            WatchProviders::class.java
+            WatchProviders::class.java,
         )
 
     override fun tv(language: Language): WatchProviders =
         httpClient.get(
             TmdbRequest.get(
                 WatchProviderPaths.tvProviders(),
-                QueryParams.create()
-                    .add("language", language.value)
+                QueryParams
+                    .create()
+                    .add("language", language.value),
             ),
-            WatchProviders::class.java
+            WatchProviders::class.java,
         )
 
     override fun tv(watchRegion: Region): WatchProviders =
         httpClient.get(
             TmdbRequest.get(
                 WatchProviderPaths.tvProviders(),
-                QueryParams.create()
-                    .add("watch_region", watchRegion.value)
+                QueryParams
+                    .create()
+                    .add("watch_region", watchRegion.value),
             ),
-            WatchProviders::class.java
+            WatchProviders::class.java,
         )
 
     override fun tv(
         watchRegion: Region,
-        language: Language
+        language: Language,
     ): WatchProviders =
         httpClient.get(
             TmdbRequest.get(
                 WatchProviderPaths.tvProviders(),
-                QueryParams.create()
+                QueryParams
+                    .create()
                     .add("watch_region", watchRegion.value)
-                    .add("language", language.value)
+                    .add("language", language.value),
             ),
-            WatchProviders::class.java
+            WatchProviders::class.java,
         )
 }

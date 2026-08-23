@@ -9,35 +9,40 @@ import org.junit.jupiter.api.assertThrows
 import java.time.Duration
 
 class TmdbClientBuilderTest {
-
     @Test
     fun buildsTmdbClientWithAccessToken() {
-        val client = TmdbClient.builder()
-            .accessToken("token")
-            .build()
+        val client =
+            TmdbClient
+                .builder()
+                .accessToken("token")
+                .build()
 
         assertNotNull(client)
     }
 
     @Test
     fun buildsTmdbClientWithAuth() {
-        val client = TmdbClient.builder()
-            .auth(TmdbAuth.bearerToken("token"))
-            .build()
+        val client =
+            TmdbClient
+                .builder()
+                .auth(TmdbAuth.bearerToken("token"))
+                .build()
 
         assertNotNull(client)
     }
 
     @Test
     fun buildsTmdbClientWithCustomDefaults() {
-        val client = TmdbClient.builder()
-            .accessToken("token")
-            .baseUrl("https://example.com/3")
-            .defaultLanguage(Languages.DE_DE)
-            .defaultRegion(Regions.DE)
-            .connectTimeout(Duration.ofSeconds(1))
-            .requestTimeout(Duration.ofSeconds(2))
-            .build()
+        val client =
+            TmdbClient
+                .builder()
+                .accessToken("token")
+                .baseUrl("https://example.com/3")
+                .defaultLanguage(Languages.DE_DE)
+                .defaultRegion(Regions.DE)
+                .connectTimeout(Duration.ofSeconds(1))
+                .requestTimeout(Duration.ofSeconds(2))
+                .build()
 
         assertNotNull(client)
     }

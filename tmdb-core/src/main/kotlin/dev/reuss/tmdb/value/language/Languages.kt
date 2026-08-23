@@ -20,7 +20,6 @@ import dev.reuss.tmdb.value.region.Regions
  * @see Region
  */
 object Languages {
-
     @JvmField
     val DE_DE = Language.of(LanguageCodes.DE, Regions.DE)
 
@@ -55,17 +54,18 @@ object Languages {
     val ZH_TW = Language.of(LanguageCodes.ZH, Regions.TW)
 
     @JvmField
-    val ALL: Set<Language> = setOf(
-        DE_DE,
-        EN_GB,
-        EN_US,
-        ES_ES,
-        FR_FR,
-        IT_IT,
-        JA_JP,
-        KO_KR,
-        PT_BR,
-        ZH_CN,
-        ZH_TW
-    )
+    val ALL: Set<Language> =
+        setOf(
+            DE_DE,
+            EN_GB,
+            EN_US,
+            ES_ES,
+            FR_FR,
+            IT_IT,
+            JA_JP,
+            KO_KR,
+            PT_BR,
+            ZH_CN,
+            ZH_TW,
+        )
 }

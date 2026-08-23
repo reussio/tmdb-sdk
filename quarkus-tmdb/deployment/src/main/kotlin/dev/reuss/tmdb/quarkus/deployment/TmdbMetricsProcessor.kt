@@ -11,28 +11,24 @@ import io.quarkus.deployment.annotations.BuildStep
  * Registers TMDB metrics support when Quarkus Metrics is present.
  */
 class TmdbMetricsProcessor {
-
     @BuildStep
     fun metricsBeans(
         capabilities: Capabilities,
-        additionalBeans: BuildProducer<AdditionalBeanBuildItem>
+        additionalBeans: BuildProducer<AdditionalBeanBuildItem>,
     ) {
         if (shouldRegisterMetrics(capabilities)) {
             additionalBeans.produce(
-                AdditionalBeanBuildItem.builder()
+                AdditionalBeanBuildItem
+                    .builder()
                     .addBeanClass(QuarkusTmdbMetricsRecorder::class.java)
                     .setUnremovable()
-                    .build()
+                    .build(),
             )
         }
     }
 
     companion object {
-
         @JvmStatic
-        fun shouldRegisterMetrics(
-            capabilities: Capabilities
-        ): Boolean =
-            capabilities.isPresent(Capability.METRICS)
+        fun shouldRegisterMetrics(capabilities: Capabilities): Boolean = capabilities.isPresent(Capability.METRICS)
     }
 }

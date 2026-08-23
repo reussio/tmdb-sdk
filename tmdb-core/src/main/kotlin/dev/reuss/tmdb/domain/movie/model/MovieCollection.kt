@@ -15,13 +15,10 @@ import dev.reuss.tmdb.common.TmdbModel
 data class MovieCollection(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("poster_path")
     val posterPath: String?,
-
     @all:JsonProperty("backdrop_path")
-    val backdropPath: String?
+    val backdropPath: String?,
 ) : TmdbModel

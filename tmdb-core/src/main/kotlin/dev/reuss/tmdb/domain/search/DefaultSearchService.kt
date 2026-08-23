@@ -9,96 +9,94 @@ import dev.reuss.tmdb.domain.search.model.movie.SearchMovieResponse
 import dev.reuss.tmdb.domain.search.model.multi.SearchMultiResponse
 import dev.reuss.tmdb.domain.search.model.person.SearchPersonResponse
 import dev.reuss.tmdb.domain.search.model.tv.SearchTvShowResponse
-import dev.reuss.tmdb.domain.search.query.*
+import dev.reuss.tmdb.domain.search.query.SearchCollectionQuery
+import dev.reuss.tmdb.domain.search.query.SearchCompanyQuery
+import dev.reuss.tmdb.domain.search.query.SearchKeywordQuery
+import dev.reuss.tmdb.domain.search.query.SearchMovieQuery
+import dev.reuss.tmdb.domain.search.query.SearchMultiQuery
+import dev.reuss.tmdb.domain.search.query.SearchPersonQuery
+import dev.reuss.tmdb.domain.search.query.SearchTvQuery
 
 /**
  * Default [SearchService] implementation backed by the TMDB HTTP client.
  */
 internal class DefaultSearchService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : SearchService {
-
-    override fun collections(query: String): SearchCollectionResponse =
-        collections(SearchCollectionQuery.of(query))
+    override fun collections(query: String): SearchCollectionResponse = collections(SearchCollectionQuery.of(query))
 
     override fun collections(query: SearchCollectionQuery): SearchCollectionResponse =
         httpClient.get(
             TmdbRequest.get(
                 SearchPaths.collections(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            SearchCollectionResponse::class.java
+            SearchCollectionResponse::class.java,
         )
 
-    override fun companies(query: String): SearchCompanyResponse =
-        companies(SearchCompanyQuery.of(query))
+    override fun companies(query: String): SearchCompanyResponse = companies(SearchCompanyQuery.of(query))
 
     override fun companies(query: SearchCompanyQuery): SearchCompanyResponse =
         httpClient.get(
             TmdbRequest.get(
                 SearchPaths.companies(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            SearchCompanyResponse::class.java
+            SearchCompanyResponse::class.java,
         )
 
-    override fun keywords(query: String): SearchKeywordResponse =
-        keywords(SearchKeywordQuery.of(query))
+    override fun keywords(query: String): SearchKeywordResponse = keywords(SearchKeywordQuery.of(query))
 
     override fun keywords(query: SearchKeywordQuery): SearchKeywordResponse =
         httpClient.get(
             TmdbRequest.get(
                 SearchPaths.keywords(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            SearchKeywordResponse::class.java
+            SearchKeywordResponse::class.java,
         )
 
-    override fun movies(query: String): SearchMovieResponse =
-        movies(SearchMovieQuery.of(query))
+    override fun movies(query: String): SearchMovieResponse = movies(SearchMovieQuery.of(query))
 
     override fun movies(query: SearchMovieQuery): SearchMovieResponse =
         httpClient.get(
             TmdbRequest.get(
                 SearchPaths.movies(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            SearchMovieResponse::class.java
+            SearchMovieResponse::class.java,
         )
 
-    override fun multi(query: String): SearchMultiResponse =
-        multi(SearchMultiQuery.of(query))
+    override fun multi(query: String): SearchMultiResponse = multi(SearchMultiQuery.of(query))
 
     override fun multi(query: SearchMultiQuery): SearchMultiResponse =
         httpClient.get(
             TmdbRequest.get(
                 SearchPaths.multi(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            SearchMultiResponse::class.java
+            SearchMultiResponse::class.java,
         )
 
-    override fun people(query: String): SearchPersonResponse =
-        people(SearchPersonQuery.of(query))
+    override fun people(query: String): SearchPersonResponse = people(SearchPersonQuery.of(query))
 
     override fun people(query: SearchPersonQuery): SearchPersonResponse =
         httpClient.get(
             TmdbRequest.get(
                 SearchPaths.people(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            SearchPersonResponse::class.java
+            SearchPersonResponse::class.java,
         )
 
-    override fun tv(query: String): SearchTvShowResponse =
-        tv(SearchTvQuery.of(query))
+    override fun tv(query: String): SearchTvShowResponse = tv(SearchTvQuery.of(query))
 
     override fun tv(query: SearchTvQuery): SearchTvShowResponse =
         httpClient.get(
             TmdbRequest.get(
                 SearchPaths.tvShows(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            SearchTvShowResponse::class.java
+            SearchTvShowResponse::class.java,
         )
 }

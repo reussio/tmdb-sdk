@@ -12,7 +12,6 @@ package dev.reuss.tmdb.core.http
  * returned by [toMap] is an immutable copy.
  */
 class QueryParams private constructor() {
-
     private val values = linkedMapOf<String, String>()
 
     /**
@@ -20,16 +19,17 @@ class QueryParams private constructor() {
      */
     fun add(
         name: String,
-        value: String?
-    ): QueryParams = apply {
-        require(name.isNotBlank()) {
-            "Query parameter name must not be blank"
-        }
+        value: String?,
+    ): QueryParams =
+        apply {
+            require(name.isNotBlank()) {
+                "Query parameter name must not be blank"
+            }
 
-        if (!value.isNullOrBlank()) {
-            values[name] = value
+            if (!value.isNullOrBlank()) {
+                values[name] = value
+            }
         }
-    }
 
     /**
      * Adds a query parameter if the given value is not `null`.
@@ -38,7 +38,7 @@ class QueryParams private constructor() {
      */
     fun add(
         name: String,
-        value: Any?
+        value: Any?,
     ): QueryParams {
         if (value == null) {
             return this
@@ -53,7 +53,6 @@ class QueryParams private constructor() {
     fun toMap(): Map<String, String> = values.toMap()
 
     companion object {
-
         /**
          * Creates an empty query parameter builder.
          */

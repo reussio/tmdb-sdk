@@ -24,34 +24,24 @@ import dev.reuss.tmdb.value.media.MediaType
 data class Review(
     @all:JsonProperty("id")
     val id: String?,
-
     @all:JsonProperty("author")
     val author: String?,
-
     @all:JsonProperty("author_details")
     val authorDetails: ReviewAuthorDetails?,
-
     @all:JsonProperty("content")
     val content: String?,
-
     @all:JsonProperty("created_at")
     val createdAt: String?,
-
     @all:JsonProperty("iso_639_1")
     val iso6391: String?,
-
     @all:JsonProperty("media_id")
     val mediaId: Int,
-
     @all:JsonProperty("media_title")
     val mediaTitle: String?,
-
     @all:JsonProperty("media_type")
     val mediaType: MediaType?,
-
     @all:JsonProperty("updated_at")
     val updatedAt: String?,
-
     @all:JsonProperty("url")
-    val url: String?
+    val url: String?,
 ) : TmdbModel

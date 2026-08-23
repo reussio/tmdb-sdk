@@ -13,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class Keyword(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("name")
-    val name: String?
+    val name: String?,
 ) : TmdbModel

@@ -5,11 +5,12 @@ import dev.reuss.tmdb.domain.people.PersonAppend
 import dev.reuss.tmdb.domain.tv.episode.TvEpisodeAppend
 import dev.reuss.tmdb.domain.tv.season.TvSeasonAppend
 import dev.reuss.tmdb.domain.tv.series.TvSeriesAppend
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertInstanceOf
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 
 class AppendableResponseContractTest {
-
     @Test
     fun movieAppendValuesExposeStableTmdbKeys() {
         assertAppendValues(
@@ -27,8 +28,8 @@ class AppendableResponseContractTest {
                 "similar",
                 "translations",
                 "videos",
-                "watch/providers"
-            )
+                "watch/providers",
+            ),
         )
     }
 
@@ -43,8 +44,8 @@ class AppendableResponseContractTest {
                 "images",
                 "movie_credits",
                 "tv_credits",
-                "translations"
-            )
+                "translations",
+            ),
         )
     }
 
@@ -68,8 +69,8 @@ class AppendableResponseContractTest {
                 "similar",
                 "translations",
                 "videos",
-                "watch/providers"
-            )
+                "watch/providers",
+            ),
         )
     }
 
@@ -85,8 +86,8 @@ class AppendableResponseContractTest {
                 "images",
                 "translations",
                 "videos",
-                "watch/providers"
-            )
+                "watch/providers",
+            ),
         )
     }
 
@@ -100,8 +101,8 @@ class AppendableResponseContractTest {
                 "external_ids",
                 "images",
                 "translations",
-                "videos"
-            )
+                "videos",
+            ),
         )
     }
 
@@ -114,7 +115,7 @@ class AppendableResponseContractTest {
 
     private fun assertAppendValues(
         values: Iterable<AppendableResponse>,
-        expectedKeys: List<String>
+        expectedKeys: List<String>,
     ) {
         values.forEach { value ->
             assertInstanceOf(AppendableResponse::class.java, value)
@@ -123,7 +124,7 @@ class AppendableResponseContractTest {
 
         assertEquals(
             expectedKeys,
-            values.map { it.value }
+            values.map { it.value },
         )
     }
 }

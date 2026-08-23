@@ -5,9 +5,8 @@ package dev.reuss.tmdb.value.id
  */
 abstract class StringTmdbResourceId(
     value: String,
-    resourceName: String
+    resourceName: String,
 ) : TmdbResourceId {
-
     val value: String
 
     init {
@@ -24,10 +23,11 @@ abstract class StringTmdbResourceId(
 
     final override fun equals(other: Any?): Boolean =
         this === other ||
-                other != null &&
-                this::class == other::class &&
+            (
                 other is StringTmdbResourceId &&
-                value == other.value
+                    this::class == other::class &&
+                    value == other.value
+            )
 
     final override fun hashCode(): Int = value.hashCode()
 }

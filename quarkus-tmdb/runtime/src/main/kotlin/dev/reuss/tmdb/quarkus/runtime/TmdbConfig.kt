@@ -14,7 +14,6 @@ import java.util.Optional
 @StaticInitSafe
 @ConfigMapping(prefix = "tmdb")
 interface TmdbConfig {
-
     /**
      * TMDB API read access token.
      *

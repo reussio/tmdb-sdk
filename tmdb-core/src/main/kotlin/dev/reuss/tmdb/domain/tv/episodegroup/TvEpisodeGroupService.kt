@@ -7,7 +7,6 @@ import dev.reuss.tmdb.value.id.TvEpisodeGroupId
  * Service for TMDB TV episode group endpoints.
  */
 interface TvEpisodeGroupService {
-
     /**
      * Loads details for a TV episode group.
      *

@@ -2,9 +2,21 @@ package dev.reuss.tmdb.query
 
 import dev.reuss.tmdb.domain.discover.query.MovieDiscoverQuery
 import dev.reuss.tmdb.domain.discover.query.TvDiscoverQuery
-import dev.reuss.tmdb.domain.movie.query.*
+import dev.reuss.tmdb.domain.movie.query.MovieNowPlayingQuery
+import dev.reuss.tmdb.domain.movie.query.MoviePopularQuery
+import dev.reuss.tmdb.domain.movie.query.MovieRecommendationsQuery
+import dev.reuss.tmdb.domain.movie.query.MovieReviewsQuery
+import dev.reuss.tmdb.domain.movie.query.MovieSimilarQuery
+import dev.reuss.tmdb.domain.movie.query.MovieTopRatedQuery
+import dev.reuss.tmdb.domain.movie.query.MovieUpcomingQuery
 import dev.reuss.tmdb.domain.people.query.PopularPeopleQuery
-import dev.reuss.tmdb.domain.search.query.*
+import dev.reuss.tmdb.domain.search.query.SearchCollectionQuery
+import dev.reuss.tmdb.domain.search.query.SearchCompanyQuery
+import dev.reuss.tmdb.domain.search.query.SearchKeywordQuery
+import dev.reuss.tmdb.domain.search.query.SearchMovieQuery
+import dev.reuss.tmdb.domain.search.query.SearchMultiQuery
+import dev.reuss.tmdb.domain.search.query.SearchPersonQuery
+import dev.reuss.tmdb.domain.search.query.SearchTvQuery
 import dev.reuss.tmdb.domain.tv.series.query.TvSeriesDateListQuery
 import dev.reuss.tmdb.domain.tv.series.query.TvSeriesListQuery
 import org.junit.jupiter.api.Assertions.assertEquals
@@ -14,7 +26,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
 class PagedQueryContractTest {
-
     @ParameterizedTest(name = "{0}")
     @MethodSource("pagedQueries")
     fun validPageIsSerialized(queryCase: PagedQueryCase) {
@@ -42,17 +53,14 @@ class PagedQueryContractTest {
 
     data class PagedQueryCase(
         val name: String,
-        val factory: () -> PagedQuery<*>
+        val factory: () -> PagedQuery<*>,
     ) {
-        fun create(): PagedQuery<*> =
-            factory()
+        fun create(): PagedQuery<*> = factory()
 
-        override fun toString(): String =
-            name
+        override fun toString(): String = name
     }
 
     companion object {
-
         @JvmStatic
         fun pagedQueries(): List<PagedQueryCase> =
             listOf(
@@ -95,7 +103,7 @@ class PagedQueryContractTest {
                 },
                 PagedQueryCase("TvSeriesListQuery") {
                     TvSeriesListQuery.create()
-                }
+                },
             )
     }
 }

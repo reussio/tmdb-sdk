@@ -13,39 +13,42 @@ import dev.reuss.tmdb.value.language.Language
  * [QueryValidation.validatePage].
  */
 class SearchPersonQuery private constructor(
-    override val query: String
-) : SearchQuery, PagedQuery<SearchPersonQuery> {
-
+    override val query: String,
+) : SearchQuery,
+    PagedQuery<SearchPersonQuery> {
     private var includeAdult: Boolean? = null
     private var language: Language? = null
     private var page: Int? = null
 
-    fun includeAdult(value: Boolean?) = apply {
-        includeAdult = value
-    }
+    fun includeAdult(value: Boolean?) =
+        apply {
+            includeAdult = value
+        }
 
-    fun language(value: Language?) = apply {
-        language = value
-    }
+    fun language(value: Language?) =
+        apply {
+            language = value
+        }
 
-    override fun page(page: Int?) = apply {
-        QueryValidation.validatePage(page)
-        this.page = page
-    }
+    override fun page(page: Int?) =
+        apply {
+            QueryValidation.validatePage(page)
+            this.page = page
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("query", query)
             .add("include_adult", includeAdult)
             .add("language", language?.value)
             .add("page", page)
 
     companion object {
-
         @JvmStatic
         fun of(query: String): SearchPersonQuery =
             SearchPersonQuery(
-                QueryValidation.requireNotBlank(query, "Search query")
+                QueryValidation.requireNotBlank(query, "Search query"),
             )
     }
 }

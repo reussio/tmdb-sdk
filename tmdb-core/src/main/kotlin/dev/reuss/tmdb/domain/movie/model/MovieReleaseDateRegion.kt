@@ -13,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class MovieReleaseDateRegion(
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("release_dates")
-    val releaseDates: List<MovieReleaseDate> = emptyList()
+    val releaseDates: List<MovieReleaseDate> = emptyList(),
 ) : TmdbModel

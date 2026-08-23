@@ -14,10 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvSeriesContentRating(
     @all:JsonProperty("descriptors")
     val descriptors: List<String> = emptyList(),
-
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("rating")
-    val rating: String?
+    val rating: String?,
 ) : TmdbModel

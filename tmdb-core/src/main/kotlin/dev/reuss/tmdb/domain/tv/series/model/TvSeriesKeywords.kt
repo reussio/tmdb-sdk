@@ -15,7 +15,7 @@ import dev.reuss.tmdb.common.keyword.KeywordsResponse
 data class TvSeriesKeywords(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("results")
-    override val keywords: List<Keyword> = emptyList()
-) : KeywordsResponse, TmdbModel
+    override val keywords: List<Keyword> = emptyList(),
+) : KeywordsResponse,
+    TmdbModel

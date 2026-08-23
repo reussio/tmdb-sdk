@@ -14,10 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 data class AlternativeTitle(
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("title")
     val title: String?,
-
     @all:JsonProperty("type")
-    val type: String?
+    val type: String?,
 ) : TmdbModel

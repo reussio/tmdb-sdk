@@ -7,26 +7,27 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class TmdbHealthCheckRegistrationTest {
-
     @Test
     fun shouldRegisterHealthCheckWhenSmallRyeHealthIsAvailable() {
-        val capabilities = Capabilities(
-            setOf(Capability.SMALLRYE_HEALTH)
-        )
+        val capabilities =
+            Capabilities(
+                setOf(Capability.SMALLRYE_HEALTH),
+            )
 
         assertTrue(
-            TmdbHealthProcessor.shouldRegisterHealthCheck(capabilities)
+            TmdbHealthProcessor.shouldRegisterHealthCheck(capabilities),
         )
     }
 
     @Test
     fun shouldSkipHealthCheckWhenSmallRyeHealthIsMissing() {
-        val capabilities = Capabilities(
-            emptySet()
-        )
+        val capabilities =
+            Capabilities(
+                emptySet(),
+            )
 
         assertFalse(
-            TmdbHealthProcessor.shouldRegisterHealthCheck(capabilities)
+            TmdbHealthProcessor.shouldRegisterHealthCheck(capabilities),
         )
     }
 }

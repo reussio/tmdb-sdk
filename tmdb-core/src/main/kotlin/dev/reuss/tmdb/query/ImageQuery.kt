@@ -14,9 +14,8 @@ import dev.reuss.tmdb.value.language.Language
  */
 data class ImageQuery(
     val language: Language? = null,
-    val includeImageLanguage: String? = null
+    val includeImageLanguage: String? = null,
 ) : TmdbQuery {
-
     init {
         require(includeImageLanguage == null || includeImageLanguage.isNotBlank()) {
             "Include image language must not be blank"
@@ -24,23 +23,20 @@ data class ImageQuery(
     }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("language", language)
             .add("include_image_language", includeImageLanguage)
 
     companion object {
         @JvmStatic
-        fun none(): ImageQuery =
-            ImageQuery()
+        fun none(): ImageQuery = ImageQuery()
 
         @JvmStatic
-        fun language(language: Language): ImageQuery =
-            ImageQuery(language = language)
+        fun language(language: Language): ImageQuery = ImageQuery(language = language)
 
         @JvmStatic
-        fun includeImageLanguage(
-            includeImageLanguage: String
-        ): ImageQuery =
+        fun includeImageLanguage(includeImageLanguage: String): ImageQuery =
             ImageQuery(includeImageLanguage = includeImageLanguage)
     }
 }

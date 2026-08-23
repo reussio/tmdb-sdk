@@ -2,7 +2,13 @@ package dev.reuss.tmdb.domain.people
 
 import dev.reuss.tmdb.common.external.ExternalIds
 import dev.reuss.tmdb.common.image.PersonImages
-import dev.reuss.tmdb.domain.people.model.*
+import dev.reuss.tmdb.domain.people.model.PersonChanges
+import dev.reuss.tmdb.domain.people.model.PersonCombinedCredits
+import dev.reuss.tmdb.domain.people.model.PersonDetails
+import dev.reuss.tmdb.domain.people.model.PersonMovieCredits
+import dev.reuss.tmdb.domain.people.model.PersonTranslations
+import dev.reuss.tmdb.domain.people.model.PersonTvCredits
+import dev.reuss.tmdb.domain.people.model.PopularPeopleResponse
 import dev.reuss.tmdb.domain.people.query.PopularPeopleQuery
 import dev.reuss.tmdb.query.AppendToResponse
 import dev.reuss.tmdb.query.ChangesQuery
@@ -13,7 +19,6 @@ import dev.reuss.tmdb.value.language.Language
  * Service for loading TMDB person metadata.
  */
 interface PersonService {
-
     /**
      * Loads top level person details.
      *
@@ -31,7 +36,7 @@ interface PersonService {
      */
     fun details(
         personId: PersonId,
-        language: Language
+        language: Language,
     ): PersonDetails
 
     /**
@@ -43,7 +48,7 @@ interface PersonService {
      */
     fun details(
         personId: PersonId,
-        appendToResponse: AppendToResponse<PersonAppend>
+        appendToResponse: AppendToResponse<PersonAppend>,
     ): PersonDetails
 
     /**
@@ -57,7 +62,7 @@ interface PersonService {
     fun details(
         personId: PersonId,
         language: Language,
-        appendToResponse: AppendToResponse<PersonAppend>
+        appendToResponse: AppendToResponse<PersonAppend>,
     ): PersonDetails
 
     /**
@@ -77,7 +82,7 @@ interface PersonService {
      */
     fun changes(
         personId: PersonId,
-        query: ChangesQuery
+        query: ChangesQuery,
     ): PersonChanges
 
     /**
@@ -97,7 +102,7 @@ interface PersonService {
      */
     fun combinedCredits(
         personId: PersonId,
-        language: Language
+        language: Language,
     ): PersonCombinedCredits
 
     /**
@@ -134,7 +139,7 @@ interface PersonService {
      */
     fun movieCredits(
         personId: PersonId,
-        language: Language
+        language: Language,
     ): PersonMovieCredits
 
     /**
@@ -154,7 +159,7 @@ interface PersonService {
      */
     fun tvCredits(
         personId: PersonId,
-        language: Language
+        language: Language,
     ): PersonTvCredits
 
     /**

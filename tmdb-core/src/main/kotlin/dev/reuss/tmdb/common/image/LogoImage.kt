@@ -19,25 +19,18 @@ import dev.reuss.tmdb.common.TmdbModel
 data class LogoImage(
     @all:JsonProperty("aspect_ratio")
     val aspectRatio: Double,
-
     @all:JsonProperty("file_path")
     val filePath: String?,
-
     @all:JsonProperty("height")
     val height: Int,
-
     @all:JsonProperty("id")
     val id: String?,
-
     @all:JsonProperty("file_type")
     val fileType: String?,
-
     @all:JsonProperty("vote_average")
     val voteAverage: Double,
-
     @all:JsonProperty("vote_count")
     val voteCount: Int,
-
     @all:JsonProperty("width")
-    val width: Int
+    val width: Int,
 ) : TmdbModel

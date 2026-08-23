@@ -12,28 +12,28 @@ import dev.reuss.tmdb.value.language.Language
  * [QueryValidation.validatePage].
  */
 class MovieRecommendationsQuery private constructor() : PagedQuery<MovieRecommendationsQuery> {
-
     private var language: Language? = null
     private var page: Int? = null
 
-    fun language(value: Language?) = apply {
-        language = value
-    }
+    fun language(value: Language?) =
+        apply {
+            language = value
+        }
 
-    override fun page(page: Int?) = apply {
-        QueryValidation.validatePage(page)
-        this.page = page
-    }
+    override fun page(page: Int?) =
+        apply {
+            QueryValidation.validatePage(page)
+            this.page = page
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("language", language?.value)
             .add("page", page)
 
     companion object {
-
         @JvmStatic
-        fun create(): MovieRecommendationsQuery =
-            MovieRecommendationsQuery()
+        fun create(): MovieRecommendationsQuery = MovieRecommendationsQuery()
     }
 }

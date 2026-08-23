@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class RegionTest {
-
     @Test
     fun createsRegionFromUppercaseCode() {
         val region = Region.of("DE")

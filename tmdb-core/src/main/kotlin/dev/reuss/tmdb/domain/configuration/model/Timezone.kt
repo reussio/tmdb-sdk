@@ -13,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class Timezone(
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("zones")
-    val zones: List<String> = emptyList()
+    val zones: List<String> = emptyList(),
 ) : TmdbModel

@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class LanguageCodeTest {
-
     @Test
     fun createsLanguageCode() {
         val code = LanguageCode.of("de")

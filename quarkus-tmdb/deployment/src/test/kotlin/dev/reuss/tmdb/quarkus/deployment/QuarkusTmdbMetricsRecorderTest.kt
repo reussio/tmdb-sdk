@@ -9,7 +9,6 @@ import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 class QuarkusTmdbMetricsRecorderTest {
-
     @Test
     fun shouldRecordRequestDurationWithBoundedTags() {
         val meterRegistry = SimpleMeterRegistry()
@@ -17,14 +16,14 @@ class QuarkusTmdbMetricsRecorderTest {
 
         recorder.recordRequestStarted(
             "GET",
-            "/movie/550/recommendations"
+            "/movie/550/recommendations",
         )
         recorder.recordRequestFinished(
             "GET",
             "/movie/550/recommendations",
             200,
             Duration.ofMillis(42),
-            128
+            128,
         )
 
         assertEquals(
@@ -37,7 +36,7 @@ class QuarkusTmdbMetricsRecorderTest {
                 .tag("status_family", "2xx")
                 .tag("outcome", "SUCCESS")
                 .timer()
-                .count()
+                .count(),
         )
 
         assertEquals(
@@ -45,7 +44,7 @@ class QuarkusTmdbMetricsRecorderTest {
             meterRegistry
                 .get(QuarkusTmdbMetricsRecorder.REQUESTS_METRIC)
                 .timer()
-                .totalTime(TimeUnit.MILLISECONDS)
+                .totalTime(TimeUnit.MILLISECONDS),
         )
 
         assertEquals(
@@ -58,7 +57,7 @@ class QuarkusTmdbMetricsRecorderTest {
                 .tag("status_family", "2xx")
                 .tag("outcome", "SUCCESS")
                 .counter()
-                .count()
+                .count(),
         )
 
         assertEquals(
@@ -66,7 +65,7 @@ class QuarkusTmdbMetricsRecorderTest {
             meterRegistry
                 .get(QuarkusTmdbMetricsRecorder.RESPONSE_BYTES_METRIC)
                 .summary()
-                .totalAmount()
+                .totalAmount(),
         )
 
         assertEquals(
@@ -74,7 +73,7 @@ class QuarkusTmdbMetricsRecorderTest {
             meterRegistry
                 .get(QuarkusTmdbMetricsRecorder.ACTIVE_REQUESTS_METRIC)
                 .gauge()
-                .value()
+                .value(),
         )
     }
 
@@ -85,7 +84,7 @@ class QuarkusTmdbMetricsRecorderTest {
 
         recorder.recordRequestStarted(
             "GET",
-            "/person/287"
+            "/person/287",
         )
 
         assertEquals(
@@ -93,14 +92,14 @@ class QuarkusTmdbMetricsRecorderTest {
             meterRegistry
                 .get(QuarkusTmdbMetricsRecorder.ACTIVE_REQUESTS_METRIC)
                 .gauge()
-                .value()
+                .value(),
         )
 
         recorder.recordRequestFailed(
             "GET",
             "/person/287",
             IOException("connection failed"),
-            Duration.ofMillis(5)
+            Duration.ofMillis(5),
         )
 
         assertEquals(
@@ -112,7 +111,7 @@ class QuarkusTmdbMetricsRecorderTest {
                 .tag("type", "exception")
                 .tag("exception", "IOException")
                 .counter()
-                .count()
+                .count(),
         )
 
         assertEquals(
@@ -125,7 +124,7 @@ class QuarkusTmdbMetricsRecorderTest {
                 .tag("status_family", "IO_ERROR")
                 .tag("outcome", "ERROR")
                 .timer()
-                .count()
+                .count(),
         )
 
         assertEquals(
@@ -133,7 +132,7 @@ class QuarkusTmdbMetricsRecorderTest {
             meterRegistry
                 .get(QuarkusTmdbMetricsRecorder.ACTIVE_REQUESTS_METRIC)
                 .gauge()
-                .value()
+                .value(),
         )
     }
 
@@ -144,14 +143,14 @@ class QuarkusTmdbMetricsRecorderTest {
 
         recorder.recordRequestStarted(
             "GET",
-            "/search/movie"
+            "/search/movie",
         )
         recorder.recordRequestFinished(
             "GET",
             "/search/movie",
             429,
             Duration.ofMillis(12),
-            64
+            64,
         )
 
         assertEquals(
@@ -164,7 +163,7 @@ class QuarkusTmdbMetricsRecorderTest {
                 .tag("status", "429")
                 .tag("status_family", "4xx")
                 .counter()
-                .count()
+                .count(),
         )
 
         assertEquals(
@@ -174,7 +173,7 @@ class QuarkusTmdbMetricsRecorderTest {
                 .tag("method", "GET")
                 .tag("path", "/search/movie")
                 .counter()
-                .count()
+                .count(),
         )
     }
 
@@ -187,7 +186,7 @@ class QuarkusTmdbMetricsRecorderTest {
             "GET",
             "/movie/550",
             SuccessResponse::class.java,
-            IllegalArgumentException("bad json")
+            IllegalArgumentException("bad json"),
         )
 
         assertEquals(
@@ -199,11 +198,11 @@ class QuarkusTmdbMetricsRecorderTest {
                 .tag("response_type", "SuccessResponse")
                 .tag("exception", "IllegalArgumentException")
                 .counter()
-                .count()
+                .count(),
         )
     }
 
     private data class SuccessResponse(
-        val id: Int
+        val id: Int,
     )
 }

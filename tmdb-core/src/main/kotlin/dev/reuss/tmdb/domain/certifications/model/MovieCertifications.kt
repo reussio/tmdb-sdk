@@ -11,5 +11,5 @@ import dev.reuss.tmdb.common.TmdbModel
 @JvmRecord
 data class MovieCertifications(
     @all:JsonProperty("certifications")
-    val certifications: Map<String, List<Certification>> = emptyMap()
+    val certifications: Map<String, List<Certification>> = emptyMap(),
 ) : TmdbModel

@@ -14,7 +14,7 @@ import dev.reuss.tmdb.common.name.AlternativeNamesResponse
 data class CompanyAlternativeNames(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("results")
-    override val results: List<CompanyAlternativeName> = emptyList()
-) : AlternativeNamesResponse<CompanyAlternativeName>, TmdbModel
+    override val results: List<CompanyAlternativeName> = emptyList(),
+) : AlternativeNamesResponse<CompanyAlternativeName>,
+    TmdbModel

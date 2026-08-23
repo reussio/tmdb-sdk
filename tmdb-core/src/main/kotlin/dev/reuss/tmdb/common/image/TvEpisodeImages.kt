@@ -13,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvEpisodeImages(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("stills")
-    val stills: List<TmdbImage> = emptyList()
+    val stills: List<TmdbImage> = emptyList(),
 ) : TmdbModel

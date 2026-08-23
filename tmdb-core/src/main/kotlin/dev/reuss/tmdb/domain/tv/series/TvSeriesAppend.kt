@@ -2,7 +2,20 @@ package dev.reuss.tmdb.domain.tv.series
 
 import dev.reuss.tmdb.common.external.ExternalIds
 import dev.reuss.tmdb.common.image.TvShowImages
-import dev.reuss.tmdb.domain.tv.series.model.*
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesAggregateCredits
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesAlternativeTitles
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesChanges
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesContentRatings
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesCredits
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesEpisodeGroups
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesKeywords
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesRecommendations
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesReviews
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesScreenedTheatrically
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesSimilar
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesTranslations
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesVideos
+import dev.reuss.tmdb.domain.tv.series.model.TvSeriesWatchProviders
 import dev.reuss.tmdb.query.AppendableResponse
 
 /**
@@ -10,9 +23,8 @@ import dev.reuss.tmdb.query.AppendableResponse
  */
 enum class TvSeriesAppend(
     override val value: String,
-    override val responseType: Class<*>
+    override val responseType: Class<*>,
 ) : AppendableResponse {
-
     AGGREGATE_CREDITS("aggregate_credits", TvSeriesAggregateCredits::class.java),
     ALTERNATIVE_TITLES("alternative_titles", TvSeriesAlternativeTitles::class.java),
     CHANGES("changes", TvSeriesChanges::class.java),
@@ -28,5 +40,5 @@ enum class TvSeriesAppend(
     SIMILAR("similar", TvSeriesSimilar::class.java),
     TRANSLATIONS("translations", TvSeriesTranslations::class.java),
     VIDEOS("videos", TvSeriesVideos::class.java),
-    WATCH_PROVIDERS("watch/providers", TvSeriesWatchProviders::class.java)
+    WATCH_PROVIDERS("watch/providers", TvSeriesWatchProviders::class.java),
 }

@@ -15,13 +15,11 @@ import dev.reuss.tmdb.common.TmdbModel
 data class MovieImages(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("backdrops")
     override val backdrops: List<TmdbImage> = emptyList(),
-
     @all:JsonProperty("logos")
     override val logos: List<TmdbImage> = emptyList(),
-
     @all:JsonProperty("posters")
-    override val posters: List<TmdbImage> = emptyList()
-) : PosterBackdropLogoImagesResponse, TmdbModel
+    override val posters: List<TmdbImage> = emptyList(),
+) : PosterBackdropLogoImagesResponse,
+    TmdbModel

@@ -25,43 +25,30 @@ import dev.reuss.tmdb.common.TmdbModel
 data class RecommendedMovie(
     @all:JsonProperty("adult")
     val adult: Boolean,
-
     @all:JsonProperty("backdrop_path")
     val backdropPath: String?,
-
     @all:JsonProperty("genre_ids")
     val genreIds: List<Int> = emptyList(),
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("original_language")
     val originalLanguage: String?,
-
     @all:JsonProperty("original_title")
     val originalTitle: String?,
-
     @all:JsonProperty("overview")
     val overview: String?,
-
     @all:JsonProperty("popularity")
     val popularity: Double,
-
     @all:JsonProperty("poster_path")
     val posterPath: String?,
-
     @all:JsonProperty("release_date")
     val releaseDate: String?,
-
     @all:JsonProperty("title")
     val title: String?,
-
     @all:JsonProperty("video")
     val video: Boolean,
-
     @all:JsonProperty("vote_average")
     val voteAverage: Double,
-
     @all:JsonProperty("vote_count")
-    val voteCount: Int
+    val voteCount: Int,
 ) : TmdbModel

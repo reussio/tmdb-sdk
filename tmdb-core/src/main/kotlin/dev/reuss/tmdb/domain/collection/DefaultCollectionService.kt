@@ -14,50 +14,45 @@ import dev.reuss.tmdb.value.language.Language
  * Default collection service implementation.
  */
 internal class DefaultCollectionService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : CollectionService {
-
     override fun details(collectionId: CollectionId): CollectionDetails =
         details(collectionId, CollectionDetailsQuery.empty())
 
     override fun details(
         collectionId: CollectionId,
-        language: Language
-    ): CollectionDetails =
-        details(collectionId, CollectionDetailsQuery.of(language))
+        language: Language,
+    ): CollectionDetails = details(collectionId, CollectionDetailsQuery.of(language))
 
     override fun details(
         collectionId: CollectionId,
-        query: CollectionDetailsQuery
+        query: CollectionDetailsQuery,
     ): CollectionDetails =
         httpClient.get(
             TmdbRequest.get(
                 CollectionPaths.details(collectionId),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            CollectionDetails::class.java
+            CollectionDetails::class.java,
         )
 
-    override fun images(collectionId: CollectionId): CollectionImages =
-        images(collectionId, ImageQuery.none())
+    override fun images(collectionId: CollectionId): CollectionImages = images(collectionId, ImageQuery.none())
 
     override fun images(
         collectionId: CollectionId,
-        query: ImageQuery
+        query: ImageQuery,
     ): CollectionImages =
         httpClient.get(
             TmdbRequest.get(
                 CollectionPaths.images(collectionId),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            CollectionImages::class.java
+            CollectionImages::class.java,
         )
 
-    override fun translations(
-        collectionId: CollectionId
-    ): CollectionTranslations =
+    override fun translations(collectionId: CollectionId): CollectionTranslations =
         httpClient.get(
             TmdbRequest.get(CollectionPaths.translations(collectionId)),
-            CollectionTranslations::class.java
+            CollectionTranslations::class.java,
         )
 }

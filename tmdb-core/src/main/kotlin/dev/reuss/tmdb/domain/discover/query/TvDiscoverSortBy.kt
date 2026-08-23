@@ -4,7 +4,7 @@ package dev.reuss.tmdb.domain.discover.query
  * Sort options for TMDB TV discovery.
  */
 enum class TvDiscoverSortBy(
-    val value: String
+    val value: String,
 ) {
     FIRST_AIR_DATE_ASC("first_air_date.asc"),
     FIRST_AIR_DATE_DESC("first_air_date.desc"),
@@ -22,5 +22,5 @@ enum class TvDiscoverSortBy(
     VOTE_AVERAGE_DESC("vote_average.desc"),
 
     VOTE_COUNT_ASC("vote_count.asc"),
-    VOTE_COUNT_DESC("vote_count.desc")
+    VOTE_COUNT_DESC("vote_count.desc"),
 }

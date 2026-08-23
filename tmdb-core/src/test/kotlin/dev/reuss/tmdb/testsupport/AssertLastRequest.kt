@@ -6,7 +6,7 @@ fun assertLastRequest(
     httpClient: RecordingTmdbHttpClient,
     path: String,
     queryParams: Map<String, String>,
-    responseType: Class<*>
+    responseType: Class<*>,
 ) {
     val request = httpClient.lastRequest()
 

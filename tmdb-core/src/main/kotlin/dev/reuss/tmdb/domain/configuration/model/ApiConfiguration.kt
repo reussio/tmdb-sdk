@@ -14,9 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 @JvmRecord
 data class ApiConfiguration(
     @all:JsonProperty("images")
-    val images: Images
+    val images: Images,
 ) : TmdbModel {
-
     /**
      * TMDB image configuration.
      *
@@ -32,23 +31,17 @@ data class ApiConfiguration(
     data class Images(
         @all:JsonProperty("base_url")
         val baseUrl: String?,
-
         @all:JsonProperty("secure_base_url")
         val secureBaseUrl: String?,
-
         @all:JsonProperty("backdrop_sizes")
         val backdropSizes: List<String> = emptyList(),
-
         @all:JsonProperty("logo_sizes")
         val logoSizes: List<String> = emptyList(),
-
         @all:JsonProperty("poster_sizes")
         val posterSizes: List<String> = emptyList(),
-
         @all:JsonProperty("profile_sizes")
         val profileSizes: List<String> = emptyList(),
-
         @all:JsonProperty("still_sizes")
-        val stillSizes: List<String> = emptyList()
+        val stillSizes: List<String> = emptyList(),
     ) : TmdbModel
 }

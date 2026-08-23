@@ -19,25 +19,18 @@ import dev.reuss.tmdb.common.TmdbModel
 data class CollectionDetails(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("original_language")
     val originalLanguage: String?,
-
     @all:JsonProperty("original_name")
     val originalName: String?,
-
     @all:JsonProperty("overview")
     val overview: String?,
-
     @all:JsonProperty("poster_path")
     val posterPath: String?,
-
     @all:JsonProperty("backdrop_path")
     val backdropPath: String?,
-
     @all:JsonProperty("parts")
-    val parts: List<CollectionPart> = emptyList()
+    val parts: List<CollectionPart> = emptyList(),
 ) : TmdbModel

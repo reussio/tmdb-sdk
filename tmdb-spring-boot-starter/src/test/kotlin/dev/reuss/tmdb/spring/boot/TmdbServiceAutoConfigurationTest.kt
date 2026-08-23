@@ -34,14 +34,14 @@ import org.springframework.boot.autoconfigure.AutoConfigurations
 import org.springframework.boot.test.context.runner.ApplicationContextRunner
 
 class TmdbServiceAutoConfigurationTest {
-
-    private val contextRunner = ApplicationContextRunner()
-        .withConfiguration(
-            AutoConfigurations.of(
-                TmdbClientAutoConfiguration::class.java,
-                TmdbServiceAutoConfiguration::class.java
+    private val contextRunner =
+        ApplicationContextRunner()
+            .withConfiguration(
+                AutoConfigurations.of(
+                    TmdbClientAutoConfiguration::class.java,
+                    TmdbServiceAutoConfiguration::class.java,
+                ),
             )
-        )
 
     @Test
     fun createsTmdbServiceBeans() {
@@ -101,40 +101,31 @@ class TmdbServiceAutoConfigurationTest {
         contextRunner
             .withBean(
                 ConfigurationService::class.java,
-                { customService }
-            )
-            .withPropertyValues("tmdb.access-token=test-token")
+                { customService },
+            ).withPropertyValues("tmdb.access-token=test-token")
             .run { context ->
                 assertThat(context)
                     .hasSingleBean(ConfigurationService::class.java)
 
                 assertThat(
-                    context.getBean(ConfigurationService::class.java)
+                    context.getBean(ConfigurationService::class.java),
                 ).isSameAs(customService)
             }
     }
 
     private class TestConfigurationService : ConfigurationService {
+        override fun apiConfiguration(): ApiConfiguration = error("Not used in this test")
 
-        override fun apiConfiguration(): ApiConfiguration =
-            error("Not used in this test")
+        override fun countries(): List<Country> = emptyList()
 
-        override fun countries(): List<Country> =
-            emptyList()
+        override fun countries(language: Language): List<Country> = emptyList()
 
-        override fun countries(language: Language): List<Country> =
-            emptyList()
+        override fun jobs(): List<JobDepartment> = emptyList()
 
-        override fun jobs(): List<JobDepartment> =
-            emptyList()
+        override fun languages(): List<ConfigurationLanguage> = emptyList()
 
-        override fun languages(): List<ConfigurationLanguage> =
-            emptyList()
+        override fun primaryTranslations(): List<String> = emptyList()
 
-        override fun primaryTranslations(): List<String> =
-            emptyList()
-
-        override fun timezones(): List<Timezone> =
-            emptyList()
+        override fun timezones(): List<Timezone> = emptyList()
     }
 }

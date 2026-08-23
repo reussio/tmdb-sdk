@@ -10,13 +10,15 @@ import org.eclipse.microprofile.health.Readiness
  * Readiness check for the TMDB SDK client.
  */
 @Readiness
-class TmdbHealthCheck @Inject constructor(
-    @Suppress("unused")
-    client: TmdbClient
-) : HealthCheck {
-
-    override fun call(): HealthCheckResponse =
-        HealthCheckResponse.named("tmdb")
-            .up()
-            .build()
-}
+class TmdbHealthCheck
+    @Inject
+    constructor(
+        @Suppress("unused")
+        client: TmdbClient,
+    ) : HealthCheck {
+        override fun call(): HealthCheckResponse =
+            HealthCheckResponse
+                .named("tmdb")
+                .up()
+                .build()
+    }

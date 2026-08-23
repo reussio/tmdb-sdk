@@ -20,25 +20,18 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TvEpisodeGroupDetails(
     @all:JsonProperty("description")
     val description: String?,
-
     @all:JsonProperty("episode_count")
     val episodeCount: Int,
-
     @all:JsonProperty("group_count")
     val groupCount: Int,
-
     @all:JsonProperty("groups")
     val groups: List<TvEpisodeGroup> = emptyList(),
-
     @all:JsonProperty("id")
     val id: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("network")
     val network: TvEpisodeGroupNetwork?,
-
     @all:JsonProperty("type")
-    val type: TvEpisodeGroupType
+    val type: TvEpisodeGroupType,
 ) : TmdbModel

@@ -1,13 +1,16 @@
 package dev.reuss.tmdb.domain.trending
 
-import dev.reuss.tmdb.domain.trending.model.*
+import dev.reuss.tmdb.domain.trending.model.TrendingAllResponse
+import dev.reuss.tmdb.domain.trending.model.TrendingMovieResponse
+import dev.reuss.tmdb.domain.trending.model.TrendingPersonResponse
+import dev.reuss.tmdb.domain.trending.model.TrendingTimeWindow
+import dev.reuss.tmdb.domain.trending.model.TrendingTvShowResponse
 import dev.reuss.tmdb.value.language.Language
 
 /**
  * Service for loading TMDB trending media.
  */
 interface TrendingService {
-
     /**
      * Loads trending media across movies, TV shows and people.
      *
@@ -25,7 +28,7 @@ interface TrendingService {
      */
     fun all(
         timeWindow: TrendingTimeWindow,
-        language: Language
+        language: Language,
     ): TrendingAllResponse
 
     /**
@@ -45,7 +48,7 @@ interface TrendingService {
      */
     fun movies(
         timeWindow: TrendingTimeWindow,
-        language: Language
+        language: Language,
     ): TrendingMovieResponse
 
     /**
@@ -65,7 +68,7 @@ interface TrendingService {
      */
     fun people(
         timeWindow: TrendingTimeWindow,
-        language: Language
+        language: Language,
     ): TrendingPersonResponse
 
     /**
@@ -85,6 +88,6 @@ interface TrendingService {
      */
     fun tv(
         timeWindow: TrendingTimeWindow,
-        language: Language
+        language: Language,
     ): TrendingTvShowResponse
 }

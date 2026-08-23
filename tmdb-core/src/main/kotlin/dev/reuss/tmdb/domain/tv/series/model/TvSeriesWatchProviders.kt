@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.tv.series.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 import dev.reuss.tmdb.common.watchprovider.WatchProviderAvailability
 import dev.reuss.tmdb.common.watchprovider.WatchProvidersResponse
@@ -16,7 +15,7 @@ import dev.reuss.tmdb.common.watchprovider.WatchProvidersResponse
 data class TvSeriesWatchProviders(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("results")
-    override val results: Map<String, WatchProviderAvailability> = emptyMap()
-) : WatchProvidersResponse<WatchProviderAvailability>, TmdbModel
+    override val results: Map<String, WatchProviderAvailability> = emptyMap(),
+) : WatchProvidersResponse<WatchProviderAvailability>,
+    TmdbModel

@@ -6,9 +6,8 @@ package dev.reuss.tmdb.value.id
  * @property value episode number
  */
 data class TvEpisodeNumber private constructor(
-    val value: Int
+    val value: Int,
 ) {
-
     init {
         require(value > 0) {
             "TV episode number must be greater than 0"

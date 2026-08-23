@@ -15,32 +15,32 @@ import java.io.Serializable
  * @property accessToken TMDB bearer access token
  */
 class TmdbAuth private constructor(
-    val accessToken: String
+    val accessToken: String,
 ) : Serializable {
-
     /**
      * Returns the value for the HTTP `Authorization` header.
      *
      * @return the authorization header value in the format `Bearer <token>`
      */
-    fun authorizationHeaderValue(): String =
-        "Bearer $accessToken"
+    fun authorizationHeaderValue(): String = "Bearer $accessToken"
 
     /**
      * Returns a masked string representation to avoid leaking the access token.
      */
-    override fun toString(): String =
-        "TmdbAuth[accessToken=***]"
+    override fun toString(): String = "TmdbAuth[accessToken=***]"
 
-    override fun equals(other: Any?): Boolean =
-        this === other ||
-                other is TmdbAuth && accessToken == other.accessToken
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
 
-    override fun hashCode(): Int =
-        accessToken.hashCode()
+        return other is TmdbAuth &&
+            accessToken == other.accessToken
+    }
+
+    override fun hashCode(): Int = accessToken.hashCode()
 
     companion object {
-
         /**
          * Creates authentication from a TMDB bearer access token.
          *

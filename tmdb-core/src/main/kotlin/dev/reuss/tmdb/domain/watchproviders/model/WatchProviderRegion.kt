@@ -14,10 +14,8 @@ import dev.reuss.tmdb.common.TmdbModel
 data class WatchProviderRegion(
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("english_name")
     val englishName: String?,
-
     @all:JsonProperty("native_name")
-    val nativeName: String?
+    val nativeName: String?,
 ) : TmdbModel

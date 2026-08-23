@@ -19,22 +19,16 @@ import dev.reuss.tmdb.value.media.MediaType
 data class CreditDetails(
     @all:JsonProperty("credit_type")
     val creditType: String?,
-
     @all:JsonProperty("department")
     val department: String?,
-
     @all:JsonProperty("job")
     val job: String?,
-
     @all:JsonProperty("media")
     val media: CreditMedia?,
-
     @all:JsonProperty("media_type")
     val mediaType: MediaType?,
-
     @all:JsonProperty("id")
     val id: String?,
-
     @all:JsonProperty("person")
-    val person: CreditPerson?
+    val person: CreditPerson?,
 ) : TmdbModel

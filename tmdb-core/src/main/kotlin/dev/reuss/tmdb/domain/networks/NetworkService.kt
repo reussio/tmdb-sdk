@@ -9,7 +9,6 @@ import dev.reuss.tmdb.value.id.NetworkId
  * Service for loading TMDB network metadata.
  */
 interface NetworkService {
-
     /**
      * Loads network details by network id.
      *

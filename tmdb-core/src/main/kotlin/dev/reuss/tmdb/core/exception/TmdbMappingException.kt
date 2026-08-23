@@ -6,7 +6,9 @@ package dev.reuss.tmdb.core.exception
  * @property message detail message
  * @property cause cause of the failure
  */
-class TmdbMappingException @JvmOverloads constructor(
-    message: String,
-    cause: Throwable? = null
-) : TmdbException(message, cause)
+class TmdbMappingException
+    @JvmOverloads
+    constructor(
+        message: String,
+        cause: Throwable? = null,
+    ) : TmdbException(message, cause)

@@ -20,17 +20,16 @@ import java.net.URISyntaxException
  * Provides TMDB extension pages for the Quarkus Dev UI.
  */
 class TmdbDevUiProcessor {
-
     @BuildStep(onlyIf = [IsDevelopment::class])
     fun devUiPages(
         curateOutcome: CurateOutcomeBuildItem,
         capabilities: Capabilities,
-        combinedIndex: CombinedIndexBuildItem
+        combinedIndex: CombinedIndexBuildItem,
     ): CardPageBuildItem {
         val baseUrl =
             configValue(
                 "tmdb.base-url",
-                TmdbClientConfig.DEFAULT_BASE_URL
+                TmdbClientConfig.DEFAULT_BASE_URL,
             )
 
         val accessTokenConfigured =
@@ -49,56 +48,61 @@ class TmdbDevUiProcessor {
 
         return CardPageBuildItem().apply {
             addPage(
-                Page.tableDataPageBuilder("Configuration")
+                Page
+                    .tableDataPageBuilder("Configuration")
                     .icon("font-awesome-solid:gear")
                     .buildTimeDataKey("configuration")
                     .showColumn("name")
-                    .showColumn("value")
+                    .showColumn("value"),
             )
 
             addPage(
-                Page.tableDataPageBuilder("Status")
+                Page
+                    .tableDataPageBuilder("Status")
                     .icon("font-awesome-solid:circle-check")
                     .buildTimeDataKey("status")
                     .showColumn("name")
                     .showColumn("status")
-                    .showColumn("details")
+                    .showColumn("details"),
             )
 
             addPage(
-                Page.tableDataPageBuilder("CDI Services")
+                Page
+                    .tableDataPageBuilder("CDI Services")
                     .icon("font-awesome-solid:plug")
                     .staticLabel(cdiServiceClassNames().size.toString())
                     .buildTimeDataKey("services")
                     .showColumn("name")
-                    .showColumn("type")
+                    .showColumn("type"),
             )
 
             if (healthActive) {
                 addPage(
-                    Page.externalPageBuilder("Health")
+                    Page
+                        .externalPageBuilder("Health")
                         .icon("font-awesome-solid:heart-pulse")
                         .url("/q/health")
-                        .doNotEmbed(true)
+                        .doNotEmbed(true),
                 )
             }
 
             if (metricsActive) {
                 addPage(
-                    Page.externalPageBuilder("Metrics")
+                    Page
+                        .externalPageBuilder("Metrics")
                         .icon("font-awesome-solid:chart-line")
                         .url("/q/metrics")
-                        .doNotEmbed(true)
+                        .doNotEmbed(true),
                 )
             }
 
             addPage(
-                Page.externalPageBuilder("TMDB Docs")
+                Page
+                    .externalPageBuilder("TMDB Docs")
                     .icon("font-awesome-solid:book")
                     .url(
-                        "https://developer.themoviedb.org/reference/intro/getting-started"
-                    )
-                    .doNotEmbed(true)
+                        "https://developer.themoviedb.org/reference/intro/getting-started",
+                    ).doNotEmbed(true),
             )
 
             addBuildTimeData(
@@ -108,22 +112,22 @@ class TmdbDevUiProcessor {
                     baseUrl,
                     configValue(
                         "tmdb.default-language",
-                        TmdbClientConfig.DEFAULT_LANGUAGE
+                        TmdbClientConfig.DEFAULT_LANGUAGE,
                     ),
                     configValue(
                         "tmdb.default-region",
-                        NOT_CONFIGURED
+                        NOT_CONFIGURED,
                     ),
                     configValue(
                         "tmdb.connect-timeout",
-                        TmdbClientConfig.DEFAULT_CONNECT_TIMEOUT
+                        TmdbClientConfig.DEFAULT_CONNECT_TIMEOUT,
                     ),
                     configValue(
                         "tmdb.request-timeout",
-                        TmdbClientConfig.DEFAULT_REQUEST_TIMEOUT
+                        TmdbClientConfig.DEFAULT_REQUEST_TIMEOUT,
                     ),
-                    accessTokenConfigured
-                )
+                    accessTokenConfigured,
+                ),
             )
 
             addBuildTimeData(
@@ -133,13 +137,13 @@ class TmdbDevUiProcessor {
                     baseUrl,
                     healthActive,
                     metricsActive,
-                    reflectionClassCount
-                )
+                    reflectionClassCount,
+                ),
             )
 
             addBuildTimeData(
                 "services",
-                devUiServiceRows()
+                devUiServiceRows(),
             )
         }
     }
@@ -157,51 +161,51 @@ class TmdbDevUiProcessor {
             defaultRegion: String,
             connectTimeout: String,
             requestTimeout: String,
-            accessTokenConfigured: Boolean
+            accessTokenConfigured: Boolean,
         ): List<Map<String, String>> =
             listOf(
                 row(
                     "name",
                     "Extension Version",
                     "value",
-                    extensionVersion
+                    extensionVersion,
                 ),
                 row(
                     "name",
                     "Base URL",
                     "value",
-                    baseUrl
+                    baseUrl,
                 ),
                 row(
                     "name",
                     "Default Language",
                     "value",
-                    defaultLanguage
+                    defaultLanguage,
                 ),
                 row(
                     "name",
                     "Default Region",
                     "value",
-                    defaultRegion
+                    defaultRegion,
                 ),
                 row(
                     "name",
                     "Connect Timeout",
                     "value",
-                    connectTimeout
+                    connectTimeout,
                 ),
                 row(
                     "name",
                     "Request Timeout",
                     "value",
-                    requestTimeout
+                    requestTimeout,
                 ),
                 row(
                     "name",
                     "Access Token",
                     "value",
-                    if (accessTokenConfigured) "configured" else NOT_CONFIGURED
-                )
+                    if (accessTokenConfigured) "configured" else NOT_CONFIGURED,
+                ),
             )
 
         @JvmStatic
@@ -210,7 +214,7 @@ class TmdbDevUiProcessor {
             baseUrl: String,
             healthActive: Boolean,
             metricsActive: Boolean,
-            reflectionClassCount: Int
+            reflectionClassCount: Int,
         ): List<Map<String, String>> {
             val baseUrlValid = isValidUri(baseUrl)
             val configReady = accessTokenConfigured && baseUrlValid
@@ -223,33 +227,33 @@ class TmdbDevUiProcessor {
                         "Required TMDB configuration is present"
                     } else {
                         "Check access token and base URL"
-                    }
+                    },
                 ),
                 statusRow(
                     "Access Token",
                     if (accessTokenConfigured) "configured" else NOT_CONFIGURED,
-                    "Token value is intentionally hidden"
+                    "Token value is intentionally hidden",
                 ),
                 statusRow(
                     "Base URL",
                     if (baseUrlValid) "valid" else "invalid",
-                    baseUrl
+                    baseUrl,
                 ),
                 statusRow(
                     "Health Capability",
                     if (healthActive) ACTIVE else INACTIVE,
-                    "Requires the SmallRye Health extension"
+                    "Requires the SmallRye Health extension",
                 ),
                 statusRow(
                     "Metrics Capability",
                     if (metricsActive) ACTIVE else INACTIVE,
-                    "Requires a Quarkus metrics extension such as Micrometer"
+                    "Requires a Quarkus metrics extension such as Micrometer",
                 ),
                 statusRow(
                     "Native Reflection",
                     "registered",
-                    "$reflectionClassCount SDK model classes"
-                )
+                    "$reflectionClassCount SDK model classes",
+                ),
             )
         }
 
@@ -260,7 +264,7 @@ class TmdbDevUiProcessor {
                     "name",
                     simpleName(className),
                     "type",
-                    className
+                    className,
                 )
             }
 
@@ -273,27 +277,22 @@ class TmdbDevUiProcessor {
                     .asSequence()
                     .filter {
                         it.isAnnotationPresent(Produces::class.java)
-                    }
-                    .map { it.returnType }
+                    }.map { it.returnType }
                     .filterNot {
                         it == TmdbMetricsRecorder::class.java
-                    }
-                    .map { it.name }
+                    }.map { it.name }
                     .sortedBy { simpleName(it) }
                     .forEach { className ->
                         add(className)
                     }
             }
 
-        private fun extensionVersion(
-            curateOutcome: CurateOutcomeBuildItem
-        ): String =
+        private fun extensionVersion(curateOutcome: CurateOutcomeBuildItem): String =
             curateOutcome.applicationModel.dependencies
                 .firstOrNull {
                     it.groupId == "dev.reuss.tmdb" &&
-                            it.artifactId == "quarkus-tmdb"
-                }
-                ?.version
+                        it.artifactId == "quarkus-tmdb"
+                }?.version
                 ?: packageVersion()
                 ?: "development"
 
@@ -305,15 +304,17 @@ class TmdbDevUiProcessor {
 
         private fun configValue(
             name: String,
-            defaultValue: String
+            defaultValue: String,
         ): String =
-            ConfigProvider.getConfig()
+            ConfigProvider
+                .getConfig()
                 .getOptionalValue(name, String::class.java)
                 .filter { it.isNotBlank() }
                 .orElse(defaultValue)
 
         private fun isConfigured(name: String): Boolean =
-            ConfigProvider.getConfig()
+            ConfigProvider
+                .getConfig()
                 .getOptionalValue(name, String::class.java)
                 .filter { it.isNotBlank() }
                 .isPresent
@@ -330,25 +331,24 @@ class TmdbDevUiProcessor {
             firstKey: String,
             firstValue: String,
             secondKey: String,
-            secondValue: String
+            secondValue: String,
         ): Map<String, String> =
             linkedMapOf(
                 firstKey to firstValue,
-                secondKey to secondValue
+                secondKey to secondValue,
             )
 
         private fun statusRow(
             name: String,
             status: String,
-            details: String
+            details: String,
         ): Map<String, String> =
             linkedMapOf(
                 "name" to name,
                 "status" to status,
-                "details" to details
+                "details" to details,
             )
 
-        private fun simpleName(className: String): String =
-            className.substringAfterLast('.')
+        private fun simpleName(className: String): String = className.substringAfterLast('.')
     }
 }

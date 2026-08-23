@@ -20,18 +20,15 @@ import org.springframework.context.annotation.Bean
         MetricsAutoConfiguration::class,
         PrometheusMetricsExportAutoConfiguration::class,
         SimpleMetricsExportAutoConfiguration::class,
-        CompositeMeterRegistryAutoConfiguration::class
+        CompositeMeterRegistryAutoConfiguration::class,
     ],
-    before = [TmdbClientAutoConfiguration::class]
+    before = [TmdbClientAutoConfiguration::class],
 )
 @ConditionalOnClass(MeterRegistry::class)
 @ConditionalOnBean(MeterRegistry::class)
 class TmdbMetricsAutoConfiguration {
-
     @Bean
     @ConditionalOnMissingBean
-    fun tmdbMetricsRecorder(
-        meterRegistry: MeterRegistry
-    ): TmdbMetricsRecorder =
+    fun tmdbMetricsRecorder(meterRegistry: MeterRegistry): TmdbMetricsRecorder =
         SpringTmdbMetricsRecorder(meterRegistry)
 }

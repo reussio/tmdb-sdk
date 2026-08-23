@@ -17,9 +17,8 @@ import java.io.Serializable
  */
 class TmdbRequest private constructor(
     val path: String,
-    queryParams: Map<String, String>?
+    queryParams: Map<String, String>?,
 ) : Serializable {
-
     val queryParams: Map<String, String> =
         queryParams?.let { java.util.Map.copyOf(it) } ?: emptyMap()
 
@@ -35,24 +34,22 @@ class TmdbRequest private constructor(
 
     override fun equals(other: Any?): Boolean =
         this === other ||
+            (
                 other is TmdbRequest &&
-                path == other.path &&
-                queryParams == other.queryParams
+                    path == other.path &&
+                    queryParams == other.queryParams
+            )
 
-    override fun hashCode(): Int =
-        31 * path.hashCode() + queryParams.hashCode()
+    override fun hashCode(): Int = 31 * path.hashCode() + queryParams.hashCode()
 
-    override fun toString(): String =
-        "TmdbRequest(path=$path, queryParams=$queryParams)"
+    override fun toString(): String = "TmdbRequest(path=$path, queryParams=$queryParams)"
 
     companion object {
-
         /**
          * Creates a GET request without query parameters.
          */
         @JvmStatic
-        fun get(path: String): TmdbRequest =
-            TmdbRequest(path, emptyMap())
+        fun get(path: String): TmdbRequest = TmdbRequest(path, emptyMap())
 
         /**
          * Creates a GET request with query parameters.
@@ -60,11 +57,11 @@ class TmdbRequest private constructor(
         @JvmStatic
         fun get(
             path: String,
-            queryParams: QueryParams?
+            queryParams: QueryParams?,
         ): TmdbRequest =
             TmdbRequest(
                 path,
-                queryParams?.toMap()
+                queryParams?.toMap(),
             )
     }
 }

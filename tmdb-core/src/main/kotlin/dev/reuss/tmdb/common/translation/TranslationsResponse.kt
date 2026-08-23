@@ -7,18 +7,11 @@ package dev.reuss.tmdb.common.translation
  */
 
 interface TranslationsResponse<T> {
-
     val translations: List<Translation<T>>
 
-    fun isEmpty(): Boolean {
-        return translations.isEmpty()
-    }
+    fun isEmpty(): Boolean = translations.isEmpty()
 
-    fun hasTranslations(): Boolean {
-        return !isEmpty()
-    }
+    fun hasTranslations(): Boolean = !isEmpty()
 
-    fun translationCount(): Int {
-        return translations.size
-    }
+    fun translationCount(): Int = translations.size
 }

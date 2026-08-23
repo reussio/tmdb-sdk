@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class QueryParamsTest {
-
     @Test
     fun createsEmptyQueryParams() {
         val params = QueryParams.create().toMap()
@@ -16,29 +15,35 @@ class QueryParamsTest {
 
     @Test
     fun addsStringValue() {
-        val params = QueryParams.create()
-            .add("language", "de-DE")
-            .toMap()
+        val params =
+            QueryParams
+                .create()
+                .add("language", "de-DE")
+                .toMap()
 
         assertEquals("de-DE", params["language"])
     }
 
     @Test
     fun addsObjectValue() {
-        val params = QueryParams.create()
-            .add("page", 2)
-            .toMap()
+        val params =
+            QueryParams
+                .create()
+                .add("page", 2)
+                .toMap()
 
         assertEquals("2", params["page"])
     }
 
     @Test
     fun ignoresNullAndBlankValues() {
-        val params = QueryParams.create()
-            .add("language", null as String?)
-            .add("region", "")
-            .add("page", "1")
-            .toMap()
+        val params =
+            QueryParams
+                .create()
+                .add("language", null as String?)
+                .add("region", "")
+                .add("page", "1")
+                .toMap()
 
         assertEquals(mapOf("page" to "1"), params)
     }

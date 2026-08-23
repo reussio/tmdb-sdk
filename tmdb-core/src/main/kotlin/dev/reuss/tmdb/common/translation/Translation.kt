@@ -17,16 +17,12 @@ import dev.reuss.tmdb.common.TmdbModel
 data class Translation<T>(
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("iso_639_1")
     val iso6391: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("english_name")
     val englishName: String?,
-
     @all:JsonProperty("data")
-    val data: T?
+    val data: T?,
 ) : TmdbModel

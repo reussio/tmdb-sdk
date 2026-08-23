@@ -38,111 +38,89 @@ import org.springframework.context.annotation.Bean
 @AutoConfiguration(after = [TmdbClientAutoConfiguration::class])
 @ConditionalOnBean(TmdbClient::class)
 class TmdbServiceAutoConfiguration {
+    @Bean
+    @ConditionalOnMissingBean
+    fun configurationService(tmdbClient: TmdbClient): ConfigurationService = tmdbClient.configuration()
 
     @Bean
     @ConditionalOnMissingBean
-    fun configurationService(tmdbClient: TmdbClient): ConfigurationService =
-        tmdbClient.configuration()
+    fun imageUrlBuilder(tmdbClient: TmdbClient): ImageUrlBuilder = tmdbClient.imageUrls()
 
     @Bean
     @ConditionalOnMissingBean
-    fun imageUrlBuilder(tmdbClient: TmdbClient): ImageUrlBuilder =
-        tmdbClient.imageUrls()
+    fun certificationService(tmdbClient: TmdbClient): CertificationService = tmdbClient.certifications()
 
     @Bean
     @ConditionalOnMissingBean
-    fun certificationService(tmdbClient: TmdbClient): CertificationService =
-        tmdbClient.certifications()
+    fun companyService(tmdbClient: TmdbClient): CompanyService = tmdbClient.companies()
 
     @Bean
     @ConditionalOnMissingBean
-    fun companyService(tmdbClient: TmdbClient): CompanyService =
-        tmdbClient.companies()
+    fun creditService(tmdbClient: TmdbClient): CreditService = tmdbClient.credits()
 
     @Bean
     @ConditionalOnMissingBean
-    fun creditService(tmdbClient: TmdbClient): CreditService =
-        tmdbClient.credits()
+    fun discoverService(tmdbClient: TmdbClient): DiscoverService = tmdbClient.discover()
 
     @Bean
     @ConditionalOnMissingBean
-    fun discoverService(tmdbClient: TmdbClient): DiscoverService =
-        tmdbClient.discover()
+    fun findService(tmdbClient: TmdbClient): FindService = tmdbClient.find()
 
     @Bean
     @ConditionalOnMissingBean
-    fun findService(tmdbClient: TmdbClient): FindService =
-        tmdbClient.find()
+    fun genreService(tmdbClient: TmdbClient): GenreService = tmdbClient.genres()
 
     @Bean
     @ConditionalOnMissingBean
-    fun genreService(tmdbClient: TmdbClient): GenreService =
-        tmdbClient.genres()
+    fun keywordService(tmdbClient: TmdbClient): KeywordService = tmdbClient.keywords()
 
     @Bean
     @ConditionalOnMissingBean
-    fun keywordService(tmdbClient: TmdbClient): KeywordService =
-        tmdbClient.keywords()
+    fun networkService(tmdbClient: TmdbClient): NetworkService = tmdbClient.networks()
 
     @Bean
     @ConditionalOnMissingBean
-    fun networkService(tmdbClient: TmdbClient): NetworkService =
-        tmdbClient.networks()
+    fun reviewService(tmdbClient: TmdbClient): ReviewService = tmdbClient.reviews()
 
     @Bean
     @ConditionalOnMissingBean
-    fun reviewService(tmdbClient: TmdbClient): ReviewService =
-        tmdbClient.reviews()
+    fun trendingService(tmdbClient: TmdbClient): TrendingService = tmdbClient.trending()
 
     @Bean
     @ConditionalOnMissingBean
-    fun trendingService(tmdbClient: TmdbClient): TrendingService =
-        tmdbClient.trending()
+    fun watchProviderService(tmdbClient: TmdbClient): WatchProviderService = tmdbClient.watchProviders()
 
     @Bean
     @ConditionalOnMissingBean
-    fun watchProviderService(tmdbClient: TmdbClient): WatchProviderService =
-        tmdbClient.watchProviders()
+    fun searchService(tmdbClient: TmdbClient): SearchService = tmdbClient.search()
 
     @Bean
     @ConditionalOnMissingBean
-    fun searchService(tmdbClient: TmdbClient): SearchService =
-        tmdbClient.search()
+    fun personService(tmdbClient: TmdbClient): PersonService = tmdbClient.people()
 
     @Bean
     @ConditionalOnMissingBean
-    fun personService(tmdbClient: TmdbClient): PersonService =
-        tmdbClient.people()
+    fun tvSeriesService(tmdbClient: TmdbClient): TvSeriesService = tmdbClient.tvSeries()
 
     @Bean
     @ConditionalOnMissingBean
-    fun tvSeriesService(tmdbClient: TmdbClient): TvSeriesService =
-        tmdbClient.tvSeries()
+    fun tvSeasonService(tmdbClient: TmdbClient): TvSeasonService = tmdbClient.tvSeason()
 
     @Bean
     @ConditionalOnMissingBean
-    fun tvSeasonService(tmdbClient: TmdbClient): TvSeasonService =
-        tmdbClient.tvSeason()
+    fun tvEpisodeService(tmdbClient: TmdbClient): TvEpisodeService = tmdbClient.tvEpisode()
 
     @Bean
     @ConditionalOnMissingBean
-    fun tvEpisodeService(tmdbClient: TmdbClient): TvEpisodeService =
-        tmdbClient.tvEpisode()
+    fun tvEpisodeGroupService(tmdbClient: TmdbClient): TvEpisodeGroupService = tmdbClient.tvEpisodeGroup()
 
     @Bean
     @ConditionalOnMissingBean
-    fun tvEpisodeGroupService(tmdbClient: TmdbClient): TvEpisodeGroupService =
-        tmdbClient.tvEpisodeGroup()
+    fun movieService(tmdbClient: TmdbClient): MovieService = tmdbClient.movies()
 
     @Bean
     @ConditionalOnMissingBean
-    fun movieService(tmdbClient: TmdbClient): MovieService =
-        tmdbClient.movies()
-
-    @Bean
-    @ConditionalOnMissingBean
-    fun collectionService(tmdbClient: TmdbClient): CollectionService =
-        tmdbClient.collections()
+    fun collectionService(tmdbClient: TmdbClient): CollectionService = tmdbClient.collections()
 
     @Bean
     fun tmdbServiceBeansLogger(): SmartInitializingSingleton =

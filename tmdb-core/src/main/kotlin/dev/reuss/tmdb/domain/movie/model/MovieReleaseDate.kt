@@ -17,19 +17,14 @@ import dev.reuss.tmdb.common.TmdbModel
 data class MovieReleaseDate(
     @all:JsonProperty("certification")
     val certification: String?,
-
     @all:JsonProperty("descriptors")
     val descriptors: List<String> = emptyList(),
-
     @all:JsonProperty("iso_639_1")
     val iso6391: String?,
-
     @all:JsonProperty("note")
     val note: String?,
-
     @all:JsonProperty("release_date")
     val releaseDate: String?,
-
     @all:JsonProperty("type")
-    val type: MovieReleaseType
+    val type: MovieReleaseType,
 ) : TmdbModel

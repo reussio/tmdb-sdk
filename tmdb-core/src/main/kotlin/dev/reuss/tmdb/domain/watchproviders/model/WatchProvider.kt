@@ -16,16 +16,12 @@ import dev.reuss.tmdb.common.TmdbModel
 data class WatchProvider(
     @all:JsonProperty("display_priorities")
     val displayPriorities: Map<String, Int> = emptyMap(),
-
     @all:JsonProperty("display_priority")
     val displayPriority: Int,
-
     @all:JsonProperty("logo_path")
     val logoPath: String?,
-
     @all:JsonProperty("provider_name")
     val providerName: String?,
-
     @all:JsonProperty("provider_id")
-    val providerId: Int
+    val providerId: Int,
 ) : TmdbModel

@@ -7,7 +7,6 @@ import dev.reuss.tmdb.domain.certifications.model.TvCertifications
  * Service for loading TMDB certification metadata.
  */
 interface CertificationService {
-
     fun movieCertifications(): MovieCertifications
 
     fun tvCertifications(): TvCertifications

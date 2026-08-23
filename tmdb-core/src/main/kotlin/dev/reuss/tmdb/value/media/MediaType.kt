@@ -8,15 +8,15 @@ import com.fasterxml.jackson.annotation.JsonValue
  */
 enum class MediaType(
     @get:JsonValue
-    val value: String
+    val value: String,
 ) {
     MOVIE("movie"),
     TV("tv"),
     PERSON("person"),
-    UNKNOWN("unknown");
+    UNKNOWN("unknown"),
+    ;
 
     companion object {
-
         /**
          * Parses a TMDB media type value.
          *
@@ -24,7 +24,6 @@ enum class MediaType(
          */
         @JvmStatic
         @JsonCreator
-        fun fromValue(value: String?): MediaType =
-            entries.firstOrNull { it.value == value } ?: UNKNOWN
+        fun fromValue(value: String?): MediaType = entries.firstOrNull { it.value == value } ?: UNKNOWN
     }
 }

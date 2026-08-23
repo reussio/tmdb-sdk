@@ -17,19 +17,14 @@ import dev.reuss.tmdb.common.TmdbModel
 data class Network(
     @all:JsonProperty("headquarters")
     val headquarters: String?,
-
     @all:JsonProperty("homepage")
     val homepage: String?,
-
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("logo_path")
     val logoPath: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("origin_country")
-    val originCountry: String?
+    val originCountry: String?,
 ) : TmdbModel

@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.movie.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -14,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class MovieNowPlayingDates(
     @all:JsonProperty("maximum")
     val maximum: String?,
-
     @all:JsonProperty("minimum")
-    val minimum: String?
+    val minimum: String?,
 ) : TmdbModel

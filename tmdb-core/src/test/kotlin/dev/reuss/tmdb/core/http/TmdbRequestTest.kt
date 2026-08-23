@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class TmdbRequestTest {
-
     @Test
     fun createsGetRequestWithoutParams() {
         val request = TmdbRequest.get("/configuration")
@@ -17,15 +16,17 @@ class TmdbRequestTest {
 
     @Test
     fun createsGetRequestWithParams() {
-        val request = TmdbRequest.get(
-            "/search/movie",
-            QueryParams.create()
-                .add("query", "Fight Club")
-        )
+        val request =
+            TmdbRequest.get(
+                "/search/movie",
+                QueryParams
+                    .create()
+                    .add("query", "Fight Club"),
+            )
 
         assertEquals(
             mapOf("query" to "Fight Club"),
-            request.queryParams
+            request.queryParams,
         )
     }
 

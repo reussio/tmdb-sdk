@@ -1,6 +1,6 @@
 package dev.reuss.tmdb.core.exception
 
-import java.util.*
+import java.util.Optional
 
 /**
  * Known TMDB API status codes and their default HTTP status and message.
@@ -12,14 +12,14 @@ import java.util.*
 enum class TmdbError(
     val code: Int,
     val httpStatus: Int,
-    val message: String
+    val message: String,
 ) {
     SUCCESS(1, 200, "Success."),
     INVALID_SERVICE(2, 501, "Invalid service: this service does not exist."),
     AUTHENTICATION_FAILED_PERMISSION(
         3,
         401,
-        "Authentication failed: You do not have permissions to access the service."
+        "Authentication failed: You do not have permissions to access the service.",
     ),
     INVALID_FORMAT(4, 405, "Invalid format: This service doesn't exist in that format."),
     INVALID_PARAMETERS(5, 422, "Invalid parameters: Your request parameters are incorrect."),
@@ -64,11 +64,11 @@ enum class TmdbError(
     ID_INVALID(44, 500, "The ID is invalid."),
     USER_SUSPENDED(45, 403, "This user has been suspended."),
     API_MAINTENANCE(46, 503, "The API is undergoing maintenance. Try again later."),
-    INVALID_INPUT(47, 400, "The input is not valid.");
+    INVALID_INPUT(47, 400, "The input is not valid."),
+    ;
 
     companion object {
         @JvmStatic
-        fun fromCode(code: Int): Optional<TmdbError> =
-            Optional.ofNullable(entries.firstOrNull { it.code == code })
+        fun fromCode(code: Int): Optional<TmdbError> = Optional.ofNullable(entries.firstOrNull { it.code == code })
     }
 }

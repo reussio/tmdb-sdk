@@ -11,24 +11,23 @@ import dev.reuss.tmdb.value.language.Language
  * Default [CreditService] implementation backed by the TMDB HTTP client.
  */
 internal class DefaultCreditService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : CreditService {
-
     override fun details(creditId: CreditId): CreditDetails =
         httpClient.get(
             TmdbRequest.get(CreditPaths.details(creditId)),
-            CreditDetails::class.java
+            CreditDetails::class.java,
         )
 
     override fun details(
         creditId: CreditId,
-        language: Language
+        language: Language,
     ): CreditDetails =
         httpClient.get(
             TmdbRequest.get(
                 CreditPaths.details(creditId),
-                QueryParams.create().add("language", language.value)
+                QueryParams.create().add("language", language.value),
             ),
-            CreditDetails::class.java
+            CreditDetails::class.java,
         )
 }

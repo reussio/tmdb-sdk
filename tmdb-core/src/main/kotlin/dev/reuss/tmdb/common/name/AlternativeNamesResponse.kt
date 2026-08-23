@@ -7,18 +7,11 @@ package dev.reuss.tmdb.common.name
  */
 
 interface AlternativeNamesResponse<T> {
-
     val results: List<T>
 
-    fun isEmpty(): Boolean {
-        return results.isEmpty()
-    }
+    fun isEmpty(): Boolean = results.isEmpty()
 
-    fun hasAlternativeNames(): Boolean {
-        return !isEmpty()
-    }
+    fun hasAlternativeNames(): Boolean = !isEmpty()
 
-    fun alternativeNameCount(): Int {
-        return results.size
-    }
+    fun alternativeNameCount(): Int = results.size
 }

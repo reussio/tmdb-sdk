@@ -7,29 +7,21 @@ package dev.reuss.tmdb.common.credit
  * @param R crew credit type
  */
 interface CreditsResponse<C, R> {
-
     val cast: List<C>
 
     val crew: List<R>
 
-    fun isEmpty(): Boolean =
-        cast.isEmpty() && crew.isEmpty()
+    fun isEmpty(): Boolean = cast.isEmpty() && crew.isEmpty()
 
-    fun hasCast(): Boolean =
-        cast.isNotEmpty()
+    fun hasCast(): Boolean = cast.isNotEmpty()
 
-    fun hasCrew(): Boolean =
-        crew.isNotEmpty()
+    fun hasCrew(): Boolean = crew.isNotEmpty()
 
-    fun hasCredits(): Boolean =
-        !isEmpty()
+    fun hasCredits(): Boolean = !isEmpty()
 
-    fun castCount(): Int =
-        cast.size
+    fun castCount(): Int = cast.size
 
-    fun crewCount(): Int =
-        crew.size
+    fun crewCount(): Int = crew.size
 
-    fun creditCount(): Int =
-        castCount() + crewCount()
+    fun creditCount(): Int = castCount() + crewCount()
 }

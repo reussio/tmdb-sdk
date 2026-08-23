@@ -46,9 +46,8 @@ import dev.reuss.tmdb.domain.watchproviders.DefaultWatchProviderService
 import dev.reuss.tmdb.domain.watchproviders.WatchProviderService
 
 internal class DefaultTmdbClient(
-    config: TmdbClientConfig
+    config: TmdbClientConfig,
 ) : TmdbClient {
-
     private val httpClient = JavaNetTmdbHttpClient(config)
 
     private val configuration = DefaultConfigurationService(httpClient)

@@ -13,10 +13,8 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class TmdbErrorResponse(
     val success: Boolean,
-
     @all:JsonProperty("status_code")
     val statusCode: Int,
-
     @all:JsonProperty("status_message")
-    val statusMessage: String
+    val statusMessage: String,
 )

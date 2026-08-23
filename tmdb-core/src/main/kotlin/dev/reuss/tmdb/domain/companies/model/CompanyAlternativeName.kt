@@ -13,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class CompanyAlternativeName(
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("type")
-    val type: String?
+    val type: String?,
 ) : TmdbModel

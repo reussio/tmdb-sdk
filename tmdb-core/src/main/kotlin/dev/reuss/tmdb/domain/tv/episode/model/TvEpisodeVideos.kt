@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.tv.episode.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 import dev.reuss.tmdb.common.video.VideosResponse
 
@@ -15,7 +14,7 @@ import dev.reuss.tmdb.common.video.VideosResponse
 data class TvEpisodeVideos(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("results")
-    override val results: List<TvEpisodeVideo> = emptyList()
-) : VideosResponse<TvEpisodeVideo>, TmdbModel
+    override val results: List<TvEpisodeVideo> = emptyList(),
+) : VideosResponse<TvEpisodeVideo>,
+    TmdbModel

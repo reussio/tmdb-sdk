@@ -1,6 +1,6 @@
 package dev.reuss.tmdb.core.exception
 
-import java.util.*
+import java.util.Optional
 
 /**
  * Exception thrown when TMDB returns an error response.
@@ -13,15 +13,13 @@ open class TmdbApiException(
     message: String,
     val httpStatus: Int,
     val tmdbStatusCode: Int,
-    val responseBody: String
+    val responseBody: String,
 ) : TmdbException(message) {
-
     private val error: TmdbError? =
         TmdbError.fromCode(tmdbStatusCode).orElse(null)
 
     /**
      * Returns the known TMDB error matching [tmdbStatusCode].
      */
-    fun error(): Optional<TmdbError> =
-        Optional.ofNullable(error)
+    fun error(): Optional<TmdbError> = Optional.ofNullable(error)
 }

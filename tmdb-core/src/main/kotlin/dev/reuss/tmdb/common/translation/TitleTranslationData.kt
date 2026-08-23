@@ -13,7 +13,6 @@ import dev.reuss.tmdb.common.TmdbModel
 data class TitleTranslationData(
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("overview")
-    val overview: String?
+    val overview: String?,
 ) : TmdbModel

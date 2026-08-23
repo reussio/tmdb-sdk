@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class TvShowIdTest {
-
     @Test
     fun createsTvShowId() {
         val id = TvShowId.of(1399)
@@ -17,18 +16,20 @@ class TvShowIdTest {
 
     @Test
     fun rejectsZero() {
-        val exception = assertThrows<IllegalArgumentException> {
-            TvShowId.of(0)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                TvShowId.of(0)
+            }
 
         assertEquals("TV series id must be greater than 0", exception.message)
     }
 
     @Test
     fun rejectsNegativeValue() {
-        val exception = assertThrows<IllegalArgumentException> {
-            TvShowId.of(-1)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                TvShowId.of(-1)
+            }
 
         assertEquals("TV series id must be greater than 0", exception.message)
     }

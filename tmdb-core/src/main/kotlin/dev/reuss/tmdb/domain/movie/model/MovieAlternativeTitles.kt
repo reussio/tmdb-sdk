@@ -15,7 +15,7 @@ import dev.reuss.tmdb.common.title.AlternativeTitlesResponse
 data class MovieAlternativeTitles(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("titles")
-    override val alternativeTitles: List<AlternativeTitle> = emptyList()
-) : AlternativeTitlesResponse, TmdbModel
+    override val alternativeTitles: List<AlternativeTitle> = emptyList(),
+) : AlternativeTitlesResponse,
+    TmdbModel

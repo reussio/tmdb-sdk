@@ -5,7 +5,13 @@ import dev.reuss.tmdb.common.image.PersonImages
 import dev.reuss.tmdb.core.http.QueryParams
 import dev.reuss.tmdb.core.http.TmdbHttpClient
 import dev.reuss.tmdb.core.http.TmdbRequest
-import dev.reuss.tmdb.domain.people.model.*
+import dev.reuss.tmdb.domain.people.model.PersonChanges
+import dev.reuss.tmdb.domain.people.model.PersonCombinedCredits
+import dev.reuss.tmdb.domain.people.model.PersonDetails
+import dev.reuss.tmdb.domain.people.model.PersonMovieCredits
+import dev.reuss.tmdb.domain.people.model.PersonTranslations
+import dev.reuss.tmdb.domain.people.model.PersonTvCredits
+import dev.reuss.tmdb.domain.people.model.PopularPeopleResponse
 import dev.reuss.tmdb.domain.people.query.PopularPeopleQuery
 import dev.reuss.tmdb.query.AppendToResponse
 import dev.reuss.tmdb.query.ChangesQuery
@@ -17,163 +23,169 @@ import dev.reuss.tmdb.value.language.Language
  * Default [PersonService] implementation backed by the TMDB HTTP client.
  */
 internal class DefaultPersonService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : PersonService {
-
     override fun details(personId: PersonId): PersonDetails =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.details(personId)),
-            PersonDetails::class.java
-        )
-
-    override fun details(
-        personId: PersonId,
-        language: Language
-    ): PersonDetails =
-        httpClient.get(
-            TmdbRequest.get(
-                PeoplePaths.details(personId),
-                QueryParams.create()
-                    .add("language", language.value)
-            ),
-            PersonDetails::class.java
-        )
-
-    override fun details(
-        personId: PersonId,
-        appendToResponse: AppendToResponse<PersonAppend>
-    ): PersonDetails =
-        httpClient.get(
-            TmdbRequest.get(
-                PeoplePaths.details(personId),
-                QueryParams.create()
-                    .add("append_to_response", appendToResponse)
-            ),
-            PersonDetails::class.java
+            PersonDetails::class.java,
         )
 
     override fun details(
         personId: PersonId,
         language: Language,
-        appendToResponse: AppendToResponse<PersonAppend>
     ): PersonDetails =
         httpClient.get(
             TmdbRequest.get(
                 PeoplePaths.details(personId),
-                QueryParams.create()
-                    .add("language", language.value)
-                    .add("append_to_response", appendToResponse)
+                QueryParams
+                    .create()
+                    .add("language", language.value),
             ),
-            PersonDetails::class.java
+            PersonDetails::class.java,
+        )
+
+    override fun details(
+        personId: PersonId,
+        appendToResponse: AppendToResponse<PersonAppend>,
+    ): PersonDetails =
+        httpClient.get(
+            TmdbRequest.get(
+                PeoplePaths.details(personId),
+                QueryParams
+                    .create()
+                    .add("append_to_response", appendToResponse),
+            ),
+            PersonDetails::class.java,
+        )
+
+    override fun details(
+        personId: PersonId,
+        language: Language,
+        appendToResponse: AppendToResponse<PersonAppend>,
+    ): PersonDetails =
+        httpClient.get(
+            TmdbRequest.get(
+                PeoplePaths.details(personId),
+                QueryParams
+                    .create()
+                    .add("language", language.value)
+                    .add("append_to_response", appendToResponse),
+            ),
+            PersonDetails::class.java,
         )
 
     override fun changes(personId: PersonId): PersonChanges =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.changes(personId)),
-            PersonChanges::class.java
+            PersonChanges::class.java,
         )
 
     override fun changes(
         personId: PersonId,
-        query: ChangesQuery
+        query: ChangesQuery,
     ): PersonChanges =
         httpClient.get(
             TmdbRequest.get(
                 PeoplePaths.changes(personId),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            PersonChanges::class.java
+            PersonChanges::class.java,
         )
 
     override fun combinedCredits(personId: PersonId): PersonCombinedCredits =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.combinedCredits(personId)),
-            PersonCombinedCredits::class.java
+            PersonCombinedCredits::class.java,
         )
 
     override fun combinedCredits(
         personId: PersonId,
-        language: Language
+        language: Language,
     ): PersonCombinedCredits =
         httpClient.get(
             TmdbRequest.get(
                 PeoplePaths.combinedCredits(personId),
-                QueryParams.create()
-                    .add("language", language.value)
+                QueryParams
+                    .create()
+                    .add("language", language.value),
             ),
-            PersonCombinedCredits::class.java
+            PersonCombinedCredits::class.java,
         )
 
     override fun externalIds(personId: PersonId): ExternalIds =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.externalIds(personId)),
-            ExternalIds::class.java
+            ExternalIds::class.java,
         )
 
     override fun latest(): PersonDetails =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.latest()),
-            PersonDetails::class.java
+            PersonDetails::class.java,
         )
 
     override fun movieCredits(personId: PersonId): PersonMovieCredits =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.movieCredits(personId)),
-            PersonMovieCredits::class.java
+            PersonMovieCredits::class.java,
         )
 
     override fun movieCredits(
         personId: PersonId,
-        language: Language
+        language: Language,
     ): PersonMovieCredits =
         httpClient.get(
             TmdbRequest.get(
                 PeoplePaths.movieCredits(personId),
-                QueryParams.create()
-                    .add("language", language.value)
+                QueryParams
+                    .create()
+                    .add("language", language.value),
             ),
-            PersonMovieCredits::class.java
+            PersonMovieCredits::class.java,
         )
 
     override fun tvCredits(personId: PersonId): PersonTvCredits =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.tvCredits(personId)),
-            PersonTvCredits::class.java
+            PersonTvCredits::class.java,
         )
 
     override fun tvCredits(
         personId: PersonId,
-        language: Language
+        language: Language,
     ): PersonTvCredits =
         httpClient.get(
             TmdbRequest.get(
                 PeoplePaths.tvCredits(personId),
-                QueryParams.create()
-                    .add("language", language.value)
+                QueryParams
+                    .create()
+                    .add("language", language.value),
             ),
-            PersonTvCredits::class.java
+            PersonTvCredits::class.java,
         )
 
     override fun translations(personId: PersonId): PersonTranslations =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.translations(personId)),
-            PersonTranslations::class.java
+            PersonTranslations::class.java,
         )
 
     override fun popular(): PopularPeopleResponse =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.popular()),
-            PopularPeopleResponse::class.java
+            PopularPeopleResponse::class.java,
         )
 
     override fun popular(language: Language): PopularPeopleResponse =
         httpClient.get(
             TmdbRequest.get(
                 PeoplePaths.popular(),
-                QueryParams.create()
-                    .add("language", language.value)
+                QueryParams
+                    .create()
+                    .add("language", language.value),
             ),
-            PopularPeopleResponse::class.java
+            PopularPeopleResponse::class.java,
         )
 
     override fun popular(page: Int): PopularPeopleResponse {
@@ -182,10 +194,11 @@ internal class DefaultPersonService(
         return httpClient.get(
             TmdbRequest.get(
                 PeoplePaths.popular(),
-                QueryParams.create()
-                    .add("page", page)
+                QueryParams
+                    .create()
+                    .add("page", page),
             ),
-            PopularPeopleResponse::class.java
+            PopularPeopleResponse::class.java,
         )
     }
 
@@ -193,14 +206,14 @@ internal class DefaultPersonService(
         httpClient.get(
             TmdbRequest.get(
                 PeoplePaths.popular(),
-                query.toQueryParams()
+                query.toQueryParams(),
             ),
-            PopularPeopleResponse::class.java
+            PopularPeopleResponse::class.java,
         )
 
     override fun images(personId: PersonId): PersonImages =
         httpClient.get(
             TmdbRequest.get(PeoplePaths.images(personId)),
-            PersonImages::class.java
+            PersonImages::class.java,
         )
 }

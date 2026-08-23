@@ -17,11 +17,7 @@ import org.springframework.context.annotation.Bean
 @ConditionalOnBean(TmdbClient::class)
 @ConditionalOnEnabledHealthIndicator("tmdb")
 class TmdbHealthAutoConfiguration {
-
     @Bean
     @ConditionalOnMissingBean(name = ["tmdbHealthIndicator"])
-    fun tmdbHealthIndicator(
-        tmdbClient: TmdbClient
-    ): HealthIndicator =
-        TmdbHealthIndicator(tmdbClient)
+    fun tmdbHealthIndicator(tmdbClient: TmdbClient): HealthIndicator = TmdbHealthIndicator(tmdbClient)
 }

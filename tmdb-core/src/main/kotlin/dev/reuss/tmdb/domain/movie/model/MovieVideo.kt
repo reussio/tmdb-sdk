@@ -21,31 +21,22 @@ import dev.reuss.tmdb.common.TmdbModel
 data class MovieVideo(
     @all:JsonProperty("iso_639_1")
     val iso6391: String?,
-
     @all:JsonProperty("iso_3166_1")
     val iso31661: String?,
-
     @all:JsonProperty("name")
     val name: String?,
-
     @all:JsonProperty("key")
     val key: String?,
-
     @all:JsonProperty("site")
     val site: String?,
-
     @all:JsonProperty("size")
     val size: Int,
-
     @all:JsonProperty("type")
     val type: String?,
-
     @all:JsonProperty("official")
     val official: Boolean,
-
     @all:JsonProperty("published_at")
     val publishedAt: String?,
-
     @all:JsonProperty("id")
-    val id: String?
+    val id: String?,
 ) : TmdbModel

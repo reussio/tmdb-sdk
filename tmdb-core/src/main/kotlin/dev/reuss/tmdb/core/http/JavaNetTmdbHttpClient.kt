@@ -5,7 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.KotlinFeature
 import com.fasterxml.jackson.module.kotlin.KotlinModule
 import dev.reuss.tmdb.core.config.TmdbClientConfig
-import dev.reuss.tmdb.core.exception.*
+import dev.reuss.tmdb.core.exception.TmdbApiException
+import dev.reuss.tmdb.core.exception.TmdbClientException
+import dev.reuss.tmdb.core.exception.TmdbErrorResponse
+import dev.reuss.tmdb.core.exception.TmdbExceptions
+import dev.reuss.tmdb.core.exception.TmdbMappingException
 import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder
 import org.slf4j.LoggerFactory
 import java.io.IOException
@@ -28,22 +32,24 @@ import java.time.Duration
  * exceptions.
  */
 class JavaNetTmdbHttpClient(
-    private val config: TmdbClientConfig
+    private val config: TmdbClientConfig,
 ) : TmdbHttpClient {
+    private val httpClient: HttpClient =
+        HttpClient
+            .newBuilder()
+            .connectTimeout(config.connectTimeout)
+            .build()
 
-    private val httpClient: HttpClient = HttpClient.newBuilder()
-        .connectTimeout(config.connectTimeout)
-        .build()
-
-    private val objectMapper: ObjectMapper = ObjectMapper()
-        .registerModule(
-            KotlinModule.Builder()
-                .enable(KotlinFeature.NullToEmptyCollection)
-                .enable(KotlinFeature.NullToEmptyMap)
-                .build()
-        )
-        .findAndRegisterModules()
-        .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    private val objectMapper: ObjectMapper =
+        ObjectMapper()
+            .registerModule(
+                KotlinModule
+                    .Builder()
+                    .enable(KotlinFeature.NullToEmptyCollection)
+                    .enable(KotlinFeature.NullToEmptyMap)
+                    .build(),
+            ).findAndRegisterModules()
+            .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
 
     private val metricsRecorder: TmdbMetricsRecorder = config.metricsRecorder
 
@@ -52,23 +58,25 @@ class JavaNetTmdbHttpClient(
      */
     override fun <T> get(
         request: TmdbRequest,
-        responseType: Class<T>
+        responseType: Class<T>,
     ): T {
         log.debug(
             "Sending TMDB request: method=GET, path={}, responseType={}",
             request.path,
-            responseType.simpleName
+            responseType.simpleName,
         )
 
         val uri = buildUri(request)
         log.trace("Resolved TMDB request URI: {}", uri)
 
-        val httpRequest = HttpRequest.newBuilder(uri)
-            .timeout(config.requestTimeout)
-            .header("Authorization", config.auth.authorizationHeaderValue())
-            .header("Accept", "application/json")
-            .GET()
-            .build()
+        val httpRequest =
+            HttpRequest
+                .newBuilder(uri)
+                .timeout(config.requestTimeout)
+                .header("Authorization", config.auth.authorizationHeaderValue())
+                .header("Accept", "application/json")
+                .GET()
+                .build()
 
         val method = httpRequest.method()
         val path = request.path
@@ -77,10 +85,11 @@ class JavaNetTmdbHttpClient(
         metricsRecorder.recordRequestStarted(method, path)
 
         try {
-            val response = httpClient.send(
-                httpRequest,
-                HttpResponse.BodyHandlers.ofString()
-            )
+            val response =
+                httpClient.send(
+                    httpRequest,
+                    HttpResponse.BodyHandlers.ofString(),
+                )
 
             val durationMillis = elapsedMillis(startedAt)
 
@@ -89,7 +98,7 @@ class JavaNetTmdbHttpClient(
                 path,
                 response.statusCode(),
                 Duration.ofMillis(durationMillis),
-                responseBytes(response.body())
+                responseBytes(response.body()),
             )
 
             return handleResponse(
@@ -97,7 +106,7 @@ class JavaNetTmdbHttpClient(
                 responseType,
                 method,
                 path,
-                durationMillis
+                durationMillis,
             )
         } catch (exception: IOException) {
             val duration = Duration.ofNanos(System.nanoTime() - startedAt)
@@ -106,12 +115,12 @@ class JavaNetTmdbHttpClient(
                 method,
                 path,
                 exception,
-                duration
+                duration,
             )
 
             throw TmdbClientException(
                 "Failed to execute TMDB request",
-                exception
+                exception,
             )
         } catch (exception: InterruptedException) {
             val duration = Duration.ofNanos(System.nanoTime() - startedAt)
@@ -120,14 +129,14 @@ class JavaNetTmdbHttpClient(
                 method,
                 path,
                 exception,
-                duration
+                duration,
             )
 
             Thread.currentThread().interrupt()
 
             throw TmdbClientException(
                 "TMDB request was interrupted",
-                exception
+                exception,
             )
         }
     }
@@ -135,15 +144,16 @@ class JavaNetTmdbHttpClient(
     private fun buildUri(request: TmdbRequest): URI {
         val baseUrl = config.baseUrl.removeSuffix("/")
 
-        val url = buildString {
-            append(baseUrl)
-            append(request.path)
+        val url =
+            buildString {
+                append(baseUrl)
+                append(request.path)
 
-            if (request.queryParams.isNotEmpty()) {
-                append("?")
-                append(toQueryString(request.queryParams))
+                if (request.queryParams.isNotEmpty()) {
+                    append("?")
+                    append(toQueryString(request.queryParams))
+                }
             }
-        }
 
         return URI.create(url)
     }
@@ -153,15 +163,14 @@ class JavaNetTmdbHttpClient(
             "${encode(name)}=${encode(value)}"
         }
 
-    private fun encode(value: String): String =
-        URLEncoder.encode(value, StandardCharsets.UTF_8)
+    private fun encode(value: String): String = URLEncoder.encode(value, StandardCharsets.UTF_8)
 
     private fun <T> handleResponse(
         response: HttpResponse<String>,
         responseType: Class<T>,
         method: String,
         path: String,
-        durationMillis: Long
+        durationMillis: Long,
     ): T {
         val httpStatus = response.statusCode()
         val body = response.body()
@@ -171,7 +180,7 @@ class JavaNetTmdbHttpClient(
             httpStatus,
             path,
             responseType.simpleName,
-            durationMillis
+            durationMillis,
         )
 
         if (httpStatus in 200..299) {
@@ -179,14 +188,14 @@ class JavaNetTmdbHttpClient(
                 body,
                 responseType,
                 method,
-                path
+                path,
             )
         }
 
         logNonSuccessfulResponse(
             httpStatus,
             path,
-            durationMillis
+            durationMillis,
         )
 
         throw mapErrorResponse(httpStatus, body)
@@ -194,25 +203,26 @@ class JavaNetTmdbHttpClient(
 
     private fun mapErrorResponse(
         httpStatus: Int,
-        body: String
+        body: String,
     ): TmdbApiException =
         try {
-            val errorResponse = objectMapper.readValue(
-                body,
-                TmdbErrorResponse::class.java
-            )
+            val errorResponse =
+                objectMapper.readValue(
+                    body,
+                    TmdbErrorResponse::class.java,
+                )
 
             TmdbExceptions.from(
                 httpStatus,
                 errorResponse.statusCode,
                 errorResponse.statusMessage,
-                body
+                body,
             )
         } catch (exception: Exception) {
             TmdbExceptions.fromHttpStatus(
                 httpStatus,
                 "TMDB request failed with status code $httpStatus",
-                body
+                body,
             )
         }
 
@@ -220,7 +230,7 @@ class JavaNetTmdbHttpClient(
         body: String,
         responseType: Class<T>,
         method: String,
-        path: String
+        path: String,
     ): T =
         try {
             objectMapper.readValue(body, responseType)
@@ -229,42 +239,44 @@ class JavaNetTmdbHttpClient(
                 method,
                 path,
                 responseType,
-                exception
+                exception,
             )
 
             throw TmdbMappingException(
                 "Failed to map TMDB response to ${responseType.simpleName}",
-                exception
+                exception,
             )
         }
 
     private fun logNonSuccessfulResponse(
         httpStatus: Int,
         path: String,
-        durationMillis: Long
+        durationMillis: Long,
     ) {
         when {
-            httpStatus == 429 -> log.warn(
-                "TMDB rate limit response received: status={}, path={}, duration={}ms",
-                httpStatus,
-                path,
-                durationMillis
-            )
+            httpStatus == 429 -> {
+                log.warn(
+                    "TMDB rate limit response received: status={}, path={}, duration={}ms",
+                    httpStatus,
+                    path,
+                    durationMillis,
+                )
+            }
 
-            httpStatus >= 500 -> log.warn(
-                "TMDB server error response received: status={}, path={}, duration={}ms",
-                httpStatus,
-                path,
-                durationMillis
-            )
+            httpStatus >= 500 -> {
+                log.warn(
+                    "TMDB server error response received: status={}, path={}, duration={}ms",
+                    httpStatus,
+                    path,
+                    durationMillis,
+                )
+            }
         }
     }
 
-    private fun elapsedMillis(startedAt: Long): Long =
-        (System.nanoTime() - startedAt) / 1_000_000
+    private fun elapsedMillis(startedAt: Long): Long = (System.nanoTime() - startedAt) / 1_000_000
 
-    private fun responseBytes(body: String?): Long =
-        body?.toByteArray(StandardCharsets.UTF_8)?.size?.toLong() ?: 0L
+    private fun responseBytes(body: String?): Long = body?.toByteArray(StandardCharsets.UTF_8)?.size?.toLong() ?: 0L
 
     companion object {
         private val log = LoggerFactory.getLogger(JavaNetTmdbHttpClient::class.java)

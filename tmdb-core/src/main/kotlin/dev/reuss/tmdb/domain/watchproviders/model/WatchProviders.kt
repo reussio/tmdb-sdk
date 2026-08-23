@@ -1,7 +1,6 @@
 package dev.reuss.tmdb.domain.watchproviders.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
-
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
@@ -12,5 +11,5 @@ import dev.reuss.tmdb.common.TmdbModel
 @JvmRecord
 data class WatchProviders(
     @all:JsonProperty("results")
-    val results: List<WatchProvider> = emptyList()
+    val results: List<WatchProvider> = emptyList(),
 ) : TmdbModel

@@ -4,7 +4,7 @@ package dev.reuss.tmdb.domain.discover.query
  * Sort options for TMDB movie discovery.
  */
 enum class MovieDiscoverSortBy(
-    val value: String
+    val value: String,
 ) {
     ORIGINAL_TITLE_ASC("original_title.asc"),
     ORIGINAL_TITLE_DESC("original_title.desc"),
@@ -25,5 +25,5 @@ enum class MovieDiscoverSortBy(
     VOTE_AVERAGE_DESC("vote_average.desc"),
 
     VOTE_COUNT_ASC("vote_count.asc"),
-    VOTE_COUNT_DESC("vote_count.desc")
+    VOTE_COUNT_DESC("vote_count.desc"),
 }

@@ -3,10 +3,9 @@ package dev.reuss.tmdb.core.metrics
 import java.time.Duration
 
 interface TmdbMetricsRecorder {
-
     fun recordRequestStarted(
         method: String,
-        path: String
+        path: String,
     ) = Unit
 
     fun recordRequestFinished(
@@ -14,21 +13,21 @@ interface TmdbMetricsRecorder {
         path: String,
         statusCode: Int,
         duration: Duration,
-        responseBytes: Long
+        responseBytes: Long,
     ) = Unit
 
     fun recordRequestFailed(
         method: String,
         path: String,
         exception: Throwable,
-        duration: Duration
+        duration: Duration,
     ) = Unit
 
     fun recordMappingFailed(
         method: String,
         path: String,
         responseType: Class<*>,
-        exception: Throwable
+        exception: Throwable,
     ) = Unit
 
     companion object {

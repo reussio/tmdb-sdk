@@ -10,7 +10,6 @@ import dev.reuss.tmdb.value.id.CompanyId
  */
 
 interface CompanyService {
-
     fun details(companyId: CompanyId): Company
 
     fun alternativeNames(companyId: CompanyId): CompanyAlternativeNames

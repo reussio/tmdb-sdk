@@ -13,7 +13,7 @@ import dev.reuss.tmdb.common.TmdbModel
 data class NetworkImages(
     @all:JsonProperty("id")
     val id: Int,
-
     @all:JsonProperty("logos")
-    override val logos: List<LogoImage> = emptyList()
-) : LogoImagesResponse, TmdbModel
+    override val logos: List<LogoImage> = emptyList(),
+) : LogoImagesResponse,
+    TmdbModel

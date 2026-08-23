@@ -2,7 +2,17 @@ package dev.reuss.tmdb.domain.movie
 
 import dev.reuss.tmdb.common.external.ExternalIds
 import dev.reuss.tmdb.common.image.MovieImages
-import dev.reuss.tmdb.domain.movie.model.*
+import dev.reuss.tmdb.domain.movie.model.MovieAlternativeTitles
+import dev.reuss.tmdb.domain.movie.model.MovieChanges
+import dev.reuss.tmdb.domain.movie.model.MovieCredits
+import dev.reuss.tmdb.domain.movie.model.MovieKeywords
+import dev.reuss.tmdb.domain.movie.model.MovieRecommendations
+import dev.reuss.tmdb.domain.movie.model.MovieReleaseDates
+import dev.reuss.tmdb.domain.movie.model.MovieReviews
+import dev.reuss.tmdb.domain.movie.model.MovieTranslations
+import dev.reuss.tmdb.domain.movie.model.MovieVideos
+import dev.reuss.tmdb.domain.movie.model.MovieWatchProviders
+import dev.reuss.tmdb.domain.movie.model.SimilarMovies
 import dev.reuss.tmdb.query.AppendableResponse
 
 /**
@@ -10,9 +20,8 @@ import dev.reuss.tmdb.query.AppendableResponse
  */
 enum class MovieAppend(
     override val value: String,
-    override val responseType: Class<*>
+    override val responseType: Class<*>,
 ) : AppendableResponse {
-
     ALTERNATIVE_TITLES("alternative_titles", MovieAlternativeTitles::class.java),
     CHANGES("changes", MovieChanges::class.java),
     CREDITS("credits", MovieCredits::class.java),
@@ -25,5 +34,5 @@ enum class MovieAppend(
     SIMILAR("similar", SimilarMovies::class.java),
     TRANSLATIONS("translations", MovieTranslations::class.java),
     VIDEOS("videos", MovieVideos::class.java),
-    WATCH_PROVIDERS("watch/providers", MovieWatchProviders::class.java)
+    WATCH_PROVIDERS("watch/providers", MovieWatchProviders::class.java),
 }

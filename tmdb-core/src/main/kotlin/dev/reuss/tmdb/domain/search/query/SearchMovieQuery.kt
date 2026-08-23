@@ -14,9 +14,9 @@ import dev.reuss.tmdb.value.region.Region
  * year. Page and year filters are validated before serialization.
  */
 class SearchMovieQuery private constructor(
-    override val query: String
-) : SearchQuery, PagedQuery<SearchMovieQuery> {
-
+    override val query: String,
+) : SearchQuery,
+    PagedQuery<SearchMovieQuery> {
     private var includeAdult: Boolean? = null
     private var language: Language? = null
     private var primaryReleaseYear: Int? = null
@@ -24,35 +24,42 @@ class SearchMovieQuery private constructor(
     private var region: Region? = null
     private var year: Int? = null
 
-    fun includeAdult(value: Boolean?) = apply {
-        includeAdult = value
-    }
+    fun includeAdult(value: Boolean?) =
+        apply {
+            includeAdult = value
+        }
 
-    fun language(value: Language?) = apply {
-        language = value
-    }
+    fun language(value: Language?) =
+        apply {
+            language = value
+        }
 
-    fun primaryReleaseYear(value: Int) = apply {
-        QueryValidation.validateYear(value, "Primary release year")
-        primaryReleaseYear = value
-    }
+    fun primaryReleaseYear(value: Int) =
+        apply {
+            QueryValidation.validateYear(value, "Primary release year")
+            primaryReleaseYear = value
+        }
 
-    override fun page(page: Int?) = apply {
-        QueryValidation.validatePage(page)
-        this.page = page
-    }
+    override fun page(page: Int?) =
+        apply {
+            QueryValidation.validatePage(page)
+            this.page = page
+        }
 
-    fun region(value: Region?) = apply {
-        region = value
-    }
+    fun region(value: Region?) =
+        apply {
+            region = value
+        }
 
-    fun year(value: Int) = apply {
-        QueryValidation.validateYear(value, "Year")
-        year = value
-    }
+    fun year(value: Int) =
+        apply {
+            QueryValidation.validateYear(value, "Year")
+            year = value
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("query", query)
             .add("include_adult", includeAdult)
             .add("language", language?.value)
@@ -62,11 +69,10 @@ class SearchMovieQuery private constructor(
             .add("year", year)
 
     companion object {
-
         @JvmStatic
         fun of(query: String): SearchMovieQuery =
             SearchMovieQuery(
-                QueryValidation.requireNotBlank(query, "Search query")
+                QueryValidation.requireNotBlank(query, "Search query"),
             )
     }
 }

@@ -9,7 +9,6 @@ import java.lang.reflect.InvocationTargetException
 import java.util.stream.Stream
 
 class TmdbResourceIdContractTest {
-
     @ParameterizedTest(name = "{0}")
     @MethodSource("numericIds")
     fun numericResourceIdsAcceptPositiveValues(idCase: NumericIdCase) {
@@ -69,31 +68,24 @@ class TmdbResourceIdContractTest {
 
     data class NumericIdCase(
         val name: String,
-        val factory: (Int) -> TmdbResourceId
+        val factory: (Int) -> TmdbResourceId,
     ) {
+        fun create(value: Int): TmdbResourceId = factory(value)
 
-        fun create(value: Int): TmdbResourceId =
-            factory(value)
-
-        override fun toString(): String =
-            name
+        override fun toString(): String = name
     }
 
     data class StringIdCase(
         val name: String,
         val type: Class<out TmdbResourceId>,
-        val factory: (String) -> TmdbResourceId
+        val factory: (String) -> TmdbResourceId,
     ) {
+        fun create(value: String): TmdbResourceId = factory(value)
 
-        fun create(value: String): TmdbResourceId =
-            factory(value)
-
-        override fun toString(): String =
-            name
+        override fun toString(): String = name
     }
 
     companion object {
-
         @JvmStatic
         fun numericIds(): Stream<NumericIdCase> =
             Stream.of(
@@ -104,7 +96,7 @@ class TmdbResourceIdContractTest {
                 NumericIdCase("PersonId", PersonId::of),
                 NumericIdCase("CompanyId", CompanyId::of),
                 NumericIdCase("NetworkId", NetworkId::of),
-                NumericIdCase("KeywordId", KeywordId::of)
+                NumericIdCase("KeywordId", KeywordId::of),
             )
 
         @JvmStatic
@@ -116,8 +108,8 @@ class TmdbResourceIdContractTest {
                 StringIdCase(
                     "TvEpisodeGroupId",
                     TvEpisodeGroupId::class.java,
-                    TvEpisodeGroupId::of
-                )
+                    TvEpisodeGroupId::of,
+                ),
             )
     }
 }

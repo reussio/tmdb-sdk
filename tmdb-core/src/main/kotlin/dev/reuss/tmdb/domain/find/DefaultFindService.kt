@@ -12,34 +12,35 @@ import dev.reuss.tmdb.value.language.Language
  * Default [FindService] implementation backed by the TMDB HTTP client.
  */
 internal class DefaultFindService(
-    private val httpClient: TmdbHttpClient
+    private val httpClient: TmdbHttpClient,
 ) : FindService {
-
     override fun byExternalId(
         externalId: ExternalId,
-        externalSource: ExternalSource
+        externalSource: ExternalSource,
     ): FindResults =
         httpClient.get(
             TmdbRequest.get(
                 FindPaths.byExternalId(externalId),
-                QueryParams.create()
-                    .add("external_source", externalSource.value)
+                QueryParams
+                    .create()
+                    .add("external_source", externalSource.value),
             ),
-            FindResults::class.java
+            FindResults::class.java,
         )
 
     override fun byExternalId(
         externalId: ExternalId,
         externalSource: ExternalSource,
-        language: Language
+        language: Language,
     ): FindResults =
         httpClient.get(
             TmdbRequest.get(
                 FindPaths.byExternalId(externalId),
-                QueryParams.create()
+                QueryParams
+                    .create()
                     .add("external_source", externalSource.value)
-                    .add("language", language.value)
+                    .add("language", language.value),
             ),
-            FindResults::class.java
+            FindResults::class.java,
         )
 }

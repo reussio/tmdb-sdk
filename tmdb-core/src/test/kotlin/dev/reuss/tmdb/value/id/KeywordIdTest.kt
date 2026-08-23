@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 class KeywordIdTest {
-
     @Test
     fun createsKeywordId() {
         val id = KeywordId.of(9715)
@@ -17,18 +16,20 @@ class KeywordIdTest {
 
     @Test
     fun rejectsZero() {
-        val exception = assertThrows<IllegalArgumentException> {
-            KeywordId.of(0)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                KeywordId.of(0)
+            }
 
         assertEquals("Keyword id must be greater than 0", exception.message)
     }
 
     @Test
     fun rejectsNegativeValue() {
-        val exception = assertThrows<IllegalArgumentException> {
-            KeywordId.of(-1)
-        }
+        val exception =
+            assertThrows<IllegalArgumentException> {
+                KeywordId.of(-1)
+            }
 
         assertEquals("Keyword id must be greater than 0", exception.message)
     }

@@ -13,34 +13,35 @@ import dev.reuss.tmdb.value.region.Region
  * [QueryValidation.validatePage].
  */
 class MoviePopularQuery private constructor() : PagedQuery<MoviePopularQuery> {
-
     private var language: Language? = null
     private var page: Int? = null
     private var region: Region? = null
 
-    fun language(value: Language?) = apply {
-        language = value
-    }
+    fun language(value: Language?) =
+        apply {
+            language = value
+        }
 
-    override fun page(page: Int?) = apply {
-        QueryValidation.validatePage(page)
-        this.page = page
-    }
+    override fun page(page: Int?) =
+        apply {
+            QueryValidation.validatePage(page)
+            this.page = page
+        }
 
-    fun region(value: Region?) = apply {
-        region = value
-    }
+    fun region(value: Region?) =
+        apply {
+            region = value
+        }
 
     override fun toQueryParams(): QueryParams =
-        QueryParams.create()
+        QueryParams
+            .create()
             .add("language", language?.value)
             .add("page", page)
             .add("region", region?.value)
 
     companion object {
-
         @JvmStatic
-        fun create(): MoviePopularQuery =
-            MoviePopularQuery()
+        fun create(): MoviePopularQuery = MoviePopularQuery()
     }
 }

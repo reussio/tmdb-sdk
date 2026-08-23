@@ -32,178 +32,113 @@ import jakarta.inject.Singleton
  */
 @Singleton
 class TmdbProducer {
+    @Produces
+    @Singleton
+    @DefaultBean
+    fun tmdbMetricsRecorder(): TmdbMetricsRecorder = TmdbMetricsRecorder.NOOP
 
     @Produces
     @Singleton
     @DefaultBean
-    fun tmdbMetricsRecorder(): TmdbMetricsRecorder =
-        TmdbMetricsRecorder.NOOP
+    fun configurationService(client: TmdbClient): ConfigurationService = client.configuration()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun configurationService(
-        client: TmdbClient
-    ): ConfigurationService =
-        client.configuration()
+    fun imageUrlBuilder(client: TmdbClient): ImageUrlBuilder = client.imageUrls()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun imageUrlBuilder(
-        client: TmdbClient
-    ): ImageUrlBuilder =
-        client.imageUrls()
+    fun certificationService(client: TmdbClient): CertificationService = client.certifications()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun certificationService(
-        client: TmdbClient
-    ): CertificationService =
-        client.certifications()
+    fun collectionService(client: TmdbClient): CollectionService = client.collections()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun collectionService(
-        client: TmdbClient
-    ): CollectionService =
-        client.collections()
+    fun companyService(client: TmdbClient): CompanyService = client.companies()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun companyService(
-        client: TmdbClient
-    ): CompanyService =
-        client.companies()
+    fun creditService(client: TmdbClient): CreditService = client.credits()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun creditService(
-        client: TmdbClient
-    ): CreditService =
-        client.credits()
+    fun discoverService(client: TmdbClient): DiscoverService = client.discover()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun discoverService(
-        client: TmdbClient
-    ): DiscoverService =
-        client.discover()
+    fun findService(client: TmdbClient): FindService = client.find()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun findService(
-        client: TmdbClient
-    ): FindService =
-        client.find()
+    fun genreService(client: TmdbClient): GenreService = client.genres()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun genreService(
-        client: TmdbClient
-    ): GenreService =
-        client.genres()
+    fun keywordService(client: TmdbClient): KeywordService = client.keywords()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun keywordService(
-        client: TmdbClient
-    ): KeywordService =
-        client.keywords()
+    fun movieService(client: TmdbClient): MovieService = client.movies()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun movieService(
-        client: TmdbClient
-    ): MovieService =
-        client.movies()
+    fun networkService(client: TmdbClient): NetworkService = client.networks()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun networkService(
-        client: TmdbClient
-    ): NetworkService =
-        client.networks()
+    fun personService(client: TmdbClient): PersonService = client.people()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun personService(
-        client: TmdbClient
-    ): PersonService =
-        client.people()
+    fun reviewService(client: TmdbClient): ReviewService = client.reviews()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun reviewService(
-        client: TmdbClient
-    ): ReviewService =
-        client.reviews()
+    fun searchService(client: TmdbClient): SearchService = client.search()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun searchService(
-        client: TmdbClient
-    ): SearchService =
-        client.search()
+    fun trendingService(client: TmdbClient): TrendingService = client.trending()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun trendingService(
-        client: TmdbClient
-    ): TrendingService =
-        client.trending()
+    fun tvEpisodeService(client: TmdbClient): TvEpisodeService = client.tvEpisode()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun tvEpisodeService(
-        client: TmdbClient
-    ): TvEpisodeService =
-        client.tvEpisode()
+    fun tvEpisodeGroupService(client: TmdbClient): TvEpisodeGroupService = client.tvEpisodeGroup()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun tvEpisodeGroupService(
-        client: TmdbClient
-    ): TvEpisodeGroupService =
-        client.tvEpisodeGroup()
+    fun tvSeasonService(client: TmdbClient): TvSeasonService = client.tvSeason()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun tvSeasonService(
-        client: TmdbClient
-    ): TvSeasonService =
-        client.tvSeason()
+    fun tvSeriesService(client: TmdbClient): TvSeriesService = client.tvSeries()
 
     @Produces
     @Singleton
     @DefaultBean
-    fun tvSeriesService(
-        client: TmdbClient
-    ): TvSeriesService =
-        client.tvSeries()
-
-    @Produces
-    @Singleton
-    @DefaultBean
-    fun watchProviderService(
-        client: TmdbClient
-    ): WatchProviderService =
-        client.watchProviders()
+    fun watchProviderService(client: TmdbClient): WatchProviderService = client.watchProviders()
 }
