@@ -12,13 +12,25 @@
     </parent>
 
     <artifactId>tmdb-core</artifactId>
-    <name>TMDB Java SDK Core</name>
-    <description>Core Java client library for The Movie Database API.</description>
+    <name>TMDB JVM SDK Core</name>
+    <description>Core JVM client library for The Movie Database API.</description>
 
     <dependencies>
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
             <version>${jackson.version}</version>
         </dependency>
 
