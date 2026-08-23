@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -8,8 +9,8 @@
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
-    <name>TMDB Java SDK</name>
-    <description>A modern Java client library for The Movie Database API.</description>
+    <name>TMDB JVM SDK</name>
+    <description>A modern JVM client library for The Movie Database API.</description>
     <url>https://reussio.github.io/tmdb-sdk/</url>
 
     <modules>
@@ -44,6 +45,7 @@
     <properties>
         <java.version>17</java.version>
         <maven.compiler.release>17</maven.compiler.release>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <kotlin.version>2.4.10</kotlin.version>
@@ -54,10 +56,10 @@
         <spring-boot.version>3.5.15</spring-boot.version>
         <slf4j.version>2.0.18</slf4j.version>
 
-        <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
-        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
-        <maven-gpg-plugin.version>3.2.7</maven-gpg-plugin.version>
-        <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
+        <maven-source-plugin.version>3.4.0</maven-source-plugin.version>
+        <maven-javadoc-plugin.version>3.12.0</maven-javadoc-plugin.version>
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-maven-plugin.version>0.11.0</central-publishing-maven-plugin.version>
     </properties>
 
     <dependencies/>
@@ -79,7 +81,6 @@
                 <artifactId>kotlin-maven-plugin</artifactId>
                 <version>${kotlin.version}</version>
                 <extensions>true</extensions>
-
                 <configuration>
                     <jvmTarget>${java.version}</jvmTarget>
                 </configuration>
@@ -90,11 +91,11 @@
                 <artifactId>spotless-maven-plugin</artifactId>
                 <version>${spotless.version}</version>
                 <configuration>
-                    <java>
-                        <removeUnusedImports/>
+                    <kotlin>
+                        <ktlint/>
                         <trimTrailingWhitespace/>
                         <endWithNewline/>
-                    </java>
+                    </kotlin>
                 </configuration>
                 <executions>
                     <execution>
@@ -118,7 +119,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-source-plugin</artifactId>
-                        <version>3.4.0</version>
+                        <version>${maven-source-plugin.version}</version>
                         <executions>
                             <execution>
                                 <id>attach-sources</id>
@@ -133,7 +134,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-javadoc-plugin</artifactId>
-                        <version>3.12.0</version>
+                        <version>${maven-javadoc-plugin.version}</version>
                         <configuration>
                             <doclint>none</doclint>
                         </configuration>
@@ -151,7 +152,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.2.8</version>
+                        <version>${maven-gpg-plugin.version}</version>
                         <configuration>
                             <gpgArguments>
                                 <arg>--pinentry-mode</arg>
@@ -172,7 +173,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.11.0</version>
+                        <version>${central-publishing-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
@@ -184,5 +185,4 @@
             </build>
         </profile>
     </profiles>
-
 </project>
