@@ -6,20 +6,20 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Movie returned by TMDB movie search.
  *
- * @property adult whether the movie is marked as adult
- * @property backdropPath backdrop image path
- * @property genreIds genre ids
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
+ * @property genreIds TMDB genre identifiers assigned to the resource.
  * @property id TMDB movie id
- * @property originalLanguage original language code
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
  * @property originalTitle original movie title
- * @property overview movie overview
- * @property popularity movie popularity
- * @property posterPath poster image path
- * @property releaseDate movie release date
+ * @property overview Localized overview when available.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property posterPath TMDB image path for the poster.
+ * @property releaseDate Movie release date in `YYYY-MM-DD` format when known.
  * @property title localized movie title
- * @property video whether the movie has video content
- * @property voteAverage vote average
- * @property voteCount vote count
+ * @property video Whether TMDB marks the movie as having video content.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
  */
 @JvmRecord
 data class SearchMovie(

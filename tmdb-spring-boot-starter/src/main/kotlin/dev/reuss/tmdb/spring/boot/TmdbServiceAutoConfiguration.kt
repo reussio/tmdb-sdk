@@ -30,10 +30,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 
 /**
- * Autoconfiguration for TMDB domain service beans.
+ * Auto-configuration for TMDB domain service beans.
  *
  * This configuration exposes the service instances provided by the configured
- * [TmdbClient] as individual Spring beans.
+ * [TmdbClient] as individual Spring beans. Every service bean backs off independently when an
+ * application provides an implementation of the same type.
  */
 @AutoConfiguration(after = [TmdbClientAutoConfiguration::class])
 @ConditionalOnBean(TmdbClient::class)

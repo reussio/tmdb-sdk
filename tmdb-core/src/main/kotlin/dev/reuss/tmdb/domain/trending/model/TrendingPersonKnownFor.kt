@@ -10,25 +10,25 @@ import dev.reuss.tmdb.value.media.MediaType
  * This model supports both movie and TV results. Fields that do not apply
  * to the concrete media type may be `null` or empty.
  *
- * @property adult whether the item is marked as adult
- * @property backdropPath backdrop image path
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
  * @property id TMDB media id
  * @property title movie title
  * @property originalTitle original movie title
- * @property name TV show name
- * @property originalName original TV show name
- * @property originalLanguage original language code
- * @property overview overview
- * @property posterPath poster image path
- * @property mediaType media type, for example `movie` or `tv`
- * @property genreIds genre ids
- * @property popularity popularity
- * @property releaseDate movie release date
- * @property firstAirDate TV first air date
- * @property video whether the movie has video content
- * @property voteAverage vote average
- * @property voteCount vote count
- * @property originCountry TV origin countries
+ * @property name TV series name
+ * @property originalName original TV series name
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
+ * @property genreIds TMDB genre identifiers assigned to the resource.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property releaseDate Movie release date in `YYYY-MM-DD` format when known.
+ * @property firstAirDate First air date in `YYYY-MM-DD` format when known.
+ * @property video Whether TMDB marks the movie as having video content.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
+ * @property originCountry ISO 3166-1 codes for the resource's countries of origin.
  */
 @JvmRecord
 data class TrendingPersonKnownFor(

@@ -13,10 +13,10 @@ import dev.reuss.tmdb.value.media.MediaType
  * @property authorDetails review author details
  * @property content review content
  * @property createdAt creation timestamp
- * @property iso6391 ISO 639-1 language code
- * @property mediaId related movie or TV show id
- * @property mediaTitle related movie or TV show title
- * @property mediaType related media type, for example `movie` or `tv`
+ * @property iso6391 ISO 639-1 language code associated with the value.
+ * @property mediaId related movie or TV series id
+ * @property mediaTitle related movie or TV series title
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
  * @property updatedAt update timestamp
  * @property url TMDB review URL
  */

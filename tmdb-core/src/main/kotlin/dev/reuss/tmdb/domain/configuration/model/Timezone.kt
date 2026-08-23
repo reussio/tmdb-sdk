@@ -6,7 +6,7 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Timezones used by a TMDB country.
  *
- * @property iso31661 TMDB country code
+ * @property iso31661 ISO 3166-1 country code associated with the value.
  * @property zones timezone identifiers
  */
 @JvmRecord

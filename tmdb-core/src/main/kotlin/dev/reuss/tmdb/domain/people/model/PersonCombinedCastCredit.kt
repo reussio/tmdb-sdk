@@ -10,29 +10,29 @@ import dev.reuss.tmdb.value.media.MediaType
  * This model supports both movie and TV credits. Fields that do not apply
  * to the concrete media type may be `null` or empty.
  *
- * @property adult whether the media is marked as adult
- * @property backdropPath backdrop image path
- * @property genreIds genre ids
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
+ * @property genreIds TMDB genre identifiers assigned to the resource.
  * @property id TMDB media id
- * @property originalLanguage original language code
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
  * @property originalTitle original movie title
- * @property originalName original TV show name
- * @property overview overview
- * @property popularity popularity
- * @property posterPath poster image path
- * @property releaseDate movie release date
- * @property firstAirDate TV first air date
+ * @property originalName original TV series name
+ * @property overview Localized overview when available.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property posterPath TMDB image path for the poster.
+ * @property releaseDate Movie release date in `YYYY-MM-DD` format when known.
+ * @property firstAirDate First air date in `YYYY-MM-DD` format when known.
  * @property title movie title
- * @property name TV show name
- * @property video whether the movie has video content
- * @property voteAverage vote average
- * @property voteCount vote count
- * @property originCountry TV origin countries
+ * @property name TV series name
+ * @property video Whether TMDB marks the movie as having video content.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
+ * @property originCountry ISO 3166-1 codes for the resource's countries of origin.
  * @property character character name
  * @property creditId TMDB credit id
  * @property order cast order
- * @property episodeCount TV episode count
- * @property mediaType media type
+ * @property episodeCount Number of associated episodes.
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
  */
 @JvmRecord
 data class PersonCombinedCastCredit(

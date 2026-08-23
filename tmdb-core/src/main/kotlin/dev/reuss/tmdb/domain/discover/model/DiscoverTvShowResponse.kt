@@ -7,10 +7,10 @@ import dev.reuss.tmdb.common.page.PagedResponse
 /**
  * Paginated TMDB TV discover response.
  *
- * @property page current result page
- * @property results discovered TV shows
- * @property totalPages total available pages
- * @property totalResults total available results
+ * @property page One-based index of this result page.
+ * @property results discovered TV series
+ * @property totalPages Total number of result pages reported by TMDB.
+ * @property totalResults Total number of matching results reported by TMDB.
  */
 @JvmRecord
 data class DiscoverTvShowResponse(

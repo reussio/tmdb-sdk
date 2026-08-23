@@ -15,11 +15,13 @@ class MovieRecommendationsQuery private constructor() : PagedQuery<MovieRecommen
     private var language: Language? = null
     private var page: Int? = null
 
+    /** Sets the response language; `null` leaves the parameter unspecified. */
     fun language(value: Language?) =
         apply {
             language = value
         }
 
+    /** Sets the one-based result page; `null` leaves the parameter unspecified. */
     override fun page(page: Int?) =
         apply {
             QueryValidation.validatePage(page)
@@ -33,6 +35,7 @@ class MovieRecommendationsQuery private constructor() : PagedQuery<MovieRecommen
             .add("page", page)
 
     companion object {
+        /** Creates an empty query that relies on TMDB defaults. */
         @JvmStatic
         fun create(): MovieRecommendationsQuery = MovieRecommendationsQuery()
     }

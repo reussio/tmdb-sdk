@@ -1,5 +1,10 @@
 package dev.reuss.tmdb.value.region
 
+/**
+ * ISO 3166-1 alpha-2 region constants available to TMDB queries.
+ *
+ * Custom validated values can be created with [Region.of].
+ */
 object Regions {
     @JvmField
     val AD = Region.of("AD")

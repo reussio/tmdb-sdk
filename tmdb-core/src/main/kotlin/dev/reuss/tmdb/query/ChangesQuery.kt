@@ -7,8 +7,9 @@ import java.time.temporal.ChronoUnit
 /**
  * Query parameters for TMDB change endpoints.
  *
- * The start and end date filters are optional. If both are set, the start
- * date must not be after the end date and the range must not exceed 14 days.
+ * The date bounds are inclusive and optional. When both are set, the start
+ * cannot follow the end and the elapsed range cannot exceed 14 days. Page
+ * numbers are one-based.
  */
 class ChangesQuery private constructor() : PagedQuery<ChangesQuery> {
     private var endDate: LocalDate? = null
@@ -16,7 +17,10 @@ class ChangesQuery private constructor() : PagedQuery<ChangesQuery> {
     private var startDate: LocalDate? = null
 
     /**
-     * Sets the inclusive end date filter.
+     * Sets or clears the inclusive end date.
+     *
+     * @throws IllegalArgumentException if the completed date range is reversed
+     * or exceeds 14 days
      */
     fun endDate(endDate: LocalDate?): ChangesQuery =
         apply {
@@ -24,6 +28,7 @@ class ChangesQuery private constructor() : PagedQuery<ChangesQuery> {
             validateDateRange()
         }
 
+    /** Sets or clears the one-based result page. */
     override fun page(page: Int?): ChangesQuery =
         apply {
             QueryValidation.validatePage(page)
@@ -31,7 +36,10 @@ class ChangesQuery private constructor() : PagedQuery<ChangesQuery> {
         }
 
     /**
-     * Sets the inclusive start date filter.
+     * Sets or clears the inclusive start date.
+     *
+     * @throws IllegalArgumentException if the completed date range is reversed
+     * or exceeds 14 days
      */
     fun startDate(startDate: LocalDate?): ChangesQuery =
         apply {
@@ -39,9 +47,6 @@ class ChangesQuery private constructor() : PagedQuery<ChangesQuery> {
             validateDateRange()
         }
 
-    /**
-     * Converts this query to TMDB query parameters.
-     */
     override fun toQueryParams(): QueryParams =
         QueryParams
             .create()
@@ -67,6 +72,7 @@ class ChangesQuery private constructor() : PagedQuery<ChangesQuery> {
     companion object {
         private const val MAX_DATE_RANGE_DAYS = 14L
 
+        /** Creates an empty changes query. */
         @JvmStatic
         fun create(): ChangesQuery = ChangesQuery()
     }

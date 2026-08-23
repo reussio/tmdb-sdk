@@ -7,9 +7,7 @@ import io.quarkus.deployment.Capability
 import io.quarkus.deployment.annotations.BuildProducer
 import io.quarkus.deployment.annotations.BuildStep
 
-/**
- * Registers TMDB health check support when Quarkus Health is present.
- */
+/** Registers the TMDB readiness check only when SmallRye Health is present. */
 class TmdbHealthProcessor {
     @BuildStep
     fun healthCheck(
@@ -28,6 +26,7 @@ class TmdbHealthProcessor {
     }
 
     companion object {
+        /** Returns whether the application has the SmallRye Health capability. */
         @JvmStatic
         fun shouldRegisterHealthCheck(capabilities: Capabilities): Boolean =
             capabilities.isPresent(Capability.SMALLRYE_HEALTH)

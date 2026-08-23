@@ -7,10 +7,10 @@ import dev.reuss.tmdb.common.page.PagedResponse
 /**
  * Paged similar movies for a TMDB movie.
  *
- * @property page current page
+ * @property page One-based index of this result page.
  * @property results similar movies
- * @property totalPages total pages
- * @property totalResults total results
+ * @property totalPages Total number of result pages reported by TMDB.
+ * @property totalResults Total number of matching results reported by TMDB.
  */
 @JvmRecord
 data class SimilarMovies(

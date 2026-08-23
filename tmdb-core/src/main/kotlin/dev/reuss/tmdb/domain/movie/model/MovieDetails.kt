@@ -10,45 +10,45 @@ import dev.reuss.tmdb.common.image.MovieImages
 /**
  * Details for a TMDB movie.
  *
- * @property adult whether the movie is marked as adult
- * @property backdropPath backdrop image path
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
  * @property belongsToCollection collection this movie belongs to
  * @property budget movie budget
  * @property genres movie genres
  * @property homepage movie homepage
  * @property id TMDB movie id
  * @property imdbId IMDb id
- * @property originCountry origin countries
- * @property originalLanguage original language
+ * @property originCountry ISO 3166-1 codes for the resource's countries of origin.
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
  * @property originalTitle original title
- * @property overview movie overview
- * @property popularity popularity
- * @property posterPath poster image path
+ * @property overview Localized overview when available.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property posterPath TMDB image path for the poster.
  * @property productionCompanies production companies
  * @property productionCountries production countries
- * @property releaseDate release date
+ * @property releaseDate Movie release date in `YYYY-MM-DD` format when known.
  * @property revenue movie revenue
- * @property runtime runtime in minutes
+ * @property runtime Runtime in minutes when known.
  * @property spokenLanguages spoken languages
  * @property status movie status
  * @property tagline movie tagline
  * @property title movie title
- * @property video whether the movie has video flag
- * @property voteAverage vote average
- * @property voteCount vote count
- * @property alternativeTitles appended alternative titles
- * @property changes appended changes
- * @property credits appended credits
- * @property externalIds appended external ids
- * @property images appended images
- * @property keywords appended keywords
- * @property recommendations appended recommendations
- * @property releaseDates appended release dates
- * @property reviews appended reviews
- * @property similar appended similar movies
- * @property translations appended translations
- * @property videos appended videos
- * @property watchProviders appended watch providers
+ * @property video Whether TMDB marks the movie as having video content.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
+ * @property alternativeTitles Response appended through `append_to_response` when requested.
+ * @property changes Response appended through `append_to_response` when requested.
+ * @property credits Response appended through `append_to_response` when requested.
+ * @property externalIds Response appended through `append_to_response` when requested.
+ * @property images Response appended through `append_to_response` when requested.
+ * @property keywords Response appended through `append_to_response` when requested.
+ * @property recommendations Response appended through `append_to_response` when requested.
+ * @property releaseDates Response appended through `append_to_response` when requested.
+ * @property reviews Response appended through `append_to_response` when requested.
+ * @property similar Response appended through `append_to_response` when requested.
+ * @property translations Response appended through `append_to_response` when requested.
+ * @property videos Response appended through `append_to_response` when requested.
+ * @property watchProviders Response appended through `append_to_response` when requested.
  */
 @JvmRecord
 data class MovieDetails(

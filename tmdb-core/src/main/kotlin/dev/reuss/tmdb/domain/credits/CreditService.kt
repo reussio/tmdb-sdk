@@ -4,25 +4,12 @@ import dev.reuss.tmdb.domain.credits.model.CreditDetails
 import dev.reuss.tmdb.value.id.CreditId
 import dev.reuss.tmdb.value.language.Language
 
-/**
- * Service for loading TMDB credit metadata.
- */
+/** Loads one cast or crew credit independently of its associated media item. */
 interface CreditService {
-    /**
-     * Loads credit details by credit id.
-     *
-     * @param creditId the credit id
-     * @return credit details
-     */
+    /** Returns the credit identified by [creditId] using the client's default language. */
     fun details(creditId: CreditId): CreditDetails
 
-    /**
-     * Loads credit details by credit id using a specific language.
-     *
-     * @param creditId the credit id
-     * @param language the response language
-     * @return credit details
-     */
+    /** Returns the credit identified by [creditId], localized in [language]. */
     fun details(
         creditId: CreditId,
         language: Language,

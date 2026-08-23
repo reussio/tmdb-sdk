@@ -13,7 +13,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 
 /**
- * Auto-configuration for Micrometer metrics support.
+ * Installs the TMDB Micrometer recorder when a [MeterRegistry] is available and no application
+ * recorder bean overrides it.
  */
 @AutoConfiguration(
     after = [

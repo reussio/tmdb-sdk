@@ -10,7 +10,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean
 
 /**
- * Auto-configuration for Spring Boot Actuator health support.
+ * Registers the non-networking `tmdb` health indicator when Actuator health support and a
+ * [TmdbClient] bean are present.
  */
 @AutoConfiguration(after = [TmdbClientAutoConfiguration::class])
 @ConditionalOnClass(HealthIndicator::class)

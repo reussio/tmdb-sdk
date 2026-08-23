@@ -7,17 +7,17 @@ import dev.reuss.tmdb.common.TmdbModel
  * Episode inside a TV episode group.
  *
  * @property airDate episode air date
- * @property episodeNumber episode number
+ * @property episodeNumber Episode number within its season.
  * @property id TMDB episode id
  * @property name episode name
- * @property overview episode overview
+ * @property overview Localized overview when available.
  * @property productionCode production code
- * @property runtime runtime in minutes
- * @property seasonNumber season number
+ * @property runtime Runtime in minutes when known.
+ * @property seasonNumber Season number within its TV series.
  * @property showId TMDB show id
- * @property stillPath still image path
- * @property voteAverage vote average
- * @property voteCount vote count
+ * @property stillPath TMDB image path for the episode still.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
  * @property order episode order inside the group
  */
 @JvmRecord

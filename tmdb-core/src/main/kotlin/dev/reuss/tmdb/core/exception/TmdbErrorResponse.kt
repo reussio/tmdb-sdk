@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
 /**
- * Error response returned by TMDB.
+ * JSON error envelope returned by TMDB.
  *
- * @property success TMDB success flag
- * @property statusCode TMDB status code
- * @property statusMessage TMDB status message
+ * @property success Whether TMDB reports the operation as successful.
+ * @property statusCode TMDB-specific status code.
+ * @property statusMessage Human-readable TMDB status message.
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class TmdbErrorResponse(

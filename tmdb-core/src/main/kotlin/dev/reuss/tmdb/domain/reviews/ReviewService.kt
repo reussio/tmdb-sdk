@@ -3,15 +3,8 @@ package dev.reuss.tmdb.domain.reviews
 import dev.reuss.tmdb.domain.reviews.model.Review
 import dev.reuss.tmdb.value.id.ReviewId
 
-/**
- * Service for loading TMDB review metadata.
- */
+/** Loads a TMDB user review independently of its associated media item. */
 interface ReviewService {
-    /**
-     * Loads review details by review id.
-     *
-     * @param reviewId the review id
-     * @return review details
-     */
+    /** Returns the review identified by [reviewId]. */
     fun details(reviewId: ReviewId): Review
 }

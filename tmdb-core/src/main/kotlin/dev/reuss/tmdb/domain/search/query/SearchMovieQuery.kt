@@ -24,33 +24,39 @@ class SearchMovieQuery private constructor(
     private var region: Region? = null
     private var year: Int? = null
 
+    /** Controls whether adult results may be returned; `null` uses the TMDB default. */
     fun includeAdult(value: Boolean?) =
         apply {
             includeAdult = value
         }
 
+    /** Sets the response language; `null` leaves the parameter unspecified. */
     fun language(value: Language?) =
         apply {
             language = value
         }
 
+    /** Filters movies by their primary release year. */
     fun primaryReleaseYear(value: Int) =
         apply {
             QueryValidation.validateYear(value, "Primary release year")
             primaryReleaseYear = value
         }
 
+    /** Sets the one-based result page; `null` leaves the parameter unspecified. */
     override fun page(page: Int?) =
         apply {
             QueryValidation.validatePage(page)
             this.page = page
         }
 
+    /** Sets the ISO 3166-1 region used to localize release information. */
     fun region(value: Region?) =
         apply {
             region = value
         }
 
+    /** Filters by any movie release date occurring in the given year. */
     fun year(value: Int) =
         apply {
             QueryValidation.validateYear(value, "Year")
@@ -69,6 +75,11 @@ class SearchMovieQuery private constructor(
             .add("year", year)
 
     companion object {
+        /**
+         * Creates a query for trimmed [query] text.
+         *
+         * @throws IllegalArgumentException if [query] is blank
+         */
         @JvmStatic
         fun of(query: String): SearchMovieQuery =
             SearchMovieQuery(

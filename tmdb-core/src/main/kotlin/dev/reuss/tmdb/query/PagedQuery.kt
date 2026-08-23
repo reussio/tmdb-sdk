@@ -1,16 +1,17 @@
 package dev.reuss.tmdb.query
 
 /**
- * Common contract for TMDB query objects that support pagination.
+ * Fluent contract for query objects that support TMDB result pages.
  *
- * @property T concrete query type
+ * @param T Concrete query type returned by [page].
  */
 interface PagedQuery<T : PagedQuery<T>> : TmdbQuery {
     /**
-     * Sets the requested result page.
+     * Sets the one-based result page, or clears it with `null`.
      *
-     * @property page page number, starting at 1
-     * @return the query instance
+     * @param page One-based page number; TMDB defaults to `1` when absent.
+     * @return This query instance.
+     * @throws IllegalArgumentException if [page] is zero or negative
      */
     fun page(page: Int?): T
 }

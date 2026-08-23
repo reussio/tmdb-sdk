@@ -6,7 +6,7 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Language metadata used throughout TMDB.
  *
- * @property iso6391 ISO 639-1 language code
+ * @property iso6391 ISO 639-1 language code associated with the value.
  * @property englishName English language name
  * @property name native language name
  */

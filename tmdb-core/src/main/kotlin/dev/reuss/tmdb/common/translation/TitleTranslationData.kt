@@ -7,7 +7,7 @@ import dev.reuss.tmdb.common.TmdbModel
  * Translated title/name data with overview text.
  *
  * @property name     translated name
- * @property overview translated overview
+ * @property overview Localized overview when available.
  */
 @JvmRecord
 data class TitleTranslationData(

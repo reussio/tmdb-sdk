@@ -7,13 +7,13 @@ import dev.reuss.tmdb.common.TmdbModel
  * TV season information included in a TMDB credit response.
  *
  * @property airDate season air date
- * @property episodeCount episode count
+ * @property episodeCount Number of associated episodes.
  * @property id TMDB season id
  * @property name season name
- * @property overview season overview
- * @property posterPath poster image path
- * @property seasonNumber season number
- * @property showId TV show id
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
+ * @property seasonNumber Season number within its TV series.
+ * @property showId TV series id
  */
 @JvmRecord
 data class CreditSeason(

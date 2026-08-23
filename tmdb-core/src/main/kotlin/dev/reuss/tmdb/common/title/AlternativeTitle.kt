@@ -6,7 +6,7 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Alternative title for a TMDB resource.
  *
- * @property iso31661 ISO 3166-1 country or region code
+ * @property iso31661 ISO 3166-1 country code associated with the value.
  * @property title    alternative title
  * @property type     alternative title type
  */

@@ -1,11 +1,16 @@
 package dev.reuss.tmdb.core.exception
 
 /**
- * Factory methods for mapping TMDB response status values to SDK exceptions.
+ * Maps HTTP and TMDB status information to the public exception hierarchy.
  */
 object TmdbExceptions {
     /**
-     * Creates the most specific API exception for a parsed TMDB error response.
+     * Selects the most specific exception supported for [httpStatus].
+     *
+     * Authentication and authorization errors map to [TmdbUnauthorizedException],
+     * `404` to [TmdbNotFoundException], `429` to [TmdbRateLimitException], and
+     * `500` through `504` to [TmdbServerException]. Other statuses remain
+     * [TmdbApiException].
      */
     @JvmStatic
     fun from(
@@ -62,7 +67,7 @@ object TmdbExceptions {
         }
 
     /**
-     * Creates the most specific API exception for an HTTP error without a parsed TMDB status code.
+     * Maps an HTTP error whose body did not yield a TMDB status code.
      */
     @JvmStatic
     fun fromHttpStatus(

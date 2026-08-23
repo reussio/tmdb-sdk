@@ -12,19 +12,19 @@ import dev.reuss.tmdb.common.image.TvSeasonImages
  * @property airDate season air date
  * @property episodes season episodes
  * @property name season name
- * @property overview season overview
+ * @property overview Localized overview when available.
  * @property id TMDB season id
- * @property posterPath poster image path
- * @property seasonNumber season number
- * @property voteAverage vote average
- * @property aggregateCredits appended aggregate credits
- * @property changes appended changes
- * @property credits appended credits
- * @property externalIds appended external ids
- * @property images appended images
- * @property translations appended translations
- * @property videos appended videos
- * @property watchProviders appended watch providers
+ * @property posterPath TMDB image path for the poster.
+ * @property seasonNumber Season number within its TV series.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property aggregateCredits Response appended through `append_to_response` when requested.
+ * @property changes Response appended through `append_to_response` when requested.
+ * @property credits Response appended through `append_to_response` when requested.
+ * @property externalIds Response appended through `append_to_response` when requested.
+ * @property images Response appended through `append_to_response` when requested.
+ * @property translations Response appended through `append_to_response` when requested.
+ * @property videos Response appended through `append_to_response` when requested.
+ * @property watchProviders Response appended through `append_to_response` when requested.
  */
 @JvmRecord
 data class TvSeasonDetails(

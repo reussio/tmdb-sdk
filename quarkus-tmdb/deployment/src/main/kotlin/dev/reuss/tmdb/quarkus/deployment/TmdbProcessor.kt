@@ -16,7 +16,10 @@ import jakarta.inject.Singleton
 import org.jboss.jandex.Type
 
 /**
- * Core Quarkus build processor for the TMDB extension.
+ * Registers the TMDB feature, runtime configuration, producer beans, and runtime-initialized
+ * synthetic client bean.
+ *
+ * The client is a default bean, allowing an application-provided [TmdbClient] to take precedence.
  */
 class TmdbProcessor {
     @BuildStep

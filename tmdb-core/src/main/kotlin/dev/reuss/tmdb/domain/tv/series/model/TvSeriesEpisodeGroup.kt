@@ -8,7 +8,7 @@ import dev.reuss.tmdb.domain.tv.episodegroup.model.TvEpisodeGroupType
  * Episode group for a TMDB TV series.
  *
  * @property description group description
- * @property episodeCount episode count
+ * @property episodeCount Number of associated episodes.
  * @property groupCount group count
  * @property id TMDB episode group id
  * @property name group name

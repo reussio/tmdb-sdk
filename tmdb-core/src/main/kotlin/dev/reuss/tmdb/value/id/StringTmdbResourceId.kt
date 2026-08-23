@@ -1,7 +1,10 @@
 package dev.reuss.tmdb.value.id
 
 /**
- * Base class for string-based TMDB resource identifiers.
+ * Base for type-safe TMDB identifiers represented by opaque strings.
+ *
+ * Values are trimmed and must not be blank. Equality requires both the same
+ * concrete identifier type and the same normalized value.
  */
 abstract class StringTmdbResourceId(
     value: String,

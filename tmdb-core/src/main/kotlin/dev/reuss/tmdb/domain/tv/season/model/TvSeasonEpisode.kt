@@ -9,18 +9,18 @@ import dev.reuss.tmdb.common.credit.GuestStarCredit
  * Episode of a TMDB TV season.
  *
  * @property airDate episode air date
- * @property episodeNumber episode number
+ * @property episodeNumber Episode number within its season.
  * @property episodeType episode type
  * @property id TMDB episode id
  * @property name episode name
- * @property overview episode overview
+ * @property overview Localized overview when available.
  * @property productionCode production code
- * @property runtime runtime in minutes
- * @property seasonNumber season number
+ * @property runtime Runtime in minutes when known.
+ * @property seasonNumber Season number within its TV series.
  * @property showId TMDB TV series id
- * @property stillPath still image path
- * @property voteAverage vote average
- * @property voteCount vote count
+ * @property stillPath TMDB image path for the episode still.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
  * @property crew episode crew
  * @property guestStars episode guest stars
  */

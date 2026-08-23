@@ -1,10 +1,10 @@
 package dev.reuss.tmdb.core.exception
 
 /**
- * Base unchecked exception for SDK failures.
+ * Base unchecked exception for failures reported by the SDK.
  *
- * @property message detail message
- * @property cause cause of the failure
+ * Callers can catch its specialized subclasses to distinguish TMDB API errors,
+ * transport failures, and response-mapping failures.
  */
 open class TmdbException(
     message: String,

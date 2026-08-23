@@ -1,9 +1,11 @@
 package dev.reuss.tmdb.value.id
 
 /**
- * TV season number.
+ * Season number used in TMDB TV season and episode paths.
  *
- * @property value season number
+ * TMDB uses season `0` for specials, so zero is valid while negative values are not.
+ *
+ * @property value Non-negative season number.
  */
 data class TvSeasonNumber private constructor(
     val value: Int,
@@ -19,6 +21,11 @@ data class TvSeasonNumber private constructor(
     override fun toString(): String = asString()
 
     companion object {
+        /**
+         * Creates a season number, including `0` for specials.
+         *
+         * @throws IllegalArgumentException if [value] is negative
+         */
         @JvmStatic
         fun of(value: Int): TvSeasonNumber = TvSeasonNumber(value)
     }

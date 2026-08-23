@@ -1,5 +1,6 @@
 package dev.reuss.tmdb.value.image.size
 
+/** Logo size values exposed by [dev.reuss.tmdb.domain.images.url.ImageUrlBuilder]. */
 enum class LogoSize(
     override val value: String,
 ) : ImageSize {

@@ -10,28 +10,28 @@ import dev.reuss.tmdb.value.media.MediaType
  * This model supports movie, TV and person results. Fields that do not
  * apply to the concrete media type may be `null` or empty.
  *
- * @property adult whether the result is marked as adult
- * @property backdropPath backdrop image path
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
  * @property id TMDB resource id
  * @property title movie title
  * @property originalTitle original movie title
- * @property name TV show or person name
- * @property originalName original TV show or person name
- * @property originalLanguage original language code
- * @property overview overview
- * @property posterPath poster image path
- * @property profilePath person profile image path
- * @property mediaType media type, for example `movie`, `tv` or `person`
- * @property genreIds genre ids
- * @property popularity popularity
- * @property releaseDate movie release date
- * @property firstAirDate TV first air date
- * @property video whether the movie has video content
- * @property voteAverage vote average
- * @property voteCount vote count
- * @property originCountry TV origin countries
- * @property gender gender value returned by TMDB
- * @property knownForDepartment known department for person results
+ * @property name TV series or person name
+ * @property originalName original TV series or person name
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
+ * @property profilePath TMDB image path for the profile image.
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
+ * @property genreIds TMDB genre identifiers assigned to the resource.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property releaseDate Movie release date in `YYYY-MM-DD` format when known.
+ * @property firstAirDate First air date in `YYYY-MM-DD` format when known.
+ * @property video Whether TMDB marks the movie as having video content.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
+ * @property originCountry ISO 3166-1 codes for the resource's countries of origin.
+ * @property gender TMDB gender code for the person.
+ * @property knownForDepartment Department the person is primarily known for.
  * @property knownFor known movie or TV results for person results
  */
 @JvmRecord

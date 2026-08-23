@@ -7,9 +7,7 @@ import io.quarkus.deployment.Capability
 import io.quarkus.deployment.annotations.BuildProducer
 import io.quarkus.deployment.annotations.BuildStep
 
-/**
- * Registers TMDB metrics support when Quarkus Metrics is present.
- */
+/** Registers the Micrometer-backed TMDB recorder only when a Quarkus metrics capability is present. */
 class TmdbMetricsProcessor {
     @BuildStep
     fun metricsBeans(
@@ -28,6 +26,7 @@ class TmdbMetricsProcessor {
     }
 
     companion object {
+        /** Returns whether the application has a Quarkus metrics capability. */
         @JvmStatic
         fun shouldRegisterMetrics(capabilities: Capabilities): Boolean = capabilities.isPresent(Capability.METRICS)
     }

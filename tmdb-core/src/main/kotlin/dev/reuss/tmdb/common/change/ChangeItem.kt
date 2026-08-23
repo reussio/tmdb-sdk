@@ -9,8 +9,8 @@ import dev.reuss.tmdb.common.TmdbModel
  * @property id            change item id
  * @property action        change action
  * @property time          change timestamp
- * @property iso6391       ISO 639-1 language code
- * @property iso31661      ISO 3166-1 region code
+ * @property iso6391 ISO 639-1 language code associated with the value.
+ * @property iso31661 ISO 3166-1 country code associated with the value.
  * @property value         changed value
  * @property originalValue previous value, if provided by the endpoint
  */

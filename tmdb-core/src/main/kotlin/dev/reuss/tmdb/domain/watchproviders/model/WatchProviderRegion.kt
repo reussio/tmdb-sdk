@@ -6,7 +6,7 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Region with available TMDB watch provider data.
  *
- * @property iso31661 ISO 3166-1 region code
+ * @property iso31661 ISO 3166-1 country code associated with the value.
  * @property englishName English region name
  * @property nativeName native region name
  */

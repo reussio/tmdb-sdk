@@ -22,14 +22,15 @@ import java.nio.charset.StandardCharsets
 import java.time.Duration
 
 /**
- * [TmdbHttpClient] implementation based on Java's built-in [HttpClient].
+ * Default [TmdbHttpClient] based on Java's built-in [HttpClient].
  *
- * This client applies the configured TMDB authentication, builds absolute
- * request URIs from [TmdbRequest] instances, sends HTTP GET requests and
- * maps successful JSON responses to the requested Java type.
+ * The client applies bearer authentication, the configured timeouts, and the
+ * default `language` and optional `region`. Request-specific query parameters
+ * replace defaults with the same name. Query names and values are UTF-8 encoded.
  *
- * Non-successful HTTP responses are translated into SDK-specific runtime
- * exceptions.
+ * Unknown JSON properties are ignored and JSON `null` collections and maps are
+ * mapped to empty Kotlin collections. Non-successful responses, transport
+ * failures, and mapping failures are translated to SDK exceptions.
  */
 class JavaNetTmdbHttpClient(
     private val config: TmdbClientConfig,
@@ -54,7 +55,11 @@ class JavaNetTmdbHttpClient(
     private val metricsRecorder: TmdbMetricsRecorder = config.metricsRecorder
 
     /**
-     * Sends a GET request to TMDB and maps the JSON response body to the given type.
+     * Executes a blocking GET request and maps its response body.
+     *
+     * @throws TmdbApiException when TMDB returns a non-2xx response
+     * @throws TmdbClientException when transport fails or the thread is interrupted
+     * @throws TmdbMappingException when a 2xx response cannot be mapped
      */
     override fun <T> get(
         request: TmdbRequest,

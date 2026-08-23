@@ -4,7 +4,7 @@ import dev.reuss.tmdb.common.TmdbModel
 import java.util.Locale
 
 /**
- * Represents a TMDB region parameter.
+ * Validated ISO 3166-1 alpha-2 region accepted by TMDB.
  *
  * TMDB expects regions as
  * [ISO 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
@@ -16,7 +16,7 @@ import java.util.Locale
  *
  * See also the [TMDB region support documentation](https://developer.themoviedb.org/docs/region-support).
  *
- * @property value the ISO 3166-1 alpha-2 region code
+ * @property value Normalized uppercase region code.
  *
  * @see Regions
  */
@@ -34,6 +34,13 @@ class Region private constructor(
     companion object {
         private val ISO_COUNTRIES = Locale.getISOCountries().toSet()
 
+        /**
+         * Validates and uppercases an ISO 3166-1 alpha-2 code.
+         *
+         * Input is not trimmed.
+         *
+         * @throws IllegalArgumentException if [value] is blank, malformed, or unknown
+         */
         @JvmStatic
         fun of(value: String): Region {
             require(value.isNotBlank()) {

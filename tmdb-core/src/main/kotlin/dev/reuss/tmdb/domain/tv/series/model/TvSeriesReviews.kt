@@ -9,10 +9,10 @@ import dev.reuss.tmdb.common.review.Review
  * Reviews for a TMDB TV series.
  *
  * @property id TMDB TV series id
- * @property page current page
+ * @property page One-based index of this result page.
  * @property results TV series reviews
- * @property totalPages total pages
- * @property totalResults total results
+ * @property totalPages Total number of result pages reported by TMDB.
+ * @property totalResults Total number of matching results reported by TMDB.
  */
 @JvmRecord
 data class TvSeriesReviews(

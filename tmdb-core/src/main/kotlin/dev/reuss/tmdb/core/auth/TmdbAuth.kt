@@ -3,7 +3,7 @@ package dev.reuss.tmdb.core.auth
 import java.io.Serializable
 
 /**
- * Represents TMDB API authentication.
+ * Bearer authentication for TMDB API requests.
  *
  * TMDB API requests are authenticated with a bearer access token.
  * This value object stores the raw access token and can create the
@@ -12,21 +12,15 @@ import java.io.Serializable
  * The access token is intentionally masked in [toString] to
  * avoid accidentally exposing credentials in logs or debug output.
  *
- * @property accessToken TMDB bearer access token
+ * @property accessToken Trimmed TMDB API read access token.
  */
 class TmdbAuth private constructor(
     val accessToken: String,
 ) : Serializable {
-    /**
-     * Returns the value for the HTTP `Authorization` header.
-     *
-     * @return the authorization header value in the format `Bearer <token>`
-     */
+    /** Produces the HTTP `Authorization` value in `Bearer <token>` form. */
     fun authorizationHeaderValue(): String = "Bearer $accessToken"
 
-    /**
-     * Returns a masked string representation to avoid leaking the access token.
-     */
+    /** Produces a representation that never includes the access token. */
     override fun toString(): String = "TmdbAuth[accessToken=***]"
 
     override fun equals(other: Any?): Boolean {
@@ -42,7 +36,9 @@ class TmdbAuth private constructor(
 
     companion object {
         /**
-         * Creates authentication from a TMDB bearer access token.
+         * Creates authentication from a TMDB API read access token.
+         *
+         * Leading and trailing whitespace is removed.
          *
          * @throws IllegalArgumentException if [accessToken] is blank
          */

@@ -8,6 +8,23 @@ import java.net.URI
 import java.net.URISyntaxException
 import java.time.Duration
 
+/**
+ * Validated configuration consumed by the default TMDB HTTP client.
+ *
+ * [baseUrl] is trimmed and must be an absolute HTTP(S) URL with a host and no
+ * query or fragment. Both timeout values must be positive. [defaultLanguage]
+ * and [defaultRegion] are merged into every request unless that request supplies
+ * the same query parameter explicitly.
+ *
+ * @property auth Bearer authentication applied to every request.
+ * @property baseUrl Base URL for TMDB-compatible API requests.
+ * @property defaultLanguage Fallback `language` query parameter.
+ * @property defaultRegion Optional fallback `region` query parameter.
+ * @property connectTimeout Maximum time allowed to establish a connection.
+ * @property requestTimeout Timeout applied to each HTTP request.
+ * @property metricsRecorder Observer for HTTP request lifecycle events.
+ * @throws IllegalArgumentException if the base URL or either timeout is invalid
+ */
 class TmdbClientConfig(
     val auth: TmdbAuth,
     baseUrl: String,

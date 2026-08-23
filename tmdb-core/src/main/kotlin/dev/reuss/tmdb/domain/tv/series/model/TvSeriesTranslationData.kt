@@ -7,7 +7,7 @@ import dev.reuss.tmdb.common.TmdbModel
  * Translated TV series data.
  *
  * @property name translated TV series name
- * @property overview translated overview
+ * @property overview Localized overview when available.
  * @property homepage translated homepage
  * @property tagline translated tagline
  */

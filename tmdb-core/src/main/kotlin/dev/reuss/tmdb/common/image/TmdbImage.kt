@@ -8,10 +8,10 @@ import dev.reuss.tmdb.common.TmdbModel
  *
  * @property aspectRatio image aspect ratio
  * @property height      image height in pixels
- * @property iso6391     optional ISO 639-1 language code
- * @property filePath    TMDB image file path
- * @property voteAverage average image vote
- * @property voteCount   image vote count
+ * @property iso6391 ISO 639-1 language code associated with the value.
+ * @property filePath TMDB image path for this image.
+ * @property voteAverage Average user rating for the image reported by TMDB.
+ * @property voteCount Number of user ratings for the image reported by TMDB.
  * @property width       image width in pixels
  */
 @JvmRecord

@@ -28,7 +28,10 @@ import jakarta.enterprise.inject.Produces
 import jakarta.inject.Singleton
 
 /**
- * Produces TMDB SDK beans for Quarkus applications.
+ * Exposes the services owned by [TmdbClient] as injectable CDI beans.
+ *
+ * All produced beans are defaults, so an application bean of the same type takes precedence. The
+ * no-op metrics recorder is likewise replaced when Quarkus metrics support registers its recorder.
  */
 @Singleton
 class TmdbProducer {

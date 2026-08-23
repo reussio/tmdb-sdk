@@ -10,6 +10,13 @@ class ExternalId private constructor(
     value: String,
 ) : StringTmdbResourceId(value, "External id") {
     companion object {
+        /**
+         * Creates an identifier from a non-blank value.
+         *
+         * Leading and trailing whitespace is removed.
+         *
+         * @throws IllegalArgumentException if [value] is blank
+         */
         @JvmStatic
         fun of(value: String): ExternalId = ExternalId(value)
     }

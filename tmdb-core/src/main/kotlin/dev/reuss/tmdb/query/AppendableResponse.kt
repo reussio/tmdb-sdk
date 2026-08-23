@@ -3,7 +3,7 @@ package dev.reuss.tmdb.query
 import java.io.Serializable
 
 /**
- * Common contract for TMDB `append_to_response` values.
+ * Endpoint-specific section that can be requested through `append_to_response`.
  *
  * Implementations are intended for endpoint groups that support appended
  * responses and expose both the raw TMDB query value and the expected response
@@ -11,12 +11,12 @@ import java.io.Serializable
  */
 interface AppendableResponse : Serializable {
     /**
-     * TMDB `append_to_response` query value.
+     * Wire value used in the comma-separated query parameter.
      */
     val value: String
 
     /**
-     * Response model type for this appended response.
+     * Model type used for the appended JSON section.
      */
     val responseType: Class<*>
 }

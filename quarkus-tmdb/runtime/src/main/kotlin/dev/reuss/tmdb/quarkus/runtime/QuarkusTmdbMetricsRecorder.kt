@@ -9,6 +9,14 @@ import jakarta.inject.Singleton
 import java.time.Duration
 import java.util.concurrent.atomic.AtomicInteger
 
+/**
+ * Records TMDB HTTP latency, request counts, response sizes, failures, rate-limit hits, mapping
+ * failures, and active requests in Micrometer.
+ *
+ * Metric paths replace numeric path segments with `{id}` to bound tag cardinality. Completed HTTP
+ * requests use method, normalized path, status, status family, and outcome tags; transport and
+ * mapping failures carry their exception or response-type metadata.
+ */
 @Singleton
 class QuarkusTmdbMetricsRecorder(
     private val meterRegistry: MeterRegistry,
@@ -175,6 +183,7 @@ class QuarkusTmdbMetricsRecorder(
         private val ID_PATH_SEGMENT =
             Regex("/\\d+(?=/|$)")
 
+        /** Replaces each numeric path segment with `{id}` for use as a bounded metrics tag. */
         @JvmStatic
         fun normalizePath(path: String): String = path.replace(ID_PATH_SEGMENT, "/{id}")
 

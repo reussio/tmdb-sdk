@@ -7,9 +7,9 @@ import dev.reuss.tmdb.common.TmdbModel
  * Production company for a TMDB resource.
  *
  * @property id            TMDB company id
- * @property logoPath      company logo path
+ * @property logoPath TMDB image path for the logo.
  * @property name          company name
- * @property originCountry origin country
+ * @property originCountry ISO 3166-1 code for the resource's country of origin.
  */
 @JvmRecord
 data class ProductionCompany(

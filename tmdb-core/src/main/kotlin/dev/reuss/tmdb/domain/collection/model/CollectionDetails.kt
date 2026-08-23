@@ -8,11 +8,11 @@ import dev.reuss.tmdb.common.TmdbModel
  *
  * @property id collection id
  * @property name collection name
- * @property originalLanguage original language
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
  * @property originalName original collection name
- * @property overview collection overview
- * @property posterPath poster path
- * @property backdropPath backdrop path
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
+ * @property backdropPath TMDB image path for the backdrop.
  * @property parts movies that are part of the collection
  */
 @JvmRecord

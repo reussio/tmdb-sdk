@@ -11,6 +11,13 @@ class ReviewId private constructor(
     value: String,
 ) : StringTmdbResourceId(value, "Review id") {
     companion object {
+        /**
+         * Creates an identifier from a non-blank value.
+         *
+         * Leading and trailing whitespace is removed.
+         *
+         * @throws IllegalArgumentException if [value] is blank
+         */
         @JvmStatic
         fun of(value: String): ReviewId = ReviewId(value)
     }

@@ -7,8 +7,8 @@ import dev.reuss.tmdb.common.TmdbModel
  * Translated movie data.
  *
  * @property homepage translated homepage
- * @property overview translated overview
- * @property runtime localized runtime
+ * @property overview Localized overview when available.
+ * @property runtime Runtime in minutes when known.
  * @property tagline translated tagline
  * @property title translated title
  */

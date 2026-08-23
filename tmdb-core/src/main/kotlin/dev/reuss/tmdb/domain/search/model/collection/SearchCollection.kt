@@ -6,14 +6,14 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Collection returned by TMDB collection search.
  *
- * @property adult whether the collection is marked as adult
- * @property backdropPath backdrop image path
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
  * @property id TMDB collection id
  * @property name localized collection name
- * @property originalLanguage original language code
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
  * @property originalName original collection name
- * @property overview collection overview
- * @property posterPath poster image path
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
  */
 @JvmRecord
 data class SearchCollection(

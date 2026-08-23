@@ -7,7 +7,7 @@ import dev.reuss.tmdb.common.TmdbModel
  * Content rating for a TMDB TV series.
  *
  * @property descriptors rating descriptors
- * @property iso31661 ISO 3166-1 region code
+ * @property iso31661 ISO 3166-1 country code associated with the value.
  * @property rating content rating
  */
 @JvmRecord

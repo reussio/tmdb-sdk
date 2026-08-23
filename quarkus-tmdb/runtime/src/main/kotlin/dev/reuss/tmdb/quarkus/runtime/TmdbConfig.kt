@@ -9,59 +9,38 @@ import java.time.Duration
 import java.util.Optional
 
 /**
- * Runtime configuration for the TMDB Quarkus extension.
+ * Runtime configuration under the `tmdb` prefix.
+ *
+ * Although [accessToken] is represented as optional for configuration mapping, client creation
+ * fails at runtime initialization when it is absent or blank.
  */
 @StaticInitSafe
 @ConfigMapping(prefix = "tmdb")
 interface TmdbConfig {
-    /**
-     * TMDB API read access token.
-     *
-     * @return configured access token
-     */
+    /** Required TMDB API read access token used as a bearer token. */
     @WithName("access-token")
     fun accessToken(): Optional<String>
 
-    /**
-     * TMDB API base URL.
-     *
-     * @return configured TMDB base URL
-     */
+    /** API base URL; defaults to `https://api.themoviedb.org/3/`. */
     @WithName("base-url")
     @WithDefault(TmdbClientConfig.DEFAULT_BASE_URL)
     fun baseUrl(): String
 
-    /**
-     * Default language used for TMDB requests.
-     *
-     * @return configured default language
-     */
+    /** Default TMDB language tag added to requests; defaults to `en-US`. */
     @WithName("default-language")
     @WithDefault(TmdbClientConfig.DEFAULT_LANGUAGE)
     fun defaultLanguage(): String
 
-    /**
-     * Default region used for TMDB requests.
-     *
-     * @return configured default region
-     */
+    /** Optional ISO 3166-1 region added to requests by default. */
     @WithName("default-region")
     fun defaultRegion(): Optional<String>
 
-    /**
-     * Connect timeout used by the TMDB HTTP client.
-     *
-     * @return configured connect timeout
-     */
+    /** Positive HTTP connection timeout; defaults to 10 seconds. */
     @WithName("connect-timeout")
     @WithDefault(TmdbClientConfig.DEFAULT_CONNECT_TIMEOUT)
     fun connectTimeout(): Duration
 
-    /**
-     * Request timeout used by the TMDB HTTP client.
-     *
-     * @return configured request timeout
-     */
+    /** Positive per-request timeout; defaults to 30 seconds. */
     @WithName("request-timeout")
     @WithDefault(TmdbClientConfig.DEFAULT_REQUEST_TIMEOUT)
     fun requestTimeout(): Duration

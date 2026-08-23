@@ -6,14 +6,14 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Aggregate cast credit for a TV season.
  *
- * @property adult whether the person is marked as adult
- * @property gender gender
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property gender TMDB gender code for the person.
  * @property id TMDB person id
- * @property knownForDepartment known for department
+ * @property knownForDepartment Department the person is primarily known for.
  * @property name person name
  * @property originalName original person name
- * @property popularity popularity
- * @property profilePath profile image path
+ * @property popularity Popularity score calculated by TMDB.
+ * @property profilePath TMDB image path for the profile image.
  * @property roles roles in this season
  * @property totalEpisodeCount total episode count
  * @property order cast order

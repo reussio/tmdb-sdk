@@ -8,84 +8,41 @@ import dev.reuss.tmdb.domain.trending.model.TrendingTvShowResponse
 import dev.reuss.tmdb.value.language.Language
 
 /**
- * Service for loading TMDB trending media.
+ * Loads the movies, people, and TV series receiving the most activity on TMDB during a day or
+ * week.
  */
 interface TrendingService {
-    /**
-     * Loads trending media across movies, TV shows and people.
-     *
-     * @param timeWindow trending time window
-     * @return trending media
-     */
+    /** Returns trending movies, people, and TV series using the client's default language. */
     fun all(timeWindow: TrendingTimeWindow): TrendingAllResponse
 
-    /**
-     * Loads trending media across movies, TV shows and people using a specific language.
-     *
-     * @param timeWindow trending time window
-     * @param language response language
-     * @return trending media
-     */
+    /** Returns trending movies, people, and TV series localized in [language]. */
     fun all(
         timeWindow: TrendingTimeWindow,
         language: Language,
     ): TrendingAllResponse
 
-    /**
-     * Loads trending movies.
-     *
-     * @param timeWindow trending time window
-     * @return trending movies
-     */
+    /** Returns trending movies using the client's default language. */
     fun movies(timeWindow: TrendingTimeWindow): TrendingMovieResponse
 
-    /**
-     * Loads trending movies using a specific language.
-     *
-     * @param timeWindow trending time window
-     * @param language response language
-     * @return trending movies
-     */
+    /** Returns trending movies localized in [language]. */
     fun movies(
         timeWindow: TrendingTimeWindow,
         language: Language,
     ): TrendingMovieResponse
 
-    /**
-     * Loads trending people.
-     *
-     * @param timeWindow trending time window
-     * @return trending people
-     */
+    /** Returns trending people using the client's default language. */
     fun people(timeWindow: TrendingTimeWindow): TrendingPersonResponse
 
-    /**
-     * Loads trending people using a specific language.
-     *
-     * @param timeWindow trending time window
-     * @param language response language
-     * @return trending people
-     */
+    /** Returns trending people localized in [language]. */
     fun people(
         timeWindow: TrendingTimeWindow,
         language: Language,
     ): TrendingPersonResponse
 
-    /**
-     * Loads trending TV shows.
-     *
-     * @param timeWindow trending time window
-     * @return trending TV shows
-     */
+    /** Returns trending TV series using the client's default language. */
     fun tv(timeWindow: TrendingTimeWindow): TrendingTvShowResponse
 
-    /**
-     * Loads trending TV shows using a specific language.
-     *
-     * @param timeWindow trending time window
-     * @param language response language
-     * @return trending TV shows
-     */
+    /** Returns trending TV series localized in [language]. */
     fun tv(
         timeWindow: TrendingTimeWindow,
         language: Language,

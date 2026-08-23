@@ -4,7 +4,7 @@ import dev.reuss.tmdb.common.TmdbModel
 import java.util.Locale
 
 /**
- * Represents an ISO 639-1 language code.
+ * Validated ISO 639-1 language code used by TMDB.
  *
  * TMDB uses ISO 639-1 language codes for localization,
  * for example `de`, `en`, `pt`, `fr` or `ja`.
@@ -13,7 +13,7 @@ import java.util.Locale
  * region code when sent to TMDB, for example `de-DE`,
  * `en-US` or `pt-BR`.
  *
- * @property value the two-letter ISO 639-1 language code
+ * @property value Normalized lowercase two-letter code.
  *
  * @see Language
  * @see Languages
@@ -33,9 +33,9 @@ class LanguageCode private constructor(
         private val ISO_LANGUAGES: Set<String> = Locale.getISOLanguages().toSet()
 
         /**
-         * Creates a language code from an ISO 639-1 language code.
+         * Validates and normalizes an ISO 639-1 language code.
          *
-         * The value is normalized to lowercase.
+         * The value is normalized to lowercase but is not trimmed.
          *
          * @throws IllegalArgumentException if [value] is blank,
          * not a two-letter code or not a known ISO 639-1 language code

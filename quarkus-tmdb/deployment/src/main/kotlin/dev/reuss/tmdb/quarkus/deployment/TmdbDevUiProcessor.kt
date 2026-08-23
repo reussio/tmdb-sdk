@@ -17,7 +17,10 @@ import java.net.URI
 import java.net.URISyntaxException
 
 /**
- * Provides TMDB extension pages for the Quarkus Dev UI.
+ * Adds development-only TMDB configuration, capability, reflection, and CDI-service pages to the
+ * Quarkus Dev UI.
+ *
+ * The access token is never exposed; the UI reports only whether it is configured.
  */
 class TmdbDevUiProcessor {
     @BuildStep(onlyIf = [IsDevelopment::class])
@@ -153,6 +156,7 @@ class TmdbDevUiProcessor {
         private const val ACTIVE = "active"
         private const val INACTIVE = "inactive"
 
+        /** Builds the sanitized configuration table shown in Dev UI. */
         @JvmStatic
         fun devUiConfigurationRows(
             extensionVersion: String,
@@ -208,6 +212,7 @@ class TmdbDevUiProcessor {
                 ),
             )
 
+        /** Builds readiness and optional-capability status rows for Dev UI. */
         @JvmStatic
         fun devUiStatusRows(
             accessTokenConfigured: Boolean,
@@ -257,6 +262,7 @@ class TmdbDevUiProcessor {
             )
         }
 
+        /** Returns rows for all TMDB CDI service types exposed by the extension. */
         @JvmStatic
         fun devUiServiceRows(): List<Map<String, String>> =
             cdiServiceClassNames().map { className ->
@@ -268,6 +274,7 @@ class TmdbDevUiProcessor {
                 )
             }
 
+        /** Returns the synthetic client and producer service bean class names. */
         @JvmStatic
         fun cdiServiceClassNames(): List<String> =
             buildList {

@@ -4,14 +4,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 import java.time.Duration
 
 /**
- * Configuration properties for the TMDB client.
+ * External configuration for the auto-configured TMDB client.
  *
- * @property accessToken TMDB API access token
- * @property baseUrl TMDB API base URL
- * @property defaultLanguage default language
- * @property defaultRegion default region
- * @property connectTimeout HTTP connection timeout
- * @property requestTimeout HTTP request timeout
+ * @property accessToken Required TMDB API read access token used as a bearer token.
+ * @property baseUrl API base URL; blank or absent values use `https://api.themoviedb.org/3/`.
+ * @property defaultLanguage Default TMDB language tag; blank or absent values use `en-US`.
+ * @property defaultRegion Optional ISO 3166-1 region added to requests by default.
+ * @property connectTimeout Positive HTTP connection timeout; absent values use 10 seconds.
+ * @property requestTimeout Positive per-request timeout; absent values use 30 seconds.
  */
 @ConfigurationProperties(prefix = "tmdb")
 data class TmdbProperties(

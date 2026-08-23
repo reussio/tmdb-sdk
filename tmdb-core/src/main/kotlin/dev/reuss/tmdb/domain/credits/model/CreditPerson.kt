@@ -7,15 +7,15 @@ import dev.reuss.tmdb.value.media.MediaType
 /**
  * Person information included in a TMDB credit response.
  *
- * @property adult whether the person is marked as adult
+ * @property adult Whether TMDB marks the resource as adult content.
  * @property id TMDB person id
  * @property name person name
  * @property originalName original person name
- * @property mediaType media type, usually `person`
- * @property popularity person popularity
- * @property gender gender value returned by TMDB
- * @property knownForDepartment known department
- * @property profilePath profile image path
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property gender TMDB gender code for the person.
+ * @property knownForDepartment Department the person is primarily known for.
+ * @property profilePath TMDB image path for the profile image.
  */
 @JvmRecord
 data class CreditPerson(

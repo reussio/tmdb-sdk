@@ -7,10 +7,10 @@ import dev.reuss.tmdb.common.page.PagedResponse
 /**
  * Recommended TV series for a TMDB TV series.
  *
- * @property page current page
+ * @property page One-based index of this result page.
  * @property results recommended TV series
- * @property totalPages total pages
- * @property totalResults total results
+ * @property totalPages Total number of result pages reported by TMDB.
+ * @property totalResults Total number of matching results reported by TMDB.
  */
 @JvmRecord
 data class TvSeriesRecommendations(

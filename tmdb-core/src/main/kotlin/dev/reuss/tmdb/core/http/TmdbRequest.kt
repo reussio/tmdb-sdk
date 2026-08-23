@@ -4,17 +4,16 @@ import java.io.Serializable
 import java.util.Collections
 
 /**
- * Represents a TMDB HTTP request.
+ * Immutable description of a TMDB GET request.
  *
  * A request consists of a path relative to the configured TMDB base URL
  * and optional query parameters. Paths must start with `/`, for example
  * `/configuration` or `/movie/550`.
  *
- * This class does not contain the HTTP method explicitly yet, because the
- * current SDK core only supports GET requests.
+ * Query parameters are copied when the request is created.
  *
- * @property path the request path relative to the TMDB API base URL
- * @property queryParams the request query parameters
+ * @property path Path relative to the configured API base URL; it must begin with `/`.
+ * @property queryParams Immutable query-parameter snapshot.
  */
 class TmdbRequest private constructor(
     val path: String,
@@ -49,13 +48,17 @@ class TmdbRequest private constructor(
 
     companion object {
         /**
-         * Creates a GET request without query parameters.
+         * Creates a request without query parameters.
+         *
+         * @throws IllegalArgumentException if [path] is blank or does not start with `/`
          */
         @JvmStatic
         fun get(path: String): TmdbRequest = TmdbRequest(path, emptyMap())
 
         /**
-         * Creates a GET request with query parameters.
+         * Creates a request from a snapshot of [queryParams].
+         *
+         * @throws IllegalArgumentException if [path] is blank or does not start with `/`
          */
         @JvmStatic
         fun get(

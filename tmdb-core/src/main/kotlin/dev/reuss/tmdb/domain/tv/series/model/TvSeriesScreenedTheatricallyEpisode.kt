@@ -7,8 +7,8 @@ import dev.reuss.tmdb.common.TmdbModel
  * TV episode that has screened theatrically.
  *
  * @property id TMDB episode id
- * @property episodeNumber episode number
- * @property seasonNumber season number
+ * @property episodeNumber Episode number within its season.
+ * @property seasonNumber Season number within its TV series.
  */
 @JvmRecord
 data class TvSeriesScreenedTheatricallyEpisode(

@@ -9,9 +9,9 @@ import dev.reuss.tmdb.common.TmdbModel
  * @property headquarters network headquarters
  * @property homepage network homepage URL
  * @property id TMDB network id
- * @property logoPath TMDB logo image path
+ * @property logoPath TMDB image path for the logo.
  * @property name network name
- * @property originCountry origin country code
+ * @property originCountry ISO 3166-1 code for the resource's country of origin.
  */
 @JvmRecord
 data class Network(

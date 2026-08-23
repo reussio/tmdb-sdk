@@ -16,16 +16,16 @@ import dev.reuss.tmdb.value.id.TvSeasonNumber
 import dev.reuss.tmdb.value.id.TvShowId
 import dev.reuss.tmdb.value.language.Language
 
-/**
- * Service for TMDB TV episode endpoints.
- */
+/** Loads details and related metadata for individual TV episodes. */
 interface TvEpisodeService {
+    /** Returns episode details using the client's default language. */
     fun details(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
         episodeNumber: TvEpisodeNumber,
     ): TvEpisodeDetails
 
+    /** Returns episode details localized in [language]. */
     fun details(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
@@ -33,6 +33,7 @@ interface TvEpisodeService {
         language: Language,
     ): TvEpisodeDetails
 
+    /** Returns episode details with the requested sub-resources appended. */
     fun details(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
@@ -40,6 +41,7 @@ interface TvEpisodeService {
         appendToResponse: AppendToResponse<TvEpisodeAppend>,
     ): TvEpisodeDetails
 
+    /** Returns localized episode details with the requested sub-resources appended. */
     fun details(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
@@ -48,14 +50,17 @@ interface TvEpisodeService {
         appendToResponse: AppendToResponse<TvEpisodeAppend>,
     ): TvEpisodeDetails
 
+    /** Returns the tracked changes for the episode identified by its TMDB [episodeId]. */
     fun changes(episodeId: TvEpisodeId): TvEpisodeChanges
 
+    /** Returns episode cast and crew credits using the client's default language. */
     fun credits(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
         episodeNumber: TvEpisodeNumber,
     ): TvEpisodeCredits
 
+    /** Returns episode cast and crew credits localized in [language]. */
     fun credits(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
@@ -63,24 +68,28 @@ interface TvEpisodeService {
         language: Language,
     ): TvEpisodeCredits
 
+    /** Returns identifiers for the episode in external databases. */
     fun externalIds(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
         episodeNumber: TvEpisodeNumber,
     ): ExternalIds
 
+    /** Returns every translation recorded for the episode. */
     fun translations(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
         episodeNumber: TvEpisodeNumber,
     ): TvEpisodeTranslations
 
+    /** Returns episode videos using the client's default language. */
     fun videos(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
         episodeNumber: TvEpisodeNumber,
     ): TvEpisodeVideos
 
+    /** Returns episode videos localized in [language]. */
     fun videos(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
@@ -88,6 +97,7 @@ interface TvEpisodeService {
         language: Language,
     ): TvEpisodeVideos
 
+    /** Returns episode videos using the language filters in [query]. */
     fun videos(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
@@ -95,12 +105,14 @@ interface TvEpisodeService {
         query: TvEpisodeVideosQuery,
     ): TvEpisodeVideos
 
+    /** Returns episode stills using the client's default language filters. */
     fun images(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,
         episodeNumber: TvEpisodeNumber,
     ): TvEpisodeImages
 
+    /** Returns episode stills using the language filters in [query]. */
     fun images(
         seriesId: TvShowId,
         seasonNumber: TvSeasonNumber,

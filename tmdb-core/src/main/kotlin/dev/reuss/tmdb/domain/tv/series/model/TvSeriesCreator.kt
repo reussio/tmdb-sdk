@@ -9,8 +9,8 @@ import dev.reuss.tmdb.common.TmdbModel
  * @property id TMDB person id
  * @property creditId credit id
  * @property name creator name
- * @property gender gender value returned by TMDB
- * @property profilePath profile image path
+ * @property gender TMDB gender code for the person.
+ * @property profilePath TMDB image path for the profile image.
  */
 @JvmRecord
 data class TvSeriesCreator(

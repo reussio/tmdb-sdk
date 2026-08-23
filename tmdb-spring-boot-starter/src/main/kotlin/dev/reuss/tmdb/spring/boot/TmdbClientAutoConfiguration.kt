@@ -14,6 +14,13 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 
+/**
+ * Creates the application [TmdbClient] from `tmdb.*` properties.
+ *
+ * Auto-configuration backs off when an application supplies its own client. `tmdb.access-token`
+ * is required; blank optional values fall back to core SDK defaults. A [TmdbMetricsRecorder] is
+ * attached when one is available.
+ */
 @AutoConfiguration
 @ConditionalOnClass(TmdbClient::class)
 @EnableConfigurationProperties(TmdbProperties::class)

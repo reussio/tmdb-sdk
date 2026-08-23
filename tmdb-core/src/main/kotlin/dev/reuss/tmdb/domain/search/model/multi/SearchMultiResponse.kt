@@ -7,10 +7,10 @@ import dev.reuss.tmdb.common.page.PagedResponse
 /**
  * Paginated TMDB multi search response.
  *
- * @property page current result page
- * @property results found movies, TV shows and people
- * @property totalPages total available pages
- * @property totalResults total available results
+ * @property page One-based index of this result page.
+ * @property results found movies, TV series and people
+ * @property totalPages Total number of result pages reported by TMDB.
+ * @property totalResults Total number of matching results reported by TMDB.
  */
 @JvmRecord
 data class SearchMultiResponse(

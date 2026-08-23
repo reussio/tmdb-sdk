@@ -6,7 +6,7 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Release dates for a specific country.
  *
- * @property iso31661 ISO 3166-1 country code
+ * @property iso31661 ISO 3166-1 country code associated with the value.
  * @property releaseDates release dates
  */
 @JvmRecord

@@ -7,21 +7,21 @@ import dev.reuss.tmdb.value.media.MediaType
 /**
  * Movie returned by TMDB movie trending.
  *
- * @property adult whether the movie is marked as adult
- * @property backdropPath backdrop image path
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
  * @property id TMDB movie id
  * @property title localized movie title
- * @property originalLanguage original language code
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
  * @property originalTitle original movie title
- * @property overview movie overview
- * @property posterPath poster image path
- * @property mediaType media type, usually `movie`
- * @property genreIds genre ids
- * @property popularity movie popularity
- * @property releaseDate movie release date
- * @property video whether the movie has video content
- * @property voteAverage vote average
- * @property voteCount vote count
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
+ * @property genreIds TMDB genre identifiers assigned to the resource.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property releaseDate Movie release date in `YYYY-MM-DD` format when known.
+ * @property video Whether TMDB marks the movie as having video content.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
  */
 @JvmRecord
 data class TrendingMovie(

@@ -9,13 +9,14 @@ import dev.reuss.tmdb.value.region.Region
 import java.time.Duration
 
 /**
- * Builder for creating [TmdbClient] instances.
+ * Configures the default [TmdbClient] implementation.
  *
  * The builder configures authentication, the TMDB API base URL and default
  * request settings such as language, region and timeouts.
  *
- * At minimum, an access token or [TmdbAuth] instance must be provided
- * before calling [build].
+ * A bearer access token or [TmdbAuth] is required. Unless overridden, requests
+ * use TMDB API v3, `en-US`, a five-second connection timeout, a ten-second
+ * request timeout, no default region, and no-op metrics.
  *
  * Example:
  *
@@ -40,26 +41,30 @@ class TmdbClientBuilder {
     private var metricsRecorder: TmdbMetricsRecorder = TmdbMetricsRecorder.NOOP
 
     /**
-     * Sets the TMDB bearer access token.
+     * Uses [accessToken] for bearer authentication.
+     *
+     * The token is trimmed and must not be blank.
+     *
+     * @throws IllegalArgumentException if [accessToken] is blank
      */
     fun accessToken(accessToken: String): TmdbClientBuilder =
         apply {
             auth = TmdbAuth.bearerToken(accessToken)
         }
 
-    /**
-     * Sets the TMDB authentication configuration.
-     */
+    /** Uses an already validated authentication value. */
     fun auth(auth: TmdbAuth): TmdbClientBuilder =
         apply {
             this.auth = auth
         }
 
     /**
-     * Sets the TMDB API base URL.
+     * Overrides the TMDB API base URL.
      *
      * The default value is `https://api.themoviedb.org/3`.
-     * This is mainly useful for testing or custom deployments.
+     * The value is validated by [build] as an absolute HTTP(S) URL without a
+     * query or fragment. This setting is mainly useful for tests and compatible
+     * proxy deployments.
      */
     fun baseUrl(baseUrl: String): TmdbClientBuilder =
         apply {
@@ -67,7 +72,7 @@ class TmdbClientBuilder {
         }
 
     /**
-     * Sets the default language for localized TMDB requests.
+     * Sets the language added to requests that do not override `language`.
      *
      * The default value is [Languages.EN_US].
      */
@@ -77,9 +82,9 @@ class TmdbClientBuilder {
         }
 
     /**
-     * Sets the default region for regional TMDB requests.
+     * Sets the region added to requests that do not override `region`.
      *
-     * The default region is optional and may be `null`.
+     * The default is `null`, which omits the parameter.
      */
     fun defaultRegion(defaultRegion: Region?): TmdbClientBuilder =
         apply {
@@ -87,9 +92,9 @@ class TmdbClientBuilder {
         }
 
     /**
-     * Sets the HTTP connection timeout.
+     * Sets the maximum time allowed to establish an HTTP connection.
      *
-     * The default value is 5 seconds.
+     * The default is five seconds. [build] rejects zero and negative durations.
      */
     fun connectTimeout(connectTimeout: Duration): TmdbClientBuilder =
         apply {
@@ -97,9 +102,9 @@ class TmdbClientBuilder {
         }
 
     /**
-     * Sets the overall HTTP request timeout.
+     * Sets the timeout applied to each HTTP request.
      *
-     * The default value is 10 seconds.
+     * The default is ten seconds. [build] rejects zero and negative durations.
      */
     fun requestTimeout(requestTimeout: Duration): TmdbClientBuilder =
         apply {
@@ -107,9 +112,9 @@ class TmdbClientBuilder {
         }
 
     /**
-     * Sets the metrics recorder used to observe TMDB HTTP requests.
+     * Sets the observer notified about TMDB HTTP request lifecycle events.
      *
-     * The default recorder is a no-op implementation.
+     * The default is [TmdbMetricsRecorder.NOOP].
      */
     fun metricsRecorder(metricsRecorder: TmdbMetricsRecorder): TmdbClientBuilder =
         apply {
@@ -117,7 +122,10 @@ class TmdbClientBuilder {
         }
 
     /**
-     * Builds a new [TmdbClient].
+     * Validates the accumulated configuration and creates a client.
+     *
+     * @throws IllegalArgumentException if authentication is missing or the base URL
+     * or either timeout is invalid
      */
     fun build(): TmdbClient {
         val auth =

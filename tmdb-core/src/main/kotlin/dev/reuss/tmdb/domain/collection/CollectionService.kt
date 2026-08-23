@@ -8,46 +8,32 @@ import dev.reuss.tmdb.query.ImageQuery
 import dev.reuss.tmdb.value.id.CollectionId
 import dev.reuss.tmdb.value.language.Language
 
-/**
- * Service for loading TMDB collection data.
- */
+/** Loads movie-collection metadata, artwork, and translations. */
 interface CollectionService {
-    /**
-     * Loads collection details.
-     */
+    /** Returns collection details using the client's default language. */
     fun details(collectionId: CollectionId): CollectionDetails
 
-    /**
-     * Loads collection details using a specific language.
-     */
+    /** Returns collection details localized in [language]. */
     fun details(
         collectionId: CollectionId,
         language: Language,
     ): CollectionDetails
 
-    /**
-     * Loads collection details using explicit query parameters.
-     */
+    /** Returns collection details using [query]. */
     fun details(
         collectionId: CollectionId,
         query: CollectionDetailsQuery,
     ): CollectionDetails
 
-    /**
-     * Loads images for a collection.
-     */
+    /** Returns collection backdrops and posters using the client's default language filters. */
     fun images(collectionId: CollectionId): CollectionImages
 
-    /**
-     * Loads images for a collection using query parameters.
-     */
+    /** Returns collection backdrops and posters using the language filters in [query]. */
     fun images(
         collectionId: CollectionId,
         query: ImageQuery,
     ): CollectionImages
 
-    /**
-     * Loads translations for a collection.
-     */
+    /** Returns every translation recorded for the collection. */
     fun translations(collectionId: CollectionId): CollectionTranslations
 }

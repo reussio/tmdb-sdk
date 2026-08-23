@@ -6,8 +6,8 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Translation metadata and endpoint-specific translated data.
  *
- * @property iso31661    ISO 3166-1 region code
- * @property iso6391     ISO 639-1 language code
+ * @property iso31661 ISO 3166-1 country code associated with the value.
+ * @property iso6391 ISO 639-1 language code associated with the value.
  * @property name        localized language name
  * @property englishName English language name
  * @property data        endpoint-specific translated data

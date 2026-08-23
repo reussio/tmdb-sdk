@@ -6,7 +6,7 @@ import java.util.Locale
 import java.util.Optional
 
 /**
- * Represents a TMDB language parameter.
+ * Language tag accepted by localized TMDB endpoints.
  *
  * TMDB language parameters are based on ISO 639-1 language codes
  * and are usually combined with ISO 3166-1 alpha-2 region codes.
@@ -22,8 +22,8 @@ import java.util.Optional
  * localization. Person names and character names may not always be
  * localized by TMDB.
  *
- * @property code the ISO 639-1 language code
- * @property region the optional ISO 3166-1 alpha-2 region
+ * @property code Normalized lowercase ISO 639-1 language code.
+ * @property region Optional uppercase ISO 3166-1 region component.
  *
  * @see LanguageCode
  * @see Region
@@ -33,7 +33,7 @@ class Language private constructor(
     val region: Region?,
 ) : TmdbModel {
     /**
-     * Returns the TMDB language parameter value.
+     * TMDB query value in `language` or `language-REGION` form.
      *
      * If no region is present, only the language code is returned,
      * for example `de`. If a region is present, the value is returned
@@ -47,9 +47,7 @@ class Language private constructor(
                 "${code.value}-${region.value}"
             }
 
-    /**
-     * Returns the optional region part of this language parameter.
-     */
+    /** Exposes the region component as [Optional] for Java callers. */
     fun regionOptional(): Optional<Region> = Optional.ofNullable(region)
 
     override fun toString(): String = value
@@ -66,14 +64,17 @@ class Language private constructor(
 
     companion object {
         /**
-         * Creates a language parameter from a language code or language tag.
+         * Parses a language code or language-region tag.
          *
          * Accepted formats are ISO 639-1 language codes such as `de`
          * or `en`, and language-region tags such as `de-DE`,
          * `en-US` or `pt-BR`.
          *
-         * @throws IllegalArgumentException if [value] is blank
-         * or does not match a supported format
+         * Input is trimmed, the language component is lowercased, and the region
+         * component is uppercased.
+         *
+         * @throws IllegalArgumentException if [value] is blank, malformed, or
+         * contains an unknown ISO language or country code
          */
         @JvmStatic
         fun of(value: String): Language {
@@ -105,13 +106,13 @@ class Language private constructor(
         }
 
         /**
-         * Creates a language parameter without a region.
+         * Creates a language value without a region component.
          */
         @JvmStatic
         fun of(code: LanguageCode): Language = Language(code, null)
 
         /**
-         * Creates a language parameter with a region.
+         * Creates a language value with an explicit region component.
          */
         @JvmStatic
         fun of(

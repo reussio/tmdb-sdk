@@ -12,23 +12,23 @@ import dev.reuss.tmdb.common.image.TvEpisodeImages
  *
  * @property airDate episode air date
  * @property crew episode crew
- * @property episodeNumber episode number
+ * @property episodeNumber Episode number within its season.
  * @property guestStars episode guest stars
  * @property name episode name
- * @property overview episode overview
+ * @property overview Localized overview when available.
  * @property id TMDB episode id
  * @property productionCode production code
- * @property runtime runtime in minutes
- * @property seasonNumber season number
- * @property stillPath still image path
- * @property voteAverage vote average
- * @property voteCount vote count
- * @property changes appended changes
- * @property credits appended credits
- * @property externalIds appended external ids
- * @property images appended images
- * @property translations appended translations
- * @property videos appended videos
+ * @property runtime Runtime in minutes when known.
+ * @property seasonNumber Season number within its TV series.
+ * @property stillPath TMDB image path for the episode still.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
+ * @property changes Response appended through `append_to_response` when requested.
+ * @property credits Response appended through `append_to_response` when requested.
+ * @property externalIds Response appended through `append_to_response` when requested.
+ * @property images Response appended through `append_to_response` when requested.
+ * @property translations Response appended through `append_to_response` when requested.
+ * @property videos Response appended through `append_to_response` when requested.
  */
 @JvmRecord
 data class TvEpisodeDetails(

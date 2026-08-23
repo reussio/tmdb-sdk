@@ -1,7 +1,7 @@
 package dev.reuss.tmdb.value.image.size
 
 /**
- * Supported TMDB poster image sizes.
+ * Poster size values exposed by [dev.reuss.tmdb.domain.images.url.ImageUrlBuilder].
  */
 enum class PosterSize(
     override val value: String,

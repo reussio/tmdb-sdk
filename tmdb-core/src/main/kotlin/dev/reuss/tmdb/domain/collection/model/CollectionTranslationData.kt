@@ -7,7 +7,7 @@ import dev.reuss.tmdb.common.TmdbModel
  * Translated collection data.
  *
  * @property title translated title
- * @property overview translated overview
+ * @property overview Localized overview when available.
  * @property homepage translated homepage
  */
 @JvmRecord

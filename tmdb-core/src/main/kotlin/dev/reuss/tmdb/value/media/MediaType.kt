@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonValue
 
 /**
- * TMDB media type discriminator used in mixed responses.
+ * TMDB media discriminator used by mixed search and trending responses.
  */
 enum class MediaType(
     @get:JsonValue
@@ -18,7 +18,7 @@ enum class MediaType(
 
     companion object {
         /**
-         * Parses a TMDB media type value.
+         * Maps a wire value to a known media type without throwing.
          *
          * @return matching media type, or [UNKNOWN] if the value is absent or unknown
          */

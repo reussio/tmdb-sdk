@@ -1,7 +1,10 @@
 package dev.reuss.tmdb.value.id
 
 /**
- * Base class for numeric TMDB resource identifiers.
+ * Base for type-safe TMDB identifiers represented by positive integers.
+ *
+ * Equality requires both the same concrete identifier type and the same value;
+ * IDs belonging to different TMDB resource types are never equal.
  */
 abstract class NumericTmdbResourceId(
     val value: Int,

@@ -7,7 +7,7 @@ import dev.reuss.tmdb.common.TmdbModel
  * Spoken language used in TV series details.
  *
  * @property englishName English language name
- * @property iso6391 ISO 639-1 language code
+ * @property iso6391 ISO 639-1 language code associated with the value.
  * @property name localized language name
  */
 @JvmRecord

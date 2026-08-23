@@ -9,11 +9,11 @@ import dev.reuss.tmdb.common.genre.Genre
 /**
  * Details of a TMDB TV series.
  *
- * @property adult whether the series is marked as adult
- * @property backdropPath backdrop image path
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
  * @property createdBy series creators
  * @property episodeRunTime episode runtimes in minutes
- * @property firstAirDate first air date
+ * @property firstAirDate First air date in `YYYY-MM-DD` format when known.
  * @property genres series genres
  * @property homepage series homepage
  * @property id TMDB TV series id
@@ -26,12 +26,12 @@ import dev.reuss.tmdb.common.genre.Genre
  * @property networks networks
  * @property numberOfEpisodes episode count
  * @property numberOfSeasons season count
- * @property originCountry origin countries
- * @property originalLanguage original language
+ * @property originCountry ISO 3166-1 codes for the resource's countries of origin.
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
  * @property originalName original name
- * @property overview series overview
- * @property popularity popularity
- * @property posterPath poster image path
+ * @property overview Localized overview when available.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property posterPath TMDB image path for the poster.
  * @property productionCompanies production companies
  * @property productionCountries production countries
  * @property seasons seasons
@@ -39,23 +39,23 @@ import dev.reuss.tmdb.common.genre.Genre
  * @property status series status
  * @property tagline series tagline
  * @property type series type
- * @property voteAverage vote average
- * @property voteCount vote count
- * @property aggregateCredits appended aggregate credits
- * @property alternativeTitles appended alternative titles
- * @property changes appended changes
- * @property contentRatings appended content ratings
- * @property credits appended credits
- * @property episodeGroups appended episode groups
- * @property externalIds appended external ids
- * @property keywords appended keywords
- * @property recommendations appended recommendations
- * @property reviews appended reviews
- * @property screenedTheatrically appended theatrical screenings
- * @property similar appended similar TV series
- * @property translations appended translations
- * @property videos appended videos
- * @property watchProviders appended watch providers
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
+ * @property aggregateCredits Response appended through `append_to_response` when requested.
+ * @property alternativeTitles Response appended through `append_to_response` when requested.
+ * @property changes Response appended through `append_to_response` when requested.
+ * @property contentRatings Response appended through `append_to_response` when requested.
+ * @property credits Response appended through `append_to_response` when requested.
+ * @property episodeGroups Response appended through `append_to_response` when requested.
+ * @property externalIds Response appended through `append_to_response` when requested.
+ * @property keywords Response appended through `append_to_response` when requested.
+ * @property recommendations Response appended through `append_to_response` when requested.
+ * @property reviews Response appended through `append_to_response` when requested.
+ * @property screenedTheatrically Response appended through `append_to_response` when requested.
+ * @property similar Response appended through `append_to_response` when requested.
+ * @property translations Response appended through `append_to_response` when requested.
+ * @property videos Response appended through `append_to_response` when requested.
+ * @property watchProviders Response appended through `append_to_response` when requested.
  */
 @JvmRecord
 data class TvSeriesDetails(

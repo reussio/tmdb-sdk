@@ -1,5 +1,6 @@
 package dev.reuss.tmdb.value.image.size
 
+/** Profile-image size values exposed by [dev.reuss.tmdb.domain.images.url.ImageUrlBuilder]. */
 enum class ProfileSize(
     override val value: String,
 ) : ImageSize {

@@ -8,61 +8,37 @@ import dev.reuss.tmdb.domain.configuration.model.Timezone
 import dev.reuss.tmdb.value.language.Language
 
 /**
- * Service for loading TMDB API configuration metadata.
+ * Loads the reference data used by TMDB clients.
  *
- * The configuration contains image base URLs and supported image sizes
- * required to build complete TMDB image URLs.
+ * In particular, [apiConfiguration] supplies the base URLs and current size tokens needed to turn
+ * TMDB image paths into complete URLs. Configuration values can change and should be refreshed
+ * periodically if an application caches them.
  *
- * @see <a href="https://developer.themoviedb.org/reference/configuration-details">TMDB Configuration</a>
+ * See the [TMDB configuration reference](https://developer.themoviedb.org/reference/configuration-details).
  */
 interface ConfigurationService {
-    /**
-     * Loads the TMDB API configuration.
-     *
-     * @return the TMDB API configuration
-     */
+    /** Returns API configuration, including image and change-key metadata. */
     fun apiConfiguration(): ApiConfiguration
 
-    /**
-     * Loads countries used throughout TMDB.
-     *
-     * @return TMDB countries
-     */
+    /** Returns countries used by TMDB. */
     fun countries(): List<Country>
 
-    /**
-     * Loads countries used throughout TMDB using a specific language.
-     *
-     * @param language response language
-     * @return localized TMDB countries
-     */
+    /** Returns countries with their names localized in [language]. */
     fun countries(language: Language): List<Country>
 
-    /**
-     * Loads jobs and departments used throughout TMDB.
-     *
-     * @return TMDB jobs grouped by department
-     */
+    /** Returns jobs grouped by department. */
     fun jobs(): List<JobDepartment>
 
-    /**
-     * Loads languages used throughout TMDB.
-     *
-     * @return TMDB languages
-     */
+    /** Returns languages used by TMDB. */
     fun languages(): List<ConfigurationLanguage>
 
     /**
-     * Loads officially supported primary translations on TMDB.
+     * Returns the IETF language tags that TMDB officially supports as primary translations.
      *
-     * @return TMDB primary translation IETF tags
+     * This is not an exhaustive list of languages that may occur in user-supplied content.
      */
     fun primaryTranslations(): List<String>
 
-    /**
-     * Loads timezones used throughout TMDB.
-     *
-     * @return TMDB timezones grouped by country
-     */
+    /** Returns time-zone identifiers grouped by ISO 3166-1 country code. */
     fun timezones(): List<Timezone>
 }

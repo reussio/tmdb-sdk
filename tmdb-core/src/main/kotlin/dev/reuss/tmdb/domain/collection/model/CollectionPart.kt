@@ -6,21 +6,21 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Movie that is part of a TMDB collection.
  *
- * @property adult whether the movie is adult content
- * @property backdropPath backdrop path
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
  * @property id movie id
  * @property name movie name
  * @property originalName original movie name
- * @property overview movie overview
- * @property posterPath poster path
- * @property mediaType media type
- * @property originalLanguage original language
- * @property genreIds genre ids
- * @property popularity popularity score
- * @property releaseDate release date
- * @property video whether this is a video
- * @property voteAverage vote average
- * @property voteCount vote count
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
+ * @property genreIds TMDB genre identifiers assigned to the resource.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property releaseDate Movie release date in `YYYY-MM-DD` format when known.
+ * @property video Whether TMDB marks the movie as having video content.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
  */
 @JvmRecord
 data class CollectionPart(

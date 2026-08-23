@@ -6,15 +6,15 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Video for a TMDB TV episode.
  *
- * @property iso6391 ISO 639-1 language code
- * @property iso31661 ISO 3166-1 region code
+ * @property iso6391 ISO 639-1 language code associated with the value.
+ * @property iso31661 ISO 3166-1 country code associated with the value.
  * @property name video name
- * @property key video key, for example the YouTube video id
- * @property site video provider site
- * @property size video size
- * @property type video type
- * @property official whether the video is official
- * @property publishedAt publish timestamp
+ * @property key Provider-specific key used to locate the video.
+ * @property site Provider hosting the video, such as YouTube.
+ * @property size Video resolution reported by TMDB.
+ * @property type TMDB video type, such as trailer or teaser.
+ * @property official Whether TMDB marks the video as official.
+ * @property publishedAt Video publication timestamp.
  * @property id TMDB video id
  */
 @JvmRecord

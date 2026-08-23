@@ -1,11 +1,11 @@
 package dev.reuss.tmdb.query
 
 /**
- * Validation helpers for TMDB query objects.
+ * Shared validation rules applied by public TMDB query builders.
  */
 object QueryValidation {
     /**
-     * Requires a non-blank string value and returns it trimmed.
+     * Trims [value] after requiring non-blank text.
      */
     @JvmStatic
     fun requireNotBlank(
@@ -20,7 +20,7 @@ object QueryValidation {
     }
 
     /**
-     * Validates a TMDB page parameter.
+     * Accepts an absent or positive one-based page number.
      */
     @JvmStatic
     fun validatePage(page: Int?) {
@@ -30,7 +30,7 @@ object QueryValidation {
     }
 
     /**
-     * Validates a year parameter.
+     * Accepts an absent year or a value from `1000` through `9999`.
      */
     @JvmStatic
     fun validateYear(
@@ -43,7 +43,7 @@ object QueryValidation {
     }
 
     /**
-     * Validates a year parameter represented as a string.
+     * Applies the four-digit year range to a string value.
      */
     @JvmStatic
     fun validateYear(

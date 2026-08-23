@@ -15,16 +15,19 @@ class TvSeriesVideosQuery private constructor() : TmdbQuery {
     private var language: Language? = null
     private var includeVideoLanguage: List<Language>? = null
 
+    /** Sets the response language; `null` leaves the parameter unspecified. */
     fun language(value: Language?) =
         apply {
             language = value
         }
 
+    /** Adds videos in these languages to the response language filter. */
     fun includeVideoLanguage(value: List<Language>?) =
         apply {
             includeVideoLanguage = value?.toList()
         }
 
+    /** Adds videos in the supplied languages to the response language filter. */
     fun includeVideoLanguage(vararg value: Language) =
         apply {
             includeVideoLanguage = value.toList()
@@ -42,6 +45,7 @@ class TvSeriesVideosQuery private constructor() : TmdbQuery {
             ?.joinToString(",") { it.value }
 
     companion object {
+        /** Creates an empty query that relies on TMDB defaults. */
         @JvmStatic
         fun create(): TvSeriesVideosQuery = TvSeriesVideosQuery()
     }

@@ -6,89 +6,43 @@ import dev.reuss.tmdb.value.language.Language
 import dev.reuss.tmdb.value.region.Region
 
 /**
- * Service for loading TMDB watch provider metadata.
+ * Loads the streaming and purchase providers known to TMDB.
+ *
+ * These endpoints describe provider catalogs and their display priorities. Availability for one
+ * particular movie or TV series is exposed by that resource's watch-provider endpoint.
  */
 interface WatchProviderService {
-    /**
-     * Loads all available watch provider regions.
-     *
-     * @return watch provider regions
-     */
+    /** Returns countries for which TMDB has watch-provider data. */
     fun regions(): WatchProviderRegions
 
-    /**
-     * Loads all available watch provider regions using a specific language.
-     *
-     * @param language response language
-     * @return localized watch provider regions
-     */
+    /** Returns watch-provider countries with their names localized in [language]. */
     fun regions(language: Language): WatchProviderRegions
 
-    /**
-     * Loads all available movie watch providers.
-     *
-     * @return movie watch providers
-     */
+    /** Returns movie providers for all regions using default localization. */
     fun movies(): WatchProviders
 
-    /**
-     * Loads all available movie watch providers using a specific language.
-     *
-     * @param language response language
-     * @return localized movie watch providers
-     */
+    /** Returns movie providers for all regions, localized in [language]. */
     fun movies(language: Language): WatchProviders
 
-    /**
-     * Loads movie watch providers for a specific watch region.
-     *
-     * @param watchRegion watch region
-     * @return movie watch providers for the region
-     */
+    /** Returns movie providers available in [watchRegion]. */
     fun movies(watchRegion: Region): WatchProviders
 
-    /**
-     * Loads movie watch providers for a specific watch region using a specific language.
-     *
-     * @param watchRegion watch region
-     * @param language response language
-     * @return localized movie watch providers for the region
-     */
+    /** Returns movie providers in [watchRegion], localized in [language]. */
     fun movies(
         watchRegion: Region,
         language: Language,
     ): WatchProviders
 
-    /**
-     * Loads all available TV watch providers.
-     *
-     * @return TV watch providers
-     */
+    /** Returns TV providers for all regions using default localization. */
     fun tv(): WatchProviders
 
-    /**
-     * Loads all available TV watch providers using a specific language.
-     *
-     * @param language response language
-     * @return localized TV watch providers
-     */
+    /** Returns TV providers for all regions, localized in [language]. */
     fun tv(language: Language): WatchProviders
 
-    /**
-     * Loads TV watch providers for a specific watch region.
-     *
-     * @param watchRegion watch region
-     * @return TV watch providers for the region
-     */
+    /** Returns TV providers available in [watchRegion]. */
     fun tv(watchRegion: Region): WatchProviders
 
-    /**
-     * Loads TV watch providers for a specific watch region using a specific language.
-     *
-     * @param watchRegion watch region
-     * @param language response language
-     * @return localized TV watch providers for the region
-     */
+    /** Returns TV providers in [watchRegion], localized in [language]. */
     fun tv(
         watchRegion: Region,
         language: Language,

@@ -7,7 +7,7 @@ import dev.reuss.tmdb.common.TmdbModel
  * Spoken language of a movie.
  *
  * @property englishName English language name
- * @property iso6391 ISO 639-1 language code
+ * @property iso6391 ISO 639-1 language code associated with the value.
  * @property name native language name
  */
 @JvmRecord

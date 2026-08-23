@@ -1,5 +1,6 @@
 package dev.reuss.tmdb.value.image.size
 
+/** Episode-still size values exposed by [dev.reuss.tmdb.domain.images.url.ImageUrlBuilder]. */
 enum class StillSize(
     override val value: String,
 ) : ImageSize {

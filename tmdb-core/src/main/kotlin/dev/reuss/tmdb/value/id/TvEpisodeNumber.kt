@@ -1,9 +1,9 @@
 package dev.reuss.tmdb.value.id
 
 /**
- * TV episode number.
+ * One-based episode number used in TV episode paths.
  *
- * @property value episode number
+ * @property value Positive episode number.
  */
 data class TvEpisodeNumber private constructor(
     val value: Int,
@@ -19,6 +19,11 @@ data class TvEpisodeNumber private constructor(
     override fun toString(): String = asString()
 
     companion object {
+        /**
+         * Creates an episode number.
+         *
+         * @throws IllegalArgumentException if [value] is not greater than `0`
+         */
         @JvmStatic
         fun of(value: Int): TvEpisodeNumber = TvEpisodeNumber(value)
     }

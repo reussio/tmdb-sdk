@@ -11,7 +11,7 @@ import dev.reuss.tmdb.value.media.MediaType
  * @property department credit department
  * @property job credit job
  * @property media related movie or TV media
- * @property mediaType media type, for example `movie` or `tv`
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
  * @property id TMDB credit id
  * @property person credited person
  */

@@ -16,6 +16,7 @@ class SearchCompanyQuery private constructor(
     PagedQuery<SearchCompanyQuery> {
     private var page: Int? = null
 
+    /** Sets the one-based result page; `null` leaves the parameter unspecified. */
     override fun page(page: Int?) =
         apply {
             QueryValidation.validatePage(page)
@@ -29,6 +30,11 @@ class SearchCompanyQuery private constructor(
             .add("page", page)
 
     companion object {
+        /**
+         * Creates a query for trimmed [query] text.
+         *
+         * @throws IllegalArgumentException if [query] is blank
+         */
         @JvmStatic
         fun of(query: String): SearchCompanyQuery =
             SearchCompanyQuery(

@@ -9,9 +9,7 @@ import org.jboss.jandex.DotName
 import org.jboss.jandex.IndexView
 import java.util.TreeSet
 
-/**
- * Registers TMDB SDK model classes for native-image reflection.
- */
+/** Indexes TMDB core and registers concrete SDK response models for native-image deserialization. */
 class TmdbNativeImageProcessor {
     @BuildStep
     fun indexTmdbCore(): IndexDependencyBuildItem =
@@ -47,6 +45,10 @@ class TmdbNativeImageProcessor {
         private const val TMDB_ERROR_RESPONSE =
             "dev.reuss.tmdb.core.exception.TmdbErrorResponse"
 
+        /**
+         * Returns concrete [dev.reuss.tmdb.common.TmdbModel] implementations plus the API error
+         * envelope in deterministic order.
+         */
         @JvmStatic
         fun reflectionClassNames(index: IndexView): Set<String> {
             val classNames = TreeSet<String>()

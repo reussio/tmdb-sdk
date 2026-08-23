@@ -3,11 +3,11 @@ package dev.reuss.tmdb.core.exception
 import java.util.Optional
 
 /**
- * Known TMDB API status codes and their default HTTP status and message.
+ * TMDB status codes known to this SDK.
  *
- * @property code TMDB status code
- * @property httpStatus default HTTP status for the TMDB status code
- * @property message TMDB's default status message
+ * @property code Numeric status code carried in a TMDB error response.
+ * @property httpStatus HTTP status normally associated with the code.
+ * @property message Default TMDB status message.
  */
 enum class TmdbError(
     val code: Int,
@@ -68,6 +68,7 @@ enum class TmdbError(
     ;
 
     companion object {
+        /** Returns the known entry for [code], or an empty [Optional]. */
         @JvmStatic
         fun fromCode(code: Int): Optional<TmdbError> = Optional.ofNullable(entries.firstOrNull { it.code == code })
     }

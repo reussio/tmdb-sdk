@@ -7,7 +7,10 @@ import org.eclipse.microprofile.health.HealthCheckResponse
 import org.eclipse.microprofile.health.Readiness
 
 /**
- * Readiness check for the TMDB SDK client.
+ * Readiness check that confirms the Quarkus TMDB client bean was created.
+ *
+ * The check deliberately performs no network request and therefore does not assert TMDB API
+ * reachability or token validity.
  */
 @Readiness
 class TmdbHealthCheck

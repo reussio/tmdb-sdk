@@ -8,7 +8,7 @@ import dev.reuss.tmdb.common.TmdbModel
  *
  * @property certification certification
  * @property descriptors certification descriptors
- * @property iso6391 ISO 639-1 language code
+ * @property iso6391 ISO 639-1 language code associated with the value.
  * @property note release note
  * @property releaseDate release timestamp
  * @property type release type

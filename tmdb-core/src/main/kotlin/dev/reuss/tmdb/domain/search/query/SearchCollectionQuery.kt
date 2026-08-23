@@ -22,22 +22,26 @@ class SearchCollectionQuery private constructor(
     private var page: Int? = null
     private var region: Region? = null
 
+    /** Controls whether adult results may be returned; `null` uses the TMDB default. */
     fun includeAdult(value: Boolean?) =
         apply {
             includeAdult = value
         }
 
+    /** Sets the response language; `null` leaves the parameter unspecified. */
     fun language(value: Language?) =
         apply {
             language = value
         }
 
+    /** Sets the one-based result page; `null` leaves the parameter unspecified. */
     override fun page(page: Int?) =
         apply {
             QueryValidation.validatePage(page)
             this.page = page
         }
 
+    /** Sets the ISO 3166-1 region used to localize release information. */
     fun region(value: Region?) =
         apply {
             region = value
@@ -53,6 +57,11 @@ class SearchCollectionQuery private constructor(
             .add("region", region?.value)
 
     companion object {
+        /**
+         * Creates a query for trimmed [query] text.
+         *
+         * @throws IllegalArgumentException if [query] is blank
+         */
         @JvmStatic
         fun of(query: String): SearchCollectionQuery =
             SearchCollectionQuery(

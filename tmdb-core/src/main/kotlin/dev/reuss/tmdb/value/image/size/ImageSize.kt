@@ -1,11 +1,9 @@
 package dev.reuss.tmdb.value.image.size
 
 /**
- * Represents a TMDB image size value.
+ * Size segment used when constructing a TMDB image URL.
  */
 interface ImageSize {
-    /**
-     * Returns the TMDB image size value.
-     */
+    /** Wire value inserted between the image base URL and file path. */
     val value: String
 }

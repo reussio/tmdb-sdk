@@ -7,10 +7,10 @@ import dev.reuss.tmdb.common.page.PagedResponse
 /**
  * Paginated TMDB TV series list response.
  *
- * @property page current page
+ * @property page One-based index of this result page.
  * @property results TV series results
- * @property totalPages total pages
- * @property totalResults total results
+ * @property totalPages Total number of result pages reported by TMDB.
+ * @property totalResults Total number of matching results reported by TMDB.
  */
 @JvmRecord
 data class TvSeriesListResponse(

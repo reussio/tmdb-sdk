@@ -8,7 +8,7 @@ import dev.reuss.tmdb.common.TmdbModel
  *
  * @property creditId credit id
  * @property character character name
- * @property episodeCount episode count
+ * @property episodeCount Number of associated episodes.
  */
 @JvmRecord
 data class TvSeasonAggregateCastRole(

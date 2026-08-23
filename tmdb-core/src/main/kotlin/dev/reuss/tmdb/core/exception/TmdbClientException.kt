@@ -1,10 +1,7 @@
 package dev.reuss.tmdb.core.exception
 
 /**
- * Exception thrown when the SDK cannot complete a request before receiving a TMDB response.
- *
- * @property message detail message
- * @property cause cause of the failure
+ * Transport or interruption failure that occurs before a response is available.
  */
 class TmdbClientException(
     message: String,

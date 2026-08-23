@@ -5,7 +5,8 @@ import java.io.Serializable
 /**
  * Models TMDB's `append_to_response` query parameter.
  *
- * Use this value with endpoints that support appended responses. Values are
+ * Movie, TV series, season, episode, and person detail endpoints can include
+ * related endpoint responses in the same JSON document. Values are
  * serialized as a comma-separated list, duplicate append values are removed
  * while preserving their first occurrence, and at most 20 unique values are
  * allowed.
@@ -17,7 +18,7 @@ import java.io.Serializable
  * )
  * ```
  *
- * @property values appendable responses to request
+ * @property values Unique appendable responses in request order.
  */
 class AppendToResponse<T : AppendableResponse> private constructor(
     val values: List<T>,
@@ -28,7 +29,10 @@ class AppendToResponse<T : AppendableResponse> private constructor(
         private const val MAX_VALUES = 20
 
         /**
-         * Creates an append-to-response value from one or more appendable responses.
+         * Creates an append value from one or more endpoint-specific sections.
+         *
+         * @throws IllegalArgumentException if no values are supplied or more than
+         * 20 distinct wire values remain after deduplication
          */
         @JvmStatic
         fun <T : AppendableResponse> of(vararg values: T): AppendToResponse<T> {

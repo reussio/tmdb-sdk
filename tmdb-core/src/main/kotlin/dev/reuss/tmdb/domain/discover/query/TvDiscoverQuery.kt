@@ -8,11 +8,10 @@ import dev.reuss.tmdb.value.region.Region
 import java.time.LocalDate
 
 /**
- * Query parameters for TMDB TV discovery.
+ * Builds filters for TMDB TV-series discovery.
  *
- * All fields are optional. Page and year filters are validated before
- * serialization; other filters are passed through using TMDB's discover TV
- * query parameter names.
+ * All filters are optional. TMDB ID expressions generally use a comma for logical AND and a pipe
+ * for logical OR. Watch-provider filters should be paired with [watchRegion].
  */
 class TvDiscoverQuery private constructor() : PagedQuery<TvDiscoverQuery> {
     private var airDateGte: LocalDate? = null
@@ -62,168 +61,201 @@ class TvDiscoverQuery private constructor() : PagedQuery<TvDiscoverQuery> {
 
     private var withType: String? = null
 
+    /** Sets the inclusive lower bound for any episode air date. */
     fun airDateGte(value: LocalDate?) =
         apply {
             airDateGte = value
         }
 
+    /** Sets the inclusive upper bound for any episode air date. */
     fun airDateLte(value: LocalDate?) =
         apply {
             airDateLte = value
         }
 
+    /** Filters by the series' first-air-date year. */
     fun firstAirDateYear(value: Int) =
         apply {
             QueryValidation.validateYear(value, "First air date year")
             firstAirDateYear = value
         }
 
+    /** Sets the inclusive lower bound for the series' first air date. */
     fun firstAirDateGte(value: LocalDate?) =
         apply {
             firstAirDateGte = value
         }
 
+    /** Sets the inclusive upper bound for the series' first air date. */
     fun firstAirDateLte(value: LocalDate?) =
         apply {
             firstAirDateLte = value
         }
 
+    /** Controls whether adult TV series may be returned. */
     fun includeAdult(value: Boolean) =
         apply {
             includeAdult = value
         }
 
+    /** Controls whether series without a first air date may be returned. */
     fun includeNullFirstAirDates(value: Boolean) =
         apply {
             includeNullFirstAirDates = value
         }
 
+    /** Sets the response language. */
     fun language(value: Language?) =
         apply {
             language = value
         }
 
+    /** Sets the one-based result page. */
     override fun page(page: Int?) =
         apply {
             QueryValidation.validatePage(page)
             this.page = page
         }
 
+    /** Filters by whether an episode received a theatrical screening. */
     fun screenedTheatrically(value: Boolean) =
         apply {
             screenedTheatrically = value
         }
 
+    /** Sets the result order. */
     fun sortBy(value: TvDiscoverSortBy?) =
         apply {
             sortBy = value
         }
 
+    /** Sets the time zone used when evaluating air dates. */
     fun timezone(value: String?) =
         apply {
             timezone = value
         }
 
+    /** Sets the inclusive lower bound for TMDB's average user rating. */
     fun voteAverageGte(value: Double) =
         apply {
             voteAverageGte = value
         }
 
+    /** Sets the inclusive upper bound for TMDB's average user rating. */
     fun voteAverageLte(value: Double) =
         apply {
             voteAverageLte = value
         }
 
+    /** Sets the inclusive lower bound for the number of user ratings. */
     fun voteCountGte(value: Double) =
         apply {
             voteCountGte = value
         }
 
+    /** Sets the inclusive upper bound for the number of user ratings. */
     fun voteCountLte(value: Double) =
         apply {
             voteCountLte = value
         }
 
+    /** Sets the country used by watch-provider filters. */
     fun watchRegion(value: Region?) =
         apply {
             watchRegion = value
         }
 
+    /** Filters by production-company TMDB IDs. */
     fun withCompanies(value: String?) =
         apply {
             withCompanies = value
         }
 
+    /** Filters by genre TMDB IDs. */
     fun withGenres(value: String?) =
         apply {
             withGenres = value
         }
 
+    /** Filters by keyword TMDB IDs. */
     fun withKeywords(value: String?) =
         apply {
             withKeywords = value
         }
 
+    /** Filters by a network TMDB ID. */
     fun withNetworks(value: Int) =
         apply {
             withNetworks = value
         }
 
+    /** Filters by an ISO 3166-1 country of origin. */
     fun withOriginCountry(value: String?) =
         apply {
             withOriginCountry = value
         }
 
+    /** Filters by an ISO 639-1 original-language code. */
     fun withOriginalLanguage(value: String?) =
         apply {
             withOriginalLanguage = value
         }
 
+    /** Sets the inclusive lower episode-runtime bound in minutes. */
     fun withRuntimeGte(value: Int) =
         apply {
             withRuntimeGte = value
         }
 
+    /** Sets the inclusive upper episode-runtime bound in minutes. */
     fun withRuntimeLte(value: Int) =
         apply {
             withRuntimeLte = value
         }
 
+    /** Filters by TMDB series-status values. */
     fun withStatus(value: String?) =
         apply {
             withStatus = value
         }
 
+    /** Filters by TMDB watch-monetization types. */
     fun withWatchMonetizationTypes(value: String?) =
         apply {
             withWatchMonetizationTypes = value
         }
 
+    /** Filters by watch-provider TMDB IDs for [watchRegion]. */
     fun withWatchProviders(value: String?) =
         apply {
             withWatchProviders = value
         }
 
+    /** Excludes production-company TMDB IDs. */
     fun withoutCompanies(value: String?) =
         apply {
             withoutCompanies = value
         }
 
+    /** Excludes genre TMDB IDs. */
     fun withoutGenres(value: String?) =
         apply {
             withoutGenres = value
         }
 
+    /** Excludes keyword TMDB IDs. */
     fun withoutKeywords(value: String?) =
         apply {
             withoutKeywords = value
         }
 
+    /** Excludes watch-provider TMDB IDs for [watchRegion]. */
     fun withoutWatchProviders(value: String?) =
         apply {
             withoutWatchProviders = value
         }
 
+    /** Filters by TMDB series-type values. */
     fun withType(value: String?) =
         apply {
             withType = value
@@ -267,6 +299,7 @@ class TvDiscoverQuery private constructor() : PagedQuery<TvDiscoverQuery> {
             .add("with_type", withType)
 
     companion object {
+        /** Creates an empty TV-discovery query. */
         @JvmStatic
         fun create(): TvDiscoverQuery = TvDiscoverQuery()
     }

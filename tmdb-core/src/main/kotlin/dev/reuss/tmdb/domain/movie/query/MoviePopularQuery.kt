@@ -17,17 +17,20 @@ class MoviePopularQuery private constructor() : PagedQuery<MoviePopularQuery> {
     private var page: Int? = null
     private var region: Region? = null
 
+    /** Sets the response language; `null` leaves the parameter unspecified. */
     fun language(value: Language?) =
         apply {
             language = value
         }
 
+    /** Sets the one-based result page; `null` leaves the parameter unspecified. */
     override fun page(page: Int?) =
         apply {
             QueryValidation.validatePage(page)
             this.page = page
         }
 
+    /** Sets the ISO 3166-1 region used to localize release information. */
     fun region(value: Region?) =
         apply {
             region = value
@@ -41,6 +44,7 @@ class MoviePopularQuery private constructor() : PagedQuery<MoviePopularQuery> {
             .add("region", region?.value)
 
     companion object {
+        /** Creates an empty query that relies on TMDB defaults. */
         @JvmStatic
         fun create(): MoviePopularQuery = MoviePopularQuery()
     }

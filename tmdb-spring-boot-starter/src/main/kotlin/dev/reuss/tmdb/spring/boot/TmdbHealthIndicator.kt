@@ -5,7 +5,10 @@ import org.springframework.boot.actuate.health.Health
 import org.springframework.boot.actuate.health.HealthIndicator
 
 /**
- * Spring Boot Actuator health indicator for the TMDB SDK client.
+ * Reports whether a TMDB client bean was configured.
+ *
+ * The indicator deliberately performs no network request and therefore does not assert TMDB API
+ * reachability or token validity.
  */
 class TmdbHealthIndicator(
     private val tmdbClient: TmdbClient?,

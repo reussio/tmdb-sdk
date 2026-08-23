@@ -7,23 +7,23 @@ import dev.reuss.tmdb.value.media.MediaType
 /**
  * Media item a popular person is known for.
  *
- * @property adult whether the media item is marked as adult
- * @property backdropPath backdrop image path
- * @property genreIds genre ids
+ * @property adult Whether TMDB marks the resource as adult content.
+ * @property backdropPath TMDB image path for the backdrop.
+ * @property genreIds TMDB genre identifiers assigned to the resource.
  * @property id TMDB media id
- * @property mediaType media type, for example movie or tv
- * @property originalLanguage original language
+ * @property mediaType TMDB media type discriminator, such as `movie`, `tv`, or `person`.
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
  * @property originalTitle original movie title
  * @property originalName original TV name
- * @property overview overview
- * @property posterPath poster image path
- * @property releaseDate movie release date
- * @property firstAirDate TV first air date
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
+ * @property releaseDate Movie release date in `YYYY-MM-DD` format when known.
+ * @property firstAirDate First air date in `YYYY-MM-DD` format when known.
  * @property title movie title
  * @property name TV name
- * @property video whether this movie has video flag
- * @property voteAverage vote average
- * @property voteCount vote count
+ * @property video Whether TMDB marks the movie as having video content.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
  */
 @JvmRecord
 data class PopularPersonKnownFor(

@@ -8,8 +8,8 @@ import dev.reuss.tmdb.common.TmdbModel
  *
  * @property id TMDB collection id
  * @property name collection name
- * @property posterPath poster image path
- * @property backdropPath backdrop image path
+ * @property posterPath TMDB image path for the poster.
+ * @property backdropPath TMDB image path for the backdrop.
  */
 @JvmRecord
 data class MovieCollection(

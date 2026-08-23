@@ -15,119 +15,47 @@ import dev.reuss.tmdb.domain.search.query.SearchMultiQuery
 import dev.reuss.tmdb.domain.search.query.SearchPersonQuery
 import dev.reuss.tmdb.domain.search.query.SearchTvQuery
 
-/**
- * Service for searching TMDB resources.
- */
+/** Searches TMDB resources by their names, titles, or other text metadata. */
 interface SearchService {
-    /**
-     * Searches for collections by their original, translated and alternative names.
-     *
-     * @param query search query
-     * @return collection search results
-     */
+    /** Searches collection names using the client's default paging and language settings. */
     fun collections(query: String): SearchCollectionResponse
 
-    /**
-     * Searches for collections by their original, translated and alternative names.
-     *
-     * @param query search collection query
-     * @return collection search results
-     */
+    /** Searches original, translated, and alternative collection names using [query]. */
     fun collections(query: SearchCollectionQuery): SearchCollectionResponse
 
-    /**
-     * Searches for companies by their original and alternative names.
-     *
-     * @param query search query
-     * @return company search results
-     */
+    /** Searches company names using the client's default paging settings. */
     fun companies(query: String): SearchCompanyResponse
 
-    /**
-     * Searches for companies by their original and alternative names.
-     *
-     * @param query search company query
-     * @return company search results
-     */
+    /** Searches original and alternative company names using [query]. */
     fun companies(query: SearchCompanyQuery): SearchCompanyResponse
 
-    /**
-     * Searches for keywords by their name.
-     *
-     * @param query search query
-     * @return keyword search results
-     */
+    /** Searches keyword names using the client's default paging settings. */
     fun keywords(query: String): SearchKeywordResponse
 
-    /**
-     * Searches for keywords by their name.
-     *
-     * @param query search keyword query
-     * @return keyword search results
-     */
+    /** Searches keyword names using [query]. */
     fun keywords(query: SearchKeywordQuery): SearchKeywordResponse
 
-    /**
-     * Searches for movies by their original, translated and alternative titles.
-     *
-     * @param query search query
-     * @return movie search results
-     */
+    /** Searches movie titles using the client's default paging and language settings. */
     fun movies(query: String): SearchMovieResponse
 
-    /**
-     * Searches for movies by their original, translated and alternative titles.
-     *
-     * @param query search movie query
-     * @return movie search results
-     */
+    /** Searches original, translated, and alternative movie titles using [query]. */
     fun movies(query: SearchMovieQuery): SearchMovieResponse
 
-    /**
-     * Searches for movies, TV shows and people in a single request.
-     *
-     * @param query search query
-     * @return multi search results
-     */
+    /** Searches movies, TV series, and people in one request with default query settings. */
     fun multi(query: String): SearchMultiResponse
 
-    /**
-     * Searches for movies, TV shows and people in a single request.
-     *
-     * @param query search multi query
-     * @return multi search results
-     */
+    /** Searches movies, TV series, and people in one request using [query]. */
     fun multi(query: SearchMultiQuery): SearchMultiResponse
 
-    /**
-     * Searches for people by their name and also known as names.
-     *
-     * @param query search query
-     * @return person search results
-     */
+    /** Searches person names and aliases using the client's default query settings. */
     fun people(query: String): SearchPersonResponse
 
-    /**
-     * Searches for people by their name and also known as names.
-     *
-     * @param query search person query
-     * @return person search results
-     */
+    /** Searches person names and aliases using [query]. */
     fun people(query: SearchPersonQuery): SearchPersonResponse
 
-    /**
-     * Searches for TV shows by their original, translated and also known as names.
-     *
-     * @param query search query
-     * @return TV show search results
-     */
+    /** Searches TV-series names using the client's default query settings. */
     fun tv(query: String): SearchTvShowResponse
 
-    /**
-     * Searches for TV shows by their original, translated and also known as names.
-     *
-     * @param query search TV query
-     * @return TV show search results
-     */
+    /** Searches original, translated, and alternative TV-series names using [query]. */
     fun tv(query: SearchTvQuery): SearchTvShowResponse
 }

@@ -6,7 +6,7 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * Country metadata used throughout TMDB.
  *
- * @property iso31661 TMDB country code
+ * @property iso31661 ISO 3166-1 country code associated with the value.
  * @property englishName English country name
  * @property nativeName native country name
  */

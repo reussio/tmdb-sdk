@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import dev.reuss.tmdb.common.TmdbModel
 
 /**
- * Image metadata for a TMDB TV show.
+ * Image metadata for a TMDB TV series.
  *
- * @property id        TV show id
+ * @property id        TV series id
  * @property backdrops backdrop images
  * @property logos     logo images
  * @param posters   poster images

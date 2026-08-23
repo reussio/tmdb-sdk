@@ -8,27 +8,27 @@ import dev.reuss.tmdb.common.image.PersonImages
 /**
  * Top level TMDB person details.
  *
- * @property adult whether the person is marked as adult
+ * @property adult Whether TMDB marks the resource as adult content.
  * @property alsoKnownAs alternative names
  * @property biography person biography
  * @property birthday birthday
  * @property deathday deathday
- * @property gender gender value returned by TMDB
+ * @property gender TMDB gender code for the person.
  * @property homepage homepage URL
  * @property id TMDB person id
  * @property imdbId IMDb id
- * @property knownForDepartment known department
+ * @property knownForDepartment Department the person is primarily known for.
  * @property name person name
  * @property placeOfBirth place of birth
- * @property popularity person popularity
- * @property profilePath profile image path
- * @property changes appended changes
- * @property combinedCredits appended combined credits
- * @property externalIds appended external ids
- * @property images appended images
- * @property movieCredits appended movie credits
- * @property tvCredits appended TV credits
- * @property translations appended translations
+ * @property popularity Popularity score calculated by TMDB.
+ * @property profilePath TMDB image path for the profile image.
+ * @property changes Response appended through `append_to_response` when requested.
+ * @property combinedCredits Response appended through `append_to_response` when requested.
+ * @property externalIds Response appended through `append_to_response` when requested.
+ * @property images Response appended through `append_to_response` when requested.
+ * @property movieCredits Response appended through `append_to_response` when requested.
+ * @property tvCredits Response appended through `append_to_response` when requested.
+ * @property translations Response appended through `append_to_response` when requested.
  */
 @JvmRecord
 data class PersonDetails(

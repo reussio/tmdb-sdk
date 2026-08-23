@@ -4,8 +4,9 @@ import dev.reuss.tmdb.core.http.QueryParams
 import java.io.Serializable
 
 /**
- * Common contract for TMDB query parameter objects.
+ * Serializable request options that can be converted to TMDB wire parameters.
  */
 interface TmdbQuery : Serializable {
+    /** Creates a parameter snapshot suitable for a [dev.reuss.tmdb.core.http.TmdbRequest]. */
     fun toQueryParams(): QueryParams
 }

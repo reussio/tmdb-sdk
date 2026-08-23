@@ -8,7 +8,7 @@ import dev.reuss.tmdb.common.TmdbModel
  *
  * @property movieResults matching movies
  * @property personResults matching people
- * @property tvResults matching TV shows
+ * @property tvResults matching TV series
  * @property tvEpisodeResults matching TV episodes
  * @property tvSeasonResults matching TV seasons
  */

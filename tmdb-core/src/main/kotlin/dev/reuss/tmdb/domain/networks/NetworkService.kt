@@ -5,31 +5,14 @@ import dev.reuss.tmdb.domain.networks.model.Network
 import dev.reuss.tmdb.domain.networks.model.NetworkAlternativeNames
 import dev.reuss.tmdb.value.id.NetworkId
 
-/**
- * Service for loading TMDB network metadata.
- */
+/** Loads TV-network metadata. */
 interface NetworkService {
-    /**
-     * Loads network details by network id.
-     *
-     * @param networkId the network id
-     * @return network details
-     */
+    /** Returns the network identified by [networkId]. */
     fun details(networkId: NetworkId): Network
 
-    /**
-     * Loads alternative names for a network.
-     *
-     * @param networkId the network id
-     * @return alternative network names
-     */
+    /** Returns alternative names recorded for the network. */
     fun alternativeNames(networkId: NetworkId): NetworkAlternativeNames
 
-    /**
-     * Loads images for a network.
-     *
-     * @param networkId the network id
-     * @return network images
-     */
+    /** Returns the network's PNG and SVG logos. */
     fun images(networkId: NetworkId): NetworkImages
 }

@@ -8,7 +8,7 @@ import dev.reuss.tmdb.common.TmdbModel
  *
  * @property displayPriorities region-specific display priorities
  * @property displayPriority default display priority
- * @property logoPath provider logo image path
+ * @property logoPath TMDB image path for the logo.
  * @property providerName provider name
  * @property providerId TMDB provider id
  */

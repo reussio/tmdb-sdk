@@ -7,9 +7,9 @@ import dev.reuss.tmdb.common.TmdbModel
  * Network of a TV episode group.
  *
  * @property id TMDB network id
- * @property logoPath network logo path
+ * @property logoPath TMDB image path for the logo.
  * @property name network name
- * @property originCountry origin country
+ * @property originCountry ISO 3166-1 code for the resource's country of origin.
  */
 @JvmRecord
 data class TvEpisodeGroupNetwork(

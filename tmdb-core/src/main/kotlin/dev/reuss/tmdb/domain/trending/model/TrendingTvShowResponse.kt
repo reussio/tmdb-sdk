@@ -5,12 +5,12 @@ import dev.reuss.tmdb.common.TmdbModel
 import dev.reuss.tmdb.common.page.PagedResponse
 
 /**
- * Paginated TMDB trending TV show response.
+ * Paginated TMDB trending TV series response.
  *
- * @property page current result page
- * @property results trending TV shows
- * @property totalPages total available pages
- * @property totalResults total available results
+ * @property page One-based index of this result page.
+ * @property results trending TV series
+ * @property totalPages Total number of result pages reported by TMDB.
+ * @property totalResults Total number of matching results reported by TMDB.
  */
 @JvmRecord
 data class TrendingTvShowResponse(

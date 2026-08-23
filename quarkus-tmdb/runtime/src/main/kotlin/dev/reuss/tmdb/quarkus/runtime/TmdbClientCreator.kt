@@ -11,6 +11,12 @@ import org.eclipse.microprofile.config.ConfigProvider
 import java.time.Duration
 import java.util.function.Function
 
+/**
+ * Runtime-init factory for the synthetic Quarkus [TmdbClient] bean.
+ *
+ * It reads runtime configuration, validates the required token and SDK value objects, and attaches
+ * the injected metrics recorder before building the client.
+ */
 class TmdbClientCreator : Function<SyntheticCreationalContext<TmdbClient>, TmdbClient> {
     override fun apply(context: SyntheticCreationalContext<TmdbClient>): TmdbClient =
         TmdbClient

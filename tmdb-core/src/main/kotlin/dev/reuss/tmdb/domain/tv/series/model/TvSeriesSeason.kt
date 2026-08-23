@@ -7,13 +7,13 @@ import dev.reuss.tmdb.common.TmdbModel
  * Lightweight TV season representation used in TV series details.
  *
  * @property airDate season air date
- * @property episodeCount episode count
+ * @property episodeCount Number of associated episodes.
  * @property id TMDB season id
  * @property name season name
- * @property overview season overview
- * @property posterPath poster image path
- * @property seasonNumber season number
- * @property voteAverage vote average
+ * @property overview Localized overview when available.
+ * @property posterPath TMDB image path for the poster.
+ * @property seasonNumber Season number within its TV series.
+ * @property voteAverage Average user rating reported by TMDB.
  */
 @JvmRecord
 data class TvSeriesSeason(

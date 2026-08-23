@@ -9,10 +9,10 @@ import dev.reuss.tmdb.common.review.Review
  * Paged reviews for a TMDB movie.
  *
  * @property id TMDB movie id
- * @property page current page
+ * @property page One-based index of this result page.
  * @property results movie reviews
- * @property totalPages total pages
- * @property totalResults total results
+ * @property totalPages Total number of result pages reported by TMDB.
+ * @property totalResults Total number of matching results reported by TMDB.
  */
 @JvmRecord
 data class MovieReviews(

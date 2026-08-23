@@ -6,19 +6,19 @@ import dev.reuss.tmdb.common.TmdbModel
 /**
  * TV series item returned by TMDB TV list endpoints.
  *
- * @property backdropPath backdrop image path
- * @property firstAirDate first air date
- * @property genreIds genre ids
- * @property id TMDB TV show id
- * @property name TV show name
- * @property originCountry origin countries
- * @property originalLanguage original language code
- * @property originalName original TV show name
- * @property overview overview
- * @property popularity popularity
- * @property posterPath poster image path
- * @property voteAverage vote average
- * @property voteCount vote count
+ * @property backdropPath TMDB image path for the backdrop.
+ * @property firstAirDate First air date in `YYYY-MM-DD` format when known.
+ * @property genreIds TMDB genre identifiers assigned to the resource.
+ * @property id TMDB TV series id
+ * @property name TV series name
+ * @property originCountry ISO 3166-1 codes for the resource's countries of origin.
+ * @property originalLanguage ISO 639-1 code for the resource's original language.
+ * @property originalName original TV series name
+ * @property overview Localized overview when available.
+ * @property popularity Popularity score calculated by TMDB.
+ * @property posterPath TMDB image path for the poster.
+ * @property voteAverage Average user rating reported by TMDB.
+ * @property voteCount Number of user ratings reported by TMDB.
  */
 @JvmRecord
 data class TvSeriesListItem(
