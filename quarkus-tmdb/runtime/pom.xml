@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>dev.reuss.tmdb</groupId>
         <artifactId>quarkus-tmdb-parent</artifactId>
@@ -13,7 +14,7 @@
     <artifactId>quarkus-tmdb</artifactId>
 
     <name>TMDB Quarkus Extension</name>
-    <description>Quarkus extension for the TMDB Java SDK.</description>
+    <description>Quarkus extension for the TMDB JVM SDK.</description>
 
     <dependencies>
         <dependency>
@@ -57,12 +58,13 @@
                             <goal>extension-descriptor</goal>
                         </goals>
                         <configuration>
-                            <deployment>${project.groupId}:quarkus-tmdb-deployment:${project.version}</deployment>
+                            <deployment>
+                                ${project.groupId}:quarkus-tmdb-deployment:${project.version}
+                            </deployment>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

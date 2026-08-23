@@ -14,7 +14,7 @@
     <packaging>pom</packaging>
 
     <name>TMDB Quarkus Extension Parent</name>
-    <description>Parent module for the TMDB Java SDK Quarkus extension.</description>
+    <description>Parent module for the TMDB JVM SDK Quarkus extension.</description>
     <modules>
         <module>runtime</module>
         <module>deployment</module>

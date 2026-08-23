@@ -3,6 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <groupId>dev.reuss.tmdb</groupId>
         <artifactId>quarkus-tmdb-parent</artifactId>
@@ -13,7 +14,7 @@
     <artifactId>quarkus-tmdb-deployment</artifactId>
 
     <name>TMDB Quarkus Extension Deployment</name>
-    <description>Deployment module for the TMDB Java SDK Quarkus extension.</description>
+    <description>Deployment module for the TMDB JVM SDK Quarkus extension.</description>
 
     <dependencies>
         <dependency>
@@ -59,16 +60,15 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.15.0</version>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
                 <configuration>
                     <annotationProcessorPaths>
-                        <path>
+                        <annotationProcessorPath>
                             <groupId>io.quarkus</groupId>
                             <artifactId>quarkus-extension-processor</artifactId>
                             <version>${quarkus.version}</version>
-                        </path>
+                        </annotationProcessorPath>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
@@ -90,5 +90,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
