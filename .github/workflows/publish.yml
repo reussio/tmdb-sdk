@@ -2,7 +2,7 @@ name: Publish to Maven Central
 
 on:
   release:
-    types: [ published ]
+    types: [published]
 
 jobs:
   publish:
@@ -29,14 +29,14 @@ jobs:
           gpg-passphrase: GPG_PASSPHRASE
 
       - name: Publish to Maven Central
-        run: mvn -B -Prelease clean deploy
+        run: mvn -B -ntp -Prelease clean deploy
         env:
           MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
-  deploy-javadoc:
-    name: Deploy Javadoc
+  deploy-docs:
+    name: Deploy API Docs
     runs-on: ubuntu-latest
     needs: publish
 
@@ -60,13 +60,13 @@ jobs:
           java-version: "17"
           cache: maven
 
-      - name: Generate Javadoc
-        run: mvn -B -pl tmdb-core javadoc:javadoc
+      - name: Generate API docs
+        run: mvn -B -ntp -pl tmdb-core dokka:dokka
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: tmdb-core/target/reports/apidocs
+          path: tmdb-core/target/dokka
           name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Deploy to GitHub Pages
