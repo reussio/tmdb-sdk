@@ -5,7 +5,7 @@
     <parent>
         <groupId>dev.reuss.tmdb</groupId>
         <artifactId>tmdb-sdk</artifactId>
-        <version>2.0.0</version>
+        <version>2.0.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
