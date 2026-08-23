@@ -15,3 +15,20 @@ fun assertLastRequest(
     assertEquals(responseType, httpClient.lastResponseType())
     assertEquals(1, httpClient.calls())
 }
+
+inline fun <reified T> assertRequest(
+    path: String,
+    queryParams: Map<String, String> = emptyMap(),
+    call: (RecordingTmdbHttpClient) -> Unit,
+) {
+    val httpClient = RecordingTmdbHttpClient()
+
+    call(httpClient)
+
+    assertLastRequest(
+        httpClient,
+        path,
+        queryParams,
+        T::class.java,
+    )
+}

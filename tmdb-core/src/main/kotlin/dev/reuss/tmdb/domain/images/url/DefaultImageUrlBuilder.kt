@@ -55,8 +55,16 @@ internal class DefaultImageUrlBuilder(
         val normalizedPath =
             if (path.startsWith('/')) path else "/$path"
 
+        val secureBaseUrl =
+            checkNotNull(
+                configuration.images.secureBaseUrl?.takeIf { it.isNotBlank() },
+            ) {
+                "TMDB secure image base URL is missing"
+            }
+
         return URI.create(
-            configuration.images.secureBaseUrl +
+            secureBaseUrl.trimEnd('/') +
+                "/" +
                 size.value +
                 normalizedPath,
         )

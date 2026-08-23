@@ -58,4 +58,37 @@ class QueryParamsTest {
             QueryParams.create().add("   ", "x")
         }
     }
+
+    @Test
+    fun toMap_returnsImmutableSnapshot() {
+        val builder =
+            QueryParams
+                .create()
+                .add("page", 1)
+                .add("language", "de-DE")
+        val snapshot = builder.toMap()
+
+        builder.add("region", "DE")
+
+        assertEquals(mapOf("page" to "1", "language" to "de-DE"), snapshot)
+        assertThrows<UnsupportedOperationException> {
+            (snapshot as MutableMap<String, String>)["region"] = "US"
+        }
+    }
+
+    @Test
+    fun add_shouldReplaceAnExistingParameterWithoutChangingItsPosition() {
+        val params =
+            QueryParams
+                .create()
+                .add("language", "en-US")
+                .add("page", 2)
+                .add("language", "de-DE")
+                .toMap()
+
+        assertEquals(
+            listOf("language" to "de-DE", "page" to "2"),
+            params.entries.map { it.key to it.value },
+        )
+    }
 }

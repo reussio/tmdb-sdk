@@ -5,11 +5,9 @@ import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder
 import dev.reuss.tmdb.value.language.Languages
 import dev.reuss.tmdb.value.region.Regions
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertInstanceOf
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.lang.reflect.InvocationTargetException
 import java.time.Duration
 
 class TmdbClientConfigTest {
@@ -50,19 +48,6 @@ class TmdbClientConfigTest {
     }
 
     @Test
-    fun rejectsNullAuth() {
-        assertConstructorRejectsNull(
-            null,
-            "https://api.themoviedb.org/3",
-            Languages.EN_US,
-            Regions.US,
-            Duration.ofSeconds(5),
-            Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP,
-        )
-    }
-
-    @Test
     fun rejectsBlankBaseUrl() {
         assertThrows<IllegalArgumentException> {
             TmdbClientConfig(
@@ -90,6 +75,21 @@ class TmdbClientConfigTest {
     }
 
     @Test
+    fun rejectsBaseUrlThatCannotBeUsedForHttpRequests() {
+        listOf(
+            "not-a-url",
+            "ftp://example.test/3",
+            "https:///missing-host",
+            "https://example.test/3?key=value",
+            "https://example.test/3#fragment",
+        ).forEach { invalidBaseUrl ->
+            assertThrows<IllegalArgumentException> {
+                config(baseUrl = invalidBaseUrl)
+            }
+        }
+    }
+
+    @Test
     fun trimsBaseUrl() {
         val config =
             TmdbClientConfig(
@@ -106,54 +106,29 @@ class TmdbClientConfigTest {
     }
 
     @Test
-    fun rejectsNullDefaultLanguage() {
-        assertConstructorRejectsNull(
-            TmdbAuth.bearerToken("token"),
-            "https://api.themoviedb.org/3",
-            null,
-            Regions.US,
-            Duration.ofSeconds(5),
-            Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP,
-        )
-    }
-
-    @Test
-    fun rejectsNullTimeouts() {
-        assertConstructorRejectsNull(
-            TmdbAuth.bearerToken("token"),
-            "https://api.themoviedb.org/3",
-            Languages.EN_US,
-            Regions.US,
-            null,
-            Duration.ofSeconds(10),
-            TmdbMetricsRecorder.NOOP,
-        )
-
-        assertConstructorRejectsNull(
-            TmdbAuth.bearerToken("token"),
-            "https://api.themoviedb.org/3",
-            Languages.EN_US,
-            Regions.US,
-            Duration.ofSeconds(5),
-            null,
-            TmdbMetricsRecorder.NOOP,
-        )
-    }
-
-    private fun assertConstructorRejectsNull(vararg arguments: Any?) {
-        val constructor =
-            TmdbClientConfig::class.java.declaredConstructors
-                .first { it.parameterCount == 7 && !it.isSynthetic }
-
-        val exception =
-            assertThrows<InvocationTargetException> {
-                constructor.newInstance(*arguments)
+    fun rejectsZeroAndNegativeTimeouts() {
+        listOf(Duration.ZERO, Duration.ofNanos(-1)).forEach { invalidTimeout ->
+            assertThrows<IllegalArgumentException> {
+                config(connectTimeout = invalidTimeout)
             }
-
-        assertInstanceOf(
-            NullPointerException::class.java,
-            exception.cause,
-        )
+            assertThrows<IllegalArgumentException> {
+                config(requestTimeout = invalidTimeout)
+            }
+        }
     }
+
+    private fun config(
+        baseUrl: String = "https://api.themoviedb.org/3",
+        connectTimeout: Duration = Duration.ofSeconds(5),
+        requestTimeout: Duration = Duration.ofSeconds(10),
+    ): TmdbClientConfig =
+        TmdbClientConfig(
+            TmdbAuth.bearerToken("token"),
+            baseUrl,
+            Languages.EN_US,
+            Regions.US,
+            connectTimeout,
+            requestTimeout,
+            TmdbMetricsRecorder.NOOP,
+        )
 }

@@ -3,6 +3,7 @@ package dev.reuss.tmdb.value.language
 import dev.reuss.tmdb.value.region.Regions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -28,9 +29,10 @@ class LanguageTest {
 
     @Test
     fun normalizesLanguageTag() {
-        val language = Language.of("DE-de")
+        val language = Language.of("  DE-de  ")
 
         assertEquals("de-DE", language.value)
+        assertEquals(Regions.DE, language.regionOptional().orElseThrow())
     }
 
     @Test
@@ -57,6 +59,12 @@ class LanguageTest {
         assertThrows<IllegalArgumentException> {
             Language.of("de_DE")
         }
+
+        assertThrows<IllegalArgumentException> {
+            Language.of("zz-US")
+        }
+
+        assertTrue(Language.of("de").regionOptional().isEmpty)
     }
 
     @Test

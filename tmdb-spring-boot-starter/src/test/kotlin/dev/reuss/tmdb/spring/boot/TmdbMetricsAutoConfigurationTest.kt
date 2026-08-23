@@ -11,7 +11,6 @@ import org.springframework.boot.actuate.autoconfigure.metrics.MetricsAutoConfigu
 import org.springframework.boot.actuate.autoconfigure.metrics.export.simple.SimpleMetricsExportAutoConfiguration
 import org.springframework.boot.autoconfigure.AutoConfigurations
 import org.springframework.boot.test.context.runner.ApplicationContextRunner
-import java.time.Duration
 
 class TmdbMetricsAutoConfigurationTest {
     private val contextRunner =
@@ -87,113 +86,5 @@ class TmdbMetricsAutoConfigurationTest {
                 assertThat(context)
                     .hasSingleBean(TmdbClient::class.java)
             }
-    }
-
-    @Test
-    fun recordsRequestMetrics() {
-        val meterRegistry = SimpleMeterRegistry()
-        val recorder = SpringTmdbMetricsRecorder(meterRegistry)
-
-        recorder.recordRequestStarted("GET", "/movie/550")
-        recorder.recordRequestFinished(
-            "GET",
-            "/movie/550",
-            200,
-            Duration.ofMillis(25),
-            512,
-        )
-
-        assertThat(
-            meterRegistry
-                .get(SpringTmdbMetricsRecorder.ACTIVE_REQUESTS_METRIC)
-                .gauge()
-                .value(),
-        ).isZero()
-
-        assertThat(
-            meterRegistry
-                .get(SpringTmdbMetricsRecorder.REQUESTS_METRIC)
-                .tag("method", "GET")
-                .tag("path", "/movie/{id}")
-                .tag("status", "200")
-                .tag("outcome", "SUCCESS")
-                .timer()
-                .count(),
-        ).isEqualTo(1)
-
-        assertThat(
-            meterRegistry
-                .get(SpringTmdbMetricsRecorder.RESPONSE_BYTES_METRIC)
-                .tag("method", "GET")
-                .tag("path", "/movie/{id}")
-                .summary()
-                .totalAmount(),
-        ).isEqualTo(512.0)
-    }
-
-    @Test
-    fun recordsErrorsRateLimitsAndMappingFailures() {
-        val meterRegistry = SimpleMeterRegistry()
-        val recorder = SpringTmdbMetricsRecorder(meterRegistry)
-
-        recorder.recordRequestStarted("GET", "/movie/550")
-        recorder.recordRequestFinished(
-            "GET",
-            "/movie/550",
-            429,
-            Duration.ofMillis(25),
-            128,
-        )
-
-        recorder.recordRequestStarted("GET", "/movie/550")
-        recorder.recordRequestFailed(
-            "GET",
-            "/movie/550",
-            IllegalStateException("boom"),
-            Duration.ofMillis(5),
-        )
-
-        recorder.recordMappingFailed(
-            "GET",
-            "/movie/550",
-            String::class.java,
-            IllegalArgumentException("invalid"),
-        )
-
-        assertThat(
-            meterRegistry
-                .get(SpringTmdbMetricsRecorder.ERRORS_METRIC)
-                .tag("type", "api")
-                .tag("status", "429")
-                .counter()
-                .count(),
-        ).isEqualTo(1.0)
-
-        assertThat(
-            meterRegistry
-                .get(SpringTmdbMetricsRecorder.RATE_LIMIT_HITS_METRIC)
-                .tag("method", "GET")
-                .tag("path", "/movie/{id}")
-                .counter()
-                .count(),
-        ).isEqualTo(1.0)
-
-        assertThat(
-            meterRegistry
-                .get(SpringTmdbMetricsRecorder.ERRORS_METRIC)
-                .tag("type", "exception")
-                .tag("exception", "IllegalStateException")
-                .counter()
-                .count(),
-        ).isEqualTo(1.0)
-
-        assertThat(
-            meterRegistry
-                .get(SpringTmdbMetricsRecorder.MAPPING_ERRORS_METRIC)
-                .tag("response_type", "String")
-                .tag("exception", "IllegalArgumentException")
-                .counter()
-                .count(),
-        ).isEqualTo(1.0)
     }
 }

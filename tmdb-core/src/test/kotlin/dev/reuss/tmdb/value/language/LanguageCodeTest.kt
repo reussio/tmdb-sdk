@@ -37,6 +37,10 @@ class LanguageCodeTest {
         assertThrows<IllegalArgumentException> {
             LanguageCode.of("1e")
         }
+
+        assertThrows<IllegalArgumentException> {
+            LanguageCode.of("zz")
+        }
     }
 
     @Test

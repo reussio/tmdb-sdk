@@ -16,6 +16,22 @@ import java.time.LocalDate
 
 class QueryValidationTest {
     @Test
+    fun validateYear_shouldAcceptBoundsAndRejectInvalidStringYears() {
+        QueryValidation.validateYear(1000, "Year")
+        QueryValidation.validateYear(9999, "Year")
+        QueryValidation.validateYear("2024", "Year")
+        QueryValidation.validateYear(null as String?, "Year")
+        QueryValidation.validateYear("   ", "Year")
+
+        assertThrows<IllegalArgumentException> {
+            QueryValidation.validateYear("year", "Year")
+        }
+        assertThrows<IllegalArgumentException> {
+            QueryValidation.validateYear("999", "Year")
+        }
+    }
+
+    @Test
     fun defaultQueriesOnlySerializeSetValues() {
         assertTrue(
             MovieRecommendationsQuery
@@ -126,13 +142,13 @@ class QueryValidationTest {
         assertEquals(
             mapOf(
                 "start_date" to "2024-01-01",
-                "end_date" to "2024-01-14",
+                "end_date" to "2024-01-15",
                 "page" to "2",
             ),
             ChangesQuery
                 .create()
                 .startDate(LocalDate.of(2024, 1, 1))
-                .endDate(LocalDate.of(2024, 1, 14))
+                .endDate(LocalDate.of(2024, 1, 15))
                 .page(2)
                 .toQueryParams()
                 .toMap(),

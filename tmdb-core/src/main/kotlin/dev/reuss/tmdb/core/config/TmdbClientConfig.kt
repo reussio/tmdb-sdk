@@ -4,6 +4,8 @@ import dev.reuss.tmdb.core.auth.TmdbAuth
 import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder
 import dev.reuss.tmdb.value.language.Language
 import dev.reuss.tmdb.value.region.Region
+import java.net.URI
+import java.net.URISyntaxException
 import java.time.Duration
 
 class TmdbClientConfig(
@@ -20,6 +22,28 @@ class TmdbClientConfig(
     init {
         require(this.baseUrl.isNotBlank()) {
             "TMDB base URL must not be blank"
+        }
+
+        val baseUri =
+            try {
+                URI(this.baseUrl)
+            } catch (exception: URISyntaxException) {
+                throw IllegalArgumentException(
+                    "TMDB base URL must be an absolute HTTP(S) URL",
+                    exception,
+                )
+            }
+
+        require(
+            baseUri.host != null &&
+                (
+                    baseUri.scheme.equals("http", ignoreCase = true) ||
+                        baseUri.scheme.equals("https", ignoreCase = true)
+                ) &&
+                baseUri.query == null &&
+                baseUri.fragment == null,
+        ) {
+            "TMDB base URL must be an absolute HTTP(S) URL without query or fragment"
         }
 
         require(!connectTimeout.isZero && !connectTimeout.isNegative) {

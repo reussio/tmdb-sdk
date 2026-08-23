@@ -17,6 +17,7 @@ class TmdbResourceIdContractTest {
         assertInstanceOf(TmdbResourceId::class.java, id)
         assertEquals(42, id.asString().toInt())
         assertEquals("42", id.asString())
+        assertEquals("42", id.toString())
     }
 
     @ParameterizedTest(name = "{0}")
@@ -38,6 +39,7 @@ class TmdbResourceIdContractTest {
 
         assertInstanceOf(TmdbResourceId::class.java, id)
         assertEquals("stable-id", id.asString())
+        assertEquals("stable-id", id.toString())
     }
 
     @ParameterizedTest(name = "{0}")
@@ -90,6 +92,7 @@ class TmdbResourceIdContractTest {
         fun numericIds(): Stream<NumericIdCase> =
             Stream.of(
                 NumericIdCase("MovieId", MovieId::of),
+                NumericIdCase("CollectionId", CollectionId::of),
                 NumericIdCase("TvShowId", TvShowId::of),
                 NumericIdCase("TvSeasonId", TvSeasonId::of),
                 NumericIdCase("TvEpisodeId", TvEpisodeId::of),

@@ -4,9 +4,13 @@ import dev.reuss.tmdb.quarkus.runtime.QuarkusTmdbMetricsRecorder
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.params.ParameterizedTest
+import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.MethodSource
 import java.io.IOException
 import java.time.Duration
 import java.util.concurrent.TimeUnit
+import java.util.stream.Stream
 
 class QuarkusTmdbMetricsRecorderTest {
     @Test
@@ -177,6 +181,49 @@ class QuarkusTmdbMetricsRecorderTest {
         )
     }
 
+    @ParameterizedTest(name = "HTTP {0} -> {1}/{2}")
+    @MethodSource("statusOutcomes")
+    fun recordRequestFinished_shouldClassifyStatusFamilyAndOutcome(
+        statusCode: Int,
+        statusFamily: String,
+        outcome: String,
+    ) {
+        val meterRegistry = SimpleMeterRegistry()
+        val recorder = QuarkusTmdbMetricsRecorder(meterRegistry)
+
+        recorder.recordRequestStarted("GET", "/tv/1399")
+        recorder.recordRequestFinished(
+            "GET",
+            "/tv/1399",
+            statusCode,
+            Duration.ofMillis(12),
+            64,
+        )
+
+        assertEquals(
+            1L,
+            meterRegistry
+                .get(QuarkusTmdbMetricsRecorder.REQUESTS_METRIC)
+                .tag("path", "/tv/{id}")
+                .tag("status", statusCode.toString())
+                .tag("status_family", statusFamily)
+                .tag("outcome", outcome)
+                .timer()
+                .count(),
+        )
+        if (statusCode >= 400) {
+            assertEquals(
+                1.0,
+                meterRegistry
+                    .get(QuarkusTmdbMetricsRecorder.ERRORS_METRIC)
+                    .tag("type", "api")
+                    .tag("status", statusCode.toString())
+                    .counter()
+                    .count(),
+            )
+        }
+    }
+
     @Test
     fun shouldRecordMappingErrors() {
         val meterRegistry = SimpleMeterRegistry()
@@ -202,7 +249,30 @@ class QuarkusTmdbMetricsRecorderTest {
         )
     }
 
+    @Test
+    fun normalizePath_shouldReplaceEveryNumericResourceSegment() {
+        assertEquals(
+            "/tv/{id}/season/{id}/episode/{id}",
+            QuarkusTmdbMetricsRecorder.normalizePath("/tv/1399/season/1/episode/2"),
+        )
+        assertEquals(
+            "/tv/episode_group/group-1",
+            QuarkusTmdbMetricsRecorder.normalizePath("/tv/episode_group/group-1"),
+        )
+    }
+
     private data class SuccessResponse(
         val id: Int,
     )
+
+    companion object {
+        @JvmStatic
+        fun statusOutcomes(): Stream<Arguments> =
+            Stream.of(
+                Arguments.of(204, "2xx", "SUCCESS"),
+                Arguments.of(302, "3xx", "UNKNOWN"),
+                Arguments.of(404, "4xx", "CLIENT_ERROR"),
+                Arguments.of(503, "5xx", "SERVER_ERROR"),
+            )
+    }
 }

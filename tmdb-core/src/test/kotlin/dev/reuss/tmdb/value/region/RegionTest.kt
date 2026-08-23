@@ -37,6 +37,10 @@ class RegionTest {
         assertThrows<IllegalArgumentException> {
             Region.of("1E")
         }
+
+        assertThrows<IllegalArgumentException> {
+            Region.of("ZZ")
+        }
     }
 
     @Test

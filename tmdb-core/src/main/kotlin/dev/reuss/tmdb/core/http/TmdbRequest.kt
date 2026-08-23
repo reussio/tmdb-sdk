@@ -1,6 +1,7 @@
 package dev.reuss.tmdb.core.http
 
 import java.io.Serializable
+import java.util.Collections
 
 /**
  * Represents a TMDB HTTP request.
@@ -20,7 +21,9 @@ class TmdbRequest private constructor(
     queryParams: Map<String, String>?,
 ) : Serializable {
     val queryParams: Map<String, String> =
-        queryParams?.let { java.util.Map.copyOf(it) } ?: emptyMap()
+        queryParams?.let {
+            Collections.unmodifiableMap(LinkedHashMap(it))
+        } ?: emptyMap()
 
     init {
         require(path.isNotBlank()) {

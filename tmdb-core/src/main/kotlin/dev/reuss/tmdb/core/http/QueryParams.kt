@@ -1,5 +1,7 @@
 package dev.reuss.tmdb.core.http
 
+import java.util.Collections
+
 /**
  * Mutable builder for TMDB query parameters.
  *
@@ -50,7 +52,7 @@ class QueryParams private constructor() {
     /**
      * Returns the collected query parameters as an immutable map.
      */
-    fun toMap(): Map<String, String> = values.toMap()
+    fun toMap(): Map<String, String> = Collections.unmodifiableMap(LinkedHashMap(values))
 
     companion object {
         /**

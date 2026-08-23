@@ -21,5 +21,9 @@ class TvNumberTest {
         assertThrows<IllegalArgumentException> {
             TvEpisodeNumber.of(0)
         }
+
+        assertThrows<IllegalArgumentException> {
+            TvEpisodeNumber.of(-1)
+        }
     }
 }

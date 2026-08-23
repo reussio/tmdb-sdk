@@ -1,6 +1,8 @@
 package dev.reuss.tmdb.quarkus.deployment
 
+import com.sun.net.httpserver.HttpServer
 import dev.reuss.tmdb.TmdbClient
+import dev.reuss.tmdb.core.metrics.TmdbMetricsRecorder
 import dev.reuss.tmdb.domain.certifications.CertificationService
 import dev.reuss.tmdb.domain.collection.CollectionService
 import dev.reuss.tmdb.domain.companies.CompanyService
@@ -28,10 +30,13 @@ import io.quarkus.test.QuarkusExtensionTest
 import jakarta.inject.Inject
 import org.jboss.shrinkwrap.api.asset.EmptyAsset
 import org.jboss.shrinkwrap.api.asset.StringAsset
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertSame
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.RegisterExtension
+import java.net.InetSocketAddress
 
 class TmdbExtensionTest {
     @Inject
@@ -100,6 +105,9 @@ class TmdbExtensionTest {
     @Inject
     lateinit var movieService: MovieService
 
+    @Inject
+    lateinit var metricsRecorder: TmdbMetricsRecorder
+
     @Test
     fun shouldProduceTmdbClient() {
         assertNotNull(client)
@@ -153,9 +161,22 @@ class TmdbExtensionTest {
         assertSame(client.tvEpisode(), tvEpisodeService)
         assertSame(client.tvEpisodeGroup(), tvEpisodeGroupService)
         assertSame(client.movies(), movieService)
+        assertSame(TmdbMetricsRecorder.NOOP, metricsRecorder)
+    }
+
+    @Test
+    fun shouldApplyBaseUrlAndAuthenticationConfiguration() {
+        val configuration = client.configuration().apiConfiguration()
+
+        assertEquals(
+            "Bearer test-token|language=de-DE&region=DE",
+            configuration.images.secureBaseUrl,
+        )
     }
 
     companion object {
+        private val server = startServer()
+
         @JvmField
         @RegisterExtension
         val app =
@@ -172,12 +193,38 @@ class TmdbExtensionTest {
                             StringAsset(
                                 """
                                 tmdb.access-token=test-token
+                                tmdb.base-url=http://127.0.0.1:${server.address.port}
                                 tmdb.default-language=de-DE
                                 tmdb.default-region=DE
+                                tmdb.connect-timeout=2s
+                                tmdb.request-timeout=5s
                                 """.trimIndent(),
                             ),
                             "application.properties",
                         )
                 }
+
+        @JvmStatic
+        @AfterAll
+        fun stopServer() {
+            server.stop(0)
+        }
+
+        private fun startServer(): HttpServer {
+            val server = HttpServer.create(InetSocketAddress("127.0.0.1", 0), 0)
+
+            server.createContext("/configuration") { exchange ->
+                val authorizationHeader =
+                    exchange.requestHeaders.getFirst("Authorization")
+                val rawQuery = exchange.requestURI.rawQuery
+                val body =
+                    """{"images":{"secure_base_url":"$authorizationHeader|$rawQuery"}}"""
+                        .toByteArray()
+                exchange.sendResponseHeaders(200, body.size.toLong())
+                exchange.responseBody.use { it.write(body) }
+            }
+            server.start()
+            return server
+        }
     }
 }

@@ -1,5 +1,6 @@
 package dev.reuss.tmdb.domain.configuration
 
+import dev.reuss.tmdb.domain.configuration.model.ApiConfiguration
 import dev.reuss.tmdb.domain.configuration.model.ConfigurationLanguage
 import dev.reuss.tmdb.domain.configuration.model.Country
 import dev.reuss.tmdb.domain.configuration.model.JobDepartment
@@ -11,6 +12,26 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class DefaultConfigurationServiceTest {
+    @Test
+    fun apiConfigurationPassesPathAndResponseType() {
+        val http =
+            RecordingTmdbHttpClient()
+                .respondWith(
+                    ApiConfiguration(
+                        ApiConfiguration.Images(null, "https://image.tmdb.org/t/p/"),
+                    ),
+                )
+
+        DefaultConfigurationService(http).apiConfiguration()
+
+        assertLastRequest(
+            http,
+            "/configuration",
+            emptyMap(),
+            ApiConfiguration::class.java,
+        )
+    }
+
     @Test
     fun countriesPassesPathAndResponseType() {
         val http =

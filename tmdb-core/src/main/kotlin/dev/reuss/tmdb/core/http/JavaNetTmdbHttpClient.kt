@@ -143,20 +143,32 @@ class JavaNetTmdbHttpClient(
 
     private fun buildUri(request: TmdbRequest): URI {
         val baseUrl = config.baseUrl.removeSuffix("/")
+        val queryParams = effectiveQueryParams(request)
 
         val url =
             buildString {
                 append(baseUrl)
                 append(request.path)
 
-                if (request.queryParams.isNotEmpty()) {
+                if (queryParams.isNotEmpty()) {
                     append("?")
-                    append(toQueryString(request.queryParams))
+                    append(toQueryString(queryParams))
                 }
             }
 
         return URI.create(url)
     }
+
+    private fun effectiveQueryParams(request: TmdbRequest): Map<String, String> =
+        QueryParams
+            .create()
+            .add("language", config.defaultLanguage.value)
+            .add("region", config.defaultRegion?.value)
+            .apply {
+                request.queryParams.forEach { (name, value) ->
+                    add(name, value)
+                }
+            }.toMap()
 
     private fun toQueryString(queryParams: Map<String, String>): String =
         queryParams.entries.joinToString("&") { (name, value) ->

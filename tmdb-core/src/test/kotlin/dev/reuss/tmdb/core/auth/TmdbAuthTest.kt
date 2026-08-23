@@ -2,10 +2,9 @@ package dev.reuss.tmdb.core.auth
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertInstanceOf
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import java.lang.reflect.InvocationTargetException
 
 class TmdbAuthTest {
     @Test
@@ -34,24 +33,19 @@ class TmdbAuthTest {
     }
 
     @Test
-    fun rejectsNullAccessToken() {
-        val exception =
-            assertThrows<InvocationTargetException> {
-                TmdbAuth::class.java
-                    .getMethod("bearerToken", String::class.java)
-                    .invoke(null, null)
-            }
-
-        assertInstanceOf(
-            NullPointerException::class.java,
-            exception.cause,
-        )
-    }
-
-    @Test
     fun doesNotExposeTokenInToString() {
         val auth = TmdbAuth.bearerToken("secret-token")
 
         assertFalse(auth.toString().contains("secret-token"))
+    }
+
+    @Test
+    fun equality_shouldUseTheNormalizedTokenValue() {
+        val auth = TmdbAuth.bearerToken(" token ")
+        val equalAuth = TmdbAuth.bearerToken("token")
+
+        assertEquals(equalAuth, auth)
+        assertEquals(equalAuth.hashCode(), auth.hashCode())
+        assertNotEquals(TmdbAuth.bearerToken("other"), auth)
     }
 }

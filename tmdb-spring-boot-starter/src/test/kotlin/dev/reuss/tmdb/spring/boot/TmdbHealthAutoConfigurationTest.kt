@@ -54,6 +54,24 @@ class TmdbHealthAutoConfigurationTest {
     }
 
     @Test
+    fun doesNotCreateTmdbHealthIndicatorWhenClientIsMissing() {
+        ApplicationContextRunner()
+            .withConfiguration(
+                AutoConfigurations.of(TmdbHealthAutoConfiguration::class.java),
+            ).run { context ->
+                assertThat(context).doesNotHaveBean("tmdbHealthIndicator")
+            }
+    }
+
+    @Test
+    fun healthIndicatorReportsDownWhenClientIsMissing() {
+        val health = TmdbHealthIndicator(null).health()
+
+        assertThat(health.status).isEqualTo(Status.DOWN)
+        assertThat(health.details).containsEntry("client", "missing")
+    }
+
+    @Test
     fun doesNotReplaceCustomTmdbHealthIndicator() {
         val customHealthIndicator =
             HealthIndicator {

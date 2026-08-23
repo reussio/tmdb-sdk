@@ -56,6 +56,18 @@ class AppendToResponseTest {
         }
     }
 
+    @Test
+    fun acceptsExactlyTwentyValues() {
+        assertEquals(
+            "v20",
+            AppendToResponse
+                .of(*TestAppend.entries.dropLast(1).toTypedArray())
+                .values
+                .last()
+                .value,
+        )
+    }
+
     private fun invokeOf(values: Array<out AppendableResponse?>?) {
         val method =
             AppendToResponse::class.java.methods
