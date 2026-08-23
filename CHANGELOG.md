@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/reussio/tmdb-sdk/compare/v2.0.0...v2.0.1) (2026-08-23)
+
+
+### Documentation
+
+* add repository header to README ([d5c4b8f](https://github.com/reussio/tmdb-sdk/commit/d5c4b8f9cd2becea61b4990b532a9064bff187d6))
+
 ## [2.0.0](https://github.com/reussio/tmdb-sdk/compare/v2.0.0...v2.0.0) (2026-08-23)
 
 
