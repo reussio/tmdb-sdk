@@ -1,14 +1,10 @@
-# TMDB JVM SDK
+<div align="center">
+    <img alt="TMDB JVM SDK" src="https://shieldcn.dev/header/gradient.svg?title=TMDB+JVM+SDK&subtitle=Typed+TMDB+API+client+for+Kotlin+%26+Java&mode=dark">
 
-[![Maven Central Core](https://img.shields.io/maven-central/v/dev.reuss.tmdb/tmdb-core.svg?label=tmdb-core)](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-core)
-[![Maven Central Spring Boot Starter](https://img.shields.io/maven-central/v/dev.reuss.tmdb/tmdb-spring-boot-starter.svg?label=spring-boot-starter)](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-spring-boot-starter)
-[![Maven Central Quarkus Extension](https://img.shields.io/maven-central/v/dev.reuss.tmdb/quarkus-tmdb.svg?label=quarkus-tmdb)](https://central.sonatype.com/artifact/dev.reuss.tmdb/quarkus-tmdb)
-[![API Docs](https://img.shields.io/badge/API%20Docs-Dokka-blue.svg)](https://reussio.github.io/tmdb-sdk/)
-[![CI](https://github.com/reussio/tmdb-sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/reussio/tmdb-sdk/actions/workflows/ci.yml)
-[![Release](https://github.com/reussio/tmdb-sdk/actions/workflows/release.yml/badge.svg)](https://github.com/reussio/tmdb-sdk/actions/workflows/release.yml)
-[![Java 17](https://img.shields.io/badge/JVM-17%2B-orange.svg)](https://openjdk.org/projects/jdk/17/)
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.4-purple.svg)](https://kotlinlang.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Release](https://shieldcn.dev/github/reussio/tmdb-sdk/release.svg)](https://github.com/reussio/tmdb-sdk/releases)
+[![CI](https://shieldcn.dev/github/reussio/tmdb-sdk/ci.svg)](https://github.com/reussio/tmdb-sdk/actions/workflows/ci.yml)
+[![License: MIT](https://shieldcn.dev/github/reussio/tmdb-sdk/license.svg)](LICENSE)
+</div>
 
 A modern Kotlin/JVM client library for [The Movie Database API](https://developer.themoviedb.org/).
 
@@ -34,11 +30,11 @@ The SDK is implemented in Kotlin and targets JVM 17 while remaining fully consum
 
 ## Modules
 
-| Module                                                                                                      | Description                                      |
-|-------------------------------------------------------------------------------------------------------------|--------------------------------------------------|
+| Module                                                                                                      | Description                                        |
+|-------------------------------------------------------------------------------------------------------------|----------------------------------------------------|
 | [`tmdb-core`](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-core)                               | Core Kotlin/JVM SDK without framework dependencies |
-| [`tmdb-spring-boot-starter`](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-spring-boot-starter) | Spring Boot auto-configuration for the SDK       |
-| [`quarkus-tmdb`](https://central.sonatype.com/artifact/dev.reuss.tmdb/quarkus-tmdb)                         | Quarkus extension for the SDK                    |
+| [`tmdb-spring-boot-starter`](https://central.sonatype.com/artifact/dev.reuss.tmdb/tmdb-spring-boot-starter) | Spring Boot auto-configuration for the SDK         |
+| [`quarkus-tmdb`](https://central.sonatype.com/artifact/dev.reuss.tmdb/quarkus-tmdb)                         | Quarkus extension for the SDK                      |
 
 ## Requirements
 
@@ -50,6 +46,7 @@ The SDK is implemented in Kotlin and targets JVM 17 while remaining fully consum
 ### Maven
 
 ```xml
+
 <dependency>
     <groupId>dev.reuss.tmdb</groupId>
     <artifactId>tmdb-core</artifactId>
@@ -60,6 +57,7 @@ The SDK is implemented in Kotlin and targets JVM 17 while remaining fully consum
 ### Spring Boot
 
 ```xml
+
 <dependency>
     <groupId>dev.reuss.tmdb</groupId>
     <artifactId>tmdb-spring-boot-starter</artifactId>
@@ -70,6 +68,7 @@ The SDK is implemented in Kotlin and targets JVM 17 while remaining fully consum
 ### Quarkus
 
 ```xml
+
 <dependency>
     <groupId>dev.reuss.tmdb</groupId>
     <artifactId>quarkus-tmdb</artifactId>
@@ -105,8 +104,8 @@ The SDK remains directly usable from Java:
 import dev.reuss.tmdb.TmdbClient;
 
 TmdbClient tmdb = TmdbClient.builder()
-        .accessToken("your-access-token")
-        .build();
+    .accessToken("your-access-token")
+    .build();
 ```
 
 Domain services can be used in the same way:
@@ -146,12 +145,12 @@ import dev.reuss.tmdb.value.region.Region;
 import java.time.Duration;
 
 TmdbClient tmdb = TmdbClient.builder()
-        .accessToken("your-access-token")
-        .defaultLanguage(Language.of("de-DE"))
-        .defaultRegion(Region.of("DE"))
-        .connectTimeout(Duration.ofSeconds(5))
-        .requestTimeout(Duration.ofSeconds(10))
-        .build();
+    .accessToken("your-access-token")
+    .defaultLanguage(Language.of("de-DE"))
+    .defaultRegion(Region.of("DE"))
+    .connectTimeout(Duration.ofSeconds(5))
+    .requestTimeout(Duration.ofSeconds(10))
+    .build();
 ```
 
 Default values:
@@ -166,17 +165,18 @@ Default values:
 
 ## Spring Boot Starter
 
-The Spring Boot starter automatically configures a `TmdbClient` bean and exposes the SDK domain services as Spring beans.
+The Spring Boot starter automatically configures a `TmdbClient` bean and exposes the SDK domain services as Spring
+beans.
 
 ### Configuration
 
 ```yaml
 tmdb:
-  access-token: ${TMDB_ACCESS_TOKEN}
-  default-language: de-DE
-  default-region: DE
-  connect-timeout: 5s
-  request-timeout: 10s
+    access-token: ${TMDB_ACCESS_TOKEN}
+    default-language: de-DE
+    default-region: DE
+    connect-timeout: 5s
+    request-timeout: 10s
 ```
 
 ### Inject the Client
@@ -245,7 +245,8 @@ class MovieLookupService {
 
 If Spring Boot Actuator is on the classpath, the starter registers a `tmdb` health indicator automatically.
 
-The health indicator reports whether the `TmdbClient` is available. It does not perform an external request to the TMDB API.
+The health indicator reports whether the `TmdbClient` is available. It does not perform an external request to the TMDB
+API.
 
 ```properties
 management.health.tmdb.enabled=true
@@ -340,7 +341,8 @@ Common exception types include:
 
 ## API Documentation
 
-The API documentation for `tmdb-core` is generated with [Dokka](https://kotlinlang.org/docs/dokka-introduction.html) and published at:
+The API documentation for `tmdb-core` is generated with [Dokka](https://kotlinlang.org/docs/dokka-introduction.html) and
+published at:
 
 ```text
 https://reussio.github.io/tmdb-sdk/
@@ -382,7 +384,8 @@ Notable migration changes include:
 * API documentation migrated from Javadoc to Dokka
 * Formatting is enforced through Spotless and ktlint
 
-Because 2.0 is a major release, applications upgrading from 1.x should compile and run their existing integration against
+Because 2.0 is a major release, applications upgrading from 1.x should compile and run their existing integration
+against
 the new version and review any public API changes surfaced by the compiler.
 
 ## License
